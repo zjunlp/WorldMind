@@ -23,14 +23,12 @@
             background-color: var(--bg-color);
         }
 
-        /* 布局容器 */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* 头部样式 */
         header {
             text-align: center;
             padding: 60px 0 40px;
@@ -85,7 +83,6 @@
             height: 16px;
         }
 
-        /* 章节通用样式 */
         section {
             margin-bottom: 60px;
         }
@@ -104,29 +101,12 @@
             margin-bottom: 15px;
         }
 
-        .highlight {
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        /* Visualization Section (Targeting #visualization) */
+        /* Visualization Section */
         #visualization {
             background-color: var(--light-gray);
             padding: 30px;
             border-radius: 10px;
             text-align: center;
-        }
-
-        .vis-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .vis-caption {
-            margin-top: 15px;
-            font-style: italic;
-            color: #666;
         }
 
         .comparison-grid {
@@ -162,6 +142,14 @@
             margin: 20px 0;
         }
 
+        .vis-caption {
+            margin-top: 15px;
+            font-style: italic;
+            color: #666;
+            text-align: center;
+            display: block;
+        }
+
         /* BibTeX */
         pre {
             background-color: #f4f4f4;
@@ -179,7 +167,6 @@
             color: #888;
             font-size: 0.9rem;
         }
-
     </style>
 </head>
 <body>
@@ -190,7 +177,7 @@
             
             <div class="authors">
                 <span>Anonymous Authors</span>
-                </div>
+            </div>
             
             <div class="affiliations">
                 <span>ACL 2026 Submission / Zhejiang University (ZJUNLP)</span>
@@ -214,14 +201,14 @@
 
         <section id="visualization">
             <h2>Visualizing the "Physical Hallucination" Problem</h2>
-            <p>Large Language Models (LLMs) often generate plans that are logically sound but physically unexecutable—a phenomenon we term <strong>Physical Hallucination</strong>[cite: 30]. WorldMind aligns these models by learning from experience.</p>
+            [cite_start]<p>Large Language Models (LLMs) often generate plans that are logically sound but physically unexecutable—a phenomenon we term <strong>Physical Hallucination</strong>[cite: 30]. WorldMind aligns these models by learning from experience.</p>
             
             <div class="comparison-grid">
                 <div class="card failure">
                     <span class="card-title" style="color:#e74c3c;">❌ Without WorldMind (Standard LLM)</span>
                     <p><strong>Goal:</strong> "Slice the bread."</p>
                     <p><strong>Plan:</strong><br>1. Walk to table.<br>2. Slice bread.</p>
-                    <p><strong>Outcome:</strong> <span style="color:#e74c3c;">FAILURE.</span> The agent attempts to slice the object without holding a knife[cite: 92]. It understands the <em>why</em> but misses the physical <em>how</em>.</p>
+                    [cite_start]<p><strong>Outcome:</strong> <span style="color:#e74c3c;">FAILURE.</span> The agent attempts to slice the object without holding a knife[cite: 92]. It understands the <em>why</em> but misses the physical <em>how</em>.</p>
                 </div>
                 
                 <div class="card success">
@@ -232,37 +219,34 @@
                     <p><strong>Outcome:</strong> <span style="color:#27ae60;">SUCCESS.</span> Uses <strong>Process Experience</strong> to enforce physical constraints.</p>
                 </div>
             </div>
-
-            <img src="assets/figure1_concept.png" alt="Concept Illustration" class="figure-img" style="max-width: 80%;">
-            <p class="vis-caption">Figure 1: Conceptual Illustration of Experiential Alignment. WorldMind corrects physical hallucinations via prediction errors (Process Experience) and optimizes paths via success summaries (Goal Experience).</p>
-        </section>
+            </section>
 
         <section id="abstract">
             <h2>Abstract</h2>
             <p>
-                Current Large Language Models (LLMs) exhibit a critical modal disconnect: they possess vast semantic knowledge but lack the procedural grounding to respect the immutable laws of the physical world. Consequently, while these agents implicitly function as world models, their simulations often suffer from <strong>physical hallucinations</strong>—generating plans that are logically sound but physically unexecutable [cite: 29-30].
+                Current Large Language Models (LLMs) exhibit a critical modal disconnect: they possess vast semantic knowledge but lack the procedural grounding to respect the immutable laws of the physical world. [cite_start]Consequently, while these agents implicitly function as world models, their simulations often suffer from <strong>physical hallucinations</strong>—generating plans that are logically sound but physically unexecutable [cite: 29-30].
             </p>
             <p>
-                To bridge this gap, we introduce <strong>WorldMind</strong>, a framework that autonomously constructs a symbolic <strong>World Knowledge Repository (WKR)</strong> by synthesizing environmental feedback. Specifically, it unifies <strong>Process Experience</strong> to enforce physical feasibility via prediction errors and <strong>Goal Experience</strong> to guide task optimality through successful trajectories [cite: 33-34]. Experiments on EB-ALFRED and EB-Habitat demonstrate that WorldMind achieves superior performance compared to baselines with remarkable cross-model and cross-environment transferability[cite: 35].
+                To bridge this gap, we introduce <strong>WorldMind</strong>, a framework that autonomously constructs a symbolic <strong>World Knowledge Repository (WKR)</strong> by synthesizing environmental feedback. [cite_start]Specifically, it unifies <strong>Process Experience</strong> to enforce physical feasibility via prediction errors and <strong>Goal Experience</strong> to guide task optimality through successful trajectories [cite: 33-34]. [cite_start]Experiments on EB-ALFRED and EB-Habitat demonstrate that WorldMind achieves superior performance compared to baselines with remarkable cross-model and cross-environment transferability[cite: 35].
             </p>
         </section>
 
         <section id="method">
             <h2>The WorldMind Framework</h2>
             <p>
-                WorldMind transforms autonomous agents into empirical learners. Instead of relying on resource-intensive training, it employs a <strong>Predict-Act-Verify</strong> loop to align the agent's internal world model with reality[cite: 230].
+                WorldMind transforms autonomous agents into empirical learners. [cite_start]Instead of relying on resource-intensive training, it employs a <strong>Predict-Act-Verify</strong> loop to align the agent's internal world model with reality[cite: 230].
             </p>
             
-            <img src="assets/figure2_framework.png" alt="WorldMind Framework Overview" class="figure-img">
+            <img src="assets/framework.png" alt="WorldMind Framework Overview" class="figure-img">
             <p class="vis-caption">Figure 2: Overview of the WorldMind Framework. The agent autonomously constructs a World Knowledge Repository (WKR) by unifying Process Experience (from prediction errors) and Goal Experience (from successful trajectories).</p>
 
             <h3>Key Components</h3>
             <ul>
                 <li>
-                    <strong>Process Experience (Physical Boundaries):</strong> Derived from prediction errors (e.g., trying to open a cabinet while far away). The agent uses "Reflexion" to generate verbalized causal rules that prevent future physical hallucinations[cite: 219, 285].
+                    <strong>Process Experience (Physical Boundaries):</strong> Derived from prediction errors (e.g., trying to open a cabinet while far away). [cite_start]The agent uses "Reflexion" to generate verbalized causal rules that prevent future physical hallucinations[cite: 219, 285].
                 </li>
                 <li>
-                    <strong>Goal Experience (Procedural Shortcuts):</strong> Distilled from successful trajectories. These serve as heuristics to guide the policy search space towards optimal paths, ensuring efficient convergence[cite: 221, 288].
+                    <strong>Goal Experience (Procedural Shortcuts):</strong> Distilled from successful trajectories. [cite_start]These serve as heuristics to guide the policy search space towards optimal paths, ensuring efficient convergence[cite: 221, 288].
                 </li>
             </ul>
         </section>
@@ -270,7 +254,7 @@
         <section id="results">
             <h2>Experimental Results</h2>
             <p>
-                We evaluated WorldMind on <strong>EB-ALFRED</strong> and <strong>EB-Habitat</strong>. The framework consistently outperforms baselines (ReAct, BON, SimuRA, etc.) in both Success Rate (SR) and Goal-Conditioned Success (GC)[cite: 354].
+                We evaluated WorldMind on <strong>EB-ALFRED</strong> and <strong>EB-Habitat</strong>. [cite_start]The framework consistently outperforms baselines (ReAct, BON, SimuRA, etc.) in both Success Rate (SR) and Goal-Conditioned Success (GC)[cite: 354].
             </p>
 
             <div style="overflow-x: auto;">
@@ -309,11 +293,11 @@
                     </tbody>
                 </table>
             </div>
-            <p class="vis-caption">Table 1: Comparison of Success Rates. WorldMind achieves state-of-the-art performance by reducing physical hallucinations[cite: 334, 396].</p>
+            [cite_start]<p class="vis-caption">Table 1: Comparison of Success Rates. WorldMind achieves state-of-the-art performance by reducing physical hallucinations[cite: 334, 396].</p>
             
             <h3>Cross-Model Transferability</h3>
             <p>
-                A key finding is that the experience learned by one model (e.g., GPT-4.1-mini) can be transferred to another (e.g., GPT-3.5-turbo), significantly improving the latter's performance. This confirms that the constructed world knowledge captures universal physical laws independent of the specific backbone model[cite: 111, 410].
+                A key finding is that the experience learned by one model (e.g., GPT-4.1-mini) can be transferred to another (e.g., GPT-3.5-turbo), significantly improving the latter's performance. [cite_start]This confirms that the constructed world knowledge captures universal physical laws independent of the specific backbone model[cite: 111, 410].
             </p>
         </section>
 
