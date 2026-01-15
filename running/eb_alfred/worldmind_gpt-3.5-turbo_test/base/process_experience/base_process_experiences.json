@@ -1,9 +1,0 @@
-[
-  {
-    "instruction": "Rinse off a ladle and move it to the table.",
-    "eval_set": "base",
-    "knowledge": [
-      "Environmental Logic: My prediction that I was holding the ladle failed because I attempted to pick up the ladle without first navigating to the specific location DiningTable where the ladle is visible. Therefore, Navigation Precision Rule: You must first use 'find' to explicitly navigate to the exact indexed receptacle (DiningTable) containing the object before attempting to pick it up."
-    ]
-  }
-]
