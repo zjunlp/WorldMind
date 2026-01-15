@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simTubeWrite</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simTubeWrite" id="simTubeWrite"></a>simTubeWrite / sim.tubeWrite </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Sends a data packet into a communication tube previously opened with <a href="simTubeOpen.htm">sim.tubeOpen</a>. The tube needs to be connected (see <a href="simTubeStatus.htm">sim.tubeStatus</a>).<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simTubeWrite(simInt tubeHandle,const simChar* data,simInt dataLength)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>tubeHandle</strong>: the handle of the tube that was returned by the <a href="simTubeOpen.htm">simTubeOpen</a> function.</div>
+<div><strong>data</strong>: pointer to a data packet. <a href="simTubeWrite.htm">simTubeWrite</a> will copy that packet so that it can directly be released</div>
+<div><strong>dataLength</strong>: size of the data packet</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>1</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.tubeWrite(number tubeHandle,string data)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>tubeHandle</strong>: Similar to the C-function counterpart</div>
+<div><strong>data</strong>: string representing a data packet (each character can have values between 0 and 255). See also the <a href="../apiFunctionListCategory.htm#packing">data packing/unpacking functions</a>.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>none</div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

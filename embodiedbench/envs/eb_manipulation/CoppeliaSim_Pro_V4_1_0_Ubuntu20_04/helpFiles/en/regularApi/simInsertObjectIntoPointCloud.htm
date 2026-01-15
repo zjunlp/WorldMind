@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simInsertObjectIntoPointCloud</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simInsertObjectIntoPointCloud" id="simInsertObjectIntoPointCloud"></a>simInsertObjectIntoPointCloud / sim.insertObjectIntoPointCloud </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Inserts an object into a <a href="../pointClouds.htm">point cloud</a>, as points. See also <a href="simInsertPointsIntoPointCloud.htm">sim.insertPointsIntoPointCloud</a> and the other <a href="../apiFunctionListCategory.htm#pointCloud">point cloud related functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simInsertObjectIntoPointCloud(simInt pointCloudHandle,simInt objectHandle,simInt options,simFloat gridSize,const simUChar* color,simVoid* reserved)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>pointCloudHandle</strong>: the handle of the point cloud. See also <a href="simGetObjectHandle.htm">simGetObjectHandle</a></div>
+<div><strong>objectHandle</strong>: the handle of the object to insert. Only potentially <a href="../collidableObjects.htm">collidable objects</a> are supported</div>
+<div><strong>options</strong>: reserved. Set to 0</div>
+<div><strong>gridSize</strong>: when a shape is inserted, it will first be converted to an OC tree with a given grid or voxel size.</div>
+<div><strong>color</strong>: a pointer to one RGB triple, specifying the red, green and blue color components (0-255). Can be nullptr.</div>
+<div><strong>optionalValues</strong>: can be used to specify additional parameters, or set to nullptr for default parameter values:</div>
+<div class=tab>((simInt*)optionalValues)[0]: an integer value that is bit coded. Each bit indicates which additional parameter will be taken into account:</div>
+<div class=tab>((simFloat*)optionalValues)[1]: <strong>duplicateTolerance</strong>: a minimum distance tolerance value that is used to avoid duplicate points. To have this parameter taken into account, set bit0 to 1 in ((simInt*)optionalValues)[0]. Point insertion is slower when the duplicate tolerance is &gt; then 0.0</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful, otherwise the total number of points in the point cloud</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number totalPointCnt=sim.insertObjectIntoPointCloud(number pointCloudHandle,number objectHandle,number options,number gridSize,table color=nil,number duplicateTolerance=nil)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

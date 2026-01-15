@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simRegisterScriptVariable</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simRegisterScriptVariable" id="simRegisterScriptVariable"></a>simRegisterScriptVariable</h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr><div>Registers a script variable. Each time a script is run for the first time, registered variables will be set. The registered variable names will also be used for syntax highlighting and auto-completion purpose in the CoppeliaSim code editor. Can also be used for more complex operations as in following example:</div>
+<div></div>
+<div>simRegisterScriptVariable(&quot;simUi&quot;,&quot;require('customUi')&quot;,0);</div>
+<div>which is equivalent with an implicit simUi=require('customUi') command in the initialization phase of every script.</div>
+<div>See also <a href="simRegisterScriptCallbackFunction.htm">simRegisterScriptCallbackFunction</a> and <a href="simSetScriptVariable.htm">sim.setScriptVariable</a>.</div></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simRegisterScriptVariable(const simChar* varNameAtPluginName,const simChar* varValue,int stackhandle)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>varNameAtPluginName</strong>: name of the variable, combined with the plugin name: variableName@pluginName. Avoid using too simple variable names, otherwise they might clash with other plugins. Also, always use the <em>simXX.</em> prefix (e.g. <em>simMyPlugin.myCustomVariable</em>) for the variable name. The plugin name should be the exact same name used while loading the plugin via <a href="simLoadModule.htm">simLoadModule</a> (if the plugin name is <em>simExtMyPlugin.dll</em>, this should be <em>MyPlugin</em>).</div>
+<div><strong>varValue</strong>: value of the variable. Can be nullptr, in which case the value of the variable will be the top item of the provided stack (or, if <em>stackHandle</em> is 0, <em>varName</em> will only be used for code auto-completion purpose).</div>
+<div><strong>stackHandle</strong>: a stack handle obtained with <a href="simCreateStack.htm">simCreateStack</a>. Set to 0 if <em>varValue</em> is not nullptr. Set to -1 if <em>varValue</em> is not nullptr and you do not want the variable to appear in the script editor auto-completion list. If a stack is provided, it will be released at a later point by CoppeliaSim.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>1 if the variable was registered, 0 if the variable was replaced because it already existed, -1 in case of an error</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn><div>number result=sim.registerScriptVariable(string varName [,string varValue])</div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>varName</strong>: name of the variable.</div>
+<div><strong>varValue</strong>: value of the variable. If omitted, <em>varName</em> will only be used for syntax highlighting and auto-completion purpose in the CoppeliaSim code editor.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>result</strong>: 1 if the variable was registered, 0 if the variable was replaced because it already existed</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

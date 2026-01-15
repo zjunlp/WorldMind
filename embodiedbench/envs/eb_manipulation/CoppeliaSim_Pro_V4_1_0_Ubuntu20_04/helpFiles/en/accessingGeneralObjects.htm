@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Accessing objects programmatically</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Accessing objects programmatically</h1>
+
+<p>When programming in and around CoppeliaSim, you will always need to reference  various objects you wish to work with, such as <a href="objects.htm">scene objects</a>, <a href="basicsOnIkGroupsAndIkElements.htm">Ik groups</a>, <a href="distanceCalculation.htm">distance objects</a>, etc. You do this with handles, that you obtain via various <a href="apiFunctionListCategory.htm#HandleRetrieval">handle retrieving functions</a> that expect an object name as input argument. For instance, from a <a href="plugins.htm">plugin</a>, you would access object <em>Cuboid1</em> with:</p>
+
+<pre class=lightBlueBox>
+int cuboid1Handle=simGetObjectHandle("Cuboid1");
+</pre>
+
+<p>From an embedded script, you would do it with:</p>
+
+<pre class=lightRedBox>
+cuboid1Handle=sim.getObjectHandle('Cuboid1')
+</pre>
+
+<br>
+<br>
+
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="fromUnassociatedCode"></a>Access from <em>unassociated</em> code </td></tr></table> 
+
+<p><em>Unassociated</em> code is code that is not attached to any scene object. This includes all the code written for <a href="plugins.htm">plugins</a>, <a href="addOns.htm">add-ons</a>, <a href="remoteApiOverview.htm">remote API</a> clients, external <a href="rosInterfaces.htm">ROS</a> nodes, external <a href="blueZeroPlugin.htm">BlueZero</a> nodes, and <a href="mainScript.htm">the main script</a>.</p>
+
+<p>In that case, object access is trivial as show following examples: you simply specify the object's full name in order to retrieve its handle:</p>
+
+<pre class=lightBlueBox>
+// e.g. inside of a c/c++ plugin:
+int cuboid1Handle=simGetObjectHandle("Cuboid1"); // handle of object "Cuboid1"
+int cuboid2Handle=simGetObjectHandle("Cuboid2"); // handle of object "Cuboid2"
+int cuboid1Hash0Handle=simGetObjectHandle("Cuboid1#0"); // handle of object "Cuboid1#0"
+int ikGroupHash42Handle=simGetIkGroupHandle("ikGroup#42"); // handle of ik group "ikGroup#42"
+</pre>
+
+<pre class=lightPurpleBox>
+# e.g. inside of a Python legacy remote API client:
+opMode=sim.simx_opmode_blocking
+res,cuboid1Handle=sim.simxGetObjectHandle(clientId,"Cuboid1",opMode) # handle of object "Cuboid1"
+res,cuboid2Handle=sim.simxGetObjectHandle(clientId,"Cuboid2",opMode) # handle of object "Cuboid2"
+res,cuboid1Hash0Handle=sim.simxGetObjectHandle(clientId,"Cuboid1#0",opMode) # handle of object "Cuboid1#0"
+</pre>
+
+<br>
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="fromAssociatedCode"></a>Access from <em>associated</em> code </td></tr></table> 
+
+<p><em>Associated</em> code is code that is associated with a scene object (i.e. <em>attached</em> to a scene object). This includes all the code written for <a href="childScripts.htm">child scripts</a> or <a href="customizationScripts.htm">customization scripts</a>.</p>
+
+<p>In that case, object access is a little bit more tricky, and this lies in the fact that associated code will be automatically duplicated if its associated object is duplicated (e.g. when you copy and paste a robot model for instance): in that case, will the copied code access the same objects as the original code?</p>
+
+
+
+
+
+<p>Take the example of a child script attached to object <em>Cuboid1</em> with following code:</p>
+
+
+<pre class=lightRedBox>
+cuboid1Handle=sim.getObjectHandle('Cuboid1')
+sim.setShapeColor(cuboid1Handle,nil,0,{math.random(),math.random(),math.random()})</pre>
+
+
+
+<p>What above code does is change the color of <em>Cuboid1</em> to a random color. When you duplicate <em>Cuboid1</em>, the copy will be named <em>Cuboid1#0</em>. In that case the duplicated script remains identical to the original script, however the duplicated script will <em>know</em> that is must access <em>Cuboid1#0</em> and not <em>Cuboid1</em>. And because of that, the copied cuboid will also change its color to a random color as did the original cuboid.</p>
+
+<p>Duplicated scripts will also automatically access duplicated objects in order to guarantee a very good and easy scalability of a scene content. An automatic name suffix adjustment mechansim is used:</p>
+
+
+<p>An object name can always be divided into a base name and a suffix part:</p>
+
+<p align=center><img src="images/baseNameSuffix.jpg"></p>
+<p class=imageLabel>[Base name and suffix]</p>
+<br>
+
+
+<p>When associated code simply specifies the base name to retrieve the handle of an object, then CoppeliaSim will internally adjust the name by appending a hash character and the suffix of the object the script is associated with. If the full name is specified, then there is no automatic name adjustment:</p>
+
+<p align=center><img src="images/objectAccess1.jpg"></p>
+<p class=imageLabel>[Automatic name adjustment mechanism for associated scripts]</p>
+<br>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="apiFunctionListCategory.htm#HandleRetrieval">Related API functions</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

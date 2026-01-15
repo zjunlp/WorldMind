@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Movement along a Path</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Movement along a Path</h1>
+
+
+<p>The current intrinsic path position is indicated as a red sphere on the path (if the path position display is enabled). The position of the sphere along the <a href="paths.htm">path</a> can be controlled at any time during simulation with <a href="regularApi/simSetPathPosition.htm">sim.setPathPosition</a>. Make sure you understand <a href="pathPositionCalculationMethod.htm">how path positions or the path length is calculated</a>.</p>
+
+<p>To actually make an <a href="objects.htm">object</a> move along the path, you will first need to attach the object to a <a href="dummies.htm">dummy</a>, then assign the dummy to follow the path position (with an optional offset). Refer to the section on <a href="dummies.htm">dummies</a> for more details.</p>
+
+<p>Alternatively, you can have an object follow a path by using the <a href="regularApi/simFollowPath.htm">sim.followPath</a>, or <a href="regularApi/simGetPositionOnPath.htm">sim.getPositionOnPath</a>, <a href="regularApi/simSetObjectPosition.htm">sim.setObjectPosition</a>, <a href="regularApi/simGetOrientationOnPath.htm">sim.getOrientationOnPath</a> and <a href="regularApi/simSetObjectOrientation.htm">sim.setObjectOrientation</a> command. </p>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="paths.htm">Paths</a></li>
+<li><a href="pathsControlPointsAndBezierPoints.htm">Path control points and Bezier points</a></li>
+<li><a href="pathPositionCalculationMethod.htm">Path position and length calculation method</a></li>
+<li><a href="pathPropertiesDialog.htm">Path properties</a></li>
+<li><a href="pathEditMode.htm">Path edit mode</a></li>
+<li><a href="dummies.htm">Dummies</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Light properties</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Light properties </h1>
+
+
+<p>The light properties are part of the <a href="sceneObjectPropertiesDialog.htm">scene object properties </a>dialog, which is located at [Menu bar --&gt; Tools --&gt; Scene object properties]. You can also open the dialog with a double-click on an object icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>, or with a click on its <a href="userInterface.htm#toolbars">toolbar</a> button:<br>
+</p>
+
+<p align=center><img src="images/objectPropertyToolbarButton.jpg"></p>
+<p class=imageLabel>[Scene object properties toolbar button]</p>
+<br>
+
+<p>In the scene object properties dialog, click  the <strong>Light</strong> button to display the light  dialog (the <strong>Light</strong> button only appears if the last selection is a <a href="lights.htm">light</a><a href="cameras.htm"></a><a href="paths.htm"></a>). The dialog displays the settings and parameters of the last selected light. If more than one light is selected, then some parameters can be copied from the last selected light to the other selected lights (<strong>Apply to selection</strong>-buttons):<br>
+</p>
+
+
+<p align=center><img src="images/lightProperties1.jpg"></p>
+<p class=imageLabel>[Light dialog]</p>
+<br>
+
+<li> <strong>Light is enabled</strong>: enabled or disables a light. A maximum of 8 enabled lights can exist at the same time in a <a href="scenes.htm">scene</a>.
+</li>
+
+<li> <strong>Light is local</strong>: when this item is selected, then the light will act as a local light, and only operate when seen through a <a href="cameras.htm">camera</a> or <a href="visionSensors.htm">vision sensor</a> that uses local lights (i.e. the camera or vision sensor's <strong>use local lights</strong> item needs to be enabled). In addition to that, the light needs to be built on top of that camera or vision sensor (the light beeing the direct or indirect child).</li>
+
+<li> <strong>Spot cutoff</strong>: in the case the light is a spotlight, this value specifies the cuttoff angle of the light. Small angles result in narrow spotlights.<br>
+</li>
+
+<li> <strong>Spot exponent</strong>: in the case the light is a spotlight, this value specifies the intensity distribution of the light. 0 results in a wide spotlight, 128 results in a narrow spotlight.<br>
+</li>
+
+<li> <strong>Constant attenuation factor</strong>: parameter indicating the constant attenuation factor of the light.<br>
+</li>
+
+<li> <strong>Linear attenuation factor</strong>: parameter indicating the linear attenuation factor of the light.<br>
+</li>
+
+<li> <strong>Quadratic attenuation factor</strong>: parameter indicating the quadratic attenuation factor of the light.<br>
+</li>
+
+
+<li> <strong>Object size</strong>: size of the light. This parameter has only a visual effect and no functional meaning.</li>
+
+<li> <strong>Adjust light / casing color</strong>: allows adjusting a light color, or casing color.</li>
+
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="lights.htm">Lights</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

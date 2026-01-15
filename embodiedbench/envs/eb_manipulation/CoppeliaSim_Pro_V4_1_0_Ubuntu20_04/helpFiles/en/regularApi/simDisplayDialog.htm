@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simDisplayDialog</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simDisplayDialog" id="simDisplayDialog"></a>simDisplayDialog / sim.displayDialog</h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Displays a generic dialog box. Use in conjunction with <a href="simGetDialogResult.htm">sim.getDialogResult</a> ,<a href="simGetDialogInput.htm">sim.getDialogInput</a> and <a href="simEndDialog.htm">sim.endDialog</a>. From C, the function will only create non-modal dialogs (non-blocking), from Lua, modal dialogs can be created if called from a child script that runs in a thread. Use <a href="../customUIPlugin.htm">custom user interfaces</a> instead if a higher customization level is required. Dialogs displayed from a <a href="../mainScript.htm">main script</a> or a <a href="../childScripts.htm">child script</a> will automatically close at simulation end. See also <a href="simMsgBox.htm">sim.msgBox</a> and <a href="simFileDialog.htm">sim.fileDialog</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simDisplayDialog(const simChar* titleText,const simChar* mainText,simInt dialogType,const simChar* initialText,void* nullptr,void* nullptr,void* nullptr)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>titleText</strong>: Title bar text</div>
+<div><strong>mainText</strong>: Information text</div>
+<div><strong>dialogType</strong>: <a href="../apiConstants.htm#genericDialogStyles">generic dialog style</a></div>
+<div><strong>initialText</strong>: Initial text in the edit box if the dialog is of type sim_dlgstyle_input. Can be nullptr</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>handle of generic dialog if operation was successful, -1 otherwise. The handle should be used with following functions: <a href="simGetDialogResult.htm">simGetDialogResult</a> ,<a href="simGetDialogInput.htm">simGetDialogInput</a> and <a href="simEndDialog.htm">simEndDialog</a>.<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number dialogHandle=sim.displayDialog(string titleText,string mainText,number dialogType,boolean modalDialog,string initialText)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>titleText</strong>: Title bar text</div>
+<div><strong>mainText</strong>: information text</div>
+<div><strong>dialogType</strong>: generic dialog style</div>
+<div><strong>modalDialog</strong>: specifies whether the dialog is modal. Modal dialogs are only allowed when not called from the main thread.<br>
+</div>
+<div><strong>initialText</strong>: Initial text in the edit box if the dialog is of type sim_dlgstyle_input. Can be nil or omitted
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>dialogHandle</strong>: handle of generic dialog</div>
+</td> 
+</tr> 
+
+<tr class=apiTableTr> 
+<td class=remApiTableLeftCParam>
+Remote API equiv.
+</td> 
+<td class=remApiTableRightCParam>
+<div>B0-based remote API: <a href="../b0RemoteApi-cpp.htm#simxDisplayDialog">simxDisplayDialog</a></div>
+<div>Legacy remote API: <a href="../remoteApiFunctions.htm#simxDisplayDialog">simxDisplayDialog</a></div>
+</td> 
+</tr> 
+
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

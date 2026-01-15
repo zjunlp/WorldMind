@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Scene objects</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Scene objects</h1>
+
+
+<p>The main elements in CoppeliaSim that are used for building a simulation <a href="scenes.htm">scene</a> are scene objects (objects in short). Objects are visible in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> and in the scene<a href="pagesAndViews.htm"> view</a>. In the scene view, objects have a three dimensional representation as illustrated in following figure:
+</p>
+
+<p align=center><img src="images/sceneObjects1.jpg"></p>
+<p class=imageLabel>[Object types in CoppeliaSim and their three dimensional representation]</p>
+<br>
+
+<p>
+Following list gives a brief functional description of each object type:
+</p>
+
+<li><a href="shapes.htm">Shapes</a>: a shape is a rigid mesh that is composed of triangular faces. </li>
+<li><a href="joints.htm">Joints</a>: a joint object is a joint or actuator. Four types are supported: revolute joints, prismatic joints, screws and spherical joints. </li>
+<li><a href="graphs.htm">Graphs</a>: a graph is used to record and visualize simulation data. </li>
+<li><a href="dummies.htm">Dummies</a>: a dummy is a point with orientation. Dummies are multipurpose objects that can have many different applications. </li>
+<li><a href="proximitySensors.htm">Proximity sensors</a>: a proximity sensor detects objects in a geometrically exact fashion within its detection volume. CoppeliaSim supports pyramid-, cylinder-, disk-, cone- and ray-type proximity sensors. </li>
+<li><a href="visionSensors.htm">Vision sensors</a>: a vision sensor is a camera-type sensor, reacting to light, colors and images. </li>
+<li><a href="forceSensors.htm">Force sensors</a>: a force sensor is an object able to measure forces and torques that are applied to it. It also has the ability to <em>break</em> if a given threashold is overshot. </li>
+<!--
+<li><a href="mills.htm">Mills</a>: a mill is a convex volume that can be used to perform cutting operations on shape objects. </li>
+-->
+<li><a href="cameras.htm">Cameras</a>: a camera is an object that allows <em>seeing</em> the simulation scene from various view points. </li>
+<li><a href="lights.htm">Lights</a>: a light is an object that allows illuminating the simulation scene. </li>
+<li><a href="paths.htm">Paths</a>: a path is an object that defines a path or trajectory in space. It can be used for various purposes, also as a customized joint or actuator. </li>
+<!--
+<li><a href="mirrors.htm">Mirrors</a>: a mirror can reflect images/light, but can also operate as an auxiliary clipping plane. </li>
+-->
+<li><a href="octrees.htm">OC trees</a>: an OC tree is a spacial partitioning data structure made up by voxels.</li>
+<li><a href="pointClouds.htm">Point clouds</a>: a point cloud is an OC tree structure that contains points.</li>
+
+<p>
+Some of above objects can have special properties allowing other objects or <a href="calculationModules.htm">calculation modules</a> to interact with them. Objects can be: </p>
+
+<li><a href="collidableObjects.htm">Collidable</a>: collidable objects can be tested for <a href="collisionDetection.htm">collision</a> against other collidable objects. </li>
+<li><a href="measurableObjects.htm">Measurable</a>: measurable objects can have the <a href="distanceCalculation.htm">minimum distance</a> between them and other measurable objects calculated. </li>
+<li><a href="detectableObjects.htm">Detectable</a>: detectable objects can be detected by <a href="proximitySensors.htm">proximity sensors</a>. </li>
+<!--
+<li><a href="cuttableObjects.htm">Cuttable</a>: cuttable objects can be cut by <a href="mills.htm">mills</a>. </li>
+-->
+<li><a href="renderableObjects.htm">Renderable</a>: renderable objects can be <em>seen</em> or <em>detected</em> by <a href="visionSensors.htm">vision sensors</a>. </li>
+<li><a href="viewableObjects.htm">Viewable</a>: viewable objects can be <em>looked through</em>, <em>looked at</em>, or their image content can be visualized in views. Refer to the<a href="pagesAndViews.htm"> pages and views-section</a> for more information </li>
+
+<p>Each object has a position and orientation within the simulation scene. We refer to an object's position and orientation as configuration of the object. Objects can be attached to other objects (or built on top of each other). If object A is built on top of object B, then object B is the parent and object A is the child. To create a parent-child relationships between object B and object A, select object A, then select object B (the selection order is important). Then select [Menu bar --&gt; Edit --&gt; Make last selected object parent]. Following figure illustrates this operation:<br>
+</p>
+
+<p align=center><img src="images/sceneObjects3.jpg"></p>
+<p class=imageLabel>[(1) Before attaching object A to object B, (2) after attaching object A to object B]</p>
+<br>
+
+
+<p>Alternatively, you can drag and drop an object onto another one in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> to obtain a similar result. Notice that object A's configuration was not changed (both objects kept their respective configuration). However, looking at the scene hierarchy, you can see that object A became child of object B. If you now move object B, object A will automatically follow, since object A is attached to object B. Object A can be detached by selecting it, then selecting [Menu bar --&gt; Edit --&gt; Make selected object(s) orphan]. Doing so will detach object A without changing its configuration. Alternatively, you can drag and drop an object onto the world icon to obtain a similar result.<br>
+</p>
+
+<p>Every object has an absolute configuration (or cumulative configuration) that is relative to the world's reference frame, and a local configuration (or relative configuration) that is relative to the parent object's reference frame. In above example, when object A became child of object B, object A's absolute configuration didn't change, but its local configuration was modified.<br>
+</p>
+
+<p>The absolute configuration of the last selected object is displayed in the <a href="userInterface.htm#InformationText">information text</a>. To modify or adjust the absolute or local configuration of an object, refer to the <a href="coordinateDialog.htm">coordinates and transformations dialog</a> and the section on <a href="objectMovement.htm">object position/orientation manipulation</a>.<br>
+</p>
+
+<p>Some object data can be recorded by graph objects. Refer to <a href="graphs.htm">graphs</a> and <a href="dataStreamTypes.htm">graph data streams</a> for more information about how to record object data.<br>
+</p>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+
+<li><a href="apiFunctionListCategory.htm#sceneObjectFunctionality">Object related API functions</a></li>
+<li><a href="apiFunctionListCategory.htm#sceneObjectSelectionFunctionality">Object selection related API functions</a></li>
+
+<li><a href="sceneObjectPropertiesDialog.htm">Object properties dialog</a></li>
+<li><a href="coordinateDialog.htm">Coordinates and transformations</a></li>
+<li><a href="objectMovement.htm">Object position/orientation manipulation</a></li>
+<li><a href="commonPropertiesDialog.htm">Object common properties</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

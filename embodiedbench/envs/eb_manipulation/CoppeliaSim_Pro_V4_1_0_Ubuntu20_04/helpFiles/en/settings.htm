@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Settings</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>User settings</h1>
+
+<p>Some values and settings in CoppeliaSim are not dependent on a <a href="scenes.htm">scene</a> or <a href="models.htm">model</a>, but rather dependent on the user. The user settings dialog (which partially reflects the content of file <em>system/usrset.txt</em>) can be accessed with [Menu bar --&gt; Tools --&gt; Settings] or by clicking following toolbar button:<br>
+</p>
+
+<p align=center><img src="images/settings1.jpg"></p>
+<p class=imageLabel>[Settings toolbar button]</p>
+<br>
+
+<p align=center><img src="images/settings2.jpg"></p>
+<p class=imageLabel>[User settings dialog]</p>
+<br>
+
+<li> <strong>Translation step size</strong>: the linear step size used when translating <a href="objects.htm">objects</a> in the <a href="objectMovement.htm">object manipulation mode</a>. It is recommended to keep a value of 5 cm. Objects can be assigned specific step sizes in the <a href="coordinateDialog.htm">coordinate and transformation dialog</a>.</li>
+<li> <strong>Rotation step size</strong>: the angular step size used when rotating  <a href="objects.htm">objects</a> in the <a href="objectMovement.htm">object manipulation mode</a>. Objects can be assigned specific step sizes in the <a href="coordinateDialog.htm">coordinate and transformation dialog</a>.</li>
+<li> <strong>Remove identical vertices, tolerance</strong>: when selected, vertices that lay nearby other vertices will be grouped to form one single vertex (that will then be shared among surrounding triangles). This reduces the amount of memory resources needed. This parameter is affecting meshes when they are being <a href="importExport.htm">imported</a> or <a href="shapes.htm">shapes</a> when leaving the <a href="shapeEditModes.htm">shape edit mode</a>. Tolerance specifies the distance threshold to consider when grouping vertices. In general, keep a low value, but different from zero: some mesh data formats (e.g. STL) assign individual vertices to each triangle, regardless whether a vertex is identical with another vertex in another triangle; this can considerably increase the amount of memory required.<br>
+</li>
+<li> <strong>Remove identical triangles</strong>: when selected, identical triangles in a mesh resource will be removed during an import operation or when a shape leaves the shape edit mode.</li>
+<li> <strong>Ignore triangle winding</strong>: a triangle can have two distinct orientations (since it has two distinct faces). When this item is selected, the triangle orientation is ignored when identifying identical triangles.</li>
+<li> <strong>Undo/redo enabled</strong>: enables or disables the undo/redo functionality. That functionality operates by serializing (saving) the entire scene to memory every time a change was registered. Only differences with previous undo points are memorized so as to use little memory. This is a very efficient and fail-safe undo/redo that is also supported from <a href="plugins.htm">plugins</a> or the <a href="mainClientApplication.htm">main client application</a>, and that is permitted only because CoppeliaSim's serialization routines are very fast. There are however times when either the computer is really old or the scene content extremely large (e.g. very detailed cad data) where this method slows down the whole application. In that case, simply disable the undo/redo functionality.</li>
+<li> <strong>Display world reference</strong>: displays a small world reference frame in the lower left hand side of a <a href="cameras.htm">camera</a> view. As everywhere in CoppeliaSim, the red, green and blue arrows correspond to the x-, y-, and z-axis respectively.</li>
+<li> <strong>Display bounding boxes of selected objects</strong>: displays a white/yellow bounding box around selected objects</li>
+
+<li> <strong>Auto-save enabled</strong>: when auto-save is enabled, each opened scene will be saved on a regular basis. In case of a crash, the auto-saved scenes can be restored. The auto-save delay can be adjusted in the file system/usrset.txt.</li>
+
+<li> <strong>Hide console window</strong>: allows hiding or showing the <a href="userInterface.htm#ConsoleWindow">console window</a>. By default, the console window is hidden. On Mac, this item is not available (the standard output can be viewed in the system console (Applications/Utilities/Console)).</li>
+<li> <strong>Hide hierarchy during simul.</strong>: automatically hides the scene hierarchy when simulation is running.</li>
+
+<li> <strong>Adjust OpenGL settings</strong>: opens a dialog that allows to adjust most settings related to OpenGL:</li>
+
+<br>
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="openGl"></a>OpenGL settings
+</td></tr></table> 
+
+
+<p align=center><img src="images/openGlSettings.jpg"></p>
+<p class=imageLabel>[OpenGL settings dialog]</p>
+<br>
+
+
+<li><strong>Offscreen context type</strong>: the type of the offscreen rendering contexts. Default are invisible windows.</li>
+<li><strong>FBO type</strong>: the type of the frame buffer objects. Default are Qt-based FBOs on Mac, and Non-Qt-based FBOs on Windows and Linux.</li>
+<li><strong>VBO operation</strong>: whether Vertex Buffer Objects are used. The <strong>default</strong> option uses VBOs.</li>
+<li><strong>Idle fps</strong>: the number of frames per second when idle.</li>
+
+<br>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="objectMovement.htm">Object manipulation mode</a></li>
+<li><a href="coordinateDialog.htm">Coordinate and transformation dialog</a></li>
+<li><a href="importExport.htm">Mesh import / export</a></li>
+<li><a href="shapeEditModes.htm">Shape edit modes</a></li>
+<li><a href="userInterface.htm#ConsoleWindow">Console window</a></li>
+
+<br>
+<br>
+
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

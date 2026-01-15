@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>API Functions</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body><div align="center"><table class="allEncompassingTable"><tr><td>
+<h1>ICP Plugin API reference</h1>
+<h3 class="subsectionBar">
+<a name="match" id="match"></a>simICP.match</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Match two point clouds.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">table m=simICP.match(int model_handle, int template_handle, float outlier_treshold=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>model_handle</strong> (int): handle to model point cloud (model will be the static part)</div>
+<div>
+<strong>template_handle</strong> (int): handle to template point cloud (template will be the part to register to the model)</div>
+<div>
+<strong>outlier_treshold</strong> (float, default: -1): outlier treshold (-1 = no treshold)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>m</strong> (table of float): transformation matrix (12 elements)</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="matchToShape" id="matchToShape"></a>simICP.matchToShape</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Match point clouds to shape.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">table m=simICP.matchToShape(int model_handle, int template_handle, float outlier_treshold=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>model_handle</strong> (int): handle to model shape (model will be the static part)</div>
+<div>
+<strong>template_handle</strong> (int): handle to template point cloud (template will be the part to register to the model)</div>
+<div>
+<strong>outlier_treshold</strong> (float, default: -1): outlier treshold (-1 = no treshold)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>m</strong> (table of float): transformation matrix (12 elements)</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+</td></tr></table></div></body>
+</html>

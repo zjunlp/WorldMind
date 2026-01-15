@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>ROS 2 Interface</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>ROS 2 Interface</h1>
+
+<p>The ROS 2 Interface is part of the <a href="apisOverview.htm">CoppeliaSim API framework</a> and is courtesy of Federico Ferri. The ROS 2 Interface duplicates the C++ ROS 2 API with a good fidelity. This makes it the ideal choice for very flexible communication via ROS 2, but might require a little bit more insight on the various messages and the way ROS 2 operates. You can recognize ROS 2 Interface API functions from the <em>simROS2</em>- prefix.</p>
+
+<p>ROS 2 is a distributed pseudo operating system allowing for easy management and communication between multiple computers connected in a network. Please refer to the <a href="https://index.ros.org/doc/ros2/">official ROS 2 documentation</a> for details about ROS 2.</p>
+
+<p>CoppeliaSim can act as a ROS 2 node that other nodes can communicate with via services, topics and actions.</p>
+
+<p>The ROS 2 Interface functionality in CoppeliaSim is enabled via a plugin: <em><a href="https://github.com/CoppeliaRobotics/simExtROS2Interface" target="_blank">libsimExtROS2Interface</a>.*</em>. The plugin can easily be adapted to your own needs. The plugin is loaded when CoppeliaSim is launched. Make sure to inspect CoppeliaSim's console window or terminal for details on plugin load operations.</p>
+
+<p>Have a look at following simulation scenes/model for a quick start with the ROS Interface:</p>
+
+<li><em>ros2InterfaceTopicPublisherAndSubscriber.ttt</em></li>
+<li><em>controlTypeExamples/controlledViaRos2.ttt</em></li>
+<li><em>models/tools/ros2Interface helper tool.ttm</em> (model allowing to operate CoppeliaSim in Synchronous mode, e.g. in order to manually step the simulation)</li>
+
+
+<p>Also have a look at the <a href="ros2Tutorial.htm">ROS 2 tutorial</a> and the <a href="externalControllerTutorial.htm">external controller tutorial</a>.</p>
+
+
+<br>
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="ros2InterfaceApi.htm">ROS 2 Interface API functions</a></li>
+<li><a href="ros2Tutorial.htm">ROS 2 tutorial</a></li>
+<br>
+<br>
+ </tr>
+ <tr>
+   <td > 
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Writing code in and around V-REP</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Writing code in and around CoppeliaSim</h1>
+
+<p>CoppeliaSim is a highly customizable simulator: every aspect of a <a href="simulation.htm">simulation</a> can be customized. Moreover, the simulator itself can be customized and tailored so as to behave exactly as desired. This is allowed through an elaborate <a href="apisOverview.htm">Application Programming Interface</a> (API). Six different programming or coding approaches are supported, each having particular advantages (and obviously also disadvantages) over the others, but all six are mutually compatible (i.e. can be used at the same time, or even hand-in-hand). The control entity of a <a href="models.htm">model</a>, <a href="scenes.htm">scene</a>, or the simulator itself can be located inside:<br>
+</p>
+
+<li>an <a href="scripts.htm">embedded script</a> (i.e. customizing a simulation (i.e. a <a href="scenes.htm">scene</a> or <a href="models.htm">models</a>) via scripting): this method, which consists in writing <a href="http://www.lua.org">Lua</a> scripts, is very easy and flexible, with guaranteed compatibility with every other default CoppeliaSim installations (as long as customized Lua-commands are not used, or are used with distributed <a href="plugins.htm">plugins</a>). This method allows customizing a particular simulation, a simulation scene, and to a certain extent the simulator itself. This is the easiest and most used programming approach.</li>
+
+<li>an <a href="addOns.htm">add-on</a> or <a href="sandboxScript.htm">the sandbox script</a>: this method, which consists in writing <a href="http://www.lua.org">Lua</a> scripts, allows to quickly customize the simulator itself. Add-ons (or the sandbox script) can start automatically and run in the background, or they can be called as functions (e.g. convenient when writing importers/exporters). Add-ons should not be  specific to a certain simulation or model, they should rather offer a more generic, simulator-bound functionality.<br>
+</li>
+
+<li>a <a href="plugins.htm">plugin</a> (i.e. customizing the simulator and/or a simulation via a plugin): this method basically consists in writing a plugin for CoppeliaSim.  Oftentimes, plugins are only used to provide a simulation with <a href="apiFunctionListCategory.htm#customizingLuaFunctions">customized Lua commands</a>, and so are used in conjunction with the first method. Other times, plugins are used to provide CoppeliaSim with a special functionality requiring either fast calculation capability (scripts are most of the time slower than compiled languages),  a specific  interface to a hardware device (e.g. a real robot), or a special communication interface with the outside world.<br>
+</li>
+
+<li>a <a href="remoteApiOverview.htm">remote API</a> client (i.e. customizing the simulator and/or a simulation via a remote API client application): this method allows an external application (e.g. located on a robot, another machine, etc.) to connect to CoppeliaSim in a very easy way, using remote API commands.</li>
+
+<li>a <a href="rosInterfaces.htm">ROS node</a> (i.e. customizing the simulator and/or a simulation via a ROS node): this method allows an external application (e.g. located on a robot, another machine, etc.) to connect to CoppeliaSim via <a href="http://www.ros.org">ROS</a>, the Robot Operating System.</li>
+
+
+<li>a <a href="blueZeroPlugin.htm">BlueZero node</a> (i.e. customizing the simulator and/or a simulation via a BlueZero node): this method allows an external application (e.g. located on a robot, another machine, etc.) to connect to CoppeliaSim via <a href="https://github.com/CoppeliaRobotics/bluezero" target="_blank">BlueZero</a>.</li>
+
+
+<p><a name="sixMethods" id="sixMethods"></a>
+Above 6 methods are also discussed in the <a href="externalControllerTutorial.htm">external controller tutorial</a>. Following table describes in detail the respective advantages and disadvantages of each method:
+</p>
+
+<p align=center><img src="images/controlEntities.jpg"></p>
+<p class=imageLabel>[The 6 possible types of control methods in and around CoppeliaSim]</p>
+<br>
+
+
+<p> Following figure illustrates the various customization possibilities in and around CoppeliaSim: <br>
+</p>
+
+<p align=center><img src="images/writingCode1.jpg"></p>
+<p class=imageLabel>[CoppeliaSim framework. Colored areas are custom or can be customized]</p>
+<br>
+
+<p>The various communication or messaging mechanisms indicated in above figure are briefly described hereafter:<br>
+</p>
+
+<ol>
+<li>C/C++ API calls from the <a href="mainClientApplication.htm">main client application</a> or a <a href="plugins.htm">plugin</a> to the <a href="apiOverview.htm"> regular API</a>. Can originate from a non-C/C++ application if the language provides a mechanism to call C functions (e.g. in the case of Java, refer to the Java Native Interface (JNI)).<br>
+</li>
+
+<li><a href="scriptExecution.htm">Ordered call/execution</a> of <a href="childScripts.htm">child scriptst</a>. Initiated with <a href="regularApi/simHandleChildScripts.htm">sim.handleChildScripts</a> in the <a href="mainScript.htm">main script</a>. <br>
+</li>
+
+<li>Lua API calls from the <a href="mainScript.htm">main script</a>,  a<a href="childScripts.htm"> child script</a>, or a <a href="customizationScripts.htm">customization script</a> to the <a href="apiOverview.htm"> regular API</a>. All calls are directed to the CoppeliaSim engine, except for <a href="apiFunctionListCategory.htm#customizingLuaFunctions">custom Lua functions</a> that are <em>calling back</em> plugins (see next item).<br>
+</li>
+
+<li>Callback calls from the simulator to plugins. The callback calls originate from <a href="scripts.htm">Lua script</a> calls to custom Lua functions (see previous item).<br>
+</li>
+
+<li>Event callback calls from the simulator to <a href="plugins.htm">plugins</a>. Refer to <a href="apiConstants.htm#simulatorMessages">sim_message_eventcallback_</a>-type messages. <br>
+</li>
+
+<li><a href="legacyRemoteApiOverview.htm">Legacy remote API</a> calls from external applications, robots, remote PCs, etc. <br>
+</li>
+
+<li><a href="rosInterfaces.htm">ROS</a> data exchange between CoppeliaSim and external applications, robots, remote PCs, etc. <br>
+</li>
+
+<li>Socket-, pipe-, serial port-, etc. connections to/from external applications.
+</li>
+
+<li>Lua API calls from an <a href="addOns.htm">add-on</a> or <a href="sandboxScript.htm">the sandbox script</a> to the <a href="apiOverview.htm">regular API</a>. All calls are directed to the CoppeliaSim engine, except for <a href="apiFunctionListCategory.htm#customizingLuaFunctions">custom Lua functions</a> that are <em>calling back</em> plugins.</li>
+<li>Execution calls from the CoppeliaSim engine to <a href="customizationScripts.htm">customization scripts</a>. </li>
+
+<li><a href="blueZeroPlugin.htm">BlueZero</a> data exchange between CoppeliaSim and external applications, robots, remote PCs, etc. <br>
+</li>
+
+<li><a href="b0RemoteApiOverview.htm">B0-based remote API</a> calls from external applications, robots, remote PCs, etc. <br>
+</li>
+
+</ol>
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="meansOfCommunication.htm">Means of communication in and around CoppeliaSim</a></li>
+<li><a href="mainScript.htm">The main script</a></li>
+<li><a href="childScripts.htm">Child scripts</a></li>
+<li><a href="customizationScripts.htm">Customization scripts</a></li>
+<li><a href="callbackFunctions.htm">Callback functions</a></li>
+<li><a href="addOns.htm">Add-ons</a></li>
+<li><a href="plugins.htm">Plugins</a></li>
+<li><a href="mainClientApplication.htm">The main client application</a></li>
+<li><a href="apiOverview.htm">Regular API</a></li>
+<li><a href="b0RemoteApiOverview.htm">B0-based remote API</a></li>
+<li><a href="legacyRemoteApiOverview.htm">Legacy remote API</a></li>
+<li><a href="rosInterfaces.htm">ROS interfaces</a></li>
+<li><a href="blueZeroPlugin.htm">BlueZero interface</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

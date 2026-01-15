@@ -1,0 +1,1858 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>Coppelia Kinematics Routines, Lua API</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body><div align="center"><table class="allEncompassingTable"><tr><td>
+<h1>Coppelia Kinematics Routines<br>Lua API Reference</h1>
+<p class="infoBox">All units, unless otherwise indicated, are specified in meters and radians.</p>
+
+<h3 class="subsectionBar">
+<a name="simIK.addIkElement" id="simIK.addIkElement"></a>simIK.addIkElement</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Adds a new IK element to an IK group.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number elementHandle=simIK.addIkElement(number environmentHandle,number ikGroupHandle,number tipDummyHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>tipDummyHandle</strong>: the handle of the dummy object that should act as the tip in the IK element.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet"><div><strong>elementHandle</strong>: the IK element handle in the IK group</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.computeJacobian" id="simIK.computeJacobian"></a>simIK.computeJacobian</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the Jacobian for an IK group.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">bool success=simIK.computeJacobian(number environmentHandle,number ikGroupHandle,number options)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>options</strong>: options flag, bit-coded. bit0 set (i.e. 1): takes joint weights into account.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>success</strong>: whether the Jacobian could successfully be computed.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJacobian">simIK.getJacobian</a>, <a href="#simIK.getManipulability">simIK.getManipulability</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.createEnvironment" id="simIK.createEnvironment"></a>simIK.createEnvironment</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates an new IK environment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number environmentHandle=simIK.createEnvironment()</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>environmentHandle</strong>: the handle of the newly created environment.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.eraseEnvironment">simIK.eraseEnvironment</a>, <a href="#simIK.load">simIK.load</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.createDummy" id="simIK.createDummy"></a>simIK.createDummy</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates a dummy object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number dummyHandle=simIK.createDummy(number environmentHandle,string dummyName='')</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>dummyName</strong>: the name of the dummy.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>dummyHandle</strong>: the handle of the dummy.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.doesObjectExist">simIK.doesObjectExist</a>, <a href="#simIK.createJoint">simIK.createJoint</a>, <a href="#simIK.eraseObject">simIK.eraseObject</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.createIkGroup" id="simIK.createIkGroup"></a>simIK.createIkGroup</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates an IK group.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number ikGroupHandle=simIK.createIkGroup(number environmentHandle,string ikGroupName='')</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupName</strong>: the name of the IK group.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.doesIkGroupExist">simIK.doesIkGroupExist</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.createJoint" id="simIK.createJoint"></a>simIK.createJoint</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates a joint object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number jointHandle=simIK.createJoint(number environmentHandle,string jointName='')</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointName</strong>: the name of the joint.</div>
+<div><strong>jointType</strong>: the type of the joint. Supported types are simIK.jointtype_revolute, simIK.jointtype_prismatic and simIK.jointtype_spherical.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.doesObjectExist">simIK.doesObjectExist</a>, <a href="#simIK.createJoint">simIK.createDummy</a>, <a href="#simIK.eraseObject">simIK.eraseObject</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.doesObjectExist" id="simIK.doesObjectExist"></a>simIK.doesObjectExist</h3>
+<table class="apiTable">
+
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks whether an object exists, based on its name.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">bool result=simIK.doesObjectExist(number environmentHandle,string objectName)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>objectName</strong>: the name of the object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>result</strong>: true if the object exists.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.doesIkGroupExist" id="simIK.doesIkGroupExist"></a>simIK.doesIkGroupExist</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks whether an IK group exists, based on its name.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">bool result=simIK.doesIkGroupExist(number environmentHandle,string ikGroupName)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupName</strong>: the name of the IK group.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>result</strong>: true if the IK group exists.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.eraseEnvironment" id="simIK.eraseEnvironment"></a>simIK.eraseEnvironment</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Erases an IK environment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.eraseEnvironment(number environmentHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.eraseObject" id="simIK.eraseObject"></a>simIK.eraseObject</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Erases an object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.eraseObject(number environmentHandle,number objectHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>objectHandle</strong>: handle of the object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a>, <a href="#simIK.createDummy">simIK.createDummy</a>, <a href="#simIK.createJoint">simIK.createJoint</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getConfigForTipPose" id="simIK.getConfigForTipPose"></a>simIK.getConfigForTipPose</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Searches for a manipulator configuration that matches a given end-effector position/orientation in space. Search is randomized.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">table jointPositions=simIK.getConfigForTipPose(number environmentHandle,number ikGroupHandle,table jointHandles,number thresholdDist=0.1,number maxIterations=1000,table_4 metric={1,1,1,0.1},string validationCallback='',number scriptType=sim.scripttype_childscript,table jointOptions={},table lowLimits={},table ranges={})</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>jointHandles</strong>: a table that specifies the joint handles for the joints we wish to retrieve the values calculated by the IK.</div>
+<div><strong>thresholdDist</strong>: a distance indicating when IK should be computed in order to try to bring the tip onto the target: since the search algorithm proceeds by generating random configurations, many of them produce a tip pose that is too far from the target pose to run IK successfully. Choosing a large value will result in slow calculations, choosing a small value might produce a smaller subset of solutions. Distance between two poses is calculated using a metric (see metric argument below).</div>
+<div><strong>maxIterations</strong>: the maximum number of iterations before this function returns. Alternatively, one can specify an upper time limit, in milliseconds, after which the function returns with maxIterations=-timeLimitInMs.</div>
+<div><strong>metric</strong>: a table to 4 values indicating a metric used to compute pose-pose distances: distance=sqrt((dx*metric[1])^2+(dy*metric[2])^2+(dz*metric[3])^2+(angle*metric[4])^2).</div>
+<div><strong>validationCallback</strong>: a string indicating the callback function name. The callback function takes as input argument the proposed joint values (i.e. a configuration), and as return value whether the configuration is valid (e.g. is not colliding). If the function is contained in a child or customization script, then the validationCallback argument should be formatted as <em>functionName@scriptName</em>.</div>
+<div><strong>scriptType</strong>: the type of the script the callback function is contained in. Can be sim_scripttype_mainscript, sim.scripttype_sandboxscript, sim_scripttype_childscript, sim_scripttype_customizationscript, or sim.scripttype_addonscript</div>
+<div><strong>jointOptions</strong>: a table with bit-coded values corresponding to each specified joint handle. Bit 0 (i.e. 1) indicates the corresponding joint is dependent of another joint.</div>
+<div><strong>lowLimits</strong>: a table with joint low limit values for each specified joint. This can be useful when you wish to explore a sub-set of the joint's intervals.</div>
+<div><strong>ranges</strong>: a table with joint range values for each specified joint. This can be useful when you wish to explore a sub-set of the joint's intervals.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>jointPositions</strong>: a table that contains the IK calculated joint values, as specified by the jointHandles table, if a valid configuration was found.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.computeJacobian">simIK.computeJacobian</a>, <a href="#simIK.getJacobian">simIK.getJacobian</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getIkElementBase" id="simIK.getIkElementBase"></a>simIK.getIkElementBase</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the base object of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number baseHandle,number constraintsBaseHandle=simIK.getIkElementBase(number environmentHandle,number ikGroupHandle,number elementHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>baseHandle</strong>: the handle of the base object, or -1 if the world is the base.</div>
+<div><strong>constraintsBaseHandle</strong>: the handle of the constraints base object, relative to which the constraints are specified. Returns -1 if the constraints are relative to the base object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setIkElementBase">simIK.setIkElementBase</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getIkElementConstraints" id="simIK.getIkElementConstraints"></a>simIK.getIkElementConstraints</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the constraints of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number constraints=simIK.getIkElementConstraints(number environmentHandle,number ikGroupHandle,number elementHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>constraints</strong>: the constraints. A bit-combination of following is possible: simIK.constraint_x, simIK.constraint_y, simIK.constraint_z, simIK.constraint_alpha_beta, simIK.constraint_gamma.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setIkElementConstraints">simIK.setIkElementConstraints</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getIkElementFlags" id="simIK.getIkElementFlags"></a>simIK.getIkElementFlags</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves various flags of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number flags=simIK.getIkElementFlags(number environmentHandle,number ikGroupHandle,number elementHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>flags</strong>: bit-coded flags: bit0 set(1)=the enabled state of the ik element.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setIkElementFlags">simIK.setIkElementFlags</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getIkElementPrecision" id="simIK.getIkElementPrecision"></a>simIK.getIkElementPrecision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the precision settings of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">table_2 precision=simIK.getIkElementPrecision(number environmentHandle,number ikGroupHandle,number elementHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>precision</strong>: a table with the linear and angular precision.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setIkElementPrecision">simIK.setIkElementPrecision</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getIkElementWeights" id="simIK.getIkElementWeights"></a>simIK.getIkElementWeights</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the desired linear and angular resolution weights of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">table_2 weights=simIK.getIkElementWeights(number environmentHandle,number ikGroupHandle,number elementHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>weights</strong>: a table with the linear and angular resolution weights.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setIkElementWeights">simIK.setIkElementWeights</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getIkGroupCalculation" id="simIK.getIkGroupCalculation"></a>simIK.getIkGroupCalculation</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves calculation properties for an IK group.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number method,number damping,number maxIterations=simIK.getIkGroupCalculation(number environmentHandle,number ikGroupHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>method</strong>: the resolution method. Possible values are simIK.method_pseudo_inverse and simIK.method_damped_least_squares.</div>
+<div><strong>damping</strong>: the damping, in case the resolution method is simIK.method_damped_least_squares.</div>
+<div><strong>maxIterations</strong>: the maximum number of iterations.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setIkGroupCalculation">simIK.setIkGroupCalculation</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getIkGroupFlags" id="simIK.getIkGroupFlags"></a>simIK.getIkGroupFlags</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves flags of an IK group.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number flags=simIK.getIkGroupFlags(number environmentHandle,number ikGroupHandle))</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>flags</strong>: the flags of the IK group. bit0 set (i.e. 1)=group is enabled, bit1 set (i.e. 2)=max. step sizes are ignored, bit2 set (i.e. 4)=restore joints if target position not reached, bit3 set (i.e. 8)=restore joints if target orientation not reached.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setIkGroupFlags">simIK.setIkGroupFlags</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getIkGroupHandle" id="simIK.getIkGroupHandle"></a>simIK.getIkGroupHandle</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the handle of an IK group based on its name.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number ikGroupHandle=simIK.getIkGroupHandle(number environmentHandle,string ikGroupName)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupName</strong>: the name of the IK group.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.doesIkGroupExist">simIK.doesIkGroupExist</a>, <a href="#simIK.createIkGroup">simIK.createIkGroup</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJacobian" id="simIK.getJacobian"></a>simIK.getJacobian</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the Jacobian previously computed via <a href="#simIK.computeJacobian">simIK.computeJacobian</a>.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">table jacobian,table_2 matrixSize=simIK.getJacobian(number environmentHandle,number ikGroupHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>jacobian</strong>: a table with the jacobian values.</div>
+<div><strong>matrixSize</strong>: a table containing the sizes (row count (i.e. number of DoFs) and column count) of the Jacobian matrix.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.computeJacobian">simIK.computeJacobian</a>, <a href="#simIK.getManipulability">simIK.getManipulability</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJointDependency" id="simIK.getJointDependency"></a>simIK.getJointDependency</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves information about a possible joint dependency.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number depJointHandle,number offset,number mult=simIK.getJointDependency(number environmentHandle,number jointHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>depJointHandle</strong>: the handle of the dependency joint.</div>
+<div><strong>offset</strong>: the offset. We have joint position = dependency joint position * mult + offset.</div>
+<div><strong>mult</strong>: the multiplication factor. We have joint position = dependency joint position * mult + offset.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setJointDependency">simIK.setJointDependency</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJointIkWeight" id="simIK.getJointIkWeight"></a>simIK.getJointIkWeight</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the IK weight of a joint, i.e. the weight it has during IK resolution.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number weight=simIK.getJointIkWeight(number environmentHandle,number jointHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>weight</strong>: the IK weight.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setJointIkWeight">simIK.setJointIkWeight</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJointInterval" id="simIK.getJointInterval"></a>simIK.getJointInterval</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the joint limits.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">bool cyclic,table_2 interval=simIK.getJointInterval(number environmentHandle,number jointHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>cyclic</strong>: whether the joint is cyclic (has no limits).</div>
+<div><strong>interval</strong>: a table with two values: the joint lower limit, and the joint range (i.e. joint upper limit = joint lower limit + joint range)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setJointInterval">simIK.setJointInterval</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJointMatrix" id="simIK.getJointMatrix"></a>simIK.getJointMatrix</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the intrinsic transformation matrix of a joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">table_12 matrix=simIK.getJointMatrix(number environmentHandle,number jointHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>matrix</strong>: a table of 12 numbers representing the transformation matrix (the last row of the 4x4 matrix (0,0,0,1) is not returned).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setSphericalJointMatrix">simIK.setSphericalJointMatrix</a>, <a href="#simIK.getJointPosition">simIK.getJointPosition</a>, <a href="#simIK.getJointTransformation">simIK.getJointTransformation</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJointMaxStepSize" id="simIK.getJointMaxStepSize"></a>simIK.getJointMaxStepSize</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the maximum step size of a joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number stepSize=simIK.getJointMaxStepSize(number environmentHandle,number jointHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>stepSize</strong>: the maximum step size.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setJointMaxStepSize">simIK.setJointMaxStepSize</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJointMode" id="simIK.getJointMode"></a>simIK.getJointMode</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the joint mode.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number jointMode=simIK.getJointMode(number environmentHandle,number jointHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>jointMode</strong>: the joint mode. Possible values are: simIK.jointmode_passive, simIK.jointmode_ik, simIK.jointmode_dependent, simIK.jointmode_force</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setJointMode">simIK.setJointMode</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJointPosition" id="simIK.getJointPosition"></a>simIK.getJointPosition</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the position (linear or angular) of a joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number position=simIK.getJointPosition(number environmentHandle,number jointHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>position</strong>: the position.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setJointPosition">simIK.setJointPosition</a>, <a href="#simIK.getJointMatrix">simIK.getJointMatrix</a>, <a href="#simIK.getJointTransformation">simIK.getJointTransformation</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJointScrewPitch" id="simIK.getJointScrewPitch"></a>simIK.getJointScrewPitch</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the screw pitch of a revolute joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number pitch=simIK.getJointScrewPitch(number environmentHandle,number jointHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>pitch</strong>: the screw pitch of the joint. A pitch value of zero represents a revolute joint, a value different from zero represents a screw.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setJointScrewPitch">simIK.setJointScrewPitch</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getJointTransformation" id="simIK.getJointTransformation"></a>simIK.getJointTransformation</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the intrinsic transformation of a joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">table_3 position,table_4 quaternion,table_3 euler=simIK.getJointTransformation(number environmentHandle,number jointHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>position</strong>: the translation of the joint.</div>
+<div><strong>quaternion</strong>: the rotation of the joint, expressed as quaternion (x,y,z,w).</div>
+<div><strong>euler</strong>: the rotation of the joint, expressed as Euler angles (alpha,beta,gamma).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setSphericalJointRotation">simIK.setSphericalJointRotation</a>, <a href="#simIK.getJointPosition">simIK.getJointPosition</a>, <a href="#simIK.getJointMatrix">simIK.getJointMatrix</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getLinkedDummy" id="simIK.getLinkedDummy"></a>simIK.getLinkedDummy</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the handle of a dummy linked to this one.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number linkedDummyHandle=simIK.getLinkedDummy(number environmentHandle,number dummyHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>dummyHandle</strong>: the handle of the dummy object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>linkedDummyHandle</strong>: the handle of the linked dummy object. Is -1 if no dummy object is linked to this one.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setLinkedDummy">simIK.setLinkedDummy</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getManipulability" id="simIK.getManipulability"></a>simIK.getManipulability</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the manipulability value ( sqrt(det(J*JT)) ) of the Jacobian previously computed via <a href="#simIK.computeJacobian">simIK.computeJacobian</a>.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number manipulability=simIK.getManipulability(number environmentHandle,number ikGroupHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>manipulability</strong>: the manipulability value.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.computeJacobian">simIK.computeJacobian</a>, <a href="#simIK.getJacobian">simIK.getJacobian</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getObjectHandle" id="simIK.getObjectHandle"></a>simIK.getObjectHandle</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the handle of an object based on its name.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number objectHandle=simIK.getObjectHandle(number environmentHandle,string objectName)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>objectName</strong>: the name of the object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>objectHandle</strong>: the object handle.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.doesObjectExist">simIK.doesObjectExist</a>, <a href="#simIK.createDummy">simIK.createDummy</a>, <a href="#simIK.createJoint">simIK.createJoint</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getObjectMatrix" id="simIK.getObjectMatrix"></a>simIK.getObjectMatrix</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the transformation matrix of an object. If the object is a joint object, the matrix does not include the joint's intrinsic transformation.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">table_12 matrix=simIK.getObjectMatrix(number environmentHandle,number objectHandle,number relativeToObjectHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>objectHandle</strong>: the handle of the object.</div>
+<div><strong>relativeToObjectHandle</strong>: the handle of an object relative to which we want the matrix expressed. Otherwise, specify -1 if you want the absolute matrix, or simIK.handle_parent if you want the matrix relative to the parent object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>matrix</strong>: a table of 12 numbers representing the transformation matrix (the last row of the 4x4 matrix (0,0,0,1) is not returned)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setObjectMatrix">simIK.setObjectMatrix</a>, <a href="#simIK.getObjectTransformation">simIK.getObjectTransformation</a>, <a href="#simIK.getJointTransformation">simIK.getJointTransformation</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getObjectParent" id="simIK.getObjectParent"></a>simIK.getObjectParent</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves an object's parent handle.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number parentObjectHandle=simIK.getObjectParent(number environmentHandle,number objectHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>objectHandle</strong>: the handle of the object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>parentObjectHandle</strong>: the returned handle of the parent, or -1 if the object has no parent.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setObjectParent">simIK.setObjectParent</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getObjects" id="simIK.getObjects"></a>simIK.getObjects</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Allows to loop through all objects in the environment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number objectHandle,string objectName,bool isJoint,number jointType=simIK.getObjects(number environmentHandle,number index)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>index</strong>: the zero-based index. Start at 0, and increment until there is no return values anymore, in order to loop through all objects in the environment.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>objectHandle</strong>: the handle of the object, or nil if there is no object at the specified index.</div>
+<div><strong>objectName</strong>: the name of the object.</div>
+<div><strong>isJoint</strong>: whether the object is a joint.</div>
+<div><strong>jointType</strong>: the type of joint, if the object at the specified index is a joint. Possible values are simIK.jointtype_revolute, simIK.jointtype_prismatic or simIK.jointtype_spherical.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.getObjectHandle">simIK.getObjectHandle</a>, <a href="#simIK.doesObjectExist">simIK.doesObjectExist</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.getObjectTransformation" id="simIK.getObjectTransformation"></a>simIK.getObjectTransformation</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the transformation (position and quaternion/euler angles) of an object. If the object is a joint object, the transformation does not include the joint's intrinsic transformation.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">table_3 position,table_4 quaternion,table_3 euler=simIK.getObjectTransformation(number environmentHandle,number objectHandle,number relativeToObjectHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>objectHandle</strong>: the handle of the object.</div>
+<div><strong>relativeToObjectHandle</strong>: the handle of an object relative to which we want the transformation expressed. Otherwise, specify -1 if you want the absolute transformation, or simIK.handle_parent if you want the transformation relative to the parent object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>position</strong>: the position of the object.</div>
+<div><strong>quaternion</strong>: the orientation of the object, expressed as quaternion (x,y,z,w).</div>
+<div><strong>euler</strong>: the orientation of the object, expressed as Euler angles (alpha,beta,gamma).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.setObjectTransformation">simIK.setObjectTransformation</a>, <a href="#simIK.getObjectMatrix">simIK.getObjectMatrix</a>, <a href="#simIK.getJointTransformation">simIK.getJointTransformation</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.handleIkGroup" id="simIK.handleIkGroup"></a>simIK.handleIkGroup</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Handles (i.e. computes/resolves) an IK group.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">number result=simIK.handleIkGroup(number environmentHandle,number ikGroupHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group, or simIK.handle_all to handle all IK groups.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+<div><strong>result</strong>: the resolution result, in return. Possible values are simIK.ikresult_not_performed, simIK.ikresult_success, or simIK.ikresult_fail</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.computeJacobian">simIK.computeJacobian</a>, <a href="#simIK.getConfigForTipPose">simIK.getConfigForTipPose</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.load" id="simIK.load"></a>simIK.load</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Loads kinematic content previously exported in the CoppeliaSim application. Make sure that the environment is empty before calling this function.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.load(number environmentHandle,string data)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>data</strong>: a buffer with the kinematic content.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.eraseEnvironment">simIK.eraseEnvironment</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setIkElementBase" id="simIK.setIkElementBase"></a>simIK.setIkElementBase</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the base object of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setIkElementBase(number environmentHandle,number ikGroupHandle,number elementHandle,number baseHandle,number constraintsBaseHandle=-1)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+<div><strong>baseHandle</strong>: the handle of the base object, or -1 if the world is the base.</div>
+<div><strong>constraintsBaseHandle</strong>: the handle of the constraints base object, relative to which the constraints are specified. Set to -1 to have the constraints relative to the base object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getIkElementBase">simIK.getIkElementBase</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setIkElementConstraints" id="simIK.setIkElementConstraints"></a>simIK.setIkElementConstraints</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the constraints of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setIkElementConstraints(number environmentHandle,number ikGroupHandle,number elementHandle,number constraints)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+<div><strong>constraints</strong>: the constraints. Bit-combine following: simIK.constraint_x, simIK.constraint_y, simIK.constraint_z, simIK.constraint_alpha_beta, simIK.constraint_gamma (simIK.constraint_gamma should only be set if simIK.constraint_alpha_beta is also set). For convenience we also have simIK.constraint_position=simIK.constraint_x|simIK.constraint_y|simIK.constraint_z, simIK.constraint_orientation=simIK.constraint_alpha_beta|simIK.constraint_gamma, and simIK.constraint_pose=simIK.constraint_position|simIK.constraint_orientation.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getIkElementConstraints">simIK.getIkElementConstraints</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setIkElementFlags" id="simIK.setIkElementFlags"></a>simIK.setIkElementFlags</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets various flags of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setIkElementFlags(number environmentHandle,number ikGroupHandle,number elementHandle,number flags)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+<div><strong>flags</strong>: bit-coded flags: bit0 set (1)=the enabled state of the IK element.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getIkElementFlags">simIK.getIkElementFlags</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setIkElementPrecision" id="simIK.setIkElementPrecision"></a>simIK.setIkElementPrecision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the desired precision of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setIkElementPrecision(number environmentHandle,number ikGroupHandle,number elementHandle,table_2 precision)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+<div><strong>precision</strong>: a table with two values for the linear and angular precision.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getIkElementPrecision">simIK.getIkElementPrecision</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setIkElementWeights" id="simIK.setIkElementWeights"></a>simIK.setIkElementWeights</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the desired linear and angular resolution weights of an IK element.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setIkElementWeights(number environmentHandle,number ikGroupHandle,number elementHandle,table_2 weights)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>elementHandle</strong>: the IK element handle, or X, where X=handleOfTipDummy+simIK.handleflag_tipdummy (if several IK elements with the same tip dummy exist, then the first encountered will be selected).</div>
+<div><strong>weights</strong>: a table with two values for the linear and angular resolution weight.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getIkElementWeights">simIK.getIkElementWeights</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setIkGroupCalculation" id="simIK.setIkGroupCalculation"></a>simIK.setIkGroupCalculation</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets calculation properties for an IK group.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setIkGroupCalculation(number environmentHandle,number ikGroupHandle,number method,number damping,number maxIterations)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>method</strong>: the resolution method. Possible values are simIK.method_pseudo_inverse and simIK.method_damped_least_squares.</div>
+<div><strong>damping</strong>: the damping, in case the resolution method is simIK.method_damped_least_squares.</div>
+<div><strong>maxIterations</strong>: the maximum number of iterations.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getIkGroupCalculation">simIK.getIkGroupCalculation</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setIkGroupFlags" id="simIK.setIkGroupFlags"></a>simIK.setIkGroupFlags</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets flags of an IK group.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setIkGroupFlags(number environmentHandle,number ikGroupHandle,number flags)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>ikGroupHandle</strong>: the handle of the IK group.</div>
+<div><strong>flags</strong>: the flags of the IK group. bit0 set (i.e. 1)=group is enabled, bit1 set (i.e. 2)=max. step sizes are ignored, bit2 set (i.e. 4)=restore joints if target position not reached, bit3 set (i.e. 8)=restore joints if target orientation not reached.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getIkGroupFlags">simIK.getIkGroupFlags</a>, <a href="#simIK.getIkGroupHandle">simIK.getIkGroupHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setJointDependency" id="simIK.setJointDependency"></a>simIK.setJointDependency</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets information about a possible dependent joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setJointDependency(number environmentHandle,number jointHandle,number depJointHandle,number offset=0,number mult=1)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+<div><strong>depJointHandle</strong>: the handle of the joint, this joint is dependent of. -1 to disable.</div>
+<div><strong>offset</strong>: the offset. We have joint position = dependency joint position * mult + offset</div>
+<div><strong>mult</strong>: the multiplication factor. We have joint position = dependency joint position * mult + offset</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJointDependency">simIK.getJointDependency</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setJointIkWeight" id="simIK.setJointIkWeight"></a>simIK.setJointIkWeight</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the IK weight of a joint, i.e. the weight it has during IK resolution.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setJointIkWeight(number environmentHandle,number jointHandle,number weight)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+<div><strong>weight</strong>: the IK weight.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJointIkWeight">simIK.getJointIkWeight</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setJointInterval" id="simIK.setJointInterval"></a>simIK.setJointInterval</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the joint limits.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setJointInterval(number environmentHandle,number jointHandle,bool cyclic,table_2 interval={})</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+<div><strong>cyclic</strong>: whether the joint is cyclic (has no limits). Only revolute joints can be cyclic.</div>
+<div><strong>interval</strong>: a table with two values: the joint lower limit, and the joint range (i.e. joint upper limit = joint lower limit + joint range)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJointInterval">simIK.getJointInterval</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setJointMaxStepSize" id="simIK.setJointMaxStepSize"></a>simIK.setJointMaxStepSize</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the maximum step size of a joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setJointMaxStepSize(number environmentHandle,number jointHandle,number stepSize)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+<div><strong>stepSize</strong>: the maximum step size.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJointMaxStepSize">simIK.getJointMaxStepSize</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setJointMode" id="simIK.setJointMode"></a>simIK.setJointMode</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the joint mode.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setJointMode(number environmentHandle,number jointHandle,number jointMode)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+<div><strong>jointMode</strong>: the joint mode. Allowed values are: simIK.jointmode_passive, simIK.jointmode_ik, simIK.jointmode_dependent</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJointMode">simIK.getJointMode</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setJointPosition" id="simIK.setJointPosition"></a>simIK.setJointPosition</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the position (linear or angular) of a joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setJointPosition(number environmentHandle,number jointHandle,number position)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+<div><strong>position</strong>: the position.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJointPosition">simIK.getJointPosition</a>, <a href="#simIK.setSphericalJointMatrix">simIK.setSphericalJointMatrix</a>, <a href="#simIK.setSphericalJointRotation">simIK.setSphericalJointRotation</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setJointScrewPitch" id="simIK.setJointScrewPitch"></a>simIK.setJointScrewPitch</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the screw pitch, in case of a revolute joint.</td>
+</tr>
+
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setJointScrewPitch(number environmentHandle,number jointHandle,number pitch)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+<div><strong>pitch</strong>: the screw pitch of the joint. A pitch value of zero represents a revolute joint, a value different from zero represents a screw.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJointScrewPitch">simIK.getJointScrewPitch</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setLinkedDummy" id="simIK.setLinkedDummy"></a>simIK.setLinkedDummy</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Links this dummy object to another dummy object, or detaches it from another dummy object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setLinkedDummy(number environmentHandle,number dummyHandle,number linkedDummyHandle)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>dummyHandle</strong>: the handle of the dummy object.</div>
+<div><strong>linkedDummyHandle</strong>: the handle of the dummy object to be linked, or -1 to detach this dummy object from a linked dummy object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getLinkedDummy">simIK.getLinkedDummy</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setObjectMatrix" id="simIK.setObjectMatrix"></a>simIK.setObjectMatrix</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the transformation matrix of an object. If the object is a joint object, the matrix does not include the joint's intrinsic transformation.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setObjectMatrix(number environmentHandle,number objectHandle,number relativeToObjectHandle,table_12 matrix)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>objectHandle</strong>: the handle of the object.</div>
+<div><strong>relativeToObjectHandle</strong>: the handle of an object relative to which the matrix is expressed. Otherwise, specify -1 if you specify the absolute matrix, or simIK.handle_parent if you specify the matrix relative to the parent object.</div>
+<div><strong>matrix</strong>: a table of 12 values representing the transformation matrix (the last row of the 4x4 matrix (0,0,0,1) is omitted)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getObjectMatrix">simIK.getObjectMatrix</a>, <a href="#simIK.setObjectTransformation">simIK.setObjectTransformation</a>, <a href="#simIK.setJointPosition">simIK.setJointPosition</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setObjectParent" id="simIK.setObjectParent"></a>simIK.setObjectParent</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the parent of an object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setObjectParent(number environmentHandle,number objectHandle,number parentObjectHandle, bool keepInPlace=true)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>objectHandle</strong>: the handle of the object.</div>
+<div><strong>parentObjectHandle</strong>: the desired parent object, set -1 for no parent.</div>
+<div><strong>keepInPlace</strong>: if true, the object will stay in place, otherwise, it will keep its local transformation.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getObjectParent">simIK.getObjectParent</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setObjectTransformation" id="simIK.setObjectTransformation"></a>simIK.setObjectTransformation</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the transformation (position and quaternion/Euler angles) of an object. If the object is a joint object, the transformation does not include the joint's intrinsic transformation.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setObjectTransformation(number environmentHandle,number objectHandle,number relativeToObjectHandle,table_3 position,table eulerOrQuaternion)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>objectHandle</strong>: the handle of the object.</div>
+<div><strong>relativeToObjectHandle</strong>: the handle of an object relative to which the transformation is expressed. Otherwise, specify -1 if you specify the absolute transformation, or simIK.handle_parent if you specify the transformation relative to the parent object.</div>
+<div><strong>position</strong>: the position component of the transformation.</div>
+<div><strong>eulerOrQuaternion</strong>: the orientation component of the transformation. If 3 values are specified, then they will be interpreted as Euler angles (alpha,beta,gamma). If 4 values are specified, they will be interpreted as quaternion values (x,y,z,w).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getObjectTransformation">simIK.getObjectTransformation</a>, <a href="#simIK.setObjectMatrix">simIK.setObjectMatrix</a>, <a href="#simIK.setJointPosition">simIK.setJointPosition</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setSphericalJointMatrix" id="simIK.setSphericalJointMatrix"></a>simIK.setSphericalJointMatrix</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the rotation transformation matrix of a spherical joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setSphericalJointMatrix(number environmentHandle,number jointHandle,table_12 matrix)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+<div><strong>matrix</strong>: a table of 12 values representing the transformation matrix (the last row of the 4x4 matrix (0,0,0,1) is omitted). The translation part in the matrix will be ignored.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJointMatrix">simIK.getJointMatrix</a>, <a href="#simIK.setJointPosition">simIK.setJointPosition</a>, <a href="#simIK.setSphericalJointRotation">simIK.setSphericalJointRotation</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="simIK.setSphericalJointRotation" id="simIK.setSphericalJointRotation"></a>simIK.setSphericalJointRotation</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Sets the rotation transformation of a spherical joint.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Synopsis</td>
+<td class="apiTableRightLSyn">simIK.setSphericalJointRotation(number environmentHandle,number jointHandle,table eulerOrQuaternion)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Arguments</td>
+<td class="apiTableRightLParam">
+<div><strong>environmentHandle</strong>: the handle of the environment.</div>
+<div><strong>jointHandle</strong>: the handle of the joint.</div>
+<div><strong>eulerOrQuaternion</strong>: the rotation transformation to apply. If 3 values are specified, they will be interpreted as Euler angles (alpha,beta,gamma). If 4 values are specified, they will be interpreted as quaternion values (x,y,z,w).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Return values</td>
+<td class="apiTableRightLRet">
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#simIK.createEnvironment">simIK.createEnvironment</a>, <a href="#simIK.getJointTransformation">simIK.getJointTransformation</a>, <a href="#simIK.setSphericalJointMatrix">simIK.setSphericalJointMatrix</a>, <a href="#simIK.setJointPosition">simIK.setJointPosition</a>, <a href="#simIK.getObjectHandle">simIK.getObjectHandle</a></td>
+</tr>
+</table>
+<br>
+<br>
+
+
+
+
+
+</td></tr></table></div></body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetRotationAxis</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetRotationAxis" id="simGetRotationAxis"></a>simGetRotationAxis / sim.getRotationAxis </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves an axis and rotation angle that brings one transformation matrix onto another one. The translation part of the transformation matrices is ignored. This function, when used in combination with <a href="simRotateAroundAxis.htm">sim.rotateAroundAxis</a>, can be used to build interpolations between transformation matrices. See also <a href="simGetObjectMatrix.htm">sim.getObjectMatrix</a>, <a href="simSetObjectMatrix.htm">sim.setObjectMatrix</a> and the other <a href="../apiFunctionListCategory.htm#coordinatesAndTransformations">matrix/transformation functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simGetRotationAxis(const simFloat* matrixStart,const simFloat* matrixGoal,simFloat* axis,simFloat* angle)  <br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>matrixStart</strong>: the <em>start</em> transformation matrix</div>
+<div><strong>matrixGoal</strong>: the <em>goal</em> transformation matrix</div>
+<div><strong>axis</strong>: the returned rotation axis in absolute coordinates</div>
+<div><strong>angle</strong>: the returned rotation angle</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>table_3 axis,number angle=sim.getRotationAxis(table_12 matrixStart,table_12 matrixGoal)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>axis</strong>: the rotation axis in absolute coordinates</div>
+<div><strong>angle</strong>: the rotation angle</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

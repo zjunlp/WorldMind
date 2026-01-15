@@ -1,0 +1,76 @@
+digraph G {
+    graph [overlap=false, splines=true, bgcolor="white"];
+
+    node [shape=diamond, color=red, fontcolor=red];
+    S_resolv [label="resolv"];
+    S_pm1_control [label="pm1/control"];
+    S_pm2_control [label="pm2/control"];
+    S_pm3_control [label="pm3/control"];
+    S_process_manager_hub_control [label="pmhub/control"];
+
+    subgraph cluster_T_A {
+        node [shape=ellipse, color=blue, fontcolor=blue];
+        T_A [label="A"];
+        color=transparent;
+    }
+
+    subgraph cluster_T_process_manager_beacon {
+        node [shape=ellipse, color=blue, fontcolor=blue];
+        T_process_manager_beacon [label="pm/beacon"];
+        color=transparent;
+    }
+
+    subgraph cluster_machine_1 {
+        label="Machine 1";
+		bgcolor=gray90;
+
+        node [shape=box, color=black, fontcolor=black];
+        N_resolver [label="resolver"];
+        N_process_manager_1 [label="process_manager-1"];
+        N_process_manager_hub [label=<<b>process_manager_hub</b>>,style=filled,fillcolor=gray95];
+
+        edge [color=black];
+        N_resolver -> S_resolv;
+        T_process_manager_beacon -> N_process_manager_hub;
+        N_process_manager_1 -> S_pm1_control;
+        N_process_manager_hub -> S_process_manager_hub_control;
+        S_pm1_control -> N_process_manager_hub;
+    }
+
+    subgraph cluster_machine_2 {
+        label="Machine 2";
+		bgcolor=gray90;
+
+        node [shape=box, color=black, fontcolor=black];
+        N_publisher [label="publisher"];
+        N_process_manager_2 [label="process_manager-2"];
+
+        edge [color=black];
+        N_publisher -> T_A;
+        N_process_manager_2 -> S_pm2_control;
+        S_pm2_control -> N_process_manager_hub;
+    }
+
+    subgraph cluster_machine_3 {
+        label="Machine 3";
+		bgcolor=gray90;
+
+        node [shape=box, color=black, fontcolor=black];
+        N_subscriber [label="subscriber"];
+        N_process_manager_3 [label="process_manager-3"];
+
+        edge [color=black];
+        N_process_manager_3 -> S_pm3_control;
+        S_pm3_control -> N_process_manager_hub;
+    }
+
+    edge [color=black];
+    N_process_manager_1 -> T_process_manager_beacon;
+    N_process_manager_2 -> T_process_manager_beacon;
+    N_process_manager_3 -> T_process_manager_beacon;
+    T_A -> N_subscriber;
+
+    edge [color=black,style=dotted];
+    N_process_manager_2 -> N_publisher;
+    N_process_manager_3 -> N_subscriber;
+}

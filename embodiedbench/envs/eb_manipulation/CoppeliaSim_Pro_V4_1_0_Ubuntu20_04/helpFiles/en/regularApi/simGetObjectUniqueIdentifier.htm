@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetObjectUniqueIdentifier</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetObjectUniqueIdentifier" id="simGetObjectUniqueIdentifier"></a>simGetObjectUniqueIdentifier / sim.getObjectUniqueIdentifier </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves an object's unique identifier (an object handle is unique, but not across opened scenes. Additionally, if a huge amount of objects are created/destroyed (&gt;2000000), then handles of destroyed objects will be reused. This is not the case with unique identifiers).<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simGetObjectUniqueIdentifier(simInt objectHandle,simInt* uniqueIdentifier)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>objectHandle</strong>: object handle, or sim_handle_all to retrieve all object identifiers<br>
+</div>
+<div><strong>uniqueIdentifier</strong>: pointer to the unique identifier, or if sim_handle_all is specified as the object handle, then the pointer points to several values. The user is in charge of reserving the buffer (size 1 if handle is specified, or number of objects in the scene if sim_handle_all is specified)<br>
+</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>
+<div>(1) number uniqueId=sim.getObjectUniqueIdentifier(number objectHandle)</div>
+<div>(2) table uniqueIds=sim.getObjectUniqueIdentifier(sim.handle_all)</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>(1) <strong>uniqueId</strong>: the unique identifier</div>
+<div>(2) <strong>uniqueIds</strong>: a table containing the unique identifiers</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

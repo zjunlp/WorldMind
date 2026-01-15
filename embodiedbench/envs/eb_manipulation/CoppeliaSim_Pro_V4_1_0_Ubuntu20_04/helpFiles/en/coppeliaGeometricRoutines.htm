@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Coppelia geometric routines</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Coppelia Geometric Routines (<a href="auxiliaryApiOverview.htm">auxiliary API</a>)</h1>
+
+<p>The <a href="https://github.com/CoppeliaRobotics/coppeliaGeometricRoutines" target="_blank">Coppelia Geometric Routines</a> is a collection of C++ functions that allow to perform the same geometric calculations as you are able to do from within CoppeliaSim (i.e. <a href="collisionDetection.htm">collision detection</a>, <a href="distanceCalculation.htm">minimum distance calculation</a>, and <a href="proximitySensors.htm">proximity sensor</a> simulation on <a href="shapes.htm">meshes</a>, <a href="octrees.htm">oc-trees</a> and <a href="pointClouds.htm">point clouds</a>). Those functions give CoppeliaSim its geometric calculation capability.</p>
+<p>You can embedd and use the Coppelia Geometric Routines in your stand-alone application, which then can programmatically set up complex calculation tasks.</p>
+<p>Refer also to the Coppelia Geometric Routines C++ API documentation:</p>
+<li><a href="coppeliaGeometricRoutinesApi-alphabetic.htm">Coppelia Geometric Routines C++ API list (in alphabetical order)</a></li>
+<li><a href="coppeliaGeometricRoutinesApi-category.htm">Coppelia Geometric Routines C++ API list (by category)</a></li>
+<p>The Coppelia Geometric Routines source code is not directly part of CoppeliaSim, and carries separate licensing conditions. Refer to the source code for details, and <a href="http://coppeliarobotics.com/contact">contact us</a>.</p>
+
+<p>Following very simple example illustrates how to measure the smallest distance between two meshes:</p>
+
+<pre class=lightBlueBox>#include &quot;geom.h&quot;
+
+int main(int argc, char* argv[])
+{
+    // Create mesh 1 (containing a single triangle, for simplicity):
+    std::vector&lt;simReal&gt; vertices1{0.0,0.0,0.0,
+                                   0.5,0.5,0.0,
+                                   0.5,0.0,0.5};
+    std::vector&lt;int&gt; indices1{0,1,2};
+    CObbStruct* mesh1=geom_createMesh(&amp;vertices1[0],vertices1.size(),&amp;indices1[0],indices1.size());
+
+    // Create mesh 2 (containing a single triangle, for simplicity):
+    std::vector&lt;simReal&gt; vertices2{0.5,0.0,0.0,
+                                   0.0,0.5,0.5,
+                                   0.0,0.0,0.5};
+    std::vector&lt;int&gt; indices2{0,1,2};
+    CObbStruct* mesh2=geom_createMesh(&amp;vertices2[0],vertices2.size(),&amp;indices2[0],indices2.size());
+
+    // now move and rotate the two meshes and compute their minimum distance:
+    simReal t=0.0;
+    while (true)
+    {
+        t+=0.001;
+        C7Vector mesh1Transformation;
+        mesh1Transformation.X=C3Vector(0.5*cos(0.1*t),0.0,0.0); // sinusoidal x-axis movement
+        mesh1Transformation.Q.setIdentity();
+        C7Vector mesh2Transformation;
+        mesh2Transformation.X=C3Vector(0.0,0.4*cos(0.2*t),0.3*cos(0.1*t)); // sinusoidal y- and z-axis movement
+        C3Vector eulerAngles(0.0,0.0,t*1.2); // rotation around vertical axis
+        mesh2Transformation.Q.setEulerAngles(eulerAngles);
+
+        // compute the distance:
+        simReal dist=REAL_MAX;
+        geom_getMeshMeshDistanceIfSmaller(mesh1,mesh1Transformation,mesh2,mesh2Transformation,dist);
+ 
+        printf(&quot;mesh-mesh minimum distance: %f\n&quot;,dist);
+    }
+    return(0);
+}</pre>
+
+
+
+<br>
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="geometricPlugin.htm">The geometric plugin for CoppeliaSim</a></li>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

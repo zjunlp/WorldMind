@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simSetShapeTexture</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simSetShapeTexture" id="simSetShapeTexture"></a>simSetShapeTexture / sim.setShapeTexture </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Applies (or removes) a texture to a shape. See also <a href="simGetTextureId.htm">sim.getTextureId</a>, <a href="simGetShapeTextureId.htm">sim.getShapeTextureId</a>, <a href="simCreateTexture.htm">sim.createTexture</a> and <a href="simApplyTexture.htm">simApplyTexture</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simSetShapeTexture(simInt shapeHandle,simInt textureId,simInt mappingMode,simInt options,const simFloat* uvScaling,const simFloat* position,const simFloat* orientation</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>shapeHandle</strong>: the handle of the shape.</div>
+<div><strong>textureId</strong>: the ID of the texture or -1 to remove any existing texture. See also <a href="simGetTextureId.htm">simGetTextureId</a>, <a href="simGetShapeTextureId.htm">simGetShapeTextureId</a> and <a href="simCreateTexture.htm">simCreateTexture</a>.</div>
+<div><strong>mappingMode</strong>: the <a href="../apiConstants.htm#textureMappingModes">texture mapping mode</a>.</div>
+<div><strong>options</strong>: bit-coded:</div>
+<div class=tab>bit0: if set (1), then adjacent texture pixels are not interpolated.</div>
+<div class=tab>bit1:  if set (2), then the texture is applied as a decal (its appearance won't be influenced by light conditions).</div>
+<div class=tab>bit2: if set (4), then the texture will be repeated along the U direction.</div>
+<div class=tab>bit3: if set (8), then the texture will be repeated along the V direction.</div>
+<div><strong>uvScaling</strong>: a pointer to 2 values that indicate the texture scaling factors along the U and V directions.</div>
+<div><strong>position</strong>: a pointer to 3 values (x,y,z) that indicate the texture position on the shape. Can be nullptr for default values.</div>
+<div><strong>orientation</strong>: a pointer to 3 values (Euler angles) that indicate the texture orientation on the shape. Can be nullptr for default values.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 in case of an error.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.setShapeTexture(number shapeHandle,number textureId,number mappingMode,number options,table_2 uvScaling,table_3 position=nil,table_3 orientation=nil)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>none</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

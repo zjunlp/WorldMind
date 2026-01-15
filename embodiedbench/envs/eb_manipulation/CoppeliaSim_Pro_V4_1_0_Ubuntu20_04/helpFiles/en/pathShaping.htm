@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Path shaping</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Path shaping</h1>
+
+
+<p>A <a href="paths.htm">path</a> is a purely functional <a href="objects.htm">object</a> that doesn't have any fancy visual attributes. There are however times where one wants to display a more elaborate trajectory (e.g. a tunnel, rails, etc.) or generate a mesh (i.e. a <a href="shapes.htm">shape</a>) from a path. For that purpose, the simulator offers a <em>path shaping</em> functionality that can be enabled or disabled in the path shaping section of the <a href="pathPropertiesDialog.htm">path properties</a>. Path shaping works by positioning a <em>section profile</em> at various positions along a path as illustrated in following figure:<br>
+  <br>
+</p>
+
+<p align=center><img src="images/pathShaping1.jpg"></p>
+<p class=imageLabel>[Path shaping concept]</p>
+<br>
+
+<p>Path shaping parameters are adjusted by clicking the <strong>Show path shaping dialog</strong> button:<br>
+</p>
+
+
+<p align=center><img src="images/pathShaping2.jpg"></p>
+<p class=imageLabel>[Path shaping dialog]</p>
+<br>
+
+<li><strong>Path shaping enabled</strong>: enables or disables the path shaping functionality.
+</li>
+
+
+<li><strong>Follow full path orientation</strong>: if enabled, makes the section profile follow each Bezier point orientation. Depending on the path configuration, this might result in a highly twisted mesh. If disabled, the section profile will try to keep a <em>smoother continuity</em>.<br>
+</li>
+
+<li><strong>Element maximum length</strong>: indicates the distance to be used to reproduce the section. Can be seen as a <em>roughness</em> factor for the generated mesh. Specifying values much smaller than the minimum Bezier-point distance does rarely make sense.<br>
+</li>
+
+<li><strong>Adjust color</strong>: allows to adjust the mesh color.<br>
+</li>
+
+<li><strong>Generate shape</strong>: Clicking this button will generate a <a href="shapes.htm">shape object</a> that is identical to the path shaping mesh. This is useful if you want to edit the generated mesh, or if you want the generated mesh to actively interact in a simulation (e.g. through <a href="collisionDetection.htm">collision detection</a> or <a href="distanceCalculation.htm">distance calculation</a>)<br>
+</li>
+
+<li><strong>Type</strong>: indicates what type of section profile to use. If none of the built-in types is appropriate for your application, select <strong>user defined</strong> and edit the coordinates in the coordinates window.<br>
+</li>
+
+
+<p align=center><img src="images/pathShaping3.jpg"></p>
+<p class=imageLabel>[Square, circle and user-defined section types]</p>
+<br>
+
+<li><strong>Coordinates (x/y pairs)</strong>: displays the coordinates of the section profile. If a user defined type was selected, the coordinates can be edited.<br>
+</li>
+
+<li><strong>Last coordinate links to first</strong>: will close the section profile when selected. Not available if the section-type is not <strong>user defined</strong>.<br>
+</li>
+
+<li><strong>Scaling factor</strong>: allows to scale the section profile (i.e. the indicated coordinates). <br>
+</li>
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="paths.htm">Paths</a></li>
+<li><a href="pathsControlPointsAndBezierPoints.htm">Path control points and Bezier points</a></li>
+<li><a href="pathPropertiesDialog.htm">Path properties</a></li>
+<li><a href="pathEditMode.htm">Path edit mode</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

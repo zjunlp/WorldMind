@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simSwitchThread</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simSwitchThread" id="simSwitchThread"></a>simSwitchThread / sim.switchThread </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Allows specifying the exact moment at which the current thread should switch to another thread. If the current script doesn't run in a thread (i.e. if it runs in the application main thread), this function has no effect. By default, CoppeliaSim doesn't use &quot;regular&quot; threads, but something similar to hybrid threads (which behave like coroutines, but can also behave like regular threads). This allows much more flexibility and execution control of the threads: each thread (except for the main or application thread) has a switch timing associated, which specifies how long the thread will run before switching to other threads. By default this value is 2 millisecond, but can be modified with <a href="simSetThreadSwitchTiming.htm">sim.setThreadSwitchTiming</a>. That timing can be shortened with <a href="simSwitchThread.htm">sim.switchThread</a>. Use with care when calling this function from a plugin. See also the <a href="simSetThreadAutomaticSwitch.htm">sim.setThreadAutomaticSwitch</a>, <a href="simSetThreadResumeLocation.htm">sim.setThreadResumeLocation</a> and <a href="simSetThreadIsFree.htm">sim.setThreadIsFree</a> functions.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simSwitchThread()</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div>None</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>1 if the thread was switched (the current thread gave control to other threads until the next calculation pass), 0 if it was not switched (e.g. because the function was called from the main or application thread, or from a thread started by the user), or -1 in case of an error.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.switchThread()</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>none</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>none</div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

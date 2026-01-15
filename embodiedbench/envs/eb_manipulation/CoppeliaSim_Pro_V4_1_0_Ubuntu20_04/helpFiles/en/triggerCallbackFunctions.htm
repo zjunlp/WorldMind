@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Trigger callback functions</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Trigger callback functions</h1>
+
+<p>A <a href="childScripts.htm">child script</a>, or a <a href="customizationScripts.htm">customization script</a> can include a trigger callback function, when associated with a <a href="visionSensors.htm">vision sensor</a>, a <a href="proximitySensors.htm">proximity sensor</a>, or a <a href="forceSensors.htm">force/torque sensor</a>. </p>
+<p>Some conditions apply as to the location of the trigger callback function: normally, it should be inside of a <a href="customizationScripts.htm">customization script</a>, or a <a href="childScripts.htm#nonThreaded">non-threaded child script</a>. However, if the triggering API function (e.g. <a href="regularApi/simHandleVisionSensor.htm">sim.handleVisionSensor</a> or <a href="regularApi/simHandleProximitySensor.htm">sim.handleProximitySensor</a>) is called from within of a <a href="childScripts.htm#threaded">threaded child script</a>, then the trigger callback function should also be located in the threaded child script. If a trigger callback function is present in a non-threaded child script as well as in a customization script, both attached to the object triggering, then the child script will be called first, and the customization script second.</p>
+
+<p>A vision sensor can generate the trigger signal inside of the <a href="visionCallbackFunctions.htm">vision callback function</a>. The trigger callback (if present) is then called as in following example:<br>
+</p>
+
+<pre class=lightRedBox>
+function <strong>sysCall_trigger</strong>(inData)
+    -- We have:
+    -- inData.handle : the handle of the vision sensor.
+    -- inData.packedPackets : an array of data packets, packed (use sim.unpackFloatTable to unpack)
+    --    the first data packet always contains 15 auxiliary values about the acquired image:
+    --    - minimum of {intensity, red, green blue and depth value}
+    --    - maximum of {intensity, red, green blue and depth value}
+    --    - average of {intensity, red, green blue and depth value}
+
+    local outData={}
+    outData.trigger=true
+    return outData
+end
+</pre>
+
+<br>
+
+<p>A proximity sensor generates the trigger signal when an object is detected. The trigger callback (if present) is then called as in following example:</p>
+<pre class=lightRedBox>
+function <strong>sysCall_trigger</strong>(inData)
+    -- We have:
+    -- inData.handle : the handle of the proximity sensor.
+    -- inData.detectedObjectHandle : handle of detected object
+    -- inData.detectedPoint : detected point, relative to sensor frame
+    -- inData.normalVector : normal vector at detected point, relative to sensor frame
+
+    local outData={}
+    outData.trigger=true
+    return outData
+end
+</pre>
+<br>
+
+<p>Following is an example of a force/torque sensor trigger callback function, where the force/torque sensor is broken::</p>
+<pre class=lightRedBox>
+function <strong>sysCall_trigger</strong>(inData)
+    -- We have:
+    -- inData.handle : the handle of the force/torque sensor.
+    -- inData.force : current force
+    -- inData.torque : current torque
+    -- inData.filteredForce : current filtered force
+    -- inData.filteredTorque : current filtered torque
+    sim.breakForceSensor(inData.handle)
+end
+</pre>
+
+<br>
+
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="childScripts.htm">Child scripts</a></li>
+<li><a href="customizationScripts.htm">Customization scripts</a></li>
+<li><a href="visionSensors.htm">Vision sensors</a></li>
+<li><a href="visionCallbackFunctions.htm">Vision callback function</a></li>
+<li><a href="proximitySensors.htm">Proximity sensors</a></li>
+<li><a href="forceSensors.htm">Force/torque sensors</a></li>
+
+<br>
+<br>
+ </tr>
+ <tr>
+   <td > 
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

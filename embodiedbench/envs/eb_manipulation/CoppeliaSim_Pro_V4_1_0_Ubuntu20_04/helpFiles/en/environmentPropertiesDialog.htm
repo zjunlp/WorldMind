@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Environment dialog</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Environment dialog</h1>
+
+<p>The environment dialog can be accessed with [Menu bar --&gt; Tools --&gt; Environment] or by double-clicking following icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>:
+</p>
+
+<p align=center><img src="images/environmentIcon.jpg"></p>
+<p class=imageLabel>[Environment icon]</p>
+<br>
+
+<p align=center><img src="images/environment1.jpg"></p>
+<p class=imageLabel>[Environment dialog]</p>
+<br>
+
+<li> <strong>Background (up / down)</strong>: allows adjusting the background color of a scene. The up component corresponds to the upper part of the screen (sky), the down component corresponds to the lower part of the screen. The background colors are only visible when the fog functionality is disabled.
+</li>
+<li> <strong>Ambient light</strong>: allows adjusting the ambient light of a <a href="scenes.htm">scene</a>. The ambient light can be seen as the minimal light of a scene, it illuminates an object in the exact same way from all directions. See the <a href="lights.htm">section about lights</a> for more details about illumination of a scene. </li>
+<li> <strong>Adjust fog parameters</strong>: allows to adjust various fog parameters.
+</li>
+
+<li> <strong>Maximum triangle size (absolute)</strong>: this item will not affect the visual appearance of <a href="shapes.htm">shapes</a>. It will however affect the execution speed of most CoppeliaSim <a href="calculationModules.htm">calculation modules</a>. When performing <a href="distanceCalculation.htm">minimum distance calculations</a> for instance, between two <a href="entities.htm">entities</a>, execution will generally be faster if both entities are composed by similar-sized triangles. The maximum triangle size value specifies how the internal representation of a <a href="shapes.htm">shape</a> is handled (i.e. how elaborate the shape's calculation structure is). Small sizes will increase the preprocessing time, but generally the simulation execution speed will be increased at the same time. This value sets the overall maximum triangle size, as an absolute value. See also next item and the <strong>reduce triangle size</strong>-item in the <a href="triangleEditMode.htm">triangle edit mode</a>. </li>
+<li> <strong>Minimum triangle size (relative)</strong>: similar to previous item, but this item helps avoiding creating too large calculation structures that might potentially take very long. This value sets the minimum triangle size, as a relative value (relative to a given object's largest dimension).</li>
+
+<li><strong>Save operation also saves existing calculation structures</strong>: for <a href="distanceCalculation.htm">distance calculations</a>, <a href="collisionDetection.htm">collision detections</a>, etc. a data structure is computed at the beginning of a simulation (preprocessing), or the first time a <a href="shapes.htm">shape</a> is involves in such calculations, in order to speed-up calculations. Calculation of that data structure might be time consuming, so the user can chose to save it together with the <a href="scenes.htm">scene</a> or <a href="models.htm">model</a>. However one has to be aware that the additional information that will be saved is large and will result in larger files (sometimes twice as large or more). </li>
+
+<li> <strong>Shape textures disabled</strong>: if selected, then all <a href="textureDialog.htm">textures</a> applied to shapes will be disabled. </li>
+<li> <strong>Lock scene after next scene save</strong>: select this item if you want to lock your scene from edition/modification, script content viewing and resource export. After next scene save operation, the scene will be locked. Make sure you have saved the same scene in an unlocked state if you want to be able to modify it at a later time.
+</li>
+
+<li> <strong>Extension string</strong>: a string that describes additional environment properties, mainly used by extension plugins (see also the <a href="regularApi/simGetExtensionString.htm">sim.getExtensionString</a> API function).</li>
+
+
+<li><strong>Clean-up object names</strong>: allows putting some order into object names with a hash tag. This is not necessary, but might be convenient to reduce the suffix numbers after the hash tags. </li>
+
+<li><strong>Clean-up ghosts</strong>: removes all ghost objects a scene might contain. Refer also to the <a href="apiFunctionListCategory.htm#ghosts">ghost recording functionality</a>.</li>
+
+
+<li> <strong>Scene content acknowledgements / Info</strong>: information related to a scene. It is always good practice to acknowledge the original author of a scene, <a href="models.htm">model</a>, or imported mesh. When a scene that contains acknowledgment information is opened, it will automatically display that information. </li>
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="scenes.htm">Scenes</a></li>
+<li><a href="lights.htm">Lights</a></li>
+<li><a href="textureDialog.htm">Texture dialog</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

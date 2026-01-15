@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simIntersectPointsWithPointCloud</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simIntersectPointsWithPointCloud" id="simIntersectPointsWithPointCloud"></a>simIntersectPointsWithPointCloud / sim.intersectPointsWithPointCloud </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Removes points from a <a href="../pointClouds.htm">point cloud</a>, that do not intersect with the provided points (i.e. the result in the point cloud will be the intersection between the two sets of points). When a point cloud doesn't use an OC tree calculation structure, then this operation cannot be performed. See also <a href="simInsertPointsIntoPointCloud.htm">sim.insertPointsIntoPointCloud</a>, <a href="simSetPointCloudOptions.htm">sim.setPointCloudOptions</a> and the other <a href="../apiFunctionListCategory.htm#pointCloud">point cloud related functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simIntersectPointsWithPointCloud(simInt pointCloudHandle,simInt options,const simFloat* pts,simInt ptCnt,simFloat tolerance,simVoid* reserved)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>pointCloudHandle</strong>: the handle of the point cloud. See also <a href="simGetObjectHandle.htm">simGetObjectHandle</a></div>
+<div><strong>options</strong>: bit-coded:</div>
+<div class=tab>bit0 set (1): specified points are relative to the point cloud reference frame, otherwise they are relative to the world reference frame</div>
+<div><strong>pts</strong>: a pointer to the point positions specified as X/Y/Z coordinates. </div>
+<div><strong>ptCnt</strong>: the number of point coordinates contained in pts</div>
+<div><strong>tolerance</strong>: a distance used as a tolerance value</div>
+<div><strong>reserved</strong>: reserved for future extensions. Set to nullptr</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful, otherwise the total number of points in the point cloud</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number totalPointCnt=sim.intersectPointsWithPointCloud(number pointCloudHandle,number options,table points,number tolerance)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

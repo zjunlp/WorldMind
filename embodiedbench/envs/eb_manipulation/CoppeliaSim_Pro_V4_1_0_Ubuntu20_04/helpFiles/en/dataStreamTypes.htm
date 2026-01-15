@@ -1,0 +1,931 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Graph data stream types</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Graph data stream types</h1>
+
+
+<p><a href="graphs.htm">Graphs</a> can record various types of data streams. Following data stream types are directly supported:
+</p>
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="objects.htm">objects</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Object: absolute x-position 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute x-position of an object 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Object: absolute y-position 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute y-position of an object 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Object: absolute z-position 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute z-position of an object 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: x-position relative to graph<br></td> 
+		<td class=streamTableRight>Records the x-position of an object relative to the graph<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: y-position relative to graph<br></td> 
+		<td class=streamTableRight>Records the y-position of an object relative to the graph<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: z-position relative to graph<br></td> 
+		<td class=streamTableRight>Records the z-position of an object relative to the graph<br></td>
+	</tr> 
+    
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: absolute velocity</td> 
+		<td class=streamTableRight>Records the absolute velocity of an object</td>
+	</tr> 
+  	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: absolute x-velocity</td> 
+		<td class=streamTableRight>Records the absolute x-velocity of an object</td>
+	</tr> 
+  	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: absolute y-velocity</td> 
+		<td class=streamTableRight>Records the absolute y-velocity of an object</td>
+	</tr> 
+  	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: absolute z-velocity</td> 
+		<td class=streamTableRight>Records the absolute z-velocity of an object</td>
+	</tr> 
+    
+    
+    
+    
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: absolute alpha-orientation<br></td> 
+		<td class=streamTableRight>Records the absolute alpha-orientation of an object. An object's orientation is specified by its <a href="eulerAngles.htm">Euler angles</a> (alpha, beta, gamma)<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: absolute beta-orientation<br></td> 
+		<td class=streamTableRight>Records the absolute beta-orientation of an object. An object's orientation is specified by its <a href="eulerAngles.htm">Euler angles</a> (alpha, beta, gamma)<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Object: absolute gamma-orientation 
+		</td> 
+		<td class=streamTableRight>Records the absolute gamma-orientation of an object. An object's orientation is specified by its <a href="eulerAngles.htm">Euler angles</a> (alpha, beta, gamma)<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Object: alpha-orientation relative to graph 
+		</td> 
+		<td class=streamTableRight>Records the alpha-orientation of an object relative to the graph. An object's orientation is specified by its <a href="eulerAngles.htm">Euler angle</a>s (alpha, beta, gamma)<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: beta-orientation relative to graph<br></td> 
+		<td class=streamTableRight>Records the beta-orientation of an object relative to the graph. An object's orientation is specified by its <a href="eulerAngles.htm">Euler angles</a> (alpha, beta, gamma)<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: gamma-orientation relative to graph<br></td> 
+		<td class=streamTableRight>Records the gamma-orientation of an object relative to the graph. An object's orientation is specified by its <a href="eulerAngles.htm">Euler angles</a> (alpha, beta, gamma)<br></td>
+	</tr> 
+    
+    
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>Object: angular velocity</td> 
+		<td class=streamTableRight>Records the angular velocity of an object</td>
+	</tr> 
+    
+    
+    
+</table> 
+
+<br>
+
+
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="proximitySensors.htm">proximity sensors</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: absolute detection position x 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute x-position of a detected point 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: absolute detection position y 
+		</td> 
+		<td class=streamTableRight>Records the absolute y-position of a detected point<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: absolute detection position z 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute z-position of a detected point 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection position x relative to graph 
+		</td> 
+		<td class=streamTableRight>Records the x-position of a detected point relative to the graph<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection position y relative to graph 
+		</td> 
+		<td class=streamTableRight>
+			Records the y-position of a detected point relative to the graph 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection position z relative to graph 
+		</td> 
+		<td class=streamTableRight>
+			Records the z-position of a detected point relative to the graph 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection position x relative to sensor 
+		</td> 
+		<td class=streamTableRight>
+			Records the x-position of a detected point relative to the sensor 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection position y relative to sensor 
+		</td> 
+		<td class=streamTableRight>
+			Records the y-position of a detected point relative to the sensor 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection position z relative to sensor 
+		</td> 
+		<td class=streamTableRight>
+			Records the z-position of a detected point relative to the sensor 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection distance 
+		</td> 
+		<td class=streamTableRight>
+			Records the detection distance to the sensor (i.e. the detection segment length) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection azimuth 
+		</td> 
+		<td class=streamTableRight>
+			Records the detection azimuth to the sensor (i.e. azimuth of the detection segment) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection elevation 
+		</td> 
+		<td class=streamTableRight>
+			Records the detection elevation to the sensor (i.e. elevation of the detection segment) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: detection state 
+		</td> 
+		<td class=streamTableRight>
+			Records the detection state of the sensor (i.e. detected something or didn't detect anything) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the calculation time of the sensor 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Proximity sensor: overall calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the calculation time of all proximity sensors that were handled during a simulation step 
+		</td>
+	</tr> 
+</table> 
+
+<br>
+
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="visionSensors.htm">vision sensors</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: minimum red value 
+		</td> 
+		<td class=streamTableRight>
+			Records the minimum red-component value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: minimum green value 
+		</td> 
+		<td class=streamTableRight>
+			Records the minimum green-component value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: minimum blue value 
+		</td> 
+		<td class=streamTableRight>
+			Records the minimum blue-component value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: minimum intensity value 
+		</td> 
+		<td class=streamTableRight>
+			Records the minimum intensity-component (greyscale) value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: minimum depth value 
+		</td> 
+		<td class=streamTableRight>
+			Records the minimum depth-component value of the sensor's depth map content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: maximum red value 
+		</td> 
+		<td class=streamTableRight>
+			Records the maximum red-component value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: maximum green value 
+		</td> 
+		<td class=streamTableRight>
+			Records the maximum green-component value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: maximum blue value 
+		</td> 
+		<td class=streamTableRight>
+			Records the maximum blue-component value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: maximum intensity value 
+		</td> 
+		<td class=streamTableRight>
+			Records the maximum intensity-component (greyscale) value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: maximum depth value 
+		</td> 
+		<td class=streamTableRight>
+			Records the maximum depth-component value of the sensor's depth map content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: average red value 
+		</td> 
+		<td class=streamTableRight>
+			Records the average red-component value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: average green value 
+		</td> 
+		<td class=streamTableRight>
+			Records the average green-component value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: average blue value 
+		</td> 
+		<td class=streamTableRight>
+			Records the average blue-component value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: average intensity value 
+		</td> 
+		<td class=streamTableRight>
+			Records the average intensity-component (greyscale) value of the sensor's image content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: average depth value 
+		</td> 
+		<td class=streamTableRight>
+			Records the average depth-component value of the sensor's depth map content 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: detection state 
+		</td> 
+		<td class=streamTableRight>
+			Records the detection state of the sensor (i.e. detected something or didn't detect anything) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the calculation time of the sensor 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Vision sensor: overall calculation time 
+		</td> 
+		<td class=streamTableRight>Records the calculation time of all vision sensors that were handled during a simulation step<br></td>
+	</tr> 
+</table> 
+
+<br>
+
+
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="forceSensors.htm">force sensors</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: force 
+		</td> 
+		<td class=streamTableRight>
+			Records the amplitude of the force vector acting on the sensor 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: force along x-axis 
+		</td> 
+		<td class=streamTableRight>
+			Records the force acting along the sensor's x-axis 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: force along y-axis 
+		</td> 
+		<td class=streamTableRight>
+			Records the force acting along the sensor's y-axis 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: force along z-axis 
+		</td> 
+		<td class=streamTableRight>
+			Records the force acting along the sensor's z-axis 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: torque 
+		</td> 
+		<td class=streamTableRight>
+			Records the amplitude of the torque vector acting on the sensor 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: torque about x-axis 
+		</td> 
+		<td class=streamTableRight>
+			Records the torque acting about the sensor's x-axis 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: torque about y-axis 
+		</td> 
+		<td class=streamTableRight>
+			Records the torque acting about the sensor's y-axis 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: torque about z-axis 
+		</td> 
+		<td class=streamTableRight>
+			Records the torque acting about the sensor's z-axis 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: internal position error 
+		</td> 
+		<td class=streamTableRight>
+			Records the sensor's internal position error (due to its compliant nature) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: internal orientation error 
+		</td> 
+		<td class=streamTableRight>
+			Records the sensor's internal orientation error (due to its compliant nature) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Force sensor: broken state 
+		</td> 
+		<td class=streamTableRight>
+			Records the sensor's broken state (0=intact, 1=broken) 
+		</td>
+	</tr> 
+</table> 
+
+<br>
+
+
+
+<!--
+<h3 class=subsectionBar>
+Graph data streams related to <a href="mills.htm">mills</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Mill: cut surface 
+		</td> 
+		<td class=streamTableRight>
+			Records the amount of surface that was cut (removed) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Mill: cut volume 
+		</td> 
+		<td class=streamTableRight>
+			Records the amount of volume that was cut (removed) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Mill: overall cut surface 
+		</td> 
+		<td class=streamTableRight>Records the amount of surface that was cut (removed) for all mills that were handled during a simulation step<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Mill: overall cut volume 
+		</td> 
+		<td class=streamTableRight>Records the amount of volume that was cut (removed) for all mills that were handled during a simulation step<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Mill: calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the calculation time of the mill 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Mill: overall calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the calculation time of all mills that were handled during a simulation step 
+		</td>
+	</tr> 
+</table> 
+
+<br>
+-->
+
+
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="joints.htm">joints</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Joint: position 
+		</td> 
+		<td class=streamTableRight>
+			Records the joint position (i.e. its linear or angular value) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Joint: velocity 
+		</td> 
+		<td class=streamTableRight>
+			Records the joint velocity (i.e. its linear or angular velocity value) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Joint: internal position error 
+		</td> 
+		<td class=streamTableRight>Records the joint's internal position error when dynamically enabled (dynamically enabled joints have compliance)<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Joint: internal orientation error 
+		</td> 
+		<td class=streamTableRight>Records the joint's internal orientation error when dynamically enabled (dynamically enabled joints have compliance)<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Joint: force or torque 
+		</td> 
+		<td class=streamTableRight>Records the joint's force/torque along/about its z-axis when dynamically enabled<br></td>
+	</tr> 
+</table> 
+
+<br>
+
+
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="paths.htm">paths</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Path: position 
+		</td> 
+		<td class=streamTableRight>Records the path position. The calculation of the path position depends on the path position/length calculation method (see how a path position is defined for more details)<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Path: position, linear component only 
+		</td> 
+		<td class=streamTableRight>
+			Records the path position, but only its linear component 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Path: position, angular component only 
+		</td> 
+		<td class=streamTableRight>
+			Records the path position, but only its angular component 
+		</td>
+	</tr> 
+</table> 
+
+<br>
+
+
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="collisionDetection.htm">collision objects</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Collision: collision state 
+		</td> 
+		<td class=streamTableRight>
+			Records the colliding state of a collision object (i.e. colliding or not colliding) 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Collision: number of collisions 
+		</td> 
+		<td class=streamTableRight>Records the number of collisions that were detected for all collision objects that were handled during a simulation step<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Collision: calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the calculation time of a collision object 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Collision: overall calculation time 
+		</td> 
+		<td class=streamTableRight>Records the overall calculation time of all collision objects that were handled during a simulation step<br></td>
+	</tr> 
+</table> 
+
+<br>
+
+
+
+
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="distanceCalculation.htm">distance objects</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment length 
+		</td> 
+		<td class=streamTableRight>
+			Records the length of a distance object segment 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 1 absolute x-position 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute x-position of a distance object segment's first side 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 1 absolute y-position 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute y-position of a distance object segment's first side 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 1 absolute z-position 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute z-position of a distance object segment's first side 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 2 absolute x-position 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute x-position of a distance object segment's second side 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 2 absolute y-position 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute y-position of a distance object segment's second side 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 2 absolute z-position 
+		</td> 
+		<td class=streamTableRight>
+			Records the absolute z-position of a distance object segment's second side 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 1 x-position relative to graph 
+		</td> 
+		<td class=streamTableRight>
+			Records the x-position of a distance object segment's first side, relative to the graph 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 1 y-position relative to graph 
+		</td> 
+		<td class=streamTableRight>
+			Records the y-position of a distance object segment's first side, relative to the graph 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 1 z-position relative to graph 
+		</td> 
+		<td class=streamTableRight>
+			Records the z-position of a distance object segment's first side, relative to the graph 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 2 x-position relative to graph 
+		</td> 
+		<td class=streamTableRight>
+			Records the x-position of a distance object segment's second side, relative to the graph 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 2 y-position relative to graph 
+		</td> 
+		<td class=streamTableRight>
+			Records the y-position of a distance object segment's second side, relative to the graph 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: segment side 2 z-position relative to graph 
+		</td> 
+		<td class=streamTableRight>
+			Records the z-position of a distance object segment's second side, relative to the graph 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the calculation time of a distance object 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Distance: overall calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the overall calculation time of all distance objects that were handled during a simulation step 
+		</td>
+	</tr> 
+</table> 
+
+<br>
+
+
+
+
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="inverseKinematicsModule.htm">inverse kinematics objects</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Inverse kinematics: calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the calculation time of an inverse kinematics object 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Inverse kinematics: overall calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the overall calculation time of all inverse kinematics objects that were handled during a simulation step 
+		</td>
+	</tr> 
+</table> 
+
+<br>
+
+
+
+
+<h3 class=subsectionBar>
+Graph data streams related to the <a href="dynamicsModule.htm">dynamics functionality</a></h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Dynamics: overall calculation time 
+		</td> 
+		<td class=streamTableRight>
+			Records the overall calculation time of the dynamics module during a simulation step 
+		</td>
+	</tr> 
+</table> 
+
+<br>
+
+
+
+
+
+<h3 class=subsectionBar>
+Graph data streams related to <a href="scripts.htm">script</a> execution </h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Child scripts: execution time 
+		</td> 
+		<td class=streamTableRight>Records the execution time of all the child scripts, for one simulation step. This will include all other calculation times too that are handled through a child script (e.g. collision detection, distance calculation, etc.).<br></td>
+	</tr> 
+</table> 
+
+<br>
+
+
+
+
+
+<h3 class=subsectionBar>
+Other Graph data streams
+</h3>
+
+<table class=streamTable>
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Work threads: execution time 
+		</td> 
+		<td class=streamTableRight>Records the execution time use by the work threads<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Rendering: rendering time 
+		</td> 
+		<td class=streamTableRight>Records the time needed to render the openGl content<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Simulation pass: execution time 
+		</td> 
+		<td class=streamTableRight>Records the execution time of one simulation pass (including rendering time)<br></td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Simulation: time 
+		</td> 
+		<td class=streamTableRight>
+			Records the simulation time 
+		</td>
+	</tr> 
+	<tr class=streamTableTr> 
+		<td class=streamTableLeft>
+			Various: user-defined 
+		</td> 
+		<td class=streamTableRight>
+			Records a user-defined data stream. Refer to the <a href="regularApi/simSetGraphUserData.htm">sim.setGraphUserData</a> function for more details </td>
+	</tr> 
+</table> 
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="graphs.htm">Graphs</a></li>
+<li><a href="graphPropertiesDialog.htm">Graph properties</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

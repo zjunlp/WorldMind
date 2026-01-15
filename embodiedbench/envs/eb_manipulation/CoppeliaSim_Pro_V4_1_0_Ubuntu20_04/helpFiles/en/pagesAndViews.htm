@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>pagesAndViews</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Pages and views</h1>
+
+<p>
+A page in CoppeliaSim is the main viewing surface of a <a href="scenes.htm">scene</a>. It is not directly a view, but can contain one, two, or as many views as needed. A view is what is used to display the image content of a specific <a href="objects.htm">object</a> which has to be a <a href="viewableObjects.htm">viewable object</a>.  If a view is associated with a <a href="cameras.htm">camera object</a> for instance, then it can display what the camera <em>sees</em>. Following figure explains the page, view and viewable object relationship:</p>
+
+<p align=center><img src="images/pagesAndViews1.jpg"></p>
+<p class=imageLabel>[Page, view and viewable object relationship]</p>
+<br>
+
+<p>
+A view can have a fixed position within a page, or it can have a floating position on the page. Above page, view, and viewable object relationship is illustrated in following page configuration: </p>
+
+<p align=center><img src="images/pagesAndViews2.jpg"></p>
+<p class=imageLabel>[Page configuration containing four views. One view is fixed (background view), the other three views are floating]</p>
+<br>
+
+<p>
+Each <a href="scenes.htm">scene</a> in CoppeliaSim has eight freely configurable pages. Individual pages can be accessed (i.e. displayed) through the page selector toolbar button:</p>
+
+<p align=center><a name="pageSelector"></a><img src="images/pages.jpg"></p>
+<p class=imageLabel>[Page selector toolbar button]</p>
+<br>
+
+<p><a name="pageConfigurations"></a>
+When a new scene is created, then each of the 8 pages will be pre-configured in a different way. A page can be removed with [Popup menu --&gt; Remove Page]. An inexistent page (i.e. removed page) displays a dark-grey surface. A page and a default page configuration with empty views can then be created with [Popup menu --> Set-Up Page With...]. Several page configurations are available, as shown in following figure (numbers indicate view indices):
+</p>
+
+<p align=center><img src="images/pageConfigs.jpg"></p>
+<p class=imageLabel>[Available page configurations with fixed views]</p>
+<br>
+
+<p>
+Above page configurations allow displaying 1-8 fixed views. Each one of the light-grey surfaces corresponds to an empty view (i.e. unassociated view). At any time, a page can be removed with [Popup menu --&gt; Remove Page]. Removing a page will also remove all views that it contains, but will not remove any of the associated objects. On top of an existing page configuration, it is possible to add an unlimited number of floating views with [Popup menu --&gt; Add --&gt; Floating View]. Following figure shows such an example:
+</p>
+
+<p align=center><img src="images/pagesAndViews3.jpg"></p>
+<p class=imageLabel>[Page configuration with four  floating views]</p>
+<br>
+
+<p>
+Floating views can be shifted and resized, but do not allow navigation with the left or right mouse button (e.g. camera translations, camera rotations, etc.). Double-click a floating view to swap its content with the view index 0 (this operation can however be prohibited by programmatically disabling it). To remove a floating view, simply click its button at its upper right side.
+</p>
+
+<p>
+To associate a viewable object with a view, select the object and on the view you wish to associate with it click [Popup menu --&gt; View --&gt; Associate view with selected camera] or [Popup menu --&gt; View --&gt; Associate view with selected vision sensor] (the popup menu will automatically adjust its content depending on the last selected object). When a view is created but not yet associated with a viewable object, the [Popup menu --&gt; Add --&gt; Camera] command will add a camera and directly associate it with the view (i.e. look through it). A given viewable object can be associated with any number of views at the same time.
+</p>
+
+<p>
+Alternatively you can also associate a view with a viewable object by activating following popup in a view: [Popup menu --&gt; View --&gt; View selector...]. This will open the view selector. </p>
+
+<p>
+Once a viewing object is associated with a view, its image content will be displayed, except for vision sensors that operate in following way: a vision sensor needs to generate its image content, and this can only happen when the appropriate API command is called. By default, the main script contains a command that will handle all vision sensors in the scene ( <a href="regularApi/simHandleVisionSensor.htm">sim.handleVisionSensor</a>(sim.handle_all) ). Unless a vision sensor is marked as <em><a href="explicitHandling.htm">explicit handling</a></em> but is not explicitely handled, then its image content will be generated during simulation. </p>
+
+<p>
+A view associated with a camera can be customized or adjusted in following ways:</p>
+<li>It can display the camera view in solid or  wireframe: [Popup menu --&gt; View --&gt; Solid rendering]</li>
+<li>It can display the camera view in perspective or orthographic projection mode:  [Popup menu --&gt; View --&gt; Perspective projection]</li>
+<li>It can show or hide the edges: [Popup menu --&gt; View --&gt; Visible edges]</li>
+<li>It can display edges as thick or thin lines: [Popup menu --&gt; View --&gt; Thick edges]</li>
+<li>It can turn texture display on and off: [Popup menu --&gt; View --&gt; Shape textures enabled]</li>
+<li>Its associated camera can track the last selected object: [Popup menu --&gt; View --&gt; Track selected object]</li>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+
+<li><a href="apiFunctionListCategory.htm#PagesAndViewsFunctions">Related API functions</a></li>
+<li><a href="cameras.htm">Cameras</a></li>
+<li><a href="visionSensors.htm">Vision sensors</a></li>
+
+ <br> 
+ <br> 
+</td>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

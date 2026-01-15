@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetObjectSelection</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetObjectSelection" id="simGetObjectSelection"></a>simGetObjectSelection / sim.getObjectSelection</h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves all selected object's handles. See also <a href="simGetObjectSelectionSize.htm">simGetObjectSelectionSize</a>, <a href="simAddObjectToSelection.htm">sim.addObjectToSelection</a> and <a href="simRemoveObjectFromSelection.htm">sim.removeObjectFromSelection</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simGetObjectSelection(simInt* objectHandles)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>objectHandles</strong>: pointer to object handles. Make sure to have at least <a href="simGetObjectSelectionSize.htm">simGetObjectSelectionSize</a> simInts available<br>
+</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>size of the selection (&gt;=0) if operation was successful, -1 otherwise</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>table selectedObjectHandles=sim.getObjectSelection()</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>None</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>selectedObjectHandles</strong>: table containing the handles of all selected objects, or nil if no object is selected</div>
+</td> 
+</tr> 
+
+<tr class=apiTableTr> 
+<td class=remApiTableLeftCParam>
+Remote API equiv.
+</td> 
+<td class=remApiTableRightCParam>
+<div>B0-based remote API: <a href="../b0RemoteApi-cpp.htm#simxGetObjectSelection">simxGetObjectSelection</a></div>
+<div>Legacy remote API: <a href="../remoteApiFunctions.htm#simxGetObjectSelection">simxGetObjectSelection</a></div>
+</td> 
+</tr> 
+
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

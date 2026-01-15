@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Line following BubbleRob tutorial</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Line following BubbleRob tutorial</h1>
+
+<p>In this tutorial we aim at extending the functionality of BubbleRob to let him/her follow a line on the ground. Make sure you have fully read and understood the <a href="bubbleRobTutorial.htm">first BubbleRob tutorial</a>. This tutorial is courtesy of Eric Rohmer.</p>
+
+
+
+<p>Load the scene of the first BubbleRob tutorial located in CoppeliaSim's installation folder, in <em>tutorials/BubbleRob</em>. The scene file related to this tutorial is located in <em>tutorials/LineFollowingBubbleRob</em>. Following figure illustrates the simulation scene that we will design:<br>
+</p>
+
+<p align=center><img src="images/lbubbleRobTut1.jpg"></p>
+<br>
+
+<p>We first create the  first of 3 <a href="visionSensors.htm">vision sensors</a> that we will attach to the <em>bubbleRob</em> object. Select [Menu bar --&gt; Add --&gt; Vision sensor --&gt; Orthographic type]. Edit its properties, by double-clicking on the newly created vision sensor icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>, and change the parameters to reflect following dialog:</p>
+
+<p align=center><img src="images/lbubbleRobTut2.jpg"></p>
+<br>
+
+
+
+<p>The vision sensor has to be facing the ground, so select it, and in the <a href="orientationDialog.htm">orientation dialog</a>, on the <strong>orientation</strong> tab,  set [180;0;0] for the <em>Alpha</em>-<em>Beta</em>-<em>Gamma</em> items.</p>
+
+
+<p>We have several possibilities to read a vision sensor. Since our vision sensor has just one pixel and operates in an easy way, we will simply query the average intensity value of the image read by our vision sensor. For more complex cases, we could have set-up a <a href="visionCallbackFunctions.htm">vision callback function</a>. Now copy and paste the vision sensor twice, and adjust its names to <em>bubbleRob_leftSensor</em>, <em>bubbleRob_middleSensor</em> and <em>bubbleRob_rightSensor</em>. Make <em>bubbleRob</em> their parent (i.e. attach them to the<em> bubbleRob</em> object). Your sensors should now look like this in the scene hierarchy:</p>
+<p align=center><img src="images/lbubbleRobTut4.jpg"></p>
+<br>
+
+
+
+<p>Let's position the sensors correctly. For that use the <a href="positionDialog.htm">position dialog</a>, on the <strong>position</strong> tab, and set following absolute coordinates:</p>
+
+<li>left sensor: [0.2;0.042;0.018]</li>
+<li>middle sensor: [0.2;0;0.018]</li>
+<li>right sensor: [0.2;-0.042;0.018]</li>
+
+<p>Now let's modify the environment. We can remove a few cylinders in front of BubbleRob. Next, we will build the <a href="paths.htm">path</a> that the robot will try to follow. It is probaby better to switch to a top view from now on: select <a href="pagesAndViews.htm">page</a> 4 via the <a href="pagesAndViews.htm#pageSelector">page selector toolbar button</a>. Then click [Menu bar --&gt; Add --&gt; Path --&gt; Circle type]. Enable the <a href="objectMovement.htm">object movement with the mouse</a>. You have two possibilities to adjust the shape of the path:</p>
+
+<li>With the path (and only the path) selected, ctrl-click one of its <a href="pathsControlPointsAndBezierPoints.htm">control points</a>. You can then drag them to the right position.</li>
+<li>With the path selected, enter the <a href="pathEditMode.htm">path edit mode</a>. In there, you have much more flexibility to adjust the individual path control points.</li>
+
+
+
+<p>Once you are satisfied with the geometry of the path (you can always modify it at a later stage), select it, and uncheck <strong>Show orientation of points</strong>, <strong>Show path line</strong> and<strong> Show current position on path</strong> in  the <a href="pathPropertiesDialog.htm">path properties</a>. Then click <strong>Show path shaping dialog</strong>. This opens the <a href="pathShaping.htm">path shaping dialog</a>. Click <strong>Path shaping enabled</strong>, set the <strong>type</strong> to <strong>horizontal segment</strong>, and <strong>Scaling factor</strong> to 4.0. Finally adjust the color to black. There is a last important adjustment we have to make to the path: currently, the z-position of the path coincides with the z-position of the floor. The consequence is that sometimes we see the path, sometimes the floor (this effect is known as <em>z-fighting</em> in the openGl jargon). This not only affects what we see, but also what the vision sensors see. In order to avoid problems linked to z-fighting, just move the position of the path object up by 0.5 mm.<br>
+</p>
+
+<p>The last step is to adjust the controller of BubbleRob, so that it will also follow the black path. Open the <a href="childScripts.htm">child script</a> attached to <em>bubbleRob</em>, and replace it with following code:</p>
+
+
+<pre class=lightRedBox>
+function speedChange_callback(ui,id,newVal)
+    speed=minMaxSpeed[1]+(minMaxSpeed[2]-minMaxSpeed[1])*newVal/100
+end
+
+function sysCall_init()
+    -- This is executed exactly once, the first time this script is executed
+    bubbleRobBase=sim.getObjectAssociatedWithScript(sim.handle_self)
+    leftMotor=sim.getObjectHandle("bubbleRob_leftMotor")
+    rightMotor=sim.getObjectHandle("bubbleRob_rightMotor")
+    noseSensor=sim.getObjectHandle("bubbleRob_sensingNose")
+    minMaxSpeed={50*math.pi/180,300*math.pi/180}
+    backUntilTime=-1 -- Tells whether bubbleRob is in forward or backward mode
+    floorSensorHandles={-1,-1,-1}
+    floorSensorHandles[1]=sim.getObjectHandle("bubbleRob_leftSensor")
+    floorSensorHandles[2]=sim.getObjectHandle("bubbleRob_middleSensor")
+    floorSensorHandles[3]=sim.getObjectHandle("bubbleRob_rightSensor")
+    -- Create the custom UI:
+        xml = '&lt;ui title=&quot;'..sim.getObjectName(bubbleRobBase)..' speed&quot; closeable=&quot;false&quot; resizeable=&quot;false&quot; activate=&quot;false&quot;&gt;'..[[
+        &lt;hslider minimum=&quot;0&quot; maximum=&quot;100&quot; onchange=&quot;speedChange_callback&quot; id=&quot;1&quot;/&gt;
+        &lt;label text=&quot;&quot; style=&quot;* {margin-left: 300px;}&quot;/&gt;
+        &lt;/ui&gt;
+        ]]
+    ui=simUI.create(xml)
+    speed=(minMaxSpeed[1]+minMaxSpeed[2])*0.5
+    simUI.setSliderValue(ui,1,100*(speed-minMaxSpeed[1])/(minMaxSpeed[2]-minMaxSpeed[1]))
+end
+
+function sysCall_actuation()
+    result=sim.readProximitySensor(noseSensor)
+    if (result>0) then backUntilTime=sim.getSimulationTime()+4 end
+
+    -- read the line detection sensors:
+    sensorReading={false,false,false}
+    for i=1,3,1 do
+        result,data=sim.readVisionSensor(floorSensorHandles[i])
+        if (result>=0) then
+            sensorReading[i]=(data[11]&#60;0.3) -- data[11] is the average of intensity of the image
+        end
+        print(sensorReading[i])
+    end
+
+    -- compute left and right velocities to follow the detected line:
+    rightV=speed
+    leftV=speed
+    if sensorReading[1] then
+        leftV=0.03*speed
+    end
+    if sensorReading[3] then
+        rightV=0.03*speed
+    end
+    if sensorReading[1] and sensorReading[3] then
+        backUntilTime=sim.getSimulationTime()+2
+    end
+
+    if (backUntilTime&#60;sim.getSimulationTime()) then
+        -- When in forward mode, we simply move forward at the desired speed
+        sim.setJointTargetVelocity(leftMotor,leftV)
+        sim.setJointTargetVelocity(rightMotor,rightV)
+    else
+        -- When in backward mode, we simply backup in a curve at reduced speed
+        sim.setJointTargetVelocity(leftMotor,-speed/2)
+        sim.setJointTargetVelocity(rightMotor,-speed/8)
+    end
+end
+
+function sysCall_cleanup()
+	simUI.destroy(ui)
+end</pre>
+
+
+<p>You can easily debug your line following vision sensors: select one, then in the scene view select [Right-click --> Add --> Floating view], then in the newly added floating view select [Right click --> View --> Associate view with selected vision sensor].
+</p>
+
+<p>Finally, remove the auxiliary items that were added in the <a href="bubbleRobTutorial.htm">first BubbleRob tutorial</a>: remove the image processing vision sensor, its associated floating view, the floating view representing the obstacle clearance. Remove also the distance calculation object via the <a href="distanceCalculation.htm">distance dialog</a>. That's it!</p>
+
+
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

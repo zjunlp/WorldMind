@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetObjectsInTree</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetObjectsInTree" id="simGetObjectsInTree"></a>simGetObjectsInTree / sim.getObjectsInTree </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves object handles in a given hierarchy tree. See also <a href="simGetObjects.htm">sim.getObjects</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt* simGetObjectsInTree(simInt treeBaseHandle,simInt objectType,simInt options,simInt* objectCount)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>treeBaseHandle</strong>: the handle of the object that describes  the hierarchy tree, or sim_handle_scene for all objects in the scene.</div>
+<div><strong>objectType</strong>: the <a href="../apiConstants.htm#sceneObjectTypes">object type</a> to retrieve or sim_handle_all for any type of object in the tree</div>
+<div><strong>options</strong>: bit-coded:</div>
+<div class=tab>bit0 set (1): exclude the tree base from the returned array</div>
+<div class=tab>bit1 set (2): include in the returned array only the object's first children. If <strong>treeBaseHandle</strong> is sim_handle_scene, then only parentless objects will be included.</div>
+<div><strong>objectCount (out value)</strong>: the number of returned object handles</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>a pointer to an array containing object handles, or nullptr in case of an error. The user is in charge of releasing the returned buffer with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>table objects=sim.getObjectsInTree(number treeBaseHandle,number objectType=sim.handle_all, number options=0)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+
+<tr class=apiTableTr> 
+<td class=remApiTableLeftCParam>
+Remote API equiv.
+</td> 
+<td class=remApiTableRightCParam>
+<div>B0-based remote API: <a href="../b0RemoteApi-cpp.htm#simxGetObjectsInTree">simxGetObjectsInTree</a></div>
+<div>Legacy remote API: -</div>
+</td> 
+</tr> 
+
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

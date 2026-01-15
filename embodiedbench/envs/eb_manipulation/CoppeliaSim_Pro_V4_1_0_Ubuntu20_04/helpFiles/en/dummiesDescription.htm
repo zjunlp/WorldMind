@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Dummy functions</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Dummy functions</h1>
+
+
+<p><a href="dummies.htm">Dummies</a> are multipurpose <a href="objects.htm">objects</a>. They can have very specific functions, or they can just be used as helper objects. Following dummy functions are common:</p>
+
+<li><strong>Used as a point or reference system</strong>: This is the case when you want to track the position and/or orientation of a specific point in the <a href="scenes.htm">scene</a>. The dummy position can be matched to the position of a <a href="shapes.htm">shape</a> vertex for instance, and will allow to precisely positioning the shape: in the <a href="vertexEditMode.htm">vertex edit mode</a>, create a dummy from a vertex, then attach the shape to the dummy (make the dummy parent). Now you can manipulate/position the shape through the dummy which has the same position as the selected vertex. <br>
+</li>
+
+<li><strong>Used as proxy or supporting object for models</strong>: <a href="models.htm">Models</a> are defined by marking an object with the <strong>object is model base</strong> flag. Any object can be the base of a model, however dummies are the prefered objects for that.<br>
+</li>
+
+<li><strong>Used as marking points</strong>: When evaluating the work space of a robot for instance, a dummy could be positioned at the same coordinates as the robot's end-effector, at various time intervals, and finally the convex hull of all added dummies can be extracted and displayed. Refer to the section on <a href="convexHull.htm">convex hull calculation</a> for more details.<br>
+</li>
+
+<li><strong>Used to specify end-effector, and end-effector target positions/orientations in inverse kinematics calculations</strong>: The <a href="inverseKinematicsModule.htm">inverse kinematics calculation module</a> handles kinematic chains. Each chain is specified with a base object and a tip object. The tip object has to be a dummy, and often the user positions and orients the tip dummy to coincide with a robot's end-effector. At the same time, in order to move the kinematic chain in inverse kinematics mode, a target position/orientation for the robot's end-effector is required. There again, a dummy is used as the target object. <br>
+</li>
+
+<li><strong>Used to create loop closure constraints for mechanisms dynamically simulated</strong>: Refer to the section on <a href="designingDynamicSimulations.htm">designing dynamic simulations</a> for more details.<br>
+</li>
+
+<li><strong>Used as path following objects</strong>: Dummy objects are the only objects that can be assigned to stay on a <a href="paths.htm">path</a> (free on path, freely sliding) or to follow the path position (fixed on path, fixed along the path at its current intrinsic position). Following figure shows a dummy assigned to stay on a path:<br>
+</li>
+
+<p align=center><img src="images/dummyDescription3.jpg"></p>
+<p class=imageLabel>[Dummy assigned to stay on a path. The dummy's position and orientation is interpolated from the path's Bezier points]</p>
+<br>
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="dummies.htm">Dummies</a></li>
+<li><a href="dummyPropertiesDialog.htm">Dummy properties</a></li>
+
+<br>
+<br>
+
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

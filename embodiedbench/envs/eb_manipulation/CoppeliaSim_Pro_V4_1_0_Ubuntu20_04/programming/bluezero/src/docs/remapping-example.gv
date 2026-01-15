@@ -1,0 +1,32 @@
+digraph G {
+    graph [overlap=false, splines=true, bgcolor="transparent"];
+
+    node [shape=box, color=black, fontcolor=black];
+    N_const_1 [label="const-1"];
+    N_const_2 [label="const-2"];
+    N_const_3 [label="const-3"];
+    N_op_mul [label="op-mul"];
+    N_op_sum [label="op-sum"];
+    N_print [label="print"];
+
+    node [shape=ellipse, color=blue];
+    T_result [label="result", fontcolor=blue];
+    T_sum [label="sum", fontcolor=blue];
+    T_x [label="x", fontcolor=blue];
+    T_y [label="y", fontcolor=blue];
+    T_z [label="z", fontcolor=blue];
+
+    node [shape=diamond, color=red];
+
+    edge [color=black];
+    N_const_1 -> T_x;
+    N_const_2 -> T_y;
+    N_const_3 -> T_z;
+    N_op_mul -> T_result;
+    N_op_sum -> T_sum;
+    T_sum -> N_op_mul;
+    T_z -> N_op_mul;
+    T_x -> N_op_sum;
+    T_y -> N_op_sum;
+    T_result -> N_print;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetCollectionHandle</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetCollectionHandle" id="simGetCollectionHandle"></a>simGetCollectionHandle / sim.getCollectionHandle</h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves a collection handle based on its name. See also the section on <a href="../accessingGeneralObjects.htm">accessing general-type objects</a>, <a href="simCreateCollection.htm">sim.createCollection</a>, <a href="simAddObjectToCollection.htm">sim.addObjectToCollection</a>, <a href="simGetCollectionObjects.htm">sim.getCollectionObjects</a> and <a href="simIsHandleValid.htm">sim.isHandleValid</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simGetCollectionHandle(const simChar* collectionName)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>collectionName</strong>: name of the collection.  If the name is appended by a &quot;@silentError&quot; suffix, then no error will be output if the collection does not exist.</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>Handle of the collection, or -1 in case of an error</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number collectionHandle=sim.getCollectionHandle(string collectionName)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+<div></div>
+</td> 
+</tr> 
+
+<tr class=apiTableTr> 
+<td class=remApiTableLeftCParam>
+Remote API equiv.
+</td> 
+<td class=remApiTableRightCParam>
+<div>B0-based remote API: <a href="../b0RemoteApi-cpp.htm#simxGetCollectionHandle">simxGetCollectionHandle</a></div>
+<div>Legacy remote API: <a href="../remoteApiFunctions.htm#simxGetCollectionHandle">simxGetCollectionHandle</a></div>
+</td> 
+</tr> 
+
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

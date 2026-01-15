@@ -1,0 +1,40 @@
+# config.yaml
+defaults:
+  - _self_
+
+env: null
+model_name: null
+model_type: null
+down_sample_ratio: null
+language_only: null
+eval_sets: null
+chat_history: null
+n_shots: null
+multiview: null
+detection_box: null
+multistep: null
+resolution: null
+exp_name: null
+visual_icl: null
+tp: null
+log_level: null
+
+# WorldMind specific settings
+enable_worldmind: null
+
+use_experience_trajectory: null
+detailed_output: null
+use_separate_summarization: null
+
+# Goal Experience Settings
+enable_goal_experience: null
+goal_experience_top_k: null
+
+# Process Experience Settings
+enable_process_experience: null
+process_experience_top_k: null
+
+# Experience Refine Settings
+enable_experience_refine: null
+
+resume: null

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetVisionSensorImage</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetVisionSensorImage" id="simGetVisionSensorImage"></a>simGetVisionSensorImage / sim.getVisionSensorImage</h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves the rgb-image (or a portion of it) of a vision sensor. Use <a href="simGetVisionSensorResolution.htm">sim.getVisionSensorResolution</a> to know the resolution of the full image. The returned data doesn't make sense if <a href="simHandleVisionSensor.htm">sim.handleVisionSensor</a> wasn't called previously  (sim.handleVisionSensor is called by default in the main script if the vision sensor is not tagged as <em>explicit handling</em>). See also <a href="simGetVisionSensorCharImage.htm">sim.getVisionSensorCharImage</a> and <a href="simSetVisionSensorImage.htm">sim.setVisionSensorImage</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simFloat* simGetVisionSensorImage(simInt sensorHandle)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>sensorHandle</strong>: handle of the vision sensor.   Can be combined with <a href="../apiConstants.htm#specialHandleFlags">sim_handleflag_greyscale</a> (simply add sim_handleflag_greyscale to sensorHandle), if you wish to retrieve the grey scale equivalent.</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>image buffer (buffer size is resolutionX*resolutionY*3 or resolutionX*resolutionY in case of a grey scale image retrieval) or nullptr in case of an error. The user is in charge of releasing the returned buffer with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>. Returned values are in the range of 0-1 (0=min. intensity, 1=max. intensity)<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>table/string imageBuffer=sim.getVisionSensorImage(number sensorHandle,number posX=0,number posY=0,number sizeX=0,number sizeY=0,number returnType=0)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>sensorHandle</strong>: handle of the vision sensor.   Can be combined with <a href="../apiConstants.htm#specialHandleFlags">sim.handleflag_greyscale</a> (simply add sim.handleflag_greyscale to sensorHandle), if you wish to retrieve the grey scale equivalent.</div>
+<div><strong>posX / posY</strong>: position of the image portion to retrieve. Zero by default.</div>
+<div><strong>sizeX / sizeY</strong>: size of the image portion to retrieve. Zero by default, which means that the full image should be retrieved</div>
+<div><strong>returnType</strong>: the type of the returned buffer. 0 returns a table filled with rgb values in the range 0-1, 1 returns a string filled with rgb values in the range 0-255</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>imageBuffer</strong>: a table containing rgb values (table size is sizeX*sizeY*3, rgb values in the range 0-1) or a string containing rgb values (table size is sizeX*sizeY*3, rgb values in the range 0-255). In case of a grey scale image retrieval, the image buffer will contain grey values or grey-alpha values.</div></td> 
+</tr> 
+
+<tr class=apiTableTr> 
+<td class=remApiTableLeftCParam>
+Remote API equiv.
+</td> 
+<td class=remApiTableRightCParam>
+<div>B0-based remote API: <a href="../b0RemoteApi-cpp.htm#simxGetVisionSensorImage">simxGetVisionSensorImage</a></div>
+<div>Legacy remote API: <a href="../remoteApiFunctions.htm#simxGetVisionSensorImage">simxGetVisionSensorImage</a></div>
+</td> 
+</tr> 
+
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

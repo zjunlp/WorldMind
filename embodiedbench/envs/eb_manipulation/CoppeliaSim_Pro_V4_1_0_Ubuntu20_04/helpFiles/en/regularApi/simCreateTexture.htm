@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simCreateTexture</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simCreateTexture" id="simCreateTexture"></a>simCreateTexture / sim.createTexture </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Creates a planar shape, that will be textured with a new, or imported texture. See also <a href="simGetTextureId.htm">sim.getTextureId</a>, <a href="simReadTexture.htm">sim.readTexture</a>,  <a href="simWriteTexture.htm">sim.writeTexture</a> and <a href="simSetShapeTexture.htm">sim.setShapeTexture</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simCreateTexture(const simChar* fileName,simInt options,const simFloat* planeSizes,const simFloat* scalingUV,const simFloat* xy_g,simInt fixedResolution,simInt* textureId,simInt* resolution,const simVoid* reserved)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>fileName</strong>: the filename of the texure to import, or an empty string if you wish to create a new texture.</div>
+<div><strong>options</strong>: bit-coded:</div>
+<div class=tab><strong>bit0</strong> set (1) =do not interpolate adjacent color patches.</div>
+<div class=tab><strong>bit1</strong> set (2) =apply the texture in decal-mode.</div>
+<div class=tab><strong>bit2</strong> set (4) =repeat the texture along the U direction.</div>
+<div class=tab><strong>bit3</strong> set (8) =repeat the texture along the V direction.</div>
+<div><strong>planeSizes</strong>: a pointer to 2 values: the dimensions of the planar shape that will be generated. Can be nullptr for default dimensions.</div>
+<div><strong>scalingUV</strong>: a pointer to 2 values: the desired scaling of the texture, along the U and V directions. Can be nullptr for default scalings.</div>
+<div><strong>xy_g</strong>: a pointer to 3 values: the texture x/y shift, and the texture gamma-rotation. Can be nullptr for default shift/rotation values.</div>
+<div><strong>fixedResolution</strong>: 0 to import the shape with its original resolution. Otherwise, specify a power of 2 value which will be the maximum texture resolution (the texture will also be applied a power of 2 resolution).</div>
+<div><strong>resolution</strong>: a pointer to 2 values representing the desired texture resolution when creating a new texture. The same pointer is used to return the effective resolution of the created/imported texture.</div>
+<div><strong>textureId</strong>: a pointer to an integer that will be used to return the new texture ID. If a same texture is already present, the old texture ID will be returned. Can be nullptr.</div>
+<div><strong>reserved</strong>: reserved. Set to nullptr.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 in case of an error, otherwise the object handle of the created planar shape.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number shapeHandle,number textureId,table_2 resolution=sim.createTexture(string fileName,number options,table_2 planeSizes=nil,table_2 scalingUV=nil,table_2 xy_g=nil,number fixedResolution=0,table_2 resolution=nil)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Solving IK and FK for any type of mechanism</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Solving IK and FK for any type of mechanism</h1>
+
+<p>The Inverse Kinematics (IK) or Forward Kinematics (FK) are solved for a mechanism by using IK Groups and IK Elements (see the section on <a href="basicsOnIkGroupsAndIkElements.htm">basics on IK groups and IK elements</a>). Keep following checkpoints in mind in order to successfully set-up IK or FK calculations:<br>
+</p>
+
+<li>Specify individual kinematic chains by providing a base and a tip.
+</li>
+
+<li>Specify a target to follow (simply link the tip <a href="dummies.htm">dummy</a> to a target dummy (refer to the <a href="dummyPropertiesDialog.htm">dummy properties</a> for more details)).<br>
+</li>
+
+<li>Group IK elements in a single IK Group if they share common <a href="joints.htm">joints</a>. </li>
+
+<li>Order individual IK Groups in order to obtain the wanted behavior.
+</li>
+
+<li>Verify that joints in a kinematic chain have the correct properties enabled or disabled. Refer to the <a href="jointProperties.htm">joint properties</a> for more details.<br>
+</li>
+
+<li>Verify that individual IK Elements are not overconstrained (X, Y, Z, Alpha-Beta, Gamma). (see the <a href="ikDialog.htm">inverse kinematics dialog</a> for details).<br>
+</li>
+
+
+<p>The last point is quite important to understand: a kinematic chain's tip that has all constraints turned on, will follow its associated target in the x-, y-, z-directions, while trying to keep the same orientation as the target. This however only works well when the kinematic chain has at least 6 non-redundant Degrees of Freedom (DoF). The tip should always be appropriately constrained (i.e. never indicate more constraints than there are DoFs in the mechanism). Positional constraints are most of the time specified relative to the base's orientation as can be seen from following figure:<br>
+</p>
+
+
+<p align=center><img src="images/ikSolving1.jpg"></p>
+<p class=imageLabel>[Positional constraints for a kinematic chain]</p>
+<br>
+
+
+<p>Sometimes it is however not possible to correctly specify the constraints for a tip, and in that case the IK group's calculation method should be a damped method (e.g. DLS method) with an appropriately selected damping factor. A damped resolution method should also be selected when a target can't possibly be reached (out of reach, or close to a singular configuration). Damping can result in more stable calculations, but keep in mind that damping will always slow down the IK calculations (more iterations will be needed to put the tip into place).<br>
+</p>
+
+<p>Turning Alpha-Beta constraint on, will match the tip's z-axis orientation with the target's z-axis orientation, while keeping a free rotation around the z-axis if Gamma constraint is off. When Alpha-Beta constraint AND Gamma constraint are turned on, then the tip will try to adopt exactly the same orientation as its associated target.<br>
+</p>
+
+<p>Solving the IK problem for simple kinematic chains is explained in the section on <a href="basicsOnIkGroupsAndIkElements.htm">basics on IK groups and IK elements</a>. Solving the FK problem of simple kinematic chains is trivial (just apply the desired joint values to all joints in the chain to obtain the position and orientation of the tip or end effector). It is less trivial to solve the IK and FK problem for closed mechanisms.<br>
+</p>
+
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="closedMechanisms"></a>Solving IK and FK for closed mechanisms
+</td></tr></table> 
+
+
+<p>In following section, two general examples are discussed that should allow the user to understand the approach to solving general type closed mechanisms:<br>
+</p>
+
+<p>In the case of an FK problem, identify first the joints that you want to control (i.e. the joints that are driving the mechanism, the active joints). Those joints should be excluded from all kinematic calculation (select a joint mode different from <strong>inverse kinematics mode</strong> (refer to the <a href="jointProperties.htm">joint properties</a>)). Those joints will be considered as rigid by the kinematic calculations from now on. Then, identify which kinematic chain needs to be closed. Closing will be handled by loop closure constraints in the form of tip-target pairs as shown in following figure:<br>
+</p>
+
+<p align=center><img src="images/ikSolving2.jpg"></p>
+<p class=imageLabel>[Forward Kinematics solving method for closed mechanisms]</p>
+<br>
+
+<p>Then, set the desired joint values for the active joints and call the inverse kinematics functionality to handle loop closure constraints. (the default <a href="mainScript.htm">main script</a> handles all IK groups that are not marked as <em>explicit handling</em>).<br>
+</p>
+
+<p>Following example shows some additional functionality that can be used to solve complicated kinematic problems:<br>
+</p>
+
+<p align=center><img src="images/ikSolving3.jpg"></p>
+<p class=imageLabel>[Inverse kinematics task]</p>
+<br>
+
+<p>As can be seen from the figure, there is one IK task desired by the user: bring the tip onto the target (or have the tip follow the target). This can be solved in the regular way, or the user can make usage of the joint dependency functionality. Following figure demonstrates this:<br>
+</p>
+
+<p align=center><img src="images/ikSolving4.jpg"></p>
+<p class=imageLabel>[Inverse kinematics task with joint overlap constraints]</p>
+<br>
+
+<p>The IK main task is in charge of reaching the target, the loop closure constraint is in charge of closing the mechanism, and the joint overlap constraints are in charge of keeping the base of the mechanism overlapped (as one single chain). The parameters of the joint dependency linear equation  have to be carefully chosen in order to reach a perfect overlap (e.g. if two corresponding joints (the ones linked through the overlap constraint) have the same orientation, then the coefficient in the equation needs to be set to -1! (since one joint is built bottom-up and the other one is built top-down)).<br>
+</p>
+
+<p>Most of the time there are several different ways of solving the IK or FK of a mechanism, and it is always worth considering various alternatives before implementing the most complicated one! <br>
+</p>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="inverseKinematicsModule.htm">Inverse kinematics</a></li>
+<li><a href="basicsOnIkGroupsAndIkElements.htm">Basics on IK groups and IK elements</a></li>
+<li><a href="ikDialog.htm">Inverse kinematics dialog</a></li>
+<li><a href="joints.htm">Joints</a></li>
+<li><a href="dummies.htm">Dummies</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

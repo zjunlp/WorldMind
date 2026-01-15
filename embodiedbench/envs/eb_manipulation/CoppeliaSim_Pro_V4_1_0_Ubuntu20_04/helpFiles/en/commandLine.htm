@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Command line</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Command line</h1>
+
+<p>When you start CoppeliaSim via the command line, you have following command line options that are supported: </p>
+
+<li><strong>-vXXX</strong>: sets the verbosity level, in the console. Default is <strong>loadinfos</strong>. Other accepted values for <strong>XXX</strong> are <strong>none</strong>, <strong>errors</strong>, <strong>warnings</strong>, loadinfos,<strong> scripterrors</strong>,<strong> scriptwarnings</strong>,<strong> scriptinfos</strong>,<strong> infos</strong>,  <strong>debug</strong> , <strong>trace</strong>, <strong>tracelua</strong> and <strong>traceall</strong>. Plugins should output messages via <a href="regularApi/simAddLog.htm">simAddLog</a> , scripts via <a href="regularApi/simAddLog.htm">sim.addLog</a>. Verbosity can change during runtime: from within CoppeliaSim, global verbosity can be adjusted with <a href="regularApi/simSetInt32Parameter.htm">sim.setInt32Parameter</a>(sim.intparam_globalverbosity,verbosity), and plugin verbosity with <a href="regularApi/simSetModuleInfo.htm">sim.setModuleInfo</a>(pluginName,sim.moduleinfo_verbosity,verbosity). By default, plugin verbosity follows global verbosity. Command line verbosity setting can be overridden via the <em>verbosity</em> value in <em>system/usrset.txt</em>. Additionally, console log messages can be filtered via the <em>consoleLogFilter</em> value in <em>system/usrset.txt</em>., or via <a href="regularApi/simSetStringParameter.htm">sim.setStringParameter</a>(<a href="apiConstants.htm#stringParameters">sim.stringparam_consolelogfilter</a>,filter).</li>
+<li><strong>-wXXX</strong>: similar to the <strong>-v</strong> setting above, but for the verbosity level in the <a href="userInterface.htm#statusBar">status bar</a>. Default is <strong>scriptinfos</strong>. Status bar verbosity setting can be overridden via the <em>statusbarVerbosity</em> value in <em>system/usrset.txt</em>.</li>
+<li><strong>-xXXX</strong>: similar to the -<strong>v</strong> or <strong>-w</strong> setting above, but for the verbosity level for simple dialogs. Default is <strong>infos</strong>. Other accepted values for <strong>XXX</strong> are <strong>none</strong>, <strong>errors</strong>, <strong>warnings</strong> and <strong>questions</strong>. Dialog verbosity setting can be overridden via the <em>dialogVerbosity</em> value in <em>system/usrset.txt</em>.</li>
+<li><strong>-c"XXX"</strong>: executes the script string XXX as soon as the sandbox script is initialized.</li>
+<li><strong>-h</strong>: runs CoppeliaSim in headless mode (i.e. without any GUI). This option simply suppresses all GUI elements, but otherwise runs normally. For a true headless operation, use the headless library (i.e. rename <em>coppeliaSimLibHeadless.dll</em> (or similar) to <em>coppeliaSimLib.dll</em>). In that case keep in mind that <a href="visionSensors.htm">vision sensors</a> won't operate, unless they use the Pov-Ray rendering mode (and the <a href="https://github.com/CoppeliaRobotics/simExtPovRay" target="_blank">Pov-Ray plugin</a> is installed, binaries available <a href="https://github.com/CoppeliaRobotics/simExtPovRay/tree/master/binaries" target="_blank">here</a>), and that their rendering will be drastically slower.</li>
+<li><strong>-sXXX</strong>: automatically start the simulation. <strong>XXX</strong> represents an optional simulation time in milliseconds after which simulation should stop again.</li>
+<li><strong>-q</strong>: automatically quits CoppeliaSim after the first simulation run ended.</li>
+<li><strong>-aXXX </strong>and/or<strong> -bXXX</strong>: loads and runs an additional <a href="addOns.htm">add-on script</a> specified via its filename (where <strong>XXX</strong> should contain the filename extension, e.g. <em>myAddonScript.lua</em>).</li>
+<li><strong>-GYYY=XXX</strong>: named parameter: <strong>YYY</strong> represents the key, <strong>XXX</strong> the value, that can be queried within CoppeliaSim with the <a href="regularApi/simGetStringNamedParam.htm">simGetStringNamedParam</a>.</li>
+<li><strong>-gXXX</strong>: <strong>XXX</strong> represents an optional argument that can be queried within CoppeliaSim with the <em><a href="apiConstants.htm#stringParameters">sim.stringparam_app_arg1</a></em>... sim.stringparam_app_arg9 parameters. The argument can be used for various custom purposes.</li>
+
+<li><strong>-gREMOTEAPISERVERSERVICE_PORT_DEBUG_PREENABLESYNC</strong>: the argument can be used to request a <a href="remoteApiServerSide.htm#continuousRemoteApiService">continuous legacy remote API server service</a> to be started at CoppeliaSim start-up. For that to happen, replace in above string following:</li>
+<li class=tabTab><em>PORT</em> is the port number</li>
+<li class=tabTab><em>DEBUG</em> is the debug mode (set to <em>TRUE</em> or <em>FALSE</em>)</li>
+<li class=tabTab><em>PREENABLESYNC</em> allows to preenable the synchronous mode (set to <em>TRUE</em> or <em>FALSE</em>)</li>
+
+<li><strong>-gGUIITEMS_XXX</strong>: the argument can be used to disable specific GUI items. For that to happen, replace in above string <strong>XXX</strong> with a decimal bit-coded value taken from the <a href="apiConstants.htm#startupOptions">start-up options</a>.</li>
+
+<li><strong>XXX.ttt</strong> or <strong>XXX.simscene.xml</strong>: loads a <a href="scenes.htm">CoppeliaSim scene</a>.</li>
+<li><strong>XXX.ttm</strong> or <strong>XXX.simmodel.xml</strong>: loads a <a href="models.htm">CoppeliaSim model</a>.</li>
+<li><strong>XXX.brs</strong>: loads an XReality scene.</li>
+<li><strong>XXX.brm</strong>: loads an XReality model.</li>
+
+
+<p>For example, to start CoppeliaSim in headless mode, load the scene <em>myScene.ttt</em>, run the simulation for 5 seconds, then stop the simulation and automatically leave CoppeliaSim again, type from within the CoppeliaSim main folder:</p>
+
+<pre class=lightGreyBox>
+<strong>Windows:</strong> coppeliaSim.exe -h -s5000 -q myScene.ttt</pre>
+
+<pre class=lightGreyBox>
+<strong>Mac:</strong> ./coppeliaSim.app/Contents/MacOS/coppeliaSim -h -s5000 -q ../Resources/myScene.ttt</pre>
+
+<pre class=lightGreyBox>
+<strong>Linux:</strong> ./coppeliaSim.sh -h -s5000 -q myScene.ttt</pre>
+ 
+ 
+ <br> 
+ <br> 
+ 
+  </td>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

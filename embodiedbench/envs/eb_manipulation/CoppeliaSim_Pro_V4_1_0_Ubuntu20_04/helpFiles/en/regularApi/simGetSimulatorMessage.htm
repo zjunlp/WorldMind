@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetSimulatorMessage</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetSimulatorMessage" id="simGetSimulatorMessage"></a>simGetSimulatorMessage / sim.getSimulatorMessage </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves and removes the next message in the C/C++ or Lua message queues. Use this in a while-loop until all messages have been extracted. While the C/C++ interface has one single message queue, each Lua script has its own message queue. The C/C++ version of this function should only be called from the CoppeliaSim client application. A given message queue cannot hold more than 64 messages, unread messages will be discarded.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simChar* simGetSimulatorMessage(simInt* messageID,simInt* auxiliaryData,simInt* returnedDataSize)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>messageID</strong>: a simulator message (see the <a href="../apiConstants.htm#simulatorMessages">simulator messages</a>) or -1 if no message is available or in case of an error<br>
+</div>
+<div><strong>auxiliaryData</strong>: table of 4 integers that can describe the returned message in more details</div>
+<div><strong>returnedDataSize</strong>: size of the returned buffer</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>nullptr if no buffer was returned, otherwise a buffer that should be released with <a href="simReleaseBuffer.htm">simReleaseBuffer</a></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number message,table_4 auxiliaryData,table auxiliaryData2=sim.getSimulatorMessage()</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>None</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>message</strong>: a simulator message (see the <a href="../apiConstants.htm#simulatorMessages">simulator messages</a>) or -1 if no message is available<br>
+</div>
+<div><strong>auxiliaryData</strong>: table of 4 numbers that can describe the returned message in more details</div>
+<div><strong>auxiliaryData2</strong>: optional table of n numbers that hold more data related to the message</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

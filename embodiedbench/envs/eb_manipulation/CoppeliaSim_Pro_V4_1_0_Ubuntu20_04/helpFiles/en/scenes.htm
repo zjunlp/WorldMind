@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>scenes</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Scenes</h1>
+
+<p>Compared to <a href="models.htm">models</a>, a scene can contain exactly the same type of elements, but additionally also includes following elements, specific to scenes:
+</p>
+
+<li>
+  <a href="environment.htm">The environment</a></li>
+<li>
+  <a href="mainScript.htm">The main script</a></li>
+<li>
+  <a href="pagesAndViews.htm">Pages and views</a></li>
+
+<p>A scene or scene image content can be seen through a <a href="viewableObjects.htm">viewable object</a> associated with a view, itself contained in a <a href="pagesAndViews.htm">page</a>. When creating a new scene ([Menu bar --&gt; File --&gt; New Scene]), the default scene will contain following elements:<br>
+</p>
+
+<li>Several <a href="cameras.htm">camera objects</a>: cameras allow to <em>see</em> the scene if they are associated with a view.</li>
+<li>Several <a href="lights.htm">light objects</a>: without a light the scene would be hardly visible. The light is used to illuminate the scene.</li>
+<li>Several <a href="pagesAndViews.htm">views</a>: a view is associated with a camera and displays what the camera <em>sees</em>. Views are contained in pages.</li>
+<li>Several <a href="pagesAndViews.htm">pages</a>: a page contains one or several views.</li>
+<li><a href="environment.htm">The environment</a>: the environment is composed by properties as ambient light, fog, background color, etc.</li>
+<li>The floor: the floor is made-up by <a href="objects.htm">objects</a> grouped in a model.</li>
+<li>The default <a href="mainScript.htm">main script</a>: the default main script should allow running minimal simulations, without the need of <a href="childScripts.htm">child scripts</a>. A child script copied into the scene at a later stage will then also be automatically executed (called by the main script) if it is associated with a scene object.</li>
+
+
+<p>Scenes can be opened (loaded) with [Menu bar --&gt; File --&gt; Open Scene...] and saved with [Menu bar --&gt; File --&gt; Save Scene] or [Menu Bar --&gt; File --&gt; Save Scene as...]. Scene files (&quot;*.ttt&quot;-files) also support drag and drop operations between the explorer window and the application window. Scene files can also be double-clicked, in which case they will launch the CoppeliaSim application and be opened.
+</p>
+
+
+<p><a name="sceneSelector"></a>Switching between opened scene can be achieved with a single click in the upper part of the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> (all opened scenes are grouped at the top of the scene hierarchy), or by using the scene selector via its related toolbar button:</p>
+
+<p align=center><img src="images/sceneSelector.jpg"></p>
+<p class=imageLabel>[Scene selector toolbar button]</p>
+<br>
+
+<p align=center><img src="images/sceneSelectorView.jpg"></p>
+<p class=imageLabel>[Scene selector]</p>
+<br>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+
+
+<li><a href="apiFunctionListCategory.htm#fileOperations">Related API functions</a></li>
+<li><a href="models.htm">Models</a></li>
+<li><a href="environment.htm">The environment</a></li>
+<li><a href="mainScript.htm">The main script</a></li>
+<li><a href="pagesAndViews.htm">Pages and views</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

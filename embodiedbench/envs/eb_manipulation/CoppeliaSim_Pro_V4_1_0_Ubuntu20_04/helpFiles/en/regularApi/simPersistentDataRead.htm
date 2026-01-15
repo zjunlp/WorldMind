@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simPersistentDataRead</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simPersistentDataRead" id="simPersistentDataRead"></a>simPersistentDataRead / sim.persistentDataRead </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Reads a block of persistent data. See also <a href="simPersistentDataWrite.htm">sim.persistentDataWrite</a>, <a href="simGetPersistentDataTags.htm">sim.getPersistentDataTags</a>, <a href="simGetStringSignal.htm">sim.getStringSignal</a>, <a href="simGetIntegerSignal.htm">sim.getIntegerSignal</a>,  <a href="simGetDoubleSignal.htm">sim.getDoubleSignal</a> and <a href="simReadCustomDataBlock.htm">sim.readCustomDataBlock</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simChar* simPersistentDataRead(const simChar* dataTag,simInt* dataLength)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>dataTag</strong>: name of the data block</div>
+<div><strong>dataLength</strong>: the size of the returned data block, since it may contain any data (also embedded zeros).</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>nullptr if operation was not successful or data block does not exist, otherwise the data block (which may contain any value, including embedded zeros). In that case the returned buffer should be released with <a href="simReleaseBuffer.htm">simReleaseBuffer</a><br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>string dataValue=sim.persistentDataRead(string dataTag)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+
+<div><strong>dataTag</strong>: name of the data block</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>dataValue</strong>: value of the data block, or nil if data block does not exist. The returned data block may contain any value, including embedded zeros.</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

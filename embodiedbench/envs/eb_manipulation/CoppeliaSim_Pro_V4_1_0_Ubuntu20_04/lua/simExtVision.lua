@@ -1,0 +1,2 @@
+local vision={}
+return vision

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simBuildMatrix</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simBuildMatrix" id="simBuildMatrix"></a>simBuildMatrix / sim.buildMatrix </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Builds a transformation matrix based on a position vector and <a href="../eulerAngles.htm">Euler angles</a>. See also the other <a href="../apiFunctionListCategory.htm#coordinatesAndTransformations">matrix/transformation functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simBuildMatrix(const simFloat* position,const simFloat* eulerAngles,simFloat* matrix)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>position</strong>: pointer to 3 simFloat values representing the position component</div>
+<div><strong>eulerAngles</strong>: pointer to 3 simFloat values representing the angular component</div>
+<div><strong>matrix</strong>: pointer to 12 simFloat values representing the transformation matrix</div>
+<div class=tab>The x-axis of the orientation component of the matrix is (matrix[0],matrix[4],matrix[8])</div>
+<div class=tab>The y-axis of the orientation component of the matrix is (matrix[1],matrix[5],matrix[9])</div>
+<div class=tab>The z-axis of the orientation component of the matrix is (matrix[2],matrix[6],matrix[10])</div>
+<div class=tab>The position component of the matrix is (matrix[3],matrix[7],matrix[11])</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>table_12 matrix=sim.buildMatrix(table_3 position,table_3 eulerAngles)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>position</strong>: table to 3 numbers representing the position component</div>
+<div><strong>eulerAngles</strong>: table to 3 numbers representing the angular component</div>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>matrix</strong>: table containing the transformation matrix (except for the last row). Note: table values in Lua are indexed from 1, not 0.</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Vertex edit modes</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Vertex edit mode</h1>
+
+<p>The vertex edit mode can be accessed with a click on the appropriate toolbar button:</p>
+
+<p align=center><img src="images/shapeEditModeButton.jpg"></p>
+<p class=imageLabel>[Shape edit mode toolbar button]</p>
+
+<p>The above toolbar button is only active if a <a href="shapes.htm"> shape</a> is selected. If the last selected shape is not a simple shape, but a compound shape, the <a href="groupedShapeEditMode.htm">edit mode for compound shapes</a> will be activated instead. In the vertex edit mode all vertices composing the shape are individually displayed in red. When selecting vertices (using the same procedure as for selecting <a href="objects.htm">objects</a>), they will appear in yellow and the last selected vertex in white. Shortcut copy/cut/paste/delete is supported (ctrl-c, ctrl-x, ctrl-v, delete). Selection can be cleared with the esc-key, with the deselect toolbar button, or by ctrl-clicking onto an empty area of the <a href="scenes.htm">scene</a>. A shift-selection will select all vertices under the selection area, also hidden vertices (if you wish to only select visible vertices via a shift-selection, hold down the ctrl-key in addition to the shift-key). In the vertex edit mode, the portion of the window that normally displays the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> is used to display the vertices of the shape being edited as a list. Items in the list can be selected with the mouse as for objects in the hierarchy window. </p>
+
+<p align=center><img src="images/vertexEditMode1.jpg"></p>
+<p class=imageLabel>[Vertex edit mode]</p>
+<br>
+
+
+<p>After entering the vertex edit mode, the edit menu items ([Menu bar --&gt; Edit]) will become specific to the vertex edit mode, and following dialog will display:
+</p>
+
+<p align=center><img src="images/vertexEditModeDlg.jpg"></p>
+<p class=imageLabel>[Vertex edit mode dialog]</p>
+
+<li><strong>Triangle / Vertex / Edge Edit Mode</strong>: the currently activated edit mode. The user can switch from one edit mode to the others via these buttons (the selected items will be preserved).</li>
+
+<li><strong>Show Hidden Vertices</strong>: when selected, will display also hidden vertices.
+</li>
+
+<li><strong>Clear selection</strong>: clears the selection of vertices.
+</li>
+<li><strong>Invert selection</strong>: inverts the selection state of vertices.
+</li>
+
+<li><strong>Insert Triangles</strong>: will insert triangles between selected vertices. The order in which vertices are selected is important.<br>
+</li>
+
+<li><strong>Insert Triangle Fan</strong>: will insert a triangle fan between selected vertices. The order in which vertices are selected is important. The last selected vertex will be the common vertex between the newly inserted triangles.<br>
+</li>
+
+<li><strong>Make Dummies</strong>: will create <a href="dummies.htm">dummy objects</a> based on currently selected vertices. This is a useful feature when a precise coordinate system for a shape needs to be set-up: create a dummy based on a vertex, leave the edit mode and attach the shape to the dummy (the dummy becomes parent). Then you can manipulate the shape's position through the dummy.<br>
+</li>
+
+
+<p>Vertices can be precisely positionned via the <a href="coordinateDialog.htm">coordinate and transformation dialog</a>. They can also  be directly translated with the mouse, using the toolbar's object/item translation button to translate the selected vertex/vertices in a perpendicular plane to the view direction: </p>
+
+<p align=center><img src="images/objectShiftButton.jpg"></p>
+<p class=imageLabel>[Object/item translation toolbar button]</p>
+
+<p align=center><img src="images/vertexEditMode2.jpg"></p>
+<p class=imageLabel>[Shape in vertex edit mode]</p>
+<br>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="shapes.htm">Shapes</a></li>
+<li><a href="coordinateDialog.htm">Coordinate and transformation dialog</a></li>
+<li><a href="shapeEditModes.htm">Shape edit modes</a></li>
+<li><a href="triangleEditMode.htm">Triangle edit mode</a></li>
+<li><a href="edgeEditMode.htm">Edge edit mode</a></li>
+<li><a href="groupedShapeEditMode.htm">Edit mode for compound shapes</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

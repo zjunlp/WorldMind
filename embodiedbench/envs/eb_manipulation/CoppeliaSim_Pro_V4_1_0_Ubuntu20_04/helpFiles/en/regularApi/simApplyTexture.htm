@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simApplyTexture</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simApplyTexture" id="simApplyTexture"></a>simApplyTexture</h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Applies a texture via texture coordinates to a shape. See also <a href="simSetShapeTexture.htm">simSetShapeTexture</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simApplyTexture(simInt shapeHandle,const simFloat* textureCoordinates,simInt textCoordSize,const simUChar* texture,const simInt* textureResolution,simInt options)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>shapeHandle</strong>: The handle of the shape. See also <a href="simGetObjectHandle.htm">simGetObjectHandle</a></div>
+<div><strong>textureCoordinates</strong>: The UV texture coordinates. For each of the shape's triangle, there should be exactly 3 UV texture coordinate pairs</div>
+<div><strong>textCoordSize</strong>: The size of the textureCoordinate array</div>
+<div><strong>texture</strong>: The RGB or RGBA texture</div>
+<div><strong>textureResolution</strong>: The X/Y resolution of the texture</div>
+<div><strong>options</strong>: bit-coded:</div>
+<div class=tab>bit0: if set (1), then adjacent texture pixels are not interpolated</div>
+<div class=tab>bit1: if set (2), then the texture is applied as a decal (its appearance won't be influenced by light conditions)</div>
+<div class=tab>bit2: unused, keep unset</div>
+<div class=tab>bit3: unused, keep unset</div>
+<div class=tab>bit4: if set (16), then the texture is RGBA, otherwise it is RGB</div>
+<div class=tab>bit5: if set (32), then the texture is horizontally flipped</div>
+<div class=tab>bit6: if set (64), then the texture is vertically flipped</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>The ID of the texture, or -1 in case of an error</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn><div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

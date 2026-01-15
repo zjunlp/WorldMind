@@ -1,0 +1,12 @@
+COPPELIASIM PRO LICENSE AGREEMENT
+
+By installing CoppeliaSim Pro (the SOFTWARE), you (either an individual or a single entity, the LICENSEE) accept the terms and conditions of this licensing agreement.
+
+If the LICENSEE does not agree with the terms of this license, the LICENSEE must remove all files related to the SOFTWARE from any storage devices and cease to use the SOFTWARE.
+
+1) The LICENSEE may use the SOFTWARE for any length of time if not otherwise specified by the acquired license.
+2) The LICENSEE may freely distribute files created with the SOFTWARE, the LICENSEE is however solely responsible for the file's content.
+
+THE SOFTWARE AND THE SOFTWARE SOURCE CODE IS DISTRIBUTED "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTY. THE LICENSEE WILL USE IT AT HIS/HER OWN RISK. THE ORIGINAL AUTHORS AND COPPELIA ROBOTICS GMBH WILL NOT BE LIABLE FOR INJURIES, DEATHS, DATA LOSS, DAMAGES, LOSS OF PROFITS OR ANY OTHER KIND OF LOSS WHILE USING OR MISUSING THIS SOFTWARE.
+
+(a copy of this license agreement can be found in the installation directory)

@@ -1,0 +1,3 @@
+local simCodeEditor={}
+
+return simCodeEditor

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simHandleIkGroup</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simHandleIkGroup" id="simHandleIkGroup"></a>simHandleIkGroup / sim.handleIkGroup </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Handles (solves) a registered IK group. IK groups can be registered while editing a scene. See also <a href="simCheckIkGroup.htm">sim.checkIkGroup</a>, <a href="simComputeJacobian.htm">sim.computeJacobian</a> and <a href="simGenerateIkPath.htm">sim.generateIkPath</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simHandleIkGroup(simInt ikGroupHandle)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>ikGroupHandle</strong>: handle of the IK group or sim_handle_all or sim_handle_all_except_explicit. (sim_handle_all will handle all IK groups, while sim_handle_all_except_explicit will only handle those that are not marked as &quot;explicit handling&quot;). See also <a href="simGetIkGroupHandle.htm">simGetIkGroupHandle</a>.<br>
+</div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>number of performed calculations (i.e. IK group calculation results are different from sim_ikresult_not_performed) if no specific IK group was specified, or a value of type <a href="../apiConstants.htm#ikCalculationResults">IK result</a> if a specific IK group was specified, -1 in case of an error (a failed IK group calculation is not considered as an error)<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number calculationCountOrResult=sim.handleIkGroup(number ikGroupHandle)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

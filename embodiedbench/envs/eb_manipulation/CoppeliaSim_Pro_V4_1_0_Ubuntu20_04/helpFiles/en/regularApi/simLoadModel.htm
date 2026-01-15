@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simLoadModel</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simLoadModel" id="simLoadModel"></a>simLoadModel / sim.loadModel</h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Loads a previously saved model, and selects it. See also <a href="simSaveModel.htm">sim.saveModel</a>, <a href="simLoadScene.htm">sim.loadScene</a>, and <a href="simSetBoolParameter.htm">sim.setBoolParameter</a> with <a href="../apiConstants.htm#booleanParameters">sim.boolparam_scene_and_model_load_messages</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simLoadModel(const simChar* filename)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>filename</strong>: model filename. The filename extension is required (<em>ttm</em> or <em>simmodel.xml</em> ). An optional &quot;@copy&quot; can be appended to the filename, in which case the model's objects will be named/renamed as if an associated script was attached to the model.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful. Otherwise the handle of the model base object.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>
+<div>a) number objectHandle=sim.loadModel(string filename)</div>
+<div>b) number objectHandle=sim.loadModel(string buffer)</div>
+<div>c) string rgbaImage=sim.loadModel(string filename,bool onlyThumbnail)</div>
+<div>d) string rgbaImage=sim.loadModel(string buffer,bool onlyThumbnail)</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>a) <strong>filename</strong>: model filename. The filename extension is required (<em>ttm</em>, or <em>simmodel.xml</em>). An optional &quot;@copy&quot; can be appended to the filename, in which case the model's objects will be named/renamed as if an associated script was attached to the model.</div>
+<div>b) <strong>buffer</strong>: a buffer containing the model</div>
+<div>c)&amp;d) <strong>onlyThumbnail</strong>: when true, then only the thumbnail image of the model will be loaded and returned</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>a)&amp;b) the handle of the model base object.</div>
+<div>c)&amp;d) the model thumbnail image (128x128x4, rgba).</div>
+</td> 
+</tr> 
+
+<tr class=apiTableTr> 
+<td class=remApiTableLeftCParam>
+Remote API equiv.
+</td> 
+<td class=remApiTableRightCParam>
+<div>B0-based remote API: <a href="../b0RemoteApi-cpp.htm#simxLoadModelFromBuffer">simxLoadModelFromBuffer</a>, <a href="../b0RemoteApi-cpp.htm#simxLoadModelFromFile">simxLoadModelFromFile</a></div>
+<div>Legacy remote API: <a href="../remoteApiFunctions.htm#simxLoadModel">simxLoadModel</a></div>
+</td> 
+</tr> 
+
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

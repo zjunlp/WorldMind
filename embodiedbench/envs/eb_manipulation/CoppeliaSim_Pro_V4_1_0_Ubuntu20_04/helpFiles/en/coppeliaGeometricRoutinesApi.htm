@@ -1,0 +1,2799 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>Coppelia Geometric Routines, API</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body><div align="center"><table class="allEncompassingTable"><tr><td>
+<h1>Coppelia Geometric Routines<br>API Reference</h1>
+<p class="infoBox">All units, unless otherwise indicated, are specified in meters and radians.</p>
+
+<h3 class="subsectionBar">
+<a name="geom_copyMesh" id="geom_copyMesh"></a>geom_copyMesh</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Duplicates a mesh object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">CObbStruct* geom_copyMesh(const CObbStruct* meshObbStruct)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: the mesh object to duplicate.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to the duplicated mesh object in case of success, otherwise nullptr.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createMesh">geom_createMesh</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_copyOctree" id="geom_copyOctree"></a>geom_copyOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Duplicates an OC-tree object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">COcStruct* geom_copyOctree(const COcStruct* ocStruct)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: the OC-tree object to duplicate.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to the duplicated OC-tree object in case of success, otherwise nullptr.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_copyPtcloud" id="geom_copyPtcloud"></a>geom_copyPtcloud</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Duplicates a point-cloud object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">CPcStruct* geom_copyPtcloud(const CPcStruct* pcStruct)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: the point-cloud object to duplicate.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to the duplicated point-cloud object in case of success, otherwise nullptr.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_createMesh" id="geom_createMesh"></a>geom_createMesh</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates a mesh object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">CObbStruct* geom_createMesh(const simReal* vertices,int verticesSize,const int* indices,int indicesSize,const C7Vector* meshOrigin=nullptr,simReal triangleEdgeMaxLength=simReal(0.3),int maxTrianglesInBoundingBox=8)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>vertices</strong>: an array with the vertices of the mesh, expressed relative to the world origin.</div>
+<div><strong>verticesSize</strong>: the size of the vertex array, i.e. 3*vertexCount.</div>
+<div><strong>indices</strong>: an array with the indices of the mesh.</div>
+<div><strong>indicesSize</strong>: the size of the index array, i.e. each triangle takes 3 indices.</div>
+<div><strong>meshOrigin</strong>: the transformation frame of the mesh. Can be nullptr, in which case the frame of the mesh is located at the world origin.</div>
+<div><strong>triangleEdgeMaxLength</strong>: the maximum triangle size used internally for efficient calculations. A smaller size usually results in faster calculations, but larger calculation structures.</div>
+<div><strong>maxTrianglesInBoundingBox</strong>: the maximum number of triangles in leaf bounding boxes, used internally for efficient calculations. A smaller value usually results in faster calculations, but larger calculation structures.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to the mesh object in case of success, nullptr otherwise</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_destroyMesh">geom_destroyMesh</a>, <a href="#geom_copyMesh">geom_copyMesh</a>, <a href="#geom_getMeshFromSerializationData">geom_getMeshFromSerializationData</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_createOctreeFromColorPoints" id="geom_createOctreeFromColorPoints"></a>geom_createOctreeFromColorPoints</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates an OC-tree object from several points with individual colors and individual user data.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">COcStruct* geom_createOctreeFromColorPoints(const simReal* points,int pointCnt,const C7Vector* octreeOrigin=nullptr,simReal cellS=simReal(0.05),const unsigned char* rgbData=nullptr,const unsigned int* usrData=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>points</strong>: an array with point data, expressed relative to the world origin.</div>
+<div><strong>pointCnt</strong>: the number of provided points.</div>
+<div><strong>octreeOrigin</strong>: the transformation frame of the OC-tree. Can be nullptr, in which case the frame of the OC-tree is located at the world origin.</div>
+<div><strong>cellS</strong>: The desired OC-tree voxel size.</div>
+<div><strong>rgbData</strong>: the RGB colors (0-255)of the various points (i.e. one color per point).</div>
+<div><strong>usrData</strong>: the user data of the various points (i.e. one user data per point).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to an OC-tree object in case of success, otherwise nullptr.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createOctreeFromPoints">geom_createOctreeFromPoints</a>, <a href="#geom_createOctreeFromMesh">geom_createOctreeFromMesh</a>, <a href="#geom_createOctreeFromOctree">geom_createOctreeFromOctree</a>, <a href="#geom_destroyOctree">geom_destroyOctree</a>, <a href="#geom_copyOctree">geom_copyOctree</a>, <a href="#geom_getOctreeFromSerializationData">geom_getOctreeFromSerializationData</a>, <a href="#geom_insertColorPointsIntoOctree">geom_insertColorPointsIntoOctree</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_createOctreeFromMesh" id="geom_createOctreeFromMesh"></a>geom_createOctreeFromMesh</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates an OC-tree object from a mesh object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">COcStruct* geom_createOctreeFromMesh(const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,const C7Vector* octreeOrigin=nullptr,simReal cellS=simReal(0.05),const unsigned char rgbData[3]=nullptr,unsigned int usrData=0)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh object.</div>
+<div><strong>octreeOrigin</strong>: the transformation frame of the OC-tree. Can be nullptr, in which case the frame of the OC-tree is located at the world origin.</div>
+<div><strong>cellS</strong>: The desired OC-tree voxel size.</div>
+<div><strong>rgbData</strong>: the RGB color (0-255) of the generated voxels.</div>
+<div><strong>usrData</strong>: the user data of the generated voxels.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to an OC-tree object in case of success, otherwise nullptr.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createOctreeFromPoints">geom_createOctreeFromPoints</a>,<a href="#geom_createOctreeFromColorPoints">geom_createOctreeFromColorPoints</a>, <a href="#geom_createOctreeFromOctree">geom_createOctreeFromOctree</a>, <a href="#geom_destroyOctree">geom_destroyOctree</a>, <a href="#geom_copyOctree">geom_copyOctree</a>, <a href="#geom_getOctreeFromSerializationData">geom_getOctreeFromSerializationData</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_createOctreeFromOctree" id="geom_createOctreeFromOctree"></a>geom_createOctreeFromOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates an OC-tree object from another OC-tree object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">COcStruct* geom_createOctreeFromOctree(const COcStruct* otherOctreeStruct,const C7Vector& otherOctreeTransformation,const C7Vector* newOctreeOrigin=nullptr,simReal newOctreeCellS=simReal(0.05),const unsigned char rgbData[3]=nullptr,unsigned int usrData=0)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>otherOctreeStruct</strong>: the other OC-tree object.</div>
+<div><strong>otherOctreeTransformation</strong>: the transformation frame of the other OC-tree object.</div>
+<div><strong>newOctreeOrigin</strong>: the transformation frame of the new OC-tree. Can be nullptr, in which case the frame of the new OC-tree is located at the world origin.</div>
+<div><strong>newOctreeCellS</strong>: The desired OC-tree voxel size.</div>
+<div><strong>rgbData</strong>: the RGB color (0-255) of the generated voxels.</div>
+<div><strong>usrData</strong>: the user data of the generated voxels.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to an OC-tree object in case of success, otherwise nullptr.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createOctreeFromPoints">geom_createOctreeFromPoints</a>,<a href="#geom_createOctreeFromColorPoints">geom_createOctreeFromColorPoints</a>, <a href="#geom_createOctreeFromMesh">geom_createOctreeFromMesh</a>, <a href="#geom_destroyOctree">geom_destroyOctree</a>, <a href="#geom_copyOctree">geom_copyOctree</a>, <a href="#geom_getOctreeFromSerializationData">geom_getOctreeFromSerializationData</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_createOctreeFromPoints" id="geom_createOctreeFromPoints"></a>geom_createOctreeFromPoints</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates an OC-tree object from several points.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">COcStruct* geom_createOctreeFromPoints(const simReal* points,int pointCnt,const C7Vector* octreeOrigin=nullptr,simReal cellS=simReal(0.05),const unsigned char rgbData[3]=nullptr,unsigned int usrData=0)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>points</strong>: an array with point data, expressed relative to the world origin.</div>
+<div><strong>pointCnt</strong>: the number of provided points.</div>
+<div><strong>octreeOrigin</strong>: the transformation frame of the OC-tree. Can be nullptr, in which case the frame of the OC-tree is located at the world origin.</div>
+<div><strong>cellS</strong>: The desired OC-tree voxel size.</div>
+<div><strong>rgbData</strong>: the RGB color (0-255) of the generated voxels.</div>
+<div><strong>usrData</strong>: the user data of the generated voxels.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to an OC-tree object in case of success, otherwise nullptr.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createOctreeFromColorPoints">geom_createOctreeFromColorPoints</a>, <a href="#geom_createOctreeFromMesh">geom_createOctreeFromMesh</a>, <a href="#geom_createOctreeFromOctree">geom_createOctreeFromOctree</a>, <a href="#geom_destroyOctree">geom_destroyOctree</a>, <a href="#geom_copyOctree">geom_copyOctree</a>, <a href="#geom_getOctreeFromSerializationData">geom_getOctreeFromSerializationData</a>, <a href="#geom_insertPointsIntoOctree">geom_insertPointsIntoOctree</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_createPtcloudFromColorPoints" id="geom_createPtcloudFromColorPoints"></a>geom_createPtcloudFromColorPoints</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates a point-cloud object from several points with individual colors.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">CPcStruct* geom_createPtcloudFromColorPoints(const simReal* points,int pointCnt,const C7Vector* ptcloudOrigin=nullptr,simReal cellS=simReal(0.05),int maxPointCnt=20,const unsigned char* rgbData=nullptr,simReal proximityTol=simReal(0.005))</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>points</strong>: an array with point data, expressed relative to the world origin.</div>
+<div><strong>pointCnt</strong>: the number of provided points.</div>
+<div><strong>ptcloudOrigin</strong>: the transformation frame of the point-cloud. Can be nullptr, in which case the frame of the point-cloud is located at the world origin.</div>
+<div><strong>cellS</strong>: The desired voxel size of the underlying OC-tree.</div>
+<div><strong>maxPointCnt</strong>: The maximum amount of points inside of a OC-tree voxel.</div>
+<div><strong>rgbData</strong>: the RGB color (0-255) of the generated points. Specify one color per point.</div>
+<div><strong>proximityTol</strong>: the distance tolerance to other points (i.e. point-point distances below the specified value are not permitted and points will be omitted).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to a point-cloud object in case of success, otherwise nullptr.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createPtcloudFromPoints">geom_createPtcloudFromPoints</a>, <a href="#geom_destroyPtcloud">geom_destroyPtcloud</a>, <a href="#geom_copyPtcloud">geom_copyPtcloud</a>, <a href="#geom_getPtcloudFromSerializationData">geom_getPtcloudFromSerializationData</a>, <a href="#geom_insertColorPointsIntoPtcloud">geom_insertColorPointsIntoPtcloud</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_createPtcloudFromPoints" id="geom_createPtcloudFromPoints"></a>geom_createPtcloudFromPoints</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates a point-cloud object from several points.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">CPcStruct* geom_createPtcloudFromPoints(const simReal* points,int pointCnt,const C7Vector* ptcloudOrigin=nullptr,simReal cellS=simReal(0.05),int maxPointCnt=20,const unsigned char rgbData[3]=nullptr,simReal proximityTol=simReal(0.005))</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>points</strong>: an array with point data, expressed relative to the world origin.</div>
+<div><strong>pointCnt</strong>: the number of provided points.</div>
+<div><strong>ptcloudOrigin</strong>: the transformation frame of the point-cloud. Can be nullptr, in which case the frame of the point-cloud is located at the world origin.</div>
+<div><strong>cellS</strong>: The desired voxel size of the underlying OC-tree.</div>
+<div><strong>maxPointCnt</strong>: The maximum amount of points inside of a OC-tree voxel.</div>
+<div><strong>rgbData</strong>: the RGB color (0-255) of the generated points.</div>
+<div><strong>proximityTol</strong>: the distance tolerance to other points (i.e. point-point distances below the specified value are not permitted and points will be omitted).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to a point-cloud object in case of success, otherwise nullptr.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createPtcloudFromColorPoints">geom_createPtcloudFromColorPoints</a>, <a href="#geom_destroyPtcloud">geom_destroyPtcloud</a>, <a href="#geom_copyPtcloud">geom_copyPtcloud</a>, <a href="#geom_getPtcloudFromSerializationData">geom_getPtcloudFromSerializationData</a>, <a href="#geom_insertPointsIntoPtcloud">geom_insertPointsIntoPtcloud</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_destroyMesh" id="geom_destroyMesh"></a>geom_destroyMesh</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Destroys a mesh object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_destroyMesh(CObbStruct* meshObbStruct)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createMesh">geom_createMesh</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_destroyOctree" id="geom_destroyOctree"></a>geom_destroyOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Destroys an OC-tree object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_destroyOctree(COcStruct* ocStruct)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createOctreeFromPoints">geom_createOctreeFromPoints</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_destroyPtcloud" id="geom_destroyPtcloud"></a>geom_destroyPtcloud</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Destroys a point-cloud object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_destroyPtcloud(CPcStruct* pcStruct)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_createPtcloudFromPoints">geom_createPtcloudFromPoints</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getApproxBoxBoxDistance" id="geom_getApproxBoxBoxDistance"></a>geom_getApproxBoxBoxDistance</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes a fast, approximate minimum distance between two cuboids. The approximate distance is always same or smaller than the exact distance.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">simReal geom_getApproxBoxBoxDistance(const C7Vector& box1Transformation,const C3Vector& box1HalfSize,const C7Vector& box2Transformation,const C3Vector& box2HalfSize)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>box1Transformation</strong>: the transformation frame of the first cuboid.</div>
+<div><strong>box1HalfSize</strong>: the half-size of the first cuboid.</div>
+<div><strong>box2Transformation</strong>: the transformation frame of the second cuboid.</div>
+<div><strong>box2HalfSize</strong>: the half-size of the second cuboid.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the approximate minimum distance between the two cuboids. The approximate distance is always same or smaller than the exact distance.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getBoxBoxDistanceIfSmaller">geom_getBoxBoxDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getBoxBoxCollision" id="geom_getBoxBoxCollision"></a>geom_getBoxBoxCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between two cuboids.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getBoxBoxCollision(const C7Vector& box1Transformation,const C3Vector& box1HalfSize,const C7Vector& box2Transformation,const C3Vector& box2HalfSize,bool boxesAreSolid)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>box1Transformation</strong>: the transformation frame of the first cuboid.</div>
+<div><strong>box1HalfSize</strong>: the half-size of the first cuboid.</div>
+<div><strong>box2Transformation</strong>: the transformation frame of the second cuboid.</div>
+<div><strong>box2HalfSize</strong>: the half-size of the second cuboid.</div>
+<div><strong>boxesAreSolid</strong>: whether the two cuboids are solid. If not, then cuboid A being fully encompassed by cuboid B will not lead to a collision detection.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getBoxTriangleCollision">geom_getBoxTriangleCollision</a>, <a href="#geom_getBoxSegmentCollision">geom_getBoxSegmentCollision</a>, <a href="#geom_getBoxPointCollision">geom_getBoxPointCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getBoxBoxDistanceIfSmaller" id="geom_getBoxBoxDistanceIfSmaller"></a>geom_getBoxBoxDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between two cuboids.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getBoxBoxDistanceIfSmaller(const C7Vector& box1Transformation,const C3Vector& box1HalfSize,const C7Vector& box2Transformation,const C3Vector& box2HalfSize,bool boxesAreSolid,simReal& dist,C3Vector* distSegPt1=nullptr,C3Vector* distSegPt2=nullptr,bool altRoutine=false)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>box1Transformation</strong>: the transformation frame of the first cuboid.</div>
+<div><strong>box1HalfSize</strong>: the half-size of the first cuboid.</div>
+<div><strong>box2Transformation</strong>: the transformation frame of the second cuboid.</div>
+<div><strong>box2HalfSize</strong>: the half-size of the second cuboid.</div>
+<div><strong>boxesAreSolid</strong>: whether the two cuboids are solid. If true, then cuboid A being fully encompassed by cuboid B will always lead to a distance of zero between the two cuboids.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>distSegPt1</strong>: the minimum distance point on the first cuboid.</div>
+<div><strong>distSegPt2</strong>: the minimum distance point on the second cuboid.</div>
+<div><strong>altRoutine</strong>: if true, an alternative calculation routine will be used.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getApproxBoxBoxDistance">geom_getApproxBoxBoxDistance</a>, <a href="#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>, <a href="#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>, <a href="#geom_getBoxPointDistanceIfSmaller">geom_getBoxPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getBoxPointCollision" id="geom_getBoxPointCollision"></a>geom_getBoxPointCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between a cuboid and a point.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getBoxPointCollision(const C7Vector& boxTransformation,const C3Vector& boxHalfSize,const C3Vector& point)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>boxTransformation</strong>: the transformation frame of the cuboid.</div>
+<div><strong>boxHalfSize</strong>: the half-size of the cuboid.</div>
+<div><strong>point</strong>: point position.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getOctreePointCollision">geom_getOctreePointCollision</a>, <a href="#geom_getBoxBoxCollision">geom_getBoxBoxCollision</a>, <a href="#geom_getBoxTriangleCollision">geom_getBoxTriangleCollision</a>, <a href="#geom_getBoxSegmentCollision">geom_getBoxSegmentCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getBoxPointDistanceIfSmaller" id="geom_getBoxPointDistanceIfSmaller"></a>geom_getBoxPointDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a cuboid and a point.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getBoxPointDistanceIfSmaller(const C7Vector& boxTransformation,const C3Vector& boxHalfSize,bool boxIsSolid,const C3Vector& point,simReal& dist,C3Vector* boxDistSegPt=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>boxTransformation</strong>: the transformation frame of the cuboid.</div>
+<div><strong>boxHalfSize</strong>: the half-size of the cuboid.</div>
+<div><strong>boxIsSolid</strong>: whether the cuboid is solid. If true, then the point being fully encompassed by the cuboid will always lead to a distance of zero.</div>
+<div><strong>point</strong>: position of the point.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>boxDistSegPt</strong>: the minimum distance point on the cuboid.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a>, <a href="#geom_getBoxBoxDistanceIfSmaller">geom_getBoxBoxDistanceIfSmaller</a>, <a href="#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>, <a href="#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getBoxSegmentCollision" id="geom_getBoxSegmentCollision"></a>geom_getBoxSegmentCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between a cuboid and a segment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getBoxSegmentCollision(const C7Vector& boxTransformation,const C3Vector& boxHalfSize,bool boxIsSolid,const C3Vector& segmentEndPoint,const C3Vector& segmentVector)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>boxTransformation</strong>: the transformation frame of the cuboid.</div>
+<div><strong>boxHalfSize</strong>: the half-size of the cuboid.</div>
+<div><strong>boxIsSolid</strong>: whether the cuboid is solid. If not, then the segment being fully encompassed by the cuboid will not lead to a collision detection.</div>
+<div><strong>segmentEndPoint</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshSegmentCollision">geom_getMeshSegmentCollision</a>, <a href="#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>, <a href="#geom_getBoxBoxCollision">geom_getBoxBoxCollision</a>, <a href="#geom_getBoxTriangleCollision">geom_getBoxTriangleCollision</a>, <a href="#geom_getBoxPointCollision">geom_getBoxPointCollision</a>, <a href="#geom_getTriangleSegmentCollision">geom_getTriangleSegmentCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getBoxSegmentDistanceIfSmaller" id="geom_getBoxSegmentDistanceIfSmaller"></a>geom_getBoxSegmentDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a cuboid and a segment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getBoxSegmentDistanceIfSmaller(const C7Vector& boxTransformation,const C3Vector& boxHalfSize,bool boxIsSolid,const C3Vector& segmentEndPoint,const C3Vector& segmentVector,simReal& dist,C3Vector* distSegPt1=nullptr,C3Vector* distSegPt2=nullptr,bool altRoutine=false)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>boxTransformation</strong>: the transformation frame of the cuboid.</div>
+<div><strong>boxHalfSize</strong>: the half-size of the cuboid.</div>
+<div><strong>boxIsSolid</strong>: whether the cuboid is solid. If true, then the segment being fully encompassed by the cuboid will always lead to a distance of zero.</div>
+<div><strong>segmentEndPoint</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>boxDistSegPt</strong>: the minimum distance point on the cuboid.</div>
+<div><strong>segmentSegPt</strong>: the minimum distance point on the segment.</div>
+<div><strong>altRoutine</strong>: if true, an alternative calculation routine will be used.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getBoxBoxDistanceIfSmaller">geom_getBoxBoxDistanceIfSmaller</a>, <a href="#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>, <a href="#geom_getBoxPointDistanceIfSmaller">geom_getBoxPointDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentSegmentDistanceIfSmaller">geom_getSegmentSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getBoxTriangleCollision" id="geom_getBoxTriangleCollision"></a>geom_getBoxTriangleCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between a cuboid and a triangle.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getBoxTriangleCollision(const C7Vector& boxTransformation,const C3Vector& boxHalfSize,bool boxIsSolid,const C3Vector& p,const C3Vector& v,const C3Vector& w)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>boxTransformation</strong>: the transformation frame of the cuboid.</div>
+<div><strong>boxHalfSize</strong>: the half-size of the cuboid.</div>
+<div><strong>boxIsSolid</strong>: whether the cuboid is solid. If not, then the triangle being fully encompassed by the cuboid will not lead to a collision detection.</div>
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshTriangleCollision">geom_getMeshTriangleCollision</a>, <a href="#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>, <a href="#geom_getBoxBoxCollision">geom_getBoxBoxCollision</a>, <a href="#geom_getBoxSegmentCollision">geom_getBoxSegmentCollision</a>, <a href="#geom_getBoxPointCollision">geom_getBoxPointCollision</a>, <a href="#geom_getTriangleTriangleCollision">geom_getTriangleTriangleCollision</a>, <a href="#geom_getTriangleSegmentCollision">geom_getTriangleSegmentCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getBoxTriangleDistanceIfSmaller" id="geom_getBoxTriangleDistanceIfSmaller"></a>geom_getBoxTriangleDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a cuboid and a triangle.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getBoxTriangleDistanceIfSmaller(const C7Vector& boxTransformation,const C3Vector& boxHalfSize,bool boxIsSolid,const C3Vector& p,const C3Vector& v,const C3Vector& w,simReal& dist,C3Vector* boxDistSegPt=nullptr,C3Vector* triangleDistSegPt=nullptr,bool altRoutine=false)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>boxTransformation</strong>: the transformation frame of the cuboid.</div>
+<div><strong>boxHalfSize</strong>: the half-size of the cuboid.</div>
+<div><strong>boxIsSolid</strong>: whether the cuboid is solid. If true, then the triangle being fully encompassed by the cuboid will always lead to a distance of zero.</div>
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>boxDistSegPt</strong>: the minimum distance point on the cuboid.</div>
+<div><strong>triangleDistSegPt</strong>: the minimum distance point on the triangle.</div>
+<div><strong>altRoutine</strong>: if true, an alternative calculation routine will be used.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getBoxBoxDistanceIfSmaller">geom_getBoxBoxDistanceIfSmaller</a>, <a href="#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>, <a href="#geom_getBoxPointDistanceIfSmaller">geom_getBoxPointDistanceIfSmaller</a>, <a href="#geom_getTriangleTriangleDistanceIfSmaller">geom_getTriangleTriangleDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshFromSerializationData" id="geom_getMeshFromSerializationData"></a>geom_getMeshFromSerializationData</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates a mesh object based on serialization data.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">CObbStruct* geom_getMeshFromSerializationData(const unsigned char* serializationData)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>serializationData</strong>: the serialization data previously generated with <a href="#geom_getMeshSerializationData">geom_getMeshSerializationData</a>.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to the created mesh object in case of success, nullptr otherwise.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshSerializationData">geom_getMeshSerializationData</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshMeshCollision" id="geom_getMeshMeshCollision"></a>geom_getMeshMeshCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between two mesh objects.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshMeshCollision(const CObbStruct* mesh1ObbStruct,const C7Vector& mesh1Transformation,const CObbStruct* mesh2ObbStruct,const C7Vector& mesh2Transformation,std::vector<simReal>* intersections=nullptr,int* mesh1Caching=nullptr,int* mesh2Caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>mesh1ObbStruct</strong>: a pointer to the first mesh object.</div>
+<div><strong>mesh1Transformation</strong>: the transformation frame of the first mesh.</div>
+<div><strong>mesh2ObbStruct</strong>: a pointer to the second mesh object.</div>
+<div><strong>mesh2Transformation</strong>: the transformation frame of the second mesh.</div>
+<div><strong>intersections</strong>: if not nullptr, then all collisions will be extracted as interference segments (set to nullptr for fast operation).</div>
+<div><strong>mesh1Caching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding triangle in mesh 1).</div>
+<div><strong>mesh2Caching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding triangle in mesh 2).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>, <a href="#geom_getMeshTriangleCollision">geom_getMeshTriangleCollision</a>, <a href="#geom_getMeshSegmentCollision">geom_getMeshSegmentCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshMeshDistanceIfSmaller" id="geom_getMeshMeshDistanceIfSmaller"></a>geom_getMeshMeshDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between two mesh objects.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshMeshDistanceIfSmaller(const CObbStruct* mesh1ObbStruct,const C7Vector& mesh1Transformation,const CObbStruct* mesh2ObbStruct,const C7Vector& mesh2Transformation,simReal& dist,C3Vector* minDistSegPt1=nullptr,C3Vector* minDistSegPt2=nullptr,int* mesh1Caching=nullptr,int* mesh2Caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>mesh1ObbStruct</strong>: a pointer to the first mesh object.</div>
+<div><strong>mesh1Transformation</strong>: the transformation frame of the first mesh.</div>
+<div><strong>mesh2ObbStruct</strong>: a pointer to the second mesh object.</div>
+<div><strong>mesh2Transformation</strong>: the transformation frame of the second mesh.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>minDistSegPt1</strong>: the minimum distance point on the first mesh.</div>
+<div><strong>minDistSegPt2</strong>: the minimum distance point on the second mesh.</div>
+<div><strong>mesh1Caching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the triangle that holds the minimum distance point on the first mesh).</div>
+<div><strong>mesh2Caching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the triangle that holds the minimum distance point on the second mesh).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>, <a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshOctreeCollision" id="geom_getMeshOctreeCollision"></a>geom_getMeshOctreeCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between a mesh object and an OC-tree object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshOctreeCollision(const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,const COcStruct* ocStruct,const C7Vector& octreeTransformation,int* meshCaching=nullptr,unsigned long long int* ocCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>meshCaching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding triangle in the mesh).</div>
+<div><strong>ocCaching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding voxel in the OC-tree).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshMeshCollision">geom_getMeshMeshCollision</a>, <a href="#geom_getMeshTriangleCollision">geom_getMeshTriangleCollision</a>, <a href="#geom_getMeshSegmentCollision">geom_getMeshSegmentCollision</a>, <a href="#geom_getOctreeOctreeCollision">geom_getOctreeOctreeCollision</a>, <a href="#geom_getOctreePtcloudCollision">geom_getOctreePtcloudCollision</a>, <a href="#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>, <a href="#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>, <a href="#geom_getOctreePointCollision">geom_getOctreePointCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshOctreeDistanceIfSmaller" id="geom_getMeshOctreeDistanceIfSmaller"></a>geom_getMeshOctreeDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a mesh object and an OC-tree object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshOctreeDistanceIfSmaller(const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,const COcStruct* ocStruct,const C7Vector& octreeTransformation,simReal& dist,C3Vector* meshMinDistPt=nullptr,C3Vector* ocMinDistPt=nullptr,int* meshCaching=nullptr,unsigned long long int* ocCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>meshMinDistPt</strong>: the minimum distance point on the mesh.</div>
+<div><strong>ocMinDistPt</strong>: the minimum distance point on the OC-tree.</div>
+<div><strong>meshCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the triangle that holds the minimum distance point on the mesh).</div>
+<div><strong>ocCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the voxel that holds the minimum distance point on the OC-tree).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshMeshDistanceIfSmaller">geom_getMeshMeshDistanceIfSmaller</a>, <a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>, <a href="#geom_getOctreeOctreeDistanceIfSmaller">geom_getOctreeOctreeDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshPointDistanceIfSmaller" id="geom_getMeshPointDistanceIfSmaller"></a>geom_getMeshPointDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a mesh object and a point.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshPointDistanceIfSmaller(const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,const C3Vector& point,simReal& dist,C3Vector* meshMinDistPt=nullptr,int* caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>point</strong>: the position of the point.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>meshMinDistPt</strong>: the minimum distance point on the mesh.</div>
+<div><strong>caching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the triangle that holds the minimum distance point on the mesh).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshMeshDistanceIfSmaller">geom_getMeshMeshDistanceIfSmaller</a>, <a href="#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>, <a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a>, <a href="#geom_getBoxPointDistanceIfSmaller">geom_getBoxPointDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshPtcloudDistanceIfSmaller" id="geom_getMeshPtcloudDistanceIfSmaller"></a>geom_getMeshPtcloudDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a mesh object and a point-cloud object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshPtcloudDistanceIfSmaller(const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,const CPcStruct* pcStruct,const C7Vector& pcTransformation,simReal& dist,C3Vector* meshMinDistPt=nullptr,C3Vector* pcMinDistPt=nullptr,int* meshCaching=nullptr,unsigned long long int* pcCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>pcTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>meshMinDistPt</strong>: the minimum distance point on the mesh.</div>
+<div><strong>pcMinDistPt</strong>: the minimum distance point on the point-cloud.</div>
+<div><strong>meshCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the triangle that holds the minimum distance point on the mesh).</div>
+<div><strong>pcCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the point that holds the minimum distance point on the point-cloud).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshMeshDistanceIfSmaller">geom_getMeshMeshDistanceIfSmaller</a>, <a href="#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>, <a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getPtcloudPtcloudDistanceIfSmaller">geom_getPtcloudPtcloudDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshSegmentCollision" id="geom_getMeshSegmentCollision"></a>geom_getMeshSegmentCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between a mesh object and a segment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshSegmentCollision(const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,const C3Vector& segmentExtremity,const C3Vector& segmentVector,std::vector<simReal>* intersections=nullptr,int* caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>segmentExtremity</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>intersections</strong>: if not nullptr, then all collisions will be extracted as interference segments (where both segment points are always coincident) (set to nullptr for fast operation).</div>
+<div><strong>caching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding triangle in the mesh).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshMeshCollision">geom_getMeshMeshCollision</a>, <a href="#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>, <a href="#geom_getMeshTriangleCollision">geom_getMeshTriangleCollision</a>, <a href="#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>, <a href="#geom_getBoxSegmentCollision">geom_getBoxSegmentCollision</a>, <a href="#geom_getTriangleSegmentCollision">geom_getTriangleSegmentCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshSegmentDistanceIfSmaller" id="geom_getMeshSegmentDistanceIfSmaller"></a>geom_getMeshSegmentDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a mesh object and a segment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshSegmentDistanceIfSmaller(const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,const C3Vector& segmentEndPoint,const C3Vector& segmentVector,simReal& dist,C3Vector* meshMinDistPt=nullptr,C3Vector* segmentDistSegPt=nullptr,int* caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>segmentEndPoint</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>meshMinDistPt</strong>: the minimum distance point on the mesh.</div>
+<div><strong>segmentDistSegPt</strong>: the minimum distance point on the segment.</div>
+<div><strong>caching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the triangle that holds the minimum distance point on the mesh).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshMeshDistanceIfSmaller">geom_getMeshMeshDistanceIfSmaller</a>, <a href="#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>, <a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentSegmentDistanceIfSmaller">geom_getSegmentSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshSerializationData" id="geom_getMeshSerializationData"></a>geom_getMeshSerializationData</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the serialization data from a mesh object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_getMeshSerializationData(const CObbStruct* meshObbStruct,std::vector<unsigned char>& serializationData)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>serializationData</strong>: the serialization data.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshFromSerializationData">geom_getMeshFromSerializationData</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshTriangleCollision" id="geom_getMeshTriangleCollision"></a>geom_getMeshTriangleCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between a mesh object and a triangle.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshTriangleCollision(const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,const C3Vector& p,const C3Vector& v,const C3Vector& w,std::vector<simReal>* intersections=nullptr,int* caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>intersections</strong>: if not nullptr, then all collisions will be extracted as interference segments (set to nullptr for fast operation).</div>
+<div><strong>caching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding triangle in the mesh).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshMeshCollision">geom_getMeshMeshCollision</a>, <a href="#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>, <a href="#geom_getMeshSegmentCollision">geom_getMeshSegmentCollision</a>, <a href="#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>, <a href="#geom_getBoxTriangleCollision">geom_getBoxTriangleCollision</a>, <a href="#geom_getTriangleTriangleCollision">geom_getTriangleTriangleCollision</a>, <a href="#geom_getTriangleSegmentCollision">geom_getTriangleSegmentCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getMeshTriangleDistanceIfSmaller" id="geom_getMeshTriangleDistanceIfSmaller"></a>geom_getMeshTriangleDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a mesh object and a triangle.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getMeshTriangleDistanceIfSmaller(const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,const C3Vector& p,const C3Vector& v,const C3Vector& w,simReal& dist,C3Vector* meshMinDistPt=nullptr,C3Vector* triangleMinDistPt=nullptr,int* caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>meshMinDistPt</strong>: the minimum distance point on the mesh.</div>
+<div><strong>triangleMinDistPt</strong>: the minimum distance point on the triangle.</div>
+<div><strong>caching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the triangle that holds the minimum distance point on the mesh).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshMeshDistanceIfSmaller">geom_getMeshMeshDistanceIfSmaller</a>, <a href="#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>, <a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>, <a href="#geom_getTriangleTriangleDistanceIfSmaller">geom_getTriangleTriangleDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreeFromSerializationData" id="geom_getOctreeFromSerializationData"></a>geom_getOctreeFromSerializationData</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates an OC-tree object based on serialization data.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">COcStruct* geom_getOctreeFromSerializationData(const unsigned char* serializationData)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>serializationData</strong>: the serialization data previously generated with <a href="#geom_getOctreeSerializationData">geom_getOctreeSerializationData</a>.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to the created OC-tree object in case of success, nullptr otherwise.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getOctreeSerializationData">geom_getOctreeSerializationData</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreeOctreeCollision" id="geom_getOctreeOctreeCollision"></a>geom_getOctreeOctreeCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between two OC-tree objects.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreeOctreeCollision(const COcStruct* oc1Struct,const C7Vector& octree1Transformation,const COcStruct* oc2Struct,const C7Vector& octree2Transformation,unsigned long long int* oc1Caching=nullptr,unsigned long long int* oc2Caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>oc1Struct</strong>: a pointer to the first OC-tree object.</div>
+<div><strong>octree1Transformation</strong>: the transformation frame of the first OC-tree.</div>
+<div><strong>oc2Struct</strong>: a pointer to the second OC-tree object.</div>
+<div><strong>octree2Transformation</strong>: the transformation frame of the second OC-tree.</div>
+<div><strong>oc1Caching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding voxel in OC-tree 1).</div>
+<div><strong>oc2Caching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding voxel in OC-tree 2).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>, <a href="#geom_getOctreePtcloudCollision">geom_getOctreePtcloudCollision</a>, <a href="#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>, <a href="#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>, <a href="#geom_getOctreePointCollision">geom_getOctreePointCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreeOctreeDistanceIfSmaller" id="geom_getOctreeOctreeDistanceIfSmaller"></a>geom_getOctreeOctreeDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between two OC-tree objects.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreeOctreeDistanceIfSmaller(const COcStruct* oc1Struct,const C7Vector& octree1Transformation,const COcStruct* oc2Struct,const C7Vector& octree2Transformation,simReal& dist,C3Vector* oc1MinDistPt=nullptr,C3Vector* oc2MinDistPt=nullptr,unsigned long long int* oc1Caching=nullptr,unsigned long long int* oc2Caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>oc1Struct</strong>: a pointer to the first OC-tree object.</div>
+<div><strong>octree1Transformation</strong>: the transformation frame of the first OC-tree.</div>
+<div><strong>oc2Struct</strong>: a pointer to the second OC-tree object.</div>
+<div><strong>octree2Transformation</strong>: the transformation frame of the second OC-tree.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>oc1MinDistPt</strong>: the minimum distance point on the first OC-tree.</div>
+<div><strong>oc2MinDistPt</strong>: the minimum distance point on the second OC-tree.</div>
+<div><strong>oc1Caching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the voxel that holds the minimum distance point on the first OC-tree).</div>
+<div><strong>oc2Caching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the voxel that holds the minimum distance point on the second OC-tree).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreePointCollision" id="geom_getOctreePointCollision"></a>geom_getOctreePointCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between an OC-tree object and a point.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreePointCollision(const COcStruct* ocStruct,const C7Vector& octreeTransformation,const C3Vector& point,unsigned int* usrData=nullptr,unsigned long long int* caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>point</strong>: a point expressed relative to the world reference frame.</div>
+<div><strong>usrData</strong>: the user data of the colliding voxel.</div>
+<div><strong>caching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding voxel in the OC-tree).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>, <a href="#geom_getOctreeOctreeCollision">geom_getOctreeOctreeCollision</a>, <a href="#geom_getOctreePtcloudCollision">geom_getOctreePtcloudCollision</a>, <a href="#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>, <a href="#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>, <a href="#geom_getBoxPointCollision">geom_getBoxPointCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreePointDistanceIfSmaller" id="geom_getOctreePointDistanceIfSmaller"></a>geom_getOctreePointDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between an OC-tree object and a point.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreePointDistanceIfSmaller(const COcStruct* ocStruct,const C7Vector& octreeTransformation,const C3Vector& point,simReal& dist,C3Vector* ocMinDistPt=nullptr,unsigned long long int* ocCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>point</strong>: the position of the point.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>ocMinDistPt</strong>: the minimum distance point on the OC-tree.</div>
+<div><strong>ocCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the voxel that holds the minimum distance point on the OC-tree).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>, <a href="#geom_getOctreeOctreeDistanceIfSmaller">geom_getOctreeOctreeDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a>, <a href="#geom_getBoxPointDistanceIfSmaller">geom_getBoxPointDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreePtcloudCollision" id="geom_getOctreePtcloudCollision"></a>geom_getOctreePtcloudCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between am OC-tree object and a point-cloud object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreePtcloudCollision(const COcStruct* ocStruct,const C7Vector& octreeTransformation,const CPcStruct* pcStruct,const C7Vector& ptcloudTransformation,unsigned long long int* ocCaching=nullptr,unsigned long long int* pcCaching=nullptr))</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>ptcloudTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>ocCaching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding voxel in the OC-tree).</div>
+<div><strong>pcCaching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding point in the point-cloud).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>, <a href="#geom_getOctreeOctreeCollision">geom_getOctreeOctreeCollision</a>, <a href="#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>, <a href="#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>, <a href="#geom_getOctreePointCollision">geom_getOctreePointCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreePtcloudDistanceIfSmaller" id="geom_getOctreePtcloudDistanceIfSmaller"></a>geom_getOctreePtcloudDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between an OC-tree object and a point-cloud object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreePtcloudDistanceIfSmaller(const COcStruct* ocStruct,const C7Vector& octreeTransformation,const CPcStruct* pcStruct,const C7Vector& pcTransformation,simReal& dist,C3Vector* ocMinDistPt=nullptr,C3Vector* pcMinDistPt=nullptr,unsigned long long int* ocCaching=nullptr,unsigned long long int* pcCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>pcTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>ocMinDistPt</strong>: the minimum distance point on the OC-tree.</div>
+<div><strong>pcMinDistPt</strong>: the minimum distance point on the point-cloud.</div>
+<div><strong>ocCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the voxel that holds the minimum distance point on the OC-tree).</div>
+<div><strong>pcCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the point that holds the minimum distance on the point-cloud).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreeOctreeDistanceIfSmaller">geom_getOctreeOctreeDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>, <a href="#geom_getPtcloudPtcloudDistanceIfSmaller">geom_getPtcloudPtcloudDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreeSegmentCollision" id="geom_getOctreeSegmentCollision"></a>geom_getOctreeSegmentCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between an OC-tree object and a segment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreeSegmentCollision(const COcStruct* ocStruct,const C7Vector& octreeTransformation,const C3Vector& segmentExtremity,const C3Vector& segmentVector,unsigned long long int* caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>segmentExtremity</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>caching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding voxel in the OC-tree).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>, <a href="#geom_getMeshSegmentCollision">geom_getMeshSegmentCollision</a>, <a href="#geom_getOctreeOctreeCollision">geom_getOctreeOctreeCollision</a>, <a href="#geom_getOctreePtcloudCollision">geom_getOctreePtcloudCollision</a>, <a href="#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>, <a href="#geom_getOctreePointCollision">geom_getOctreePointCollision</a>, <a href="#geom_getBoxSegmentCollision">geom_getBoxSegmentCollision</a>, <a href="#geom_getTriangleSegmentCollision">geom_getTriangleSegmentCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreeSegmentDistanceIfSmaller" id="geom_getOctreeSegmentDistanceIfSmaller"></a>geom_getOctreeSegmentDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between an OC-tree object and a segment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreeSegmentDistanceIfSmaller(const COcStruct* ocStruct,const C7Vector& octreeTransformation,const C3Vector& segmentEndPoint,const C3Vector& segmentVector,simReal& dist,C3Vector* ocMinDistPt=nullptr,C3Vector* segmentDistSegPt=nullptr,unsigned long long int* ocCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>segmentEndPoint</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>ocMinDistPt</strong>: the minimum distance point on the OC-tree.</div>
+<div><strong>segmentDistSegPt</strong>: the minimum distance point on the segment.</div>
+<div><strong>ocCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the voxel that holds the minimum distance point on the OC-tree).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>, <a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreeOctreeDistanceIfSmaller">geom_getOctreeOctreeDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentSegmentDistanceIfSmaller">geom_getSegmentSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreeSerializationData" id="geom_getOctreeSerializationData"></a>geom_getOctreeSerializationData</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the serialization data from an OC-tree object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_getOctreeSerializationData(const COcStruct* ocStruct,std::vector<unsigned char>& serializationData)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>serializationData</strong>: the serialization data.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getOctreeFromSerializationData">geom_getOctreeFromSerializationData</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreeTriangleCollision" id="geom_getOctreeTriangleCollision"></a>geom_getOctreeTriangleCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between an OC-tree object and a triangle.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreeTriangleCollision(const COcStruct* ocStruct,const C7Vector& octreeTransformation,const C3Vector& p,const C3Vector& v,const C3Vector& w,unsigned long long int* caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>caching</strong>: a value that can be used to speed-up next collision checking between the same two entities (memorizes the colliding voxel in the OC-tree).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>, <a href="#geom_getMeshTriangleCollision">geom_getMeshTriangleCollision</a>, <a href="#geom_getOctreeOctreeCollision">geom_getOctreeOctreeCollision</a>, <a href="#geom_getOctreePtcloudCollision">geom_getOctreePtcloudCollision</a>, <a href="#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>, <a href="#geom_getOctreePointCollision">geom_getOctreePointCollision</a>, <a href="#geom_getBoxTriangleCollision">geom_getBoxTriangleCollision</a>, <a href="#geom_getTriangleTriangleCollision">geom_getTriangleTriangleCollision</a>, <a href="#geom_getTriangleSegmentCollision">geom_getTriangleSegmentCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreeTriangleDistanceIfSmaller" id="geom_getOctreeTriangleDistanceIfSmaller"></a>geom_getOctreeTriangleDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between an OC-tree object and a triangle.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getOctreeTriangleDistanceIfSmaller(const COcStruct* ocStruct,const C7Vector& octreeTransformation,const C3Vector& p,const C3Vector& v,const C3Vector& w,simReal& dist,C3Vector* ocMinDistPt=nullptr,C3Vector* triangleMinDistPt=nullptr,unsigned long long int* ocCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>ocMinDistPt</strong>: the minimum distance point on the OC-tree.</div>
+<div><strong>triangleMinDistPt</strong>: the minimum distance point on the triangle.</div>
+<div><strong>ocCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the voxel that holds the minimum distance point on the OC-tree).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>, <a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreeOctreeDistanceIfSmaller">geom_getOctreeOctreeDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>, <a href="#geom_getTriangleTriangleDistanceIfSmaller">geom_getTriangleTriangleDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getOctreeVoxelData" id="geom_getOctreeVoxelData"></a>geom_getOctreeVoxelData</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves voxel data and optionally user data from an OC-tree.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_getOctreeVoxelData(const COcStruct* ocStruct,std::vector<simReal>& voxelData,std::vector<unsigned int>* userData=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>voxelData</strong>: the voxel data: for each voxel, there are 3 position values (XYZ) and 3 color values (RGB, 0-1).</div>
+<div><strong>userData</strong>: the user data: for each voxel, there is one user data value.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getPtcloudFromSerializationData" id="geom_getPtcloudFromSerializationData"></a>geom_getPtcloudFromSerializationData</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Creates a point-cloud object based on serialization data.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">CPcStruct* geom_getPtcloudFromSerializationData(const unsigned char* serializationData)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>serializationData</strong>: the serialization data previously generated with <a href="#geom_getPtcloudSerializationData">geom_getPtcloudSerializationData</a>.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">A pointer to the created point-cloud object in case of success, nullptr otherwise.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getPtcloudSerializationData">geom_getPtcloudSerializationData</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getPtcloudPointDistanceIfSmaller" id="geom_getPtcloudPointDistanceIfSmaller"></a>geom_getPtcloudPointDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a point-cloud object and a point.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getPtcloudPointDistanceIfSmaller(const CPcStruct* pcStruct,const C7Vector& pcTransformation,const C3Vector& point,simReal& dist,C3Vector* pcMinDistPt=nullptr,unsigned long long int* pcCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>pcTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>point</strong>: the position of the point.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>pcMinDistPt</strong>: the minimum distance point on the point-cloud.</div>
+<div><strong>pcCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the point that holds the minimum distance point on the point-cloud).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>, <a href="#geom_getPtcloudPtcloudDistanceIfSmaller">geom_getPtcloudPtcloudDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getBoxPointDistanceIfSmaller">geom_getBoxPointDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getPtcloudPoints" id="geom_getPtcloudPoints"></a>geom_getPtcloudPoints</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves point data from a point-cloud.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_getPtcloudPoints(const CPcStruct* pcStruct,std::vector<simReal>& pointData,simReal prop=simOne)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>pointData</strong>: the point data: for each point, there are 3 position values (XYZ) and 3 color values (RGB, 0-1).</div>
+<div><strong>prop</strong>: the proportion of data to retrieve, on a voxel-basis. simOne retrieves all data, 0.25 retrieves 25% of the data.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getPtcloudPtcloudDistanceIfSmaller" id="geom_getPtcloudPtcloudDistanceIfSmaller"></a>geom_getPtcloudPtcloudDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between two point-cloud objects.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getPtcloudPtcloudDistanceIfSmaller(const CPcStruct* pc1Struct,const C7Vector& pc1Transformation,const CPcStruct* pc2Struct,const C7Vector& pc2Transformation,simReal& dist,C3Vector* pc1MinDistPt=nullptr,C3Vector* pc2MinDistPt=nullptr,unsigned long long int* pc1Caching=nullptr,unsigned long long int* pc2Caching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pc1Struct</strong>: a pointer to the first point-cloud object.</div>
+<div><strong>pc1Transformation</strong>: the transformation frame of the first point-cloud.</div>
+<div><strong>pc2Struct</strong>: a pointer to the second point-cloud object.</div>
+<div><strong>pc2Transformation</strong>: the transformation frame of the second point-cloud.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>pc1MinDistPt</strong>: the minimum distance point on the first point-cloud.</div>
+<div><strong>pc2MinDistPt</strong>: the minimum distance point on the second point-cloud.</div>
+<div><strong>pc1Caching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the point that holds the minimum distance point on the first point-cloud).</div>
+<div><strong>pc2Caching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the point that holds the minimum distance point on the second point-cloud).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getPtcloudSegmentDistanceIfSmaller" id="geom_getPtcloudSegmentDistanceIfSmaller"></a>geom_getPtcloudSegmentDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a point-cloud and a segment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getPtcloudSegmentDistanceIfSmaller(const CPcStruct* pcStruct,const C7Vector& pcTransformation,const C3Vector& segmentEndPoint,const C3Vector& segmentVector,simReal& dist,C3Vector* pcMinDistPt=nullptr,C3Vector* segmentDistSegPt=nullptr,unsigned long long int* pcCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>pcTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>segmentEndPoint</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>pcMinDistPt</strong>: the minimum distance point on the point-cloud.</div>
+<div><strong>segmentDistSegPt</strong>: the minimum distance point on the segment.</div>
+<div><strong>pcCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the point that holds the minimum distance point on the point-cloud).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudPtcloudDistanceIfSmaller">geom_getPtcloudPtcloudDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a>, <a href="#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentSegmentDistanceIfSmaller">geom_getSegmentSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getPtcloudSerializationData" id="geom_getPtcloudSerializationData"></a>geom_getPtcloudSerializationData</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Retrieves the serialization data from a point-cloud object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_getPtcloudSerializationData(const CPcStruct* pcStruct,std::vector<unsigned char>& serializationData)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>serializationData</strong>: the serialization data.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getPtcloudFromSerializationData">geom_getPtcloudFromSerializationData</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getPtcloudTriangleDistanceIfSmaller" id="geom_getPtcloudTriangleDistanceIfSmaller"></a>geom_getPtcloudTriangleDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a point-cloud object and a triangle.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getPtcloudTriangleDistanceIfSmaller(const CPcStruct* pcStruct,const C7Vector& pcTransformation,const C3Vector& p,const C3Vector& v,const C3Vector& w,simReal& dist,C3Vector* pcMinDistPt=nullptr,C3Vector* triangleMinDistPt=nullptr,unsigned long long int* pcCaching=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>pcTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>pcMinDistPt</strong>: the minimum distance point on the point-cloud.</div>
+<div><strong>triangleMinDistPt</strong>: the minimum distance point on the triangle.</div>
+<div><strong>pcCaching</strong>: a value that can be used to speed-up next distance calculation between the same two entities (memorizes the point that holds the minimum distance point on the point-cloud).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>, <a href="#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>, <a href="#geom_getPtcloudPtcloudDistanceIfSmaller">geom_getPtcloudPtcloudDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a>, <a href="#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>, <a href="#geom_getTriangleTriangleDistanceIfSmaller">geom_getTriangleTriangleDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getSegmentPointDistanceIfSmaller" id="geom_getSegmentPointDistanceIfSmaller"></a>geom_getSegmentPointDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a segment and a point.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getSegmentPointDistanceIfSmaller(const C3Vector& segmentEndPoint,const C3Vector& segmentVector,const C3Vector& point,simReal& dist,C3Vector* segmentDistSegPt=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>segmentEndPoint</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>point</strong>: position of the point</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>segmentDistSegPt</strong>: the minimum distance point on the segment.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a>, <a href="#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>, <a href="#geom_getBoxPointDistanceIfSmaller">geom_getBoxPointDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a>, <a href="#geom_getSegmentSegmentDistanceIfSmaller">geom_getSegmentSegmentDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getSegmentSegmentDistanceIfSmaller" id="geom_getSegmentSegmentDistanceIfSmaller"></a>geom_getSegmentSegmentDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between two segments.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getSegmentSegmentDistanceIfSmaller(const C3Vector& segment1EndPoint,const C3Vector& segment1Vector,const C3Vector& segment2EndPoint,const C3Vector& segment2Vector,simReal& dist,C3Vector* segment1DistSegPt=nullptr,C3Vector* segment2DistSegPt=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>segment1EndPoint</strong>: position of point A on the first segment</div>
+<div><strong>segment1Vector</strong>: vector stretching from point A to point B on the first segment.</div>
+<div><strong>segment2EndPoint</strong>: position of point A on the second segment</div>
+<div><strong>segment2Vector</strong>: vector stretching from point A to point B on the second segment.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>segment1DistSegPt</strong>: the minimum distance point on the first segment.</div>
+<div><strong>segment2DistSegPt</strong>: the minimum distance point on the second segment.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getTrianglePointDistanceIfSmaller" id="geom_getTrianglePointDistanceIfSmaller"></a>geom_getTrianglePointDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a triangle and a point.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getTrianglePointDistanceIfSmaller(const C3Vector& p,const C3Vector& v,const C3Vector& w,const C3Vector& point,simReal& dist,C3Vector* triangleDistSegPt=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>point</strong>: position of the point</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>triangleDistSegPt</strong>: the minimum distance point on the triangle.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a>, <a href="#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>, <a href="#geom_getBoxPointDistanceIfSmaller">geom_getBoxPointDistanceIfSmaller</a>, <a href="#geom_getTriangleTriangleDistanceIfSmaller">geom_getTriangleTriangleDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getTriangleSegmentCollision" id="geom_getTriangleSegmentCollision"></a>geom_getTriangleSegmentCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between a triangle and a segment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getTriangleSegmentCollision(const C3Vector& p,const C3Vector& v,const C3Vector& w,const C3Vector& segmentEndPoint,const C3Vector& segmentVector,std::vector<simReal>* intersections=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>segmentEndPoint</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>intersections</strong>: if not nullptr, then a possible collision will be extracted as interference segment (where both segment points are always coincident) (set to nullptr for fast operation).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshTriangleCollision">geom_getMeshTriangleCollision</a>, <a href="#geom_getMeshSegmentCollision">geom_getMeshSegmentCollision</a>, <a href="#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>, <a href="#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>, <a href="#geom_getBoxTriangleCollision">geom_getBoxTriangleCollision</a>, <a href="#geom_getBoxSegmentCollision">geom_getBoxSegmentCollision</a>, <a href="#geom_getTriangleTriangleCollision">geom_getTriangleTriangleCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getTriangleSegmentDistanceIfSmaller" id="geom_getTriangleSegmentDistanceIfSmaller"></a>geom_getTriangleSegmentDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between a triangle and a segment.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getTriangleSegmentDistanceIfSmaller(const C3Vector& p,const C3Vector& v,const C3Vector& w,const C3Vector& segmentEndPoint,const C3Vector& segmentVector,simReal& dist,C3Vector* triangleDistSegPt=nullptr,C3Vector* segmentDistSegPt=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>segmentEndPoint</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>triangleDistSegPt</strong>: the minimum distance point on the triangle.</div>
+<div><strong>segmentDistSegPt</strong>: the minimum distance point on the segment.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>, <a href="#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>, <a href="#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>, <a href="#geom_getTriangleTriangleDistanceIfSmaller">geom_getTriangleTriangleDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a>, <a href="#geom_getSegmentSegmentDistanceIfSmaller">geom_getSegmentSegmentDistanceIfSmaller</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getTriangleTriangleCollision" id="geom_getTriangleTriangleCollision"></a>geom_getTriangleTriangleCollision</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks for collision between two triangles.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getTriangleTriangleCollision(const C3Vector& p1,const C3Vector& v1,const C3Vector& w1,const C3Vector& p2,const C3Vector& v2,const C3Vector& w2,std::vector<simReal>* intersections=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>p1</strong>: position of point A on triangle 1.</div>
+<div><strong>v1</strong>: vector stretching from point A to point B on triangle 1.</div>
+<div><strong>w1</strong>: vector stretching from point A to point C on triangle 1.</div>
+<div><strong>p2</strong>: position of point A on triangle 2.</div>
+<div><strong>v2</strong>: vector stretching from point A to point B on triangle 2.</div>
+<div><strong>w2</strong>: vector stretching from point A to point C on triangle 2.</div>
+<div><strong>intersections</strong>: if not nullptr, then all collisions will be extracted as interference segments (set to nullptr for fast operation).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">the collision status</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshTriangleCollision">geom_getMeshTriangleCollision</a>, <a href="#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>, <a href="#geom_getBoxTriangleCollision">geom_getBoxTriangleCollision</a>, <a href="#geom_getTriangleSegmentCollision">geom_getTriangleSegmentCollision</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_getTriangleTriangleDistanceIfSmaller" id="geom_getTriangleTriangleDistanceIfSmaller"></a>geom_getTriangleTriangleDistanceIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the minimum distance between two triangles.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_getTriangleTriangleDistanceIfSmaller(const C3Vector& p1,const C3Vector& v1,const C3Vector& w1,const C3Vector& p2,const C3Vector& v2,const C3Vector& w2,simReal& dist,C3Vector* triangle1DistSegPt=nullptr,C3Vector* triangle2DistSegPt=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>p1</strong>: position of point A on triangle 1.</div>
+<div><strong>v1</strong>: vector stretching from point A to point B on triangle 1.</div>
+<div><strong>w1</strong>: vector stretching from point A to point C on triangle 1.</div>
+<div><strong>p2</strong>: position of point A on triangle 2.</div>
+<div><strong>v2</strong>: vector stretching from point A to point B on triangle 2.</div>
+<div><strong>w2</strong>: vector stretching from point A to point C on triangle 2.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>triangle1DistSegPt</strong>: the minimum distance point on the first triangle.</div>
+<div><strong>triangle2DistSegPt</strong>: the minimum distance point on the second triangle.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the minimum distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>, <a href="#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>, <a href="#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>, <a href="#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>, <a href="#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_insertColorPointsIntoOctree" id="geom_insertColorPointsIntoOctree"></a>geom_insertColorPointsIntoOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Inserts points (with individual colors) into an OC-tree, effectively creating OC-tree voxels.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_insertColorPointsIntoOctree(COcStruct* ocStruct,const C7Vector& octreeTransformation,const simReal* points,int pointCnt,const unsigned char* rgbData=nullptr,const unsigned int* usrData=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>points</strong>: an array of point values (XYZ-triplets). Points are expressed relative to the world reference frame.</div>
+<div><strong>pointCnt</strong>: the number of points.</div>
+<div><strong>rgbData</strong>: the RGB colors (0-255)of the various points (i.e. one color per point).</div>
+<div><strong>usrData</strong>: the user data of the various points (i.e. one user data per point).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_insertPointsIntoOctree">geom_insertPointsIntoOctree</a>, <a href="#geom_insertMeshIntoOctree">geom_insertMeshIntoOctree</a>, <a href="#geom_insertOctreeIntoOctree">geom_insertOctreeIntoOctree</a>, <a href="#geom_removePointsFromOctree">geom_removePointsFromOctree</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_insertColorPointsIntoPtcloud" id="geom_insertColorPointsIntoPtcloud"></a>geom_insertColorPointsIntoPtcloud</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Inserts points (with individual colors) into  point-cloud object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_insertColorPointsIntoPtcloud(CPcStruct* pcStruct,const C7Vector& ptcloudTransformation,const simReal* points,int pointCnt,const unsigned char* rgbData=nullptr,simReal proximityTol=simReal(0.001)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>ptcloudTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>points</strong>: an array of point values (XYZ-triplets). Points are expressed relative to the world reference frame.</div>
+<div><strong>pointCnt</strong>: the number of points.</div>
+<div><strong>rgbData</strong>: the RGB colors (0-255)of the various points (i.e. one color per point).</div>
+<div><strong>proximityTol</strong>: the distance tolerance to other points (i.e. point-point distances below the specified value are not permitted and points will be omitted).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_insertPointsIntoPtcloud">geom_insertPointsIntoPtcloud</a>, <a href="#geom_removePointsFromPtcloud">geom_removePointsFromPtcloud</a>, <a href="#geom_removeOctreeFromPtcloud">geom_removeOctreeFromPtcloud</a>, <a href="#geom_intersectPointsWithPtcloud">geom_intersectPointsWithPtcloud</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_insertMeshIntoOctree" id="geom_insertMeshIntoOctree"></a>geom_insertMeshIntoOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Inserts a mesh object into an OC-tree, effectively creating OC-tree voxels.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_insertMeshIntoOctree(COcStruct* ocStruct,const C7Vector& octreeTransformation,const CObbStruct* obbStruct,const C7Vector& meshTransformation,const unsigned char rgbData[3]=nullptr,unsigned int usrData=0)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>obbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>rgbData</strong>: the RGB color (0-255) of the generated voxels.</div>
+<div><strong>usrData</strong>: the user data of the generated voxels.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_insertPointsIntoOctree">geom_insertPointsIntoOctree</a>, <a href="#geom_insertColorPointsIntoOctree">geom_insertColorPointsIntoOctree</a>, <a href="#geom_insertOctreeIntoOctree">geom_insertOctreeIntoOctree</a>, <a href="#geom_removeMeshFromOctree">geom_removeMeshFromOctree</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_insertOctreeIntoOctree" id="geom_insertOctreeIntoOctree"></a>geom_insertOctreeIntoOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Inserts an OC-tree object into another OC-tree object, effectively creating OC-tree voxels in the second OC-tree object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_insertOctreeIntoOctree(COcStruct* oc1Struct,const C7Vector& octree1Transformation,const COcStruct* oc2Struct,const C7Vector& octree2Transformation,const unsigned char rgbData[3]=nullptr,unsigned int usrData=0)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>oc1Struct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octree1Transformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>oc2Struct</strong>: a pointer to the other OC-tree object.</div>
+<div><strong>octree2Transformation</strong>: the transformation frame of the other OC-tree object.</div>
+<div><strong>rgbData</strong>: the RGB color (0-255) of the generated voxels.</div>
+<div><strong>usrData</strong>: the user data of the generated voxels.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_insertPointsIntoOctree">geom_insertPointsIntoOctree</a>, <a href="#geom_insertColorPointsIntoOctree">geom_insertColorPointsIntoOctree</a>, <a href="#geom_insertMeshIntoOctree">geom_insertMeshIntoOctree</a>, <a href="#geom_removeOctreeFromOctree">geom_removeOctreeFromOctree</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_insertPointsIntoOctree" id="geom_insertPointsIntoOctree"></a>geom_insertPointsIntoOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Inserts points into an OC-tree, effectively creating OC-tree voxels.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_insertPointsIntoOctree(COcStruct* ocStruct,const C7Vector& octreeTransformation,const simReal* points,int pointCnt,const unsigned char rgbData[3]=nullptr,unsigned int usrData=0)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>points</strong>: an array of point values (XYZ-triplets). Points are expressed relative to the world reference frame.</div>
+<div><strong>pointCnt</strong>: the number of points.</div>
+<div><strong>rgbData</strong>: the RGB color (0-255) of the generated voxels.</div>
+<div><strong>usrData</strong>: the user data of the generated voxels.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_insertColorPointsIntoOctree">geom_insertColorPointsIntoOctree</a>, <a href="#geom_insertMeshIntoOctree">geom_insertMeshIntoOctree</a>, <a href="#geom_insertOctreeIntoOctree">geom_insertOctreeIntoOctree</a>, <a href="#geom_removePointsFromOctree">geom_removePointsFromOctree</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_insertPointsIntoPtcloud" id="geom_insertPointsIntoPtcloud"></a>geom_insertPointsIntoPtcloud</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Inserts points into a point-cloud object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_insertPointsIntoPtcloud(CPcStruct* pcStruct,const C7Vector& ptcloudTransformation,const simReal* points,int pointCnt,const unsigned char rgbData[3]=nullptr,simReal proximityTol=simReal(0.001))</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>ptcloudTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>points</strong>: an array of point values (XYZ-triplets). Points are expressed relative to the world reference frame.</div>
+<div><strong>pointCnt</strong>: the number of points.</div>
+<div><strong>rgbData</strong>: the RGB color (0-255) of the generated points.</div>
+<div><strong>proximityTol</strong>: the distance tolerance to other points (i.e. point-point distances below the specified value are not permitted and points will be omitted).</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_insertColorPointsIntoPtcloud">geom_insertColorPointsIntoPtcloud</a>, <a href="#geom_removePointsFromPtcloud">geom_removePointsFromPtcloud</a>, <a href="#geom_removeOctreeFromPtcloud">geom_removeOctreeFromPtcloud</a>, <a href="#geom_intersectPointsWithPtcloud">geom_intersectPointsWithPtcloud</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_intersectPointsWithPtcloud" id="geom_intersectPointsWithPtcloud"></a>geom_intersectPointsWithPtcloud</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Performs an intersection operation between a point-cloud and specific points: point-cloud points within a certain tolerance to the specified points will be kept, others will be removed.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_intersectPointsWithPtcloud(CPcStruct* pcStruct,const C7Vector& ptcloudTransformation,const simReal* points,int pointCnt,simReal proximityTol=simReal(0.001))</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>ptcloudTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>points</strong>: an array of point values (XYZ-triplets). Points are expressed relative to the world reference frame.</div>
+<div><strong>pointCnt</strong>: the number of points.</div>
+<div><strong>proximityTol</strong>: the distance tolerance to other points (i.e. point-point distances above the specified value will result in removal of those point-cloud points.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_isPointInVolume" id="geom_isPointInVolume"></a>geom_isPointInVolume</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Checks whether a point lies within a proximity sensor volume.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_isPointInVolume(const simReal* planesIn,int planesInSize,const C7Vector& sensorTransformation,const C3Vector& point)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>planesIn</strong>: an array describing a convex volume, via planes. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the inside if N*P+D&gt;=0. N is the normal vector of the plane, pointing towards the volume inside.</div>
+<div><strong>planesInSize</strong>: the number of values in the planesIn array.</div>
+<div><strong>sensorTransformation</strong>: the transformation frame of the volume.</div>
+<div><strong>point</strong>: the point to test.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the point lies within the sensor's volume.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_raySensorDetectMeshIfSmaller" id="geom_raySensorDetectMeshIfSmaller"></a>geom_raySensorDetectMeshIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the distance from a ray-type proximity sensor to a mesh object. </td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_raySensorDetectMeshIfSmaller(const C7Vector& sensorTransformation,simReal rayOffset,simReal rayLength,const CObbStruct* meshObbStruct,const C7Vector& meshTransformation,simReal& dist,simReal forbiddenDist=simZero,bool fast=false,bool frontDetection=true,bool backDetection=true,simReal maxAngle=simZero,C3Vector* detectPt=nullptr,C3Vector* triN=nullptr,bool* forbiddenDistTouched=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>sensorTransformation</strong>: the transformation frame of the sensor.</div>
+<div><strong>rayOffset</strong>: the offset of the ray (i.e. where the ray starts), along its frame's Z-axis.</div>
+<div><strong>rayLength</strong>: the length of the ray.</div>
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>forbiddenDist</strong>: the distance threshold along the sensor's Z-axis, where detection is forbidden. If something is detected in that section of the ray, then the return will be false.</div>
+<div><strong>fast</strong>: if true, calculation will be faster, however only the first encountered feature that satisfies the detection requirements will be returned (and not the closest of those features).</div>
+<div><strong>frontDetection</strong>: if true, front faces of the mesh will be detected.</div>
+<div><strong>backDetection</strong>: if true, back faces of the mesh will be detected.</div>
+<div><strong>maxAngle</strong>: the maximum allowed angle between detection ray and normal vector of the detected face. Zero to ignore the maximum angle.</div>
+<div><strong>detectPt</strong>: the position of the detected point, if return value is true.</div>
+<div><strong>triN</strong>: the normal vector of the detected face, if return value is true.</div>
+<div><strong>forbiddenDistTouched</strong>: if something was detected in the forbidden section of the sensor, then the value pointed by this pointer will be true.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the sensor detected something and the distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_raySensorDetectOctreeIfSmaller">geom_raySensorDetectOctreeIfSmaller</a>, <a href="#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_raySensorDetectOctreeIfSmaller" id="geom_raySensorDetectOctreeIfSmaller"></a>geom_raySensorDetectOctreeIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the distance from a ray-type proximity sensor to an OC-tree object. </td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_raySensorDetectOctreeIfSmaller(const C7Vector& sensorTransformation,simReal rayOffset,simReal rayLength,const COcStruct* ocStruct,const C7Vector& octreeTransformation,simReal& dist,simReal forbiddenDist=simZero,bool fast=false,bool frontDetection=true,bool backDetection=true,simReal maxAngle=simZero,C3Vector* detectPt=nullptr,C3Vector* triN=nullptr,bool* forbiddenDistTouched=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>sensorTransformation</strong>: the transformation frame of the sensor.</div>
+<div><strong>rayOffset</strong>: the offset of the ray (i.e. where the ray starts), along its frame's Z-axis.</div>
+<div><strong>rayLength</strong>: the length of the ray.</div>
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>forbiddenDist</strong>: the distance threshold along the sensor's Z-axis, where detection is forbidden. If something is detected in that section of the ray, then the return will be false.</div>
+<div><strong>fast</strong>: if true, calculation will be faster, however only the first encountered feature that satisfies the detection requirements will be returned (and not the closest of those features).</div>
+<div><strong>frontDetection</strong>: if true, front faces of the OC-tree will be detected.</div>
+<div><strong>backDetection</strong>: if true, back faces of the OC-tree will be detected.</div>
+<div><strong>maxAngle</strong>: the maximum allowed angle between detection ray and normal vector of the detected face. Zero to ignore the maximum angle.</div>
+<div><strong>detectPt</strong>: the position of the detected point, if return value is true.</div>
+<div><strong>triN</strong>: the normal vector of the detected face, if return value is true.</div>
+<div><strong>forbiddenDistTouched</strong>: if something was detected in the forbidden section of the sensor, then the value pointed by this pointer will be true.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the sensor detected something and the distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_raySensorDetectMeshIfSmaller">geom_raySensorDetectMeshIfSmaller</a>, <a href="#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_removeMeshFromOctree" id="geom_removeMeshFromOctree"></a>geom_removeMeshFromOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Deletes OC-tree voxels that occupy the space of the specified mesh.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_removeMeshFromOctree(COcStruct* ocStruct,const C7Vector& octreeTransformation,const CObbStruct* obbStruct,const C7Vector& meshTransformation)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>obbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">true if the OC-tree does not contain any voxels anymore, after this operation. false otherwise.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_removePointsFromOctree">geom_removePointsFromOctree</a>, <a href="#geom_removeOctreeFromOctree">geom_removeOctreeFromOctree</a>, <a href="#geom_insertMeshIntoOctree">geom_insertMeshIntoOctree</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_removeOctreeFromOctree" id="geom_removeOctreeFromOctree"></a>geom_removeOctreeFromOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Deletes OC-tree voxels that occupy the space of the other specified OC-tree.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_removeOctreeFromOctree(COcStruct* oc1Struct,const C7Vector& octree1Transformation,const COcStruct* oc2Struct,const C7Vector& octree2Transformation)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>oc1Struct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octree1Transformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>oc2Struct</strong>: a pointer to the other OC-tree object.</div>
+<div><strong>octree2Transformation</strong>: the transformation frame of the other OC-tree.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">true if the OC-tree does not contain any voxels anymore, after this operation. false otherwise.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_removePointsFromOctree">geom_removePointsFromOctree</a>, <a href="#geom_removeMeshFromOctree">geom_removeMeshFromOctree</a>, <a href="#geom_insertOctreeIntoOctree">geom_insertOctreeIntoOctree</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_removePointsFromOctree" id="geom_removePointsFromOctree"></a>geom_removePointsFromOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Deletes OC-tree voxels that occupy the space of the specified points.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_removePointsFromOctree(COcStruct* ocStruct,const C7Vector& octreeTransformation,const simReal* points,int pointCnt)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>points</strong>: an array of point values (XYZ-triplets). Points are expressed relative to the world reference frame.</div>
+<div><strong>pointCnt</strong>: the number of points.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">true if the OC-tree does not contain any voxels anymore, after this operation. false otherwise.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_removeMeshFromOctree">geom_removeMeshFromOctree</a>, <a href="#geom_removeOctreeFromOctree">geom_removeOctreeFromOctree</a>, <a href="#geom_insertPointsIntoOctree">geom_insertPointsIntoOctree</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_removeOctreeFromPtcloud" id="geom_removeOctreeFromPtcloud"></a>geom_removeOctreeFromPtcloud</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Deletes point-cloud points that occupy the space of the specified OC-tree voxels.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_removeOctreeFromPtcloud(CPcStruct* pcStruct,const C7Vector& ptcloudTransformation,const COcStruct* ocStruct,const C7Vector& octreeTransformation,int* countRemoved=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>ptcloudTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>countRemoved</strong>: the number of removed points.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">true if the point-cloud does not contain any points anymore, after this operation. false otherwise.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_removePointsFromPtcloud">geom_removePointsFromPtcloud</a>, <a href="#geom_insertPointsIntoPtcloud">geom_insertPointsIntoPtcloud</a>, <a href="#geom_intersectPointsWithPtcloud">geom_intersectPointsWithPtcloud</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_removePointsFromPtcloud" id="geom_removePointsFromPtcloud"></a>geom_removePointsFromPtcloud</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Deletes point-cloud points that occupy the proximity space of the specified points.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_removePointsFromPtcloud(CPcStruct* pcStruct,const C7Vector& ptcloudTransformation,const simReal* points,int pointCnt,simReal proximityTol,int* countRemoved=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>ptcloudTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>points</strong>: an array of point values (XYZ-triplets). Points are expressed relative to the world reference frame.</div>
+<div><strong>pointCnt</strong>: the number of points.</div>
+<div><strong>proximityTol</strong>: the proximity tolerance.</div>
+<div><strong>countRemoved</strong>: the number of removed points.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">true if the point-cloud does not contain any points anymore, after this operation. false otherwise.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_removeOctreeFromPtcloud">geom_removeOctreeFromPtcloud</a>, <a href="#geom_insertPointsIntoPtcloud">geom_insertPointsIntoPtcloud</a>, <a href="#geom_intersectPointsWithPtcloud">geom_intersectPointsWithPtcloud</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_scaleMesh" id="geom_scaleMesh"></a>geom_scaleMesh</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Scales a mesh object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_scaleMesh(CObbStruct* meshObbStruct,simReal scalingFactor)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>scalingFactor</strong>: the scaling factor.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_scaleOctree" id="geom_scaleOctree"></a>geom_scaleOctree</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Scales an OC-tree object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_scaleOctree(COcStruct* ocStruct,simReal scalingFactor)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>scalingFactor</strong>: the scaling factor.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_scalePtcloud" id="geom_scalePtcloud"></a>geom_scalePtcloud</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Scales a point-cloud object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">void geom_scalePtcloud(CPcStruct* pcStruct,simReal scalingFactor)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>scalingFactor</strong>: the scaling factor.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet"></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_volumeSensorDetectMeshIfSmaller" id="geom_volumeSensorDetectMeshIfSmaller"></a>geom_volumeSensorDetectMeshIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the distance from a proximity sensor to parts of a mesh object that lie within the sensor's detection volume. </td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_volumeSensorDetectMeshIfSmaller(const simReal* planesIn,int planesInSize,const simReal* planesOut,int planesOutSize,const C7Vector&amp; sensorTransformation,const CObbStruct* obbStruct,const C7Vector& meshTransformation,simReal& dist,bool fast=false,bool frontDetection=true,bool backDetection=true,simReal maxAngle=simZero,C3Vector* detectPt=nullptr,C3Vector* triN=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>planesIn</strong>: an array describing a convex volume, via planes. The mesh object (or parts of it) inside the volume, and outside of volume planesOut, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the inside if N*P+D&gt;=0. N is the normal vector of the plane, pointing towards the volume inside.</div>
+<div><strong>planesInSize</strong>: the number of values in the planesIn array.</div>
+<div><strong>planesOut</strong>: an array describing a convex volume, via planes. The mesh object (or parts of it) outside the volume and inside volume planesIn, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the outside if N*P+D&lt;0. N is the normal vector of the plane, pointing towards the volume inside. planesOut can be nullptr if planesOutSize is 0</div>
+<div><strong>planesOutSize</strong>: the number of values in the planesOut array.</div>
+<div><strong>sensorTransformation</strong>: the transformation frame of the sensor (also transforms the sensor's volumes).</div>
+<div><strong>meshObbStruct</strong>: a pointer to the mesh object.</div>
+<div><strong>meshTransformation</strong>: the transformation frame of the mesh.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>fast</strong>: if true, calculation will be faster, however only the first encountered feature that satisfies the detection requirements will be returned (and not the closest of those features).</div>
+<div><strong>frontDetection</strong>: if true, front faces of the mesh will be detected.</div>
+<div><strong>backDetection</strong>: if true, back faces of the mesh will be detected.</div>
+<div><strong>maxAngle</strong>: the maximum allowed angle between detection ray and normal vector of the detected face. Zero to ignore the maximum angle.</div>
+<div><strong>detectPt</strong>: the position of the detected point, if return value is true.</div>
+<div><strong>triN</strong>: the normal vector of the detected face, if return value is true.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the sensor detected something and the distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_volumeSensorDetectOctreeIfSmaller">geom_volumeSensorDetectOctreeIfSmaller</a>, <a href="#geom_volumeSensorDetectPtcloudIfSmaller">geom_volumeSensorDetectPtcloudIfSmaller</a>, <a href="#geom_volumeSensorDetectTriangleIfSmaller">geom_volumeSensorDetectTriangleIfSmaller</a>, <a href="#geom_volumeSensorDetectSegmentIfSmaller">geom_volumeSensorDetectSegmentIfSmaller</a>, <a href="#geom_raySensorDetectMeshIfSmaller">geom_raySensorDetectMeshIfSmaller</a>, <a href="#geom_isPointInVolume">geom_isPointInVolume</a>, <a href="#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_volumeSensorDetectOctreeIfSmaller" id="geom_volumeSensorDetectOctreeIfSmaller"></a>geom_volumeSensorDetectOctreeIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the distance from a proximity sensor to parts of an OC-tree object that lie within the sensor's detection volume. </td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_volumeSensorDetectOctreeIfSmaller(const simReal* planesIn,int planesInSize,const simReal* planesOut,int planesOutSize,const C7Vector& sensorTransformation,const COcStruct* ocStruct,const C7Vector& octreeTransformation,simReal& dist,bool fast=false,bool frontDetection=true,bool backDetection=true,simReal maxAngle=simZero,C3Vector* detectPt=nullptr,C3Vector* triN=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>planesIn</strong>: an array describing a convex volume, via planes. The OC-tree object (or parts of it) inside the volume, and outside of volume planesOut, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the inside if N*P+D&gt;=0. N is the normal vector of the plane, pointing towards the volume inside.</div>
+<div><strong>planesInSize</strong>: the number of values in the planesIn array.</div>
+<div><strong>planesOut</strong>: an array describing a convex volume, via planes. The OC-tree object (or parts of it) outside the volume and inside volume planesIn, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the outside if N*P+D&lt;0. N is the normal vector of the plane, pointing towards the volume inside. planesOut can be nullptr if planesOutSize is 0</div>
+<div><strong>planesOutSize</strong>: the number of values in the planesOut array.</div>
+<div><strong>sensorTransformation</strong>: the transformation frame of the sensor (also transforms the sensor's volumes).</div>
+<div><strong>ocStruct</strong>: a pointer to the OC-tree object.</div>
+<div><strong>octreeTransformation</strong>: the transformation frame of the OC-tree.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>fast</strong>: if true, calculation will be faster, however only the first encountered feature that satisfies the detection requirements will be returned (and not the closest of those features).</div>
+<div><strong>frontDetection</strong>: if true, front faces of the OC-tree will be detected.</div>
+<div><strong>backDetection</strong>: if true, back faces of the OC-tree will be detected.</div>
+<div><strong>maxAngle</strong>: the maximum allowed angle between detection ray and normal vector of the detected face. Zero to ignore the maximum angle.</div>
+<div><strong>detectPt</strong>: the position of the detected point, if return value is true.</div>
+<div><strong>triN</strong>: the normal vector of the detected face, if return value is true.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the sensor detected something and the distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_volumeSensorDetectMeshIfSmaller">geom_volumeSensorDetectMeshIfSmaller</a>, <a href="#geom_volumeSensorDetectPtcloudIfSmaller">geom_volumeSensorDetectPtcloudIfSmaller</a>, <a href="#geom_volumeSensorDetectTriangleIfSmaller">geom_volumeSensorDetectTriangleIfSmaller</a>, <a href="#geom_volumeSensorDetectSegmentIfSmaller">geom_volumeSensorDetectSegmentIfSmaller</a>, <a href="#geom_raySensorDetectOctreeIfSmaller">geom_raySensorDetectOctreeIfSmaller</a>, <a href="#geom_isPointInVolume">geom_isPointInVolume</a>, <a href="#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_volumeSensorDetectPtcloudIfSmaller" id="geom_volumeSensorDetectPtcloudIfSmaller"></a>geom_volumeSensorDetectPtcloudIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the distance from a proximity sensor to parts of a point-cloud object that lie within the sensor's detection volume. </td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_volumeSensorDetectPtcloudIfSmaller(const simReal* planesIn,int planesInSize,const simReal* planesOut,int planesOutSize,const C7Vector& sensorTransformation,const CPcStruct* pcStruct,const C7Vector& ptcloudTransformation,simReal& dist,bool fast=false,C3Vector* detectPt=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>planesIn</strong>: an array describing a convex volume, via planes. The point-cloud object (or parts of it) inside the volume, and outside of volume planesOut, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the inside if N*P+D&gt;=0. N is the normal vector of the plane, pointing towards the volume inside.</div>
+<div><strong>planesInSize</strong>: the number of values in the planesIn array.</div>
+<div><strong>planesOut</strong>: an array describing a convex volume, via planes. The point-cloud object (or parts of it) outside the volume and inside volume planesIn, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the outside if N*P+D&lt;0. N is the normal vector of the plane, pointing towards the volume inside. planesOut can be nullptr if planesOutSize is 0</div>
+<div><strong>planesOutSize</strong>: the number of values in the planesOut array.</div>
+<div><strong>sensorTransformation</strong>: the transformation frame of the sensor (also transforms the sensor's volumes).</div>
+<div><strong>pcStruct</strong>: a pointer to the point-cloud object.</div>
+<div><strong>ptcloudTransformation</strong>: the transformation frame of the point-cloud.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>fast</strong>: if true, calculation will be faster, however only the first encountered feature that satisfies the detection requirements will be returned (and not the closest of those features).</div>
+<div><strong>detectPt</strong>: the position of the detected point, if return value is true.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the sensor detected something and the distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_volumeSensorDetectMeshIfSmaller">geom_volumeSensorDetectMeshIfSmaller</a>, <a href="#geom_volumeSensorDetectOctreeIfSmaller">geom_volumeSensorDetectOctreeIfSmaller</a>, <a href="#geom_volumeSensorDetectTriangleIfSmaller">geom_volumeSensorDetectTriangleIfSmaller</a>, <a href="#geom_volumeSensorDetectSegmentIfSmaller">geom_volumeSensorDetectSegmentIfSmaller</a>, <a href="#geom_isPointInVolume">geom_isPointInVolume</a>, <a href="#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_volumeSensorDetectSegmentIfSmaller" id="geom_volumeSensorDetectSegmentIfSmaller"></a>geom_volumeSensorDetectSegmentIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the distance from a proximity sensor to parts of a segment that lie within the sensor's detection volume. </td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_volumeSensorDetectSegmentIfSmaller(const simReal* planesIn,int planesInSize,const simReal* planesOut,int planesOutSize,const C7Vector& sensorTransformation,const C3Vector& segmentEndPoint,const C3Vector& segmentVector,simReal& dist,simReal maxAngle=simZero,C3Vector* detectPt=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>planesIn</strong>: an array describing a convex volume, via planes. The segment (or parts of it) inside the volume, and outside of volume planesOut, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the inside if N*P+D&gt;=0. N is the normal vector of the plane, pointing towards the volume inside.</div>
+<div><strong>planesInSize</strong>: the number of values in the planesIn array.</div>
+<div><strong>planesOut</strong>: an array describing a convex volume, via planes. The segment (or parts of it) outside the volume and inside volume planesIn, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the outside if N*P+D&lt;0. N is the normal vector of the plane, pointing towards the volume inside. planesOut can be nullptr if planesOutSize is 0</div>
+<div><strong>planesOutSize</strong>: the number of values in the planesOut array.</div>
+<div><strong>sensorTransformation</strong>: the transformation frame of the sensor (also transforms the sensor's volumes).</div>
+<div><strong>segmentEndPoint</strong>: position of vertex A on the segment.</div>
+<div><strong>segmentVector</strong>: vector stretching from vertex A to vertex B on the segment.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>maxAngle</strong>: the maximum allowed angle between detection ray and a perpendicular vector of the segment. Zero to ignore the maximum angle.</div>
+<div><strong>detectPt</strong>: the position of the detected point, if return value is true.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the sensor detected something and the distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_volumeSensorDetectMeshIfSmaller">geom_volumeSensorDetectMeshIfSmaller</a>, <a href="#geom_volumeSensorDetectOctreeIfSmaller">geom_volumeSensorDetectOctreeIfSmaller</a>, <a href="#geom_volumeSensorDetectPtcloudIfSmaller">geom_volumeSensorDetectPtcloudIfSmaller</a>, <a href="#geom_volumeSensorDetectTriangleIfSmaller">geom_volumeSensorDetectTriangleIfSmaller</a>, <a href="#geom_isPointInVolume">geom_isPointInVolume</a>, <a href="#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<h3 class="subsectionBar">
+<a name="geom_volumeSensorDetectTriangleIfSmaller" id="geom_volumeSensorDetectTriangleIfSmaller"></a>geom_volumeSensorDetectTriangleIfSmaller</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">Description</td>
+<td class="apiTableRightDescr">Computes the distance from a proximity sensor to parts of a triangle that lie within the sensor's detection volume. </td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCSyn">Synopsis</td>
+<td class="apiTableRightCSyn">bool geom_volumeSensorDetectTriangleIfSmaller(const simReal* planesIn,int planesInSize,const simReal* planesOut,int planesOutSize,const C7Vector& sensorTransformation,const C3Vector& p,const C3Vector& v,const C3Vector& w,simReal& dist,bool frontDetection=true,bool backDetection=true,simReal maxAngle=simZero,C3Vector* detectPt=nullptr,C3Vector* triN=nullptr)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCParam">Arguments</td>
+<td class="apiTableRightCParam">
+<div><strong>planesIn</strong>: an array describing a convex volume, via planes. The triangle (or parts of it) inside the volume, and outside of volume planesOut, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the inside if N*P+D&gt;=0. N is the normal vector of the plane, pointing towards the volume inside.</div>
+<div><strong>planesInSize</strong>: the number of values in the planesIn array.</div>
+<div><strong>planesOut</strong>: an array describing a convex volume, via planes. The triangle (or parts of it) outside the volume and inside volume planesIn, is detected. Each plane is defined by 4 values: (Nx,Ny,Nz,D), where a point (Px,Py,Pz) lies on the outside if N*P+D&lt;0. N is the normal vector of the plane, pointing towards the volume inside. planesOut can be nullptr if planesOutSize is 0</div>
+<div><strong>planesOutSize</strong>: the number of values in the planesOut array.</div>
+<div><strong>sensorTransformation</strong>: the transformation frame of the sensor (also transforms the sensor's volumes).</div>
+<div><strong>p</strong>: position of vertex A on the triangle.</div>
+<div><strong>v</strong>: vector stretching from vertex A to vertex B on the triangle.</div>
+<div><strong>w</strong>: vector stretching from vertex A to vertex C on the triangle.</div>
+<div><strong>dist</strong>: the distance threshold as input, and the minimum distance as output if it is below the threshold.</div>
+<div><strong>frontDetection</strong>: if true, the front of the triangle will be detected.</div>
+<div><strong>backDetection</strong>: if true, the back of the triangle will be detected.</div>
+<div><strong>maxAngle</strong>: the maximum allowed angle between detection ray and normal vector of the triangle. Zero to ignore the maximum angle.</div>
+<div><strong>detectPt</strong>: the position of the detected point, if return value is true.</div>
+<div><strong>triN</strong>: the normal vector of the triangle, if return value is true.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftCRet">Return value</td>
+<td class="apiTableRightCRet">whether the sensor detected something and the distance is smaller than the specified threshold</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">See also</td>
+<td class="apiTableRightDescr"><a href="#geom_volumeSensorDetectMeshIfSmaller">geom_volumeSensorDetectMeshIfSmaller</a>, <a href="#geom_volumeSensorDetectOctreeIfSmaller">geom_volumeSensorDetectOctreeIfSmaller</a>, <a href="#geom_volumeSensorDetectPtcloudIfSmaller">geom_volumeSensorDetectPtcloudIfSmaller</a>, <a href="#geom_volumeSensorDetectSegmentIfSmaller">geom_volumeSensorDetectSegmentIfSmaller</a>, <a href="#geom_isPointInVolume">geom_isPointInVolume</a>, <a href="#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a></td>
+</tr>
+</table>
+<br>
+
+<br>
+
+
+
+
+
+</td></tr></table></div></body>
+</html>

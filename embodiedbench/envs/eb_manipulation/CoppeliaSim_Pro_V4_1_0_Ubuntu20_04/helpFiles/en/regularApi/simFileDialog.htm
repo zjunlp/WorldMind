@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simFileDialog</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simFileDialog" id="simFileDialog"></a>simFileDialog / sim.fileDialog </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Opens a dialog that allows selecting a file for save or load operations, or a folder. See also <a href="simMsgBox.htm">sim.msgBox</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simChar* simFileDialog(simInt dlgType,const simChar* title,const simChar* startPath,const simChar* initName,const simChar* extName,const simChar* ext)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>dlgType</strong>: the <a href="../apiConstants.htm#fileDlgTypes">file dialog type</a>.</div>
+<div><strong>title</strong>: title of the dialog</div>
+<div><strong>startPath</strong>: the initial path. Indicate an empty string for the path to CoppeliaSim's application</div>
+<div><strong>initName</strong>: the initial name. Can be an empty string</div>
+<div><strong>extName</strong>: the extension name, e.g. &quot;text file&quot;. Should be an empty string with dlgType=sim_filedlg_type_folder.</div>
+<div><strong>ext</strong>: the extension, e.g. &quot;txt&quot;. Can contain several extensions, separated by semicolons, with dlgType=sim_filedlg_type_load or dlgType=sim_filedlg_type_load_multiple. Should be an empty string with dlgType=sim_filedlg_type_folder.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>pointer to a string representing the selected file name and path, or folder name and path. In case several files were selected for a load operation, then they will be separated by a semicolon. The user is in charge of releasing the buffer with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>.<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>string pathAndName=sim.fileDialog(number mode,string title,string startPath,string initName,string extName,string ext)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simAddObjectToSelection</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simAddObjectToSelection" id="simAddObjectToSelection"></a>simAddObjectToSelection / sim.addObjectToSelection </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>
+Adds an object to the selection. See also <a href="simRemoveObjectFromSelection.htm">sim.removeObjectFromSelection</a> and <a href="simGetObjectSelection.htm">sim.getObjectSelection</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simAddObjectToSelection(simInt what,simInt objectHandle)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>what</strong>: indicates what we want to add. Valid values are sim_handle_single (adds just one object), sim_handle_all (adds all objects in the scene), sim_handle_tree (adds the tree with base objectHandle (inclusive)) and sim_handle_chain (adds the chain with tip objectHandle (inclusive))<br>
+</div>
+<div><strong>objectHandle</strong>: handle of an object. Doesn't have a meaning if &quot;what&quot; is sim_handle_all</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>
+<div>There are two versions of this function:</div>
+<div>(1) sim.addObjectToSelection(number what,number objectHandle)</div>
+<div>(2) sim.addObjectToSelection(table objectHandles)</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>(1) Similar to the C-function counterpart. The second argument can be omitted if &quot;what&quot; is sim.handle_all</div>
+<div>(2) <strong>objectHandles</strong>: table of object handles. Can be nil</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>-</div>
+</td> 
+</tr> 
+
+<tr class=apiTableTr> 
+<td class=remApiTableLeftCParam>
+Remote API equiv.
+</td> 
+<td class=remApiTableRightCParam>
+<div>B0-based remote API: <a href="../b0RemoteApi-cpp.htm#simxSetObjectSelection">simxSetObjectSelection</a></div>
+<div>Legacy remote API: <a href="../remoteApiFunctions.htm#simxSetObjectSelection">simxSetObjectSelection</a></div>
+</td> 
+</tr> 
+
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

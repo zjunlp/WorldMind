@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Calculation modules</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Calculation modules</h1>
+
+<p>CoppeliaSim offers powerful calculation functionalities, or calculation modules, that are not directly encapsulated in <a href="objects.htm">objects</a> (like <a href="proximitySensors.htm">proximity sensors</a> or <a href="visionSensors.htm">vision sensors</a> for instance), but that rather operate on one or several objects.
+</p>
+
+<p>
+Calculation modules include:
+</p>
+
+<li><strong><a href="collisionDetection.htm">the collision detection module</a></strong>: the module allows to track, record and visualize collisions that might occur between any <a href="collidableObjects.htm">collidable</a> <a href="entities.htm">entity</a>.<br>
+</li>
+
+<li><strong><a href="distanceCalculation.htm">the minimum distance calculation module</a></strong>: the module allows to track, record and visualize minimum distances between any <a href="measurableObjects.htm">measurable</a> entity.<br>
+</li>
+
+<li><strong><a href="inverseKinematicsModule.htm">the inverse kinematics calculation module</a></strong>: the module allows solving in a very efficient way any type of inverse or forward kinematic problem.<br>
+</li>
+
+<li><strong><a href="dynamicsModule.htm">the dynamics module</a></strong>: the module allows dynamically simulating objects or <a href="models.htm">models</a> to achieve object interactions (e.g. collision response, object grasping, etc.)<br>
+</li>
+
+
+<p>Other, <a href="otherInterfaces.htm">similar functionality</a>, might be offered via a plugin, as was done with the <a href="pathAndMotionPlanningModules.htm">path/motion planning plugin</a> for instance.</p>
+
+<p>Some calculation module allow registering <a name="calcObjects" id="calcObjects"></a><em>calculation objects</em> that are user defined. <em>Calculation objects</em> are different from <a href="objects.htm">scene objects</a>, but are indirectly linked to them by operating on them. This means that <em>calculation objects</em> cannot exist by themselves:<br>
+</p>
+
+<li><em>Collision detection objects</em> (or <strong>collision objects</strong>) rely on <a href="collidableObjects.htm">collidable objects</a>. </li>
+
+<li><em>Minimum distance calculation objects</em> (or <strong>distance objects</strong>) rely on <a href="measurableObjects.htm">measurable objects</a>. </li>
+
+<li><em>Inverse kinematics calculation objects</em> (or <strong>IK groups</strong>) rely mainly on <a href="dummies.htm">dummies</a> and kinematic chains, where <a href="joints.htm">joint objects</a> play a central role.<br>
+</li>
+
+
+<p>If the integrity of a given calculation object is maintained during a copy/paste operation of scene objects, then that calculation object will also automatically be copied. For example, if <em>collision object A</em> is defined by <em>collidable object B</em> and <em>collidable object C</em> (i.e. performs collision detection between object B and object C), and if both objects B and C are duplicated at the same time (in a same copy-paste operation), then <em>collision object A</em> will also be duplicated. This represents a powerful feature allowing to duplicate not only objects or models, but also all their related calculation objects (including all related <a href="scripts.htm">scripts</a>), so that the full functionality and behavior of an object or model can be maintained.
+</p>
+
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="calculationModuleDialog.htm">Calculation module properties dialog</a></li>
+
+<li><a href="collisionDetection.htm">Collision detection module</a></li>
+
+<li><a href="distanceCalculation.htm">Minimum distance calculation module</a></li>
+
+<li><a href="inverseKinematicsModule.htm">Inverse kinematics calculation module</a></li>
+
+<li><a href="dynamicsModule.htm">Dynamics module</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

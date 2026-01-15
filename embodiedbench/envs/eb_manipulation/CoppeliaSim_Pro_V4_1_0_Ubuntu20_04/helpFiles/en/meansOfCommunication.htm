@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Means of communication in and around CoppeliaSim</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Means of communication in and around CoppeliaSim</h1>
+
+<p>Make sure you understand the <a href="writingCode.htm">overall structure of the simulator</a>, and its <a href="apisOverview.htm">API framework</a> before going ahead reading this section.<br>
+</p>
+
+<br>
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="signals"></a><a href="apiFunctionListCategory.htm#signals">Signals</a>
+</td></tr></table> 
+
+
+<p><a href="apiFunctionListCategory.htm#signals">Signals</a> can be seen as global variables. Four types of signals are currently supported: integer-, floating-, double-, and  string-type signals. Signals can be defined, redefined, read and cleared. At <a href="simulation.htm">simulation</a> end, all signals created by the <a href="mainScript.htm">main script</a> or any <a href="childScripts.htm">child script</a> will be cleared. For example:</p>
+
+<pre class=lightRedBox>
+-- script 1 writes the data to string signal &quot;mySignalName&quot;:
+
+local myData={1,2,{&quot;Hello&quot;,&quot;world&quot;,true,{value1=63,value2=&quot;aString&quot;}}}
+sim.setStringSignal(&quot;mySignalName&quot;,sim.packTable(myData))</pre>
+
+<pre class=lightRedBox>
+-- script 2 reads the data from string signal &quot;mySignalName&quot;:
+
+local myData=sim.getStringSignal(&quot;mySignalName&quot;)
+if myData then
+    myData=sim.unpackTable(myData)
+end</pre>
+
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="customDataBlocks"></a><a href="apiFunctionListCategory.htm#customDataBlocks">Custom data blocks</a>
+</td></tr></table> 
+
+
+<p>Custom data blocks is data that can be stored inside of an object, or inside of a scene. It can be used to store custom data to be saved together with a model or scene, but also as a means of communication. For example:</p>
+
+<pre class=lightRedBox>
+-- script 1 writes the data to the scene:
+
+local myData={1,2,{&quot;Hello&quot;,&quot;world&quot;,true,{value1=63,value2=&quot;aString&quot;}}}
+sim.writeCustomDataBlock(sim.handle_scene,&quot;myTag&quot;,sim.packTable(myData))</pre>
+
+<pre class=lightRedBox>
+-- script 2 reads the data from the scene:
+
+local myData=sim.readCustomDataBlock(sim.handle_scene,&quot;myTag&quot;)
+if myData then
+    myData=sim.unpackTable(myData)
+end</pre>
+
+
+<br>
+
+
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="ROS"></a><a href="rosInterfaces.htm">ROS</a>
+</td></tr></table> 
+
+
+<p>For example:</p>
+
+<pre class=lightRedBox>-- script subscribes to a topic carrying an image:
+
+function sysCall_init()
+    sub=simROS.subscribe('/image', 'sensor_msgs/Image', 'imageMessage_callback')
+    simROS.subscriberTreatUInt8ArrayAsString(sub)
+end
+
+function imageMessage_callback(msg)
+    -- here we have:
+    -- msg.data
+    -- msg.height
+    -- msg.width
+    -- etc.
+end</pre>
+
+<br>
+
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="blueZero"></a><a href="blueZeroPlugin.htm">BlueZero</a>
+</td></tr></table> 
+
+
+<p>For example:</p>
+
+<pre class=lightRedBox>-- script subscribes to a topic carrying an image:
+
+function sysCall_init()
+    b0Node=simB0.create('b0Node')
+    sub=simB0.createSubscriber(b0Node,'image','imageMessage_callback')
+    simB0.init(b0Node)
+end
+
+function sysCall_sensing()
+    simB0.spinOnce(b0Node)
+end
+
+function imageMessage_callback(msg)
+    -- msg is a raw buffer. 
+    -- If the image data was encoded in base64, we could have:
+    msg=sim.transformBuffer(msg,sim.buffer_base64,1,0,sim.buffer_uint8)
+end</pre>
+
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="remoteApi"></a><a href="remoteApiOverview.htm">Remote API</a></td></tr></table> 
+
+<p>For example, from a Python <strong>B0-based</strong> remote API client:</p>
+
+<pre class=lightPurpleBox># Receiving an image from CoppeliaSim and sending it back:
+
+import b0RemoteApi
+with b0RemoteApi.RemoteApiClient('b0RemoteApi_pythonClient','b0RemoteApi') as client:    
+        
+    def imageCallback(msg):
+        client.simxSetVisionSensorImage(passiveVisionSensorHandle[1],False,msg[2],client.simxDefaultPublisher())
+    
+    visionSensorHandle=client.simxGetObjectHandle('VisionSensor',client.simxServiceCall())
+    passiveVisionSensorHandle=client.simxGetObjectHandle('PassiveVisionSensor',client.simxServiceCall())
+    client.simxGetVisionSensorImage(visionSensorHandle[1],False,client.simxDefaultSubscriber(imageCallback))
+    client.simxStartSimulation(client.simxDefaultPublisher())
+    while True: 
+        client.simxSpinOnce()
+    client.simxStopSimulation(client.simxDefaultPublisher())</pre>
+
+<br>
+<p>For example, from a Python <strong>legacy</strong> remote API client:</p>
+
+<pre class=lightPurpleBox># Receiving an image from CoppeliaSim and sending it back:
+
+import sim
+clientID=sim.simxStart('127.0.0.1',19999,True,True,5000,5)
+if clientID!=-1:
+    res,v0=sim.simxGetObjectHandle(clientID,'Vision_sensor',sim.simx_opmode_oneshot_wait)
+    res,v1=sim.simxGetObjectHandle(clientID,'PassiveVision_sensor',sim.simx_opmode_oneshot_wait)
+
+    res,resolution,image=sim.simxGetVisionSensorImage(clientID,v0,0,sim.simx_opmode_streaming)
+    while (sim.simxGetConnectionId(clientID)!=-1):
+        res,resolution,image=sim.simxGetVisionSensorImage(clientID,v0,0,sim.simx_opmode_buffer)
+        if res==sim.simx_return_ok:
+            res=sim.simxSetVisionSensorImage(clientID,v1,image,0,sim.simx_opmode_oneshot)
+    sim.simxFinish(clientID)</pre>
+
+<br>
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="persistentData"></a><a href="apiFunctionListCategory.htm#persistentData">Persistent Data</a>
+</td></tr></table> 
+
+
+<p><a href="apiFunctionListCategory.htm#persistentData">Persistent data blocks</a> can be seen as persistent global buffers. Persistent data blocks can be defined, redefined, read and cleared, and are shared across all opened scenes. They persist until the simulator ends, but can also persist on file and automatically be reloaded next time CoppeliaSim starts.</p>
+<br>
+
+
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="customLuaFunctions"></a><a href="apiFunctionListCategory.htm#customizingLuaFunctions">Custom Lua functions</a>
+</td></tr></table> 
+
+
+<p>The <a href="mainClientApplication.htm">main client application</a> or any <a href="plugins.htm">plugin</a> can register custom Lua functions via the <a href="apiFunctionListCategory.htm#customizingLuaFunctions">Lua customization API commands</a>. The custom Lua commands will then, when called from a <a href="scripts.htm">script</a>, call back a registered function in the main client application or a plugin. This is very convenient to achieve high level Lua commands (e.g. one could imagine having a plugin handle a robot's movement with a single Lua command <em>simRobot.moveAndAvoidObstacles</em>() !)<br>
+</p>
+<br>
+
+
+
+
+
+
+
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="wireless"></a><a href="apiFunctionListCategory.htm#wirelessFunctionality">Wireless communication simulation</a>
+</td></tr></table> 
+
+
+
+<p>CoppeliaSim allows simulating wireless communications in a very flexible way: data can be emitted into a specific direction, and over a specific distance. Emitted data can then be received if the receiver is located within the specified emission area. Refer to the <a href="apiFunctionListCategory.htm#wirelessFunctionality">corresponding functions</a> in the <a href="apiOverview.htm">regular API</a> for more details. Wireless emission/reception activities can be visualized by enabling the <strong>Visualize wireless emissions</strong> and <strong>Visualize wireless receptions</strong> items in the <a href="environmentPropertiesDialog.htm">environment dialog</a>. Following figure illustrates the visualized wireless communication between two mobile robots:<br>
+</p>
+
+<p align=center><img src="images/meansOfComm2.jpg"></p>
+<p class=imageLabel>[Wireless communication simulation between two mobile robots]</p>
+<br>
+
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="serialPort"></a><a href="apiFunctionListCategory.htm#serialCommunicationFunctionality">Serial port communication</a>
+</td></tr></table> 
+
+
+<p>CoppeliaSim implements <a href="apiFunctionListCategory.htm#serialCommunicationFunctionality">specific functions</a> in the API for serial port communication. <br>
+</p>
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="luaSocket"></a><a href="http://w3.impa.br/~diego/software/luasocket/home.html">LuaSocket</a>
+</td></tr></table> 
+
+
+<p>CoppeliaSim ships with a Lua extension library called <a href="http://w3.impa.br/~diego/software/luasocket/home.html">LuaSocket</a> (see <a href="acknowledgments.htm#LuaSocketCredit">here</a> for acknowledgements and credits related to this library). It allows performing various type of socket communication from within an <a href="scripts.htm">embedded script</a> or an <a href="addOns.htm">add-on</a>. Following code section illustrates how a <a href="childScripts.htm#threaded">threaded child script</a> would fetch a webpage:<br>
+</p>
+
+<pre class=lightRedBox>
+http=require("socket.http")
+sim.setThreadIsFree(true) -- Allow real threading from here (to avoid blocking CoppeliaSim)
+page=http.request("http://www.google.com")
+sim.setThreadIsFree(false) -- Forbid real threading from here</pre>
+
+<p>Notice how the blocking part of the request command is put  within a non-blocking section. For more information on how to avoid external commands to block, refer to the <a href="regularApi/simSetThreadIsFree.htm">sim.setThreadIsFree</a> API command.<br>
+</p>
+
+<p>If your application requires socket communication, it is very convenient to set-up a threaded script as a <em>request server</em> and have the other scripts access it for socket communication as in following example:<br>
+</p>
+
+<p>
+The threaded <em>request server</em>: </p>
+
+<pre class=lightRedBox>
+http = require("socket.http")
+-- Open a communication tube:
+tubeHandle=sim.tubeOpen(0,'http_communication_test',1)
+
+while (sim.getSimulationState()~=sim.simulation_advancing_abouttostop) do
+    -- Wait for a message in the tube and reat it:
+    data=sim.tubeRead(tubeHandle,true)
+    if (data) then
+        -- Fetch the page:
+        sim.setThreadIsFree(true) -- Allow real threading from here (to avoid blocking CoppeliaSim)
+        reply=http.request(data)
+        sim.setThreadIsFree(false) -- Forbid real threading from here
+        -- Send back the page:
+        if (reply) then
+            sim.tubeWrite(tubeHandle,reply)
+        else
+            sim.tubeWrite(tubeHandle,'Page could not be retrieved')
+        end
+    else
+        sim.switchThread() -- explicitely switch thread
+    end
+end</pre>
+
+<p>
+Following <a href="childScripts.htm#nonThreaded">non-threaded child script</a> example could then be used to access socket information: </p>
+
+
+<pre class=lightRedBox>
+function sysCall_init()
+    -- Open a communication tube:
+    tubeHandle=sim.tubeOpen(0,'http_communication_test',1)
+
+    urlsToCheck={'http://www.google.com','http://www.yahoo.com','http://www.titech.co.jp'}
+    urlIndex=1
+end
+
+function sysCall_sensing()
+    s,r,w=sim.tubeStatus(tubeHandle)
+    if (s==1)and(r==0)and(w==0) then
+        -- Send a request for a page:
+        sim.tubeWrite(tubeHandle,urlsToCheck[urlIndex])
+    end
+    if (s==1)and(r==1) then
+        -- Read the reply (the page):
+        page=sim.tubeRead(tubeHandle)
+        print('URL: '..urlsToCheck[urlIndex])
+        print(page:sub(1,200)) -- Only print the first 200 chars
+        urlIndex=urlIndex+1
+        if (urlIndex>3) then
+            urlIndex=1
+        end
+    end
+end</pre>
+
+
+<br>
+
+
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="luaExtensionLibrary"></a><a href="http://lua-users.org/wiki/LibrariesAndBindings">Lua extension library</a>
+</td></tr></table> 
+
+
+<p>It is possible to extend the means of communication of CoppeliaSim almost infinitely, by using Lua's extension library mechanism. As is done with the LuaSocket library (see above), you could add any other type of <a href="http://lua-users.org/wiki/LibrariesAndBindings">Lua extension library available online</a>. You will just have to install the library in CoppeliaSim's installation directory according to the library's instructions. As illustrated with the LuaSocket here above, make sure you make use of a non-blocking section with the <a href="regularApi/simSetThreadIsFree.htm">sim.setThreadIsFree</a> API command should an extension library command block CoppeliaSim.<br>
+</p>
+<br>
+
+
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="simCallScriptFunction"></a><a name="simCallScriptFunctionEx"></a><a href="regularApi/simCallScriptFunctionEx.htm">Calling script functions</a>
+</td></tr></table> 
+
+
+<p>From the <a href="mainClientApplication.htm">main client application</a>, from a <a href="plugins.htm">plugin</a>, from an <a href="scripts.htm">embedded script</a>, from a <a href="remoteApiOverview.htm">remote API</a> client or from a <a href="rosInterfaces.htm">ROS</a> node it is possible to call a script function using <a href="regularApi/simCallScriptFunctionEx.htm">simCallScriptFunctionEx</a>, or <a href="remoteApiFunctions.htm#simxCallScriptFunction">simxCallScriptFunction</a>. The called script function can perform various tasks, then send back data to the caller.<br>
+</p>
+<br>
+
+
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="simSetScriptVariable"></a><a href="regularApi/simSetScriptVariable.htm">Setting a script variable</a>
+</td></tr></table> 
+
+
+<p>From the <a href="mainClientApplication.htm">main client application</a> or from a <a href="plugins.htm">plugin</a> it is possible to set/clear script variables (i.e. Lua variables) using <a href="regularApi/simSetScriptVariable.htm">sim.setScriptVariable</a>.<br>
+</p>
+<br>
+
+
+
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="writingCode.htm">Writing code in and around CoppeliaSim</a></li>
+<li><a href="scripts.htm">Embedded scripts</a></li>
+<li><a href="addOns.htm">Add-ons</a></li>
+<li><a href="plugins.htm">Plugins</a></li>
+<li><a href="mainClientApplication.htm">The main client application</a></li>
+<li><a href="apiOverview.htm">Regular API</a></li>
+<li><a href="remoteApiOverview.htm">Remote API</a></li>
+<li><a href="rosInterfaces.htm">ROS interfaces</a></li>
+<li><a href="blueZeroPlugin.htm">BlueZero interface</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

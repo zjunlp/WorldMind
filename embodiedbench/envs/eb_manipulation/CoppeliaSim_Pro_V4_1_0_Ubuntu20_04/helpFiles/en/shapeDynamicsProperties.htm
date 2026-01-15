@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Shape dynamics properties</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Shape dynamics properties</h1>
+
+<p>The shape dynamics dialog is part of the <a href="shapeProperties.htm">shape properties</a>. The dialog displays the dynamics settings and parameters of the last selected <a href="shapes.htm">shape</a>. If no object is selected, the dialog is inactive. If more than one shape is selected, then some parameters can be copied from the last selected shape to the other selected shapes (<strong>Apply to selection</strong>-buttons):<br>
+</p>
+<p align=center><img src="images/shapeDynamicsProperties1.jpg"></p>
+<p class=imageLabel>[Shape dynamics dialog]</p>
+<br>
+
+
+
+<li><strong>Body is respondable</strong>: if enabled, then the shape will produce a collision reaction with other respondable shapes, however only if the respective respondable masks overlap (see the item below). See also the <a href="designingDynamicSimulations.htm">designing dynamic simulation</a> section for more details.<br>
+</li>
+
+<li><strong>Respondable mask</strong>: indicates when a collision response is generated (above respondable item needs however to be enabled). The mask is composed by two 8-bit values, local and global. If two colliding shapes share any of their parents (direct or indirect), then the local masks are used, otherwise the global masks are used. If two shapes' <em>AND</em>-combined masks (local or global) is different from zero, then a collision response will be generated.<br>
+</li>
+
+<li><strong>Edit material</strong>: allows you to edit <a href="shapeDynamicEngineProperties.htm">material properties</a> for all dynamics engines, such as friction, restitution, etc.</li>
+
+<li><strong>Body is dynamic</strong>: when enabled, then the shape's position and orientation will be influenced in a <a href="dynamicsModule.htm">dynamics simulation</a>. See the <a href="designingDynamicSimulations.htm">designing dynamic simulation</a> section for more details.<br>
+</li>
+
+<li><strong>Start in sleep mode</strong>: a respondable shape that is dynamically simulated can start in sleep mode, in which case it doesn't react to constraints (e.g. gravity) until it first collides with another respondable shape.<br>
+</li>
+
+<li><strong>Set to dynamic if gets parent</strong>: when enabled and the shape is attached to another object, then the shape will be automatically made dynamic. This is useful for model bases that should be static when on their own, but dynamic when combined with another model/object (e.g. a robotic manipulator that operates on its own usually has its base static, but when attached to a vehicle, then the base should become dynamic).<br>
+</li>
+
+<li><strong>Compute mass &amp; inertia properties for the selected shapes</strong>: by clicking this button, you can automatically compute the mass and inertia properties of the selected convex shapes, based on a material uniform density.<br>
+</li>
+
+<li><strong>Mass</strong>: the mass of the shape. Selected shapes can have their masses easily increased or decreased by a factor 2 with the <strong>M=M*2 (for selection)</strong> and the <strong>M=M/2 (for selection)</strong> buttons. This is convenient to quickly find stable simulation parameters by trial-and-error.
+</li>
+
+<li><strong>Principal moments of inertia / mass</strong>: the mass-less (i.e. divided by the mass of the shape) principal moments of inertia. Selected shapes can have their mass-less inertia values easily increased or decreased by a factor 2 with the<strong> I=I*2 (for selection)</strong> and the <strong>I=I/2 (for selection)</strong> buttons. This is convenient to quickly find stable simulation parameters by trial-and-error.
+</li>
+
+<li><strong>Pos./orient. of inertia frame & COM relative to shape frame</strong>: the configuration of the inertia frame and center of mass expressed relative to the <a href="shapeReferenceFrames.htm">shape's reference frame</a>.</li>
+
+
+
+
+<li><a name="inertiaMatrix"></a><strong>Set inertia matrix &amp; COM relative to absolute frame</strong>: opens the inertia matrix dialog, allowing to specify inertia properties relative to the absolute reference frame:</li>
+
+<p align=center><img src="images/inertiaMatrixDlg.jpg"></p>
+<p class=imageLabel>[Object custom data dialog]</p>
+<br>
+
+
+<li class=tabTab><strong>Inertia matrix divided by the mass</strong>: the inertia matrix or tensor. Values are mass-less (i.e. divided by the mass of the shape). The matrix must be expressed relative to the center of mass of the shape (i.e the matrix is symmetric).
+</li>
+<li class=tabTab><strong>Position of the center of mass</strong>: the position of the center of mass</li>
+<li class=tabTab><strong>Apply to selected shapes</strong>: when checked, then all selected shapes will have the same inertia properties relative to the absolute reference frame (i.e. all center of masses and inertia matrices will be coincident).</li>
+<br>
+<br>
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="shapes.htm">Shapes</a></li>
+<li><a href="shapeReferenceFrames.htm">Shape reference frame</a></li>
+<li><a href="dynamicsModule.htm">Dynamics module</a></li>
+<li><a href="shapeDynamicEngineProperties.htm">Material properties</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

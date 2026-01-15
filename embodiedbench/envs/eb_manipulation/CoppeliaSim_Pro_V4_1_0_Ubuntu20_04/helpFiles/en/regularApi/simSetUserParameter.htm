@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simSetUserParameter</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simSetUserParameter" id="simSetUserParameter"></a>simSetUserParameter / sim.setUserParameter </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Sets user parameters of an object. Useful for simple interaction with the user. See also <a href="simGetUserParameter.htm">sim.getUserParameter</a>, the <a href="../apiFunctionListCategory.htm#packing">data packing/unpacking functions</a> and the <a href="../userConfigCallbackFunctions.htm">user config callback functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simSetUserParameter(simInt objectHandle,const simChar* parameterName,const simChar* parameterValue,simInt parameterLength)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>objectHandle</strong>: handle of the object</div>
+<div><strong>parameterName</strong>: name of the parameter to set</div>
+<div><strong>parameterValue</strong>: value of the parameter (all parameters are treated as strings, but can be converted to number later on. Strings may contain any values (also embedded zeros))<br>
+</div>
+<div><strong>parameterLength</strong>: number of bytes that parameterValue contains. If parameterValue is a regular string (without embedded zeros), then this is strlen(parameterValue).<br>
+</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if the parameterName could not be found or in case of an error<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.setUserParameter(number objectHandle,string parameterName,string/number parameterValue)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam><div><strong>objectHandle</strong>: handle of the object, or sim.handle_self, to target the object the current script is attached to.</div>
+<div><strong>parameterName</strong>: Similar to the C-function counterpart</div>
+<div><strong>parameterValue</strong>: Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>none</div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

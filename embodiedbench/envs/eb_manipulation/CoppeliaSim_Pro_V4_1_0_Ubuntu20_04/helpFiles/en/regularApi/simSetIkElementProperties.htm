@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simSetIkElementProperties</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simSetIkElementProperties" id="simSetIkElementProperties"></a>simSetIkElementProperties / sim.setIkElementProperties </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Sets properties of a specific inverse kinematics element (IK element). See also <a href="simSetIkGroupProperties.htm">sim.setIkGroupProperties</a> and <a href="simGetIkGroupHandle.htm">sim.getIkGroupHandle</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simSetIkElementProperties(simInt ikGroupHandle,simInt tipDummyHandle,simInt constraints,const simFloat* precision,const simFloat* weight,void* reserved)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>ikGroupHandle</strong>: handle of the IK group that contains the IK element to modify</div>
+<div><strong>tipDummyHandle</strong>: handle of the tip dummy object of the IK element</div>
+<div><strong>constraints</strong>: the <a href="../apiConstants.htm#ikConstraints">constraints</a> of the ik element. sim_ik_avoidance_constraint is not allowed</div>
+<div><strong>precision</strong>: an array of two values where the first represents the linear precision, and the second the angular precision. Can be nullptr to keep current settings.</div>
+<div><strong>weight</strong>: an array of two values that represent the linear and angular resolution weights. Can be nullptr to keep current settings.</div>
+<div><strong>reserved</strong>: reserved for future extensions. Keep at nullptr</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.setIkElementProperties(number ikGroupHandle,number tipDummyHandle,number constraints,table_2 precision=nil,table_2 weight=nil<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart<br>
+</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>none
+</div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

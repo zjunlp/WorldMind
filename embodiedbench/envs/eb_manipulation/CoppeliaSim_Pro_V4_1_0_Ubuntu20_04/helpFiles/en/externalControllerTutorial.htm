@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>BubbleRob tutorial</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>External controller tutorial</h1>
+
+<p>There are several ways one can control a robot or simulation in CoppeliaSim: </p>
+<li>The most convenient way is to write a <a href="childScripts.htm">child script</a> that will handle the behaviour of a given robot or <a href="models.htm">model</a>. It is the most convenient way, because child scripts are directly attached to <a href="objects.htm">scene objects</a>, they will be duplicated together with their associated scene objects, they do not need any compilation with an external tool, they can run in <a href="childScripts.htm#threaded">threaded</a> or <a href="childScripts.htm#nonThreaded">non-threaded</a> mode, they can be extended via <a href="apiFunctionListCategory.htm#customizingLuaFunctions">custom Lua function</a> or via a <a href="http://luaforge.net/projects/">Lua extension library</a>. Another major advantage in using child scripts: there is no communication lag as with the last 3 methods mentioned in this section (i.e. the <a href="apiOverview.htm">regular API</a> is used), and child scripts are part of the application main thread (inherent synchronous operation). There are several drawback to writing scripts however: you don't have the choice of the programming language, you can't have the fastest code, and you can't directly access external function libraries, except the Lua extension libraries.</li>
+<br>
+<li> Another way one can control a robot or a simulation is by writing a <a href="plugins.htm">plugin</a>. The plugin mechanism allows for callback mechanisms, <a href="apiFunctionListCategory.htm#customizingLuaFunctions">custom Lua function registration</a>, and of course access to external function libraries. A plugin is often used in conjunction with child scripts (e.g. the plugin registers custom Lua functions, that, when called from a child script, will call back a specific plugin function). A major advantage in using plugins is also that  there is no communication lag as with the last 3 methods mentioned in this section (i.e. the <a href="apiOverview.htm">regular API</a> is used), and that a plugin is part of the application main thread (inherent synchronous operation). The drawbacks with plugins are: they are more complicated to program, and they need to be compiled with an external too. Refer also to the <a href="pluginTutorial.htm">plugin tutorial</a>.</li>
+<br>
+<li> A third  and forth way one can control a robot or a simulation is by writing an external client application that relies on the <a href="remoteApiOverview.htm">remote API</a>. This is a very convenient and easy way, if you need to run the control code from an external application, from a robot or from another computer. This also allows you to control a simulation or a <a href="models.htm">model</a> (e.g. a virtual robot) with the exact same code as the one that runs the real robot. The remote API comes in two versions: the <a href="b0RemoteApiOverview.htm">B0-based remote API</a>, and the <a href="legacyRemoteApiOverview.htm">legacy remote API</a>.</li>
+<br>
+
+
+<li>A fifth way to control a robot or a simulation is via a <a href="http://www.ros.org">ROS</a> node. In a similar way as the <a href="remoteApiOverview.htm">remote API</a>, ROS is a convenient way to have several distributed processes communicate with each other. While the remote API is very lightweight and fast, it allows only communication with CoppeliaSim. ROS on the other hand allows connecting virtually any number of processes with each other, and a large amount of compatible libraries are available. It is however heavier and more complicated than the remote API. Refer to the <a href="rosInterfaces.htm">ROS interfaces</a> for details.</li>
+<br>
+
+<li>A sixth way to control a robot or a simulation is via a <a href="https://github.com/CoppeliaRobotics/bluezero" target="_blank">BlueZero</a> (B&Oslash;) node. In a similar way as  ROS, BlueZero is a convenient way to have several distributed processes communicate with each other, and is a lightweight and cross-platform solution. Refer to the <a href="blueZeroPlugin.htm">BlueZero interface</a> for details.</li>
+<br>
+
+
+<li>A seventh way to control a robot or a simulation is by writing an external application that communicates via various means (e.g. pipes, sockets, serial port, etc.) with a CoppeliaSim plugin or CoppeliaSim script. Two major advantages are the choice of programming language, which can be just any language, and the flexibility. Here also, the control code can run on a robot, or a different computer. This way of controlling a simulation or a model is however more tedious that the methods with the <a href="remoteApiOverview.htm">remote API</a>.</li>
+<br>
+
+
+
+<p>There are 8 scene files related to this tutorial:</p>
+<li><em>scenes/controlTypeExamples/controlledViaScript</em>: one robot is controlled via a <a href="childScripts.htm#nonThreaded">non-threaded child script</a>, the other is controlled via a <a href="childScripts.htm#threaded">threaded child script</a>.</li>
+<li><em>scenes/controlTypeExamples/controlledViaPlugin</em>: the robot is controlled via a <a href="plugins.htm">plugin</a>.</li>
+<li><em>scenes/controlTypeExamples/controlledViaB0RemoteApi</em>: the robot is controlled via the <a href="b0RemoteApiOverview.htm">B0-based remote API</a>.</li>
+<li><em>scenes/controlTypeExamples/controlledViaLegacyRemoteApi</em>: the robot is controlled via the <a href="legacyRemoteApiOverview.htm">legacy remote API</a>.</li>
+<li><em>scenes/controlTypeExamples/controlledViaB0</em>: the robot is controlled via the <a href="blueZeroPlugin.htm">BlueZero interface</a>.</li>
+<li><em>scenes/controlTypeExamples/controlledViaRos</em>: the robot is controlled via the <a href="rosInterf.htm">ROS interface</a>.</li>
+<li><em>scenes/controlTypeExamples/controlledViaRos2</em>: the robot is controlled via the <a href="ros2Interface.htm">ROS 2 interface</a>.</li>
+<li><em>scenes/controlTypeExamples/controlledViaTcp</em>: the robot is controlled via <a href="http://w3.impa.br/~diego/software/luasocket/">LuaSocket</a> and TCP.</li>
+
+<p align=center><img src="images/externalControllerTut1.jpg"></p>
+<br>
+
+<p>In all 8 cases, <a href="childScripts.htm">child scripts</a> are used, mainly to make the link with the outside world (e.g. launch the correct client application, and pass the correct object handles to it). There are two other ways one can control a robot, a simulation, or the simulator itself: by using <a href="customizationScripts.htm">customization scripts</a>, or <a href="addOns.htm">add-ons</a>. They are however not recommended for control and should be rather used to handle functionality while simulation is not running.</p>
+
+<p>As an example, the child script linked to the robot in scene <em>controlledViaB0RemoteApi.ttt</em> has following main task:</p>
+<li>Launch the controller application (<a href="https://github.com/CoppeliaRobotics/b0RemoteApiBindings/tree/master/cpp/bubbleRobClient" target="_blank">bubbleRobClient_b0RemoteApi</a>) with some object handles as arguments. The server functionality of the B0-based remote API is provided by object <em>b0RemoteApiServer</em>.</li>
+<p>As another example, the child script linked to the robot in scene <em>controlledViaRos.ttt</em> has following main tasks:</p>
+<li>Check if the <a href="rosInterf.htm">ROS Interface</a>/<a href="ros2Interface.htm">ROS 2 Interface</a> for CoppeliaSim was loaded</li>
+<li>Launch the controller application (<a href="https://github.com/CoppeliaRobotics/ros_bubble_rob" target="_blank">rosBubbleRob</a> / <a href="https://github.com/CoppeliaRobotics/ros2_bubble_rob" target="_blank">ros2BubbleRob</a>) with some topic names or object handles as arguments</li>
+
+<p>Yet, as another example, the child script linked to the robot in scene <em>controlledViaTcp.ttt</em> has following main tasks:</p>
+<li>Search for a free socket connection port</li>
+<li>Launch the controller application (<a href="https://github.com/CoppeliaRobotics/bubbleRobServer" target="_blank">bubbleRobServer</a>) with the chosen connection port as argument</li>
+<li>Locally connect to the controller application</li>
+<li>At each simulation pass, send the sensor values to the controller, and read the desired motor values from the controller</li>
+<li>At each simulation pass, apply the desired motor values to the robot's joints</li>
+
+<p>Run the simulations, and copy-and-paste the robot: you will see that the duplicated robots will directly be operational, since their attached child scripts are in charge of launching new instances of their respective external applications, or calling the appropriate plugin functions.</p>
+
+<p><br>
+</p>
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

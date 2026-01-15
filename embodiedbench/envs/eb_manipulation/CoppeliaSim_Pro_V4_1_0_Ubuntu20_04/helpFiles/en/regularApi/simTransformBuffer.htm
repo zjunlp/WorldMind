@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simTransformBuffer</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simTransformBuffer" id="simTransformBuffer"></a>simTransformBuffer / sim.transformBuffer </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Modified a buffer than contains packed data. See also the <a href="../apiFunctionListCategory.htm#packing">data packing/unpacking functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn><div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>
+<div>1) string outBuffer=sim.transformBuffer(string inBuffer,number inFormat,number multiplier,number offset,number outFormat)</div>
+<div>2) table outBuffer=sim.transformBuffer(string inBuffer,sim.buffer_uint8,0,number splitSize,sim.buffer_split)</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>inBuffer</strong>: the input buffer that contains packed data.</div>
+<div><strong>inFormat</strong>: a <a href="../apiConstants.htm#bufferTypes">buffer type</a>.</div>
+<div><strong>multiplier</strong>: a multiplier value. We have out=offset+multiplier*in</div>
+<div><strong>offset/splitSize</strong>: an offset or split size value. We have out=offset+multiplier*in</div>
+<div><strong>outFormat</strong>: the desired <a href="../apiConstants.htm#bufferTypes">buffer type</a> for the returned buffer.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>1) <strong>outBuffer</strong>: the modified buffer</div>
+<div>2) <strong>table</strong>: the various split buffers</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

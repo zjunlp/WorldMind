@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetUserParameter</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetUserParameter" id="simGetUserParameter"></a>simGetUserParameter / sim.getUserParameter </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves user parameters attached to an object. Useful for simple interaction with the user. See also <a href="simSetUserParameter.htm">sim.setUserParameter</a>, the <a href="../apiFunctionListCategory.htm#packing">data packing/unpacking functions</a> and the <a href="../userConfigCallbackFunctions.htm">user config callback functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simChar* simGetUserParameter(simInt objectHandle,const simChar* parameterName,simInt* parameterLength)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>objectHandle</strong>: handle of the object<br>
+</div>
+<div><strong>parameterName</strong>: name of the parameter to retrieve</div>
+<div><strong>parameterLength</strong>: the number of bytes that compose the value of the parameter (excluding the terminal zero)<br>
+</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>value of the parameter or nullptr if parameterName does not exist for the given object, or in case of an error. The user is in charge of releasing the returned value with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>. The returned pointer points to parameterLength byte values, terminated by a terminal zero (the returned buffer may however contain several embedded zeros).<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>
+<div>boolean/number/string parameterValue=sim.getUserParameter(number objectHandle,string parameterName,boolean forceStringReturn=false)</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>objectHandle</strong>: handle of the object, or sim_handle_self, to target the object the current script is attached to.</div>
+<div>
+ <strong>parameterName</strong>: name of the parameter to retrieve.
+</div>
+<div>
+ <strong>forceStringReturn</strong>: forces the return of a string (i.e. raw value). False by default. If false, then the returned string will be converted to nil, false, true, a number or a string as appropriate (and in that order).
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>parameterValue</strong>: value of the parameter. If the returned parameter value is a string, then it might contain any values (also embedded zeros)</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

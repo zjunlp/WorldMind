@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Collections</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Collections</h1>
+
+<p>A collection is a user-defined collection of <a href="objects.htm">scene objects</a>. A collection has to contain at least one object and is considered to be an <a href="entities.htm">entity</a> (objects are also entities). Collections are useful when referring to several objects like a robot for instance. CoppeliaSim supports <a href="calculationModules.htm">calculations</a> based not only on objects, but also on collections. For instance the <a href="collisionDetection.htm">collision detection module</a> allows registering following collision pair: (collection A; object B). The collision checking algorithm will then check whether the collection A (any object composing it) collides with object B.<br>
+</p>
+
+<p>Collections are <a href="collidableObjects.htm">collidable</a>, <a href="measurableObjects.htm">measurable</a>, <a href="detectableObjects.htm">detectable</a><!--, <a href="cuttableObjects.htm">cuttable</a>--> and <a href="renderableObjects.htm">renderable</a> entities. This means that collections:<br>
+</p>
+
+<li>can be used in <a href="collisionDetection.htm">collision detections</a> against other collidable entities.<br>
+</li>
+
+<li>can be used in <a href="distanceCalculation.htm">minimum distance calculations</a> with other measurable entities.<br>
+</li>
+
+<li>can be detected by <a href="proximitySensors.htm">proximity sensors</a>. </li>
+
+<!--
+<li>can be cut by <a href="mills.htm">mills</a>. </li>
+-->
+
+<li>can be detected or <em>seen</em> by <a href="visionSensors.htm">vision sensors</a>. </li>
+
+
+<p>Even if a collection is collidable, measurable, detectable<!--, cuttable--> and renderable, this doesn't mean that all objects contained in the collection are collidable, measurable, detectable<!--, cuttable--> or renderable:<br>
+</p>
+
+
+<li>During collision detection, only the collidable objects of a collection (subset of the collection) are tested against another collidable entity.<br>
+</li>
+
+<li>During distance measurement, only the measurable objects of a collection (subset of the collection) are measured against another measurable entity.<br>
+</li>
+
+<li>Only the detectable objects of a collection (subset of the collection) can be detected by proximity sensors.<br>
+</li>
+
+<!--
+<li>Only the cuttable objects of a collection (subset of the collection) can be cut by mills.<br>
+</li>
+-->
+
+<li>Only the renderable objects of a collection (subset of the collection) can be detected by vision sensors.<br>
+</li>
+
+
+<p>A collection can however override the collidable, measurable, detectable<!--, cuttable--> and renderable properties of its objects. Refer to the <a href="collectionsDialog.htm">collection dialog</a> for more details.<br>
+</p>
+
+<p>A collection has to be composed by at least one element. Following elements are supported:</p>
+
+<li><a href="#all">All scene objects</a></li>
+<li><a href="#loose">Loose objects</a></li>
+<li><a href="#treeWithBase">Tree, base included</a></li>
+<li><a href="#treeWithoutBase">Tree, base excluded</a></li>
+<li><a href="#chainWithTip">Chain, tip included</a></li>
+<li><a href="#chainWithoutTip">Chain, tip excluded</a></li>
+<li><a href="#combination">A combination of above elements</a></li>
+
+<br>
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="all"></a>All scene objects
+</td></tr></table>
+
+
+<p>The element is made up of all scene objects as can be seen in following figure (arrows indicate: <em>is child of</em>):</p>
+
+<p align=center><img src="images/collections1.jpg"></p>
+<p class=imageLabel>[Element made up of all scene objects]</p>
+<br>
+
+<p>Above element doesn't have any defining objects and can't exist by itself. Combine it with other types of elements.<br>
+</p>
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="loose"></a>Loose objects
+</td></tr></table>
+
+<p>This is a loosely definable combination of scene objects as can be seen in following figure (arrows indicate: <em>is child of</em>):</p>
+
+<p align=center><img src="images/collections2.jpg"></p>
+<p class=imageLabel>[Element made up of loose objects]</p>
+<br>
+
+<p>In above example, if object 2, object 3, object 4 and object 7 are removed from the <a href="scenes.htm">scene</a>, the element is not valid anymore and will also be removed. Object 2, object 3, object 4 and object 7 are the element's defining objects.<br>
+</p>
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="treeWithBase"></a>Tree, base included
+</td></tr></table>
+
+<p>This includes an object and all of its children (and children's children, etc.) as can be seen in following figure (arrows indicate: <em>is child of</em>):</p>
+
+<p align=center><img src="images/collections3.jpg"></p>
+<p class=imageLabel>[Element made up of a tree, with base included]</p>
+<br>
+
+<p>In above example, if object 1 is removed from the scene, the element is not valid anymore and will also be removed. Object 1 is the element's defining object.<br>
+</p>
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="treeWithoutBase"></a>Tree, base excluded
+</td></tr></table>
+
+<p>This includes all children (and children's children, etc.) of an object, without the object itself as can be seen in following figure (arrows indicate: <em>is child of</em>):</p>
+
+<p align=center><img src="images/collections4.jpg"></p>
+<p class=imageLabel>[Element made up of a tree, with the base excluded]</p>
+<br>
+
+<p>In above example, if object 1 is removed from the scene, the element is not valid anymore and will also be removed. Object 1 is the element's defining object.<br>
+</p>
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="chainWithTip"></a>Chain, tip included
+</td></tr></table>
+
+
+<p>his includes an object and all of its parents (and parent's parents, etc.) as can be seen in following figure (arrows indicate: <em>is child of</em>):</p>
+
+<p align=center><img src="images/collections5.jpg"></p>
+<p class=imageLabel>[Element made up of a chain, with the tip included]</p>
+<br>
+
+<p>In above example, if object 6 is removed from the scene, the element is not valid anymore and will also be removed. Object 6 is the element's defining object.<br>
+</p>
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="chainWithoutTip"></a>Chain, tip excluded
+</td></tr></table>
+
+<p>This includes all parents (and parent's parents, etc.) of an object, without the object itself as can be seen in following figure (arrows indicate: <em>is child of</em>):</p>
+
+<p align=center><img src="images/collections6.jpg"></p>
+<p class=imageLabel>[Element made up of a chain, with the tip excluded]</p>
+<br>
+
+<p>In above example, if object 6 is removed from the scene, the element is not valid anymore and will also be removed. Object 6 is the element's defining object.<br>
+</p>
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="combination"></a>Combination of elements
+</td></tr></table>
+
+
+<p>Within a collection, elements can be additive or subtractive. Following figure shows a collection defined by three elements:<br>
+</p>
+
+
+<p align=center><img src="images/collections7.jpg"></p>
+<p class=imageLabel>[(1) three elements, (2) resulting collection composed by the three elements]</p>
+<br>
+
+
+<p>In above example, the resulting collection contains two objects. If a new object is attached to object 2 or object 4, it won't be included in the collection (since it will be part of the tree defined in element 2, which is subtractive). If a new object becomes parent of object 5, object 3 or object 1, it will not be included in the collection (since it will be part of the chain defined in element 3, which is subtractive). Otherwise, new objects are automatically included in the collection. Collections are dynamic entities and are automatically recalculated or updated. When an object, which is also a defining object of a collection is copied or saved, the related collection will also automatically be copied or saved.<br>
+</p>
+
+
+<p>Use collections wisely and only when no other alternative can be found. If, for instance, you wish to test your mobile robot for collision against all other objects in the scene, you could define a <em>robot</em> collection (tree starting at the robot base) and an <em>obstacles</em> collection (All scene objects - tree starting at the robot base), then test collection <em>robot</em> against collection <em>obstacles</em> for collisions. This works just fine, but the <em>obstacles</em> collection is not really needed: indeed, the <a href="collisionDetection.htm">collision detection module</a> allows specifying a <strong>Check against all other collidable objects in the scene</strong> item.<br>
+</p>
+
+
+<p>When all objects contained in a collection are selected, the collection will be highlighted in pink (default color that can be adjusted in the <a href="settings.htm">user settings dialog</a>) as can be seen in following figure.<br>
+</p>
+
+
+<p align=center><img src="images/collections8.jpg"></p>
+<p class=imageLabel>[Collection selection]</p>
+<br>
+
+
+
+<p>
+Collections can be defined in the <a href="collectionsDialog.htm">collection dialog</a>. </p>
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="objects.htm">Objects</a></li>
+<li><a href="entities.htm">Entities</a></li>
+<li><a href="collectionsDialog.htm">Collection dialog</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

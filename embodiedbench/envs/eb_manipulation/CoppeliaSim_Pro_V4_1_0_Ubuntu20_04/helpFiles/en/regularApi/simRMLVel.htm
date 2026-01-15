@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simRMLVel</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simRMLVel" id="simRMLVel"></a>simRMLVel / sim.rmlVel </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Executes a call to the <a href="http://www.reflexxes.com">Reflexxes Motion Library type II or IV</a>. The Reflexxes Motion Library provides instantaneous trajectory generation capabilities for motion control systems. This function prepares a  velocity-based trajectory generation object, that can then be calculated with <a href="simRMLStep.htm">sim.rmlStep</a>. When this object is not needed anymore, remove it with <a href="simRMLRemove.htm">sim.rmlRemove</a>. See also <a href="simRMLPos.htm">sim.rmlPos</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simRMLVel(simInt dofs,simDouble smallestTimeStep,simInt flags,const simDouble* currentPosVelAccel,const simDouble* maxAccelJerk,const simBool* selection,const simDouble* targetVel,simVoid* auxData)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>dofs</strong>: the number of degrees of freedom (N).</div>
+<div><strong>smallestTimeStep</strong>: the smallest expected cycle time. Use a value of 0.0001 (0.1ms).</div>
+<div><strong>flags</strong>: <a href="../apiConstants.htm#RMLFunctions">RML flags</a>. -1 for default flags.</div>
+<div><strong>currentPosVelAccel</strong>: the current position, velocity and acceleration. Arrange values as {pos1,pos2,..,posN,vel1,vel2,..,velN,accel1,accel2,..,accelN}</div>
+
+<div><strong>maxAccelJerk</strong>: the maximum allowed acceleration and jerk. Arrange values as {accel1,accel2,..,accelN,jerk1,jerk2,..,jerkN}. With the RML type II plugin, the max. jerk will however always be infinite.</div>
+<div><strong>selection</strong>: the selection vector (one value for each DoF). For a default behaviour, fill the vector with non-zero values.</div>
+
+<div><strong>targetVel</strong>: the  target velocity (one value for each DoF)</div>
+<div><strong>auxData</strong>: can be nullptr. Otherwise in/out extension data. The first byte indicates how many additional in/out values we wish to set/get. Following  auxiliary values can be set/get:</div>
+<div class=tab>value 1 (input): Bytes 2-5 (int):  set to 1 if you wish this object to be automatically destroyed at simulation end (which is the default case when called from the main script or a child script).</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 in case of an error, otherwise the handle of the created object.<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number handle=sim.rmlVel(number dofs,number smallestTimeStep,number flags,table currentPosVelAccel,table maxAccelJerk,table selection,table targetVel)
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Refer to the C-function documentation</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Refer to the C-function documentation</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

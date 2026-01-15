@@ -1,0 +1,59 @@
+#py from parse import parse
+#py import model
+#py import os
+#py import collections
+#py import re
+#py plugin = parse(pycpp.params['xml_file'])
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>B0-based remote API function list</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body>
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<h1>B0-based remote API function list</h1>
+
+<p class=infoBox>If the function you are looking for is not listed below, then make sure to have a look at the generic function <a href="#simxCallScriptFunction">simxCallScriptFunction</a>, which allows you to implement virtually any remote API function. Another option would be to extend the B0-based remote API, which is an easy task</p>
+
+<pre class=lightGreyBox>
+
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py allCmds={}
+#py ml=0
+#py for cmd in plugin.commands:
+#py l1=cmd.name
+#py l2='<a name="'+cmd.name+'" id="'+cmd.name+'"></a>[<a href="b0RemoteApi-cpp.htm#'+cmd.name+'">C++</a>]'+'  [<a href="b0RemoteApi-python.htm#'+cmd.name+'">Python</a>]'+'  [<a href="b0RemoteApi-java.htm#'+cmd.name+'">Java</a>]'+'  [<a href="b0RemoteApi-matlab.htm#'+cmd.name+'">Matlab</a>]'+'  [<a href="b0RemoteApi-lua.htm#'+cmd.name+'">Lua</a>]'
+#py allCmds[cmd.name]=[l1,l2]
+#py if len(l1)>ml:
+#py ml=len(l1)
+#py endif
+#py endfor
+#py od=collections.OrderedDict(sorted(allCmds.items()))
+#py for k, v in od.items():
+#py s=v[0]+" "*(2+ml-len(v[0]))+v[1]
+`s`
+#py endfor
+
+
+</pre>
+
+
+
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Convex hull</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Convex decomposition</h1>
+
+
+<p>CoppeliaSim allows calculating and adding the convex decomposition  of specified <a href="shapes.htm">shapes</a>. Convex shapes perform faster and are more stable that random shapes, in regards to dynamic collision response calculation. They are however not as fast nor as stable as <a href="shapes.htm">pure shapes</a>! </p>
+
+<p align=center><img src="images/dynamicsDesign15.jpg"></p>
+<p class=imageLabel>[Non-convex model (left) and corresponding convex-decomposed model (right)]</p>
+<br>
+
+<p>You can either add the convex decomposition of selected shapes, or you can morph selected shapes into their convex decomposition equivalent:</p>
+
+<li><strong>adding the convex decomp. </strong>: [Menu bar --&gt; Add --&gt; Convex decomposition of selection...]</li>
+<li><strong>morphing into convex decomp. </strong>: [Menu bar --&gt; Edit --&gt; Morph selection into its convex decomposition...]</li>
+
+
+
+<p>Following dialog pops open and allows adjusting the way shapes are decomposed:</p>
+
+
+<p align=center><img src="images/convexDecompDlg.jpg"></p>
+<p class=imageLabel>[Convex decomposition parameter dialog]</p>
+<br>
+
+<p>Following parameters are applied for each individual shape:</p>
+
+<li><strong>Handle compound shape components individually</strong>: when checked, then each individual mesh of a compound shape will be handled on its own during decomposition, otherwise the compound shape is considered as a single mesh.</li>
+<li><strong>Max. iterations</strong>: the convex decomposition algorithm operates in an approximate way, which means that created shapes might be more or less convex. CoppeliaSim uses its own convexivity measure: a shape is considered convex only if all of its vertices lie within the half-volumes defines by all triangular faces, and this with a tolerance of 1.5% of the shape's average bounding box side length. The <strong>max. iterations</strong> parameter allows to iterate several times over the created meshes if they don't appear as convex enough to CoppeliaSim.</li>
+
+<li><strong>HACD convex decomposition</strong>: enable the HACD algorithm.</li>
+<li class=tab><strong>Add extra points</strong>: specifies whether extra points should be added when computing the concavity.</li>
+<li class=tab><strong>Add extra face points</strong>: specifies whether faces points should be added when computing the concavity.</li>
+<li class=tab><strong>Min. nb of clusters</strong>: specifies the minimum number of clusters to be generated</li>
+<li class=tab><strong>Max. concavity</strong>: specifies the maximum allowed concavity.</li>
+<li class=tab><strong>Max. connection distance</strong>: specifies the maximum allowed distance to get convex clusters connected.</li>
+<li class=tab><strong>Target nb of triangles of decimated mesh</strong>: specifies the targeted number of triangles of the decimated mesh.</li>
+<li class=tab><strong>Max. nb of vertices / convex hull</strong>: specifies the maximum number of vertices for each generated convex hull.</li>
+<li class=tab><strong>Small cluster detection threshold (%)</strong>: specifies the threshold to detect small clusters. The threshold is expressed as a percentage of the total mesh surface.</li>
+
+<li><strong>V-HACD convex decomposition</strong>: enable the V-HACD algorithm.</li>
+<li class=tab><strong>PCA enabled</strong>: enable/disable normalizing the mesh before applying the convex decomposition.</li>
+<li class=tab><strong>Voxel-based</strong>: if enabled, then voxel-based approximate convex decomposition is used, otherwise a tetrahedron-based approximate convex decomposition is used.</li>
+<li class=tab><strong>Resolution</strong>: maximum number of voxels generated during the voxelization stage.</li>
+<!-- <li class=tab><strong>Depth</strong>: maximum number of clipping stages. During each split stage, all the   model parts (with a concavity higher than the user defined threshold)   are clipped according the <em>best</em> clipping plane.</li> -->
+<li class=tab><strong>Concavity</strong>: maximum concavity.</li>
+<li class=tab><strong>Plane downsampling</strong>: controls the granularity of the search for the <em>best</em> clipping plane.</li>
+<li class=tab><strong>Convex hull downsampling</strong>: controls the precision of the convex-hull generation process during the clipping plane selection stage.</li>
+<li class=tab><strong>Alpha</strong>: controls the bias toward clipping along symmetry planes.</li>
+<li class=tab><strong>Beta</strong>: controls the bias toward clipping along revolution axes.</li>
+<!-- <li class=tab><strong>Gamma</strong>: maximum allowed concavity during the merge stage.</li> -->
+<li class=tab><strong>Max. number of vertices / convex hull</strong>: controls the maximum number of triangles per convex-hull.</li>
+<li class=tab><strong>Min. volume / convex hull</strong>: controls the adaptive sampling of the generated convex-hulls.</li>
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+
+<li><a href="regularApi/simConvexDecompose.htm">Related API function</a></li>
+<li><a href="convexHull.htm">Convex hull calculation</a></li>
+
+<br>
+<br>
+
+  </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

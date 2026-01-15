@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Graph properties</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Graph properties</h1>
+
+<p>The graph properties are part of the <a href="sceneObjectPropertiesDialog.htm">scene object properties dialog</a>, which is located at [Menu bar --&gt; Tools --&gt; Scene object properties]. You can also open the dialog with a double-click on an object icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>, or with a click on its <a href="userInterface.htm#toolbars">toolbar</a> button:<br>
+</p>
+
+<p align=center><img src="images/objectPropertyToolbarButton.jpg"></p>
+<p class=imageLabel>[Scene object properties toolbar button]</p>
+<br>
+
+<p>In the scene object properties dialog, click  the <strong>Graph</strong> button to display the graph dialog (the <strong>Graph</strong> button only appears if the last selection is a <a href="graphs.htm">graph</a><a href="dummies.htm"></a><a href="joints.htm"></a><a href="shapes.htm"></a><a href="lights.htm"></a><a href="cameras.htm"></a><a href="paths.htm"></a>). The dialog displays the settings and parameters of the last selected graph. If more than one graph is selected, then some parameters can be copied from the last selected graph to the other selected graphs (<strong>Apply to selection</strong>-buttons):<br>
+</p>
+
+
+<p align=center><img src="images/graphDialog1.jpg"></p>
+<p class=imageLabel>[Graph dialog]</p>
+<br>
+
+<li><strong>Explicit handling</strong>: indicates whether the graph should be explicitly handled. If checked, the graph will not be handled when sim.handleGraph(sim.handle_all_except_explicit) is called, but only if sim.handleGraph(sim.handle_all) or sim.handleGraph(graphHandle) is called. This is useful if the user wishes to handle the graph in a <a href="childScripts.htm">child script</a> rather than in the <a href="mainScript.htm">main script</a> (if not checked the graph will be handled twice, once when sim.handleGraph(sim.handle_all_except_explicit) is called in the main script, and once when sim.handleGraph(graphHandle) is called in the child script). Refer also to the section on <a href="explicitHandling.htm">explicit and non-explicit calls</a>.<br>
+</li>
+
+
+<li><strong>Object size</strong>: size of the graph object. This parameter has no functional effect (i.e. the recorded 3D curves won't be scaled, only the XYZ-planes will).<br>
+</li>
+
+
+<li><strong>Buffer is cyclic</strong>: when selected and the number of elements in each data stream reached the buffer size, then the first elements will be erased in order to be able to record new elements. Otherwise recording stops when the buffer is full.<br>
+</li>
+
+
+<li><strong>Buffer size</strong>: number of elements each data streams can record.<br>
+</li>
+
+
+<li><strong>Display XYZ planes</strong>: turns on and off the display of a graph's XYZ-planes in the scene view.<br>
+</li>
+
+
+<li><strong>Remove all static streams/curves</strong>: clears all static data streams or curves. A static data stream or curve is a &quot;frozen&quot; data stream or curve, that won't change during simulation.<br>
+</li>
+
+<li><strong>Adjust background color</strong>: allows adjusting the background color in the time graph or x/y graph view.<br>
+</li>
+
+<li><strong>Adjust grid color</strong>: allows adjusting the grid and graduation color in the time graph or x/y graph view.
+</li>
+
+<li><strong>Add new data stream to record</strong>: allows selecting a new data stream type and object to record. See the section on <a href="dataStreamTypes.htm">data stream types</a> for more details.<br>
+</li>
+
+<li><strong>Data stream recording list</strong>: the list displays all data streams that will be recorded. The name of individual data streams, that can be edited, will be displayed as labels in the time graph view.<br>
+</li>
+
+
+<li><strong>Data transformations</strong>: determines how the selected data stream is transformed. <strong>Raw</strong> uses the original data stream, <strong>Derivative</strong> uses the time derivative of the data stream (e.g. if the raw data stream is the position of an object, then data will be its velocity), <strong>Integral</strong> uses the time integral of the data stream (e.g. if the raw data is the velocity of an object, then data will be its position) and <strong>Cumulative</strong> uses the cumulative value of the data stream. Additionally, the data can be scaled, shifted, and a <strong>moving average period</strong> specified. </li>
+
+
+
+
+<li><strong>Visible</strong>: determines whether the selected data stream will be visible in the time graph.<br>
+</li>
+
+<li><strong>Show label</strong>: determines whether the selected data stream will be labeled in the time graph.<br>
+</li>
+
+<li><strong>Link points</strong>: determines whether the selected data stream individual values (or elements) will be linked and displayed as a line in the time graph.<br>
+</li>
+
+
+<li><strong>Adjust curve color</strong>: allows adjusting the color of the selected data stream, as displayed in the time graph.<br>
+</li>
+
+<li><strong>Duplicate curve to static</strong>: when a data stream is selected, clicking this button will duplicate the data stream as a static stream. Static streams or curves (displayed as stippled lines) are not modified or cleared when a new <a href="simulation.htm">simulation</a> is started and are used to compare results from one simulation run to another. Data streams or curves can also be made static by selecting them in a graph view (except for floating views) then clicking [Popup menu --&gt; Add --&gt; Static duplicate of curve]. Static streams or curves can be cleared with the <strong>remove all static streams/curves</strong> button.<br>
+</li>
+
+
+<li><strong>Edit XY graphs</strong>: allows editing XY graphs. Refer to the <a href="graphCurvePropertiesDialog.htm">XY graph / 3D curve dialog</a>.<br>
+</li>
+
+<li><strong>Edit 3D curves</strong>: allows editing 3D curves. Refer to the <a href="graphCurvePropertiesDialog.htm">XY graph / 3D curve dialog</a>.<br>
+</li>
+
+
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="graphs.htm">Graphs</a></li>
+<li><a href="dataStreamTypes.htm">Graph data stream types</a></li>
+<li><a href="graphCurvePropertiesDialog.htm">XY graph and 3D curve dialog</a></li>
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

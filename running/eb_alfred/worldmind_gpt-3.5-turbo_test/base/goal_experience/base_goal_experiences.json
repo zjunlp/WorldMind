@@ -1,0 +1,8 @@
+[
+  {
+    "instruction": "Rinse off a ladle and move it to the table.",
+    "goal_experience": "To successfully rinse off a target object and move it to a destination location, first locate and navigate to the container or surface where the object is currently placed. Then, pick up the target object from its location. Next, navigate to the washing area and place the object down to prepare for rinsing. Locate and operate the water source (e.g., faucet) to rinse the object, ensuring the water is turned on and off appropriately to complete the rinsing process. Finally, pick up the rinsed object and navigate to the destination location, where you place it down to complete the task. Critical decision points include recognizing when the object is not directly accessible and requires navigating to its location before picking it up, and ensuring the water source is properly controlled to achieve rinsing. Success depends on following this logical sequence of locating, picking, preparing, rinsing, and placing actions in order.",
+    "eval_set": "base",
+    "trajectory_length": 13
+  }
+]

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetScaledImage</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetScaledImage" id="simGetScaledImage"></a>simGetScaledImage / sim.getScaledImage </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Generates a scaled-up or scaled down version of the input image. See also <a href="simTransformImage.htm">sim.transformImage</a>, <a href="simLoadImage.htm">sim.loadImage</a>, <a href="simSaveImage.htm">sim.saveImage</a> and <a href="simSetVisionSensorCharImage.htm">sim.setVisionSensorCharImage</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simUChar* simGetScaledImage(const simUChar* imageIn,const simInt* resolutionIn,const simInt* resolutionOut,simInt options,simVoid* reserved)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>imageIn</strong>: a pointer to rgb or rgba values of the input image.</div>
+<div><strong>resolutionIn</strong>: the resolution of the input image.</div>
+<div><strong>resolutionOut</strong>: the desired resolution of the output image. The values will be replaced by the effective resolution of the output image</div>
+<div><strong>options</strong>: bit-coded:</div>
+<div class=tab>bit0 set (1): the input image is rgba, otherwise it is rgb</div>
+<div class=tab>bit1 set (2): the returned image is rgba, otherwise it is rgb</div>
+<div class=tab>bit2-3: 0:ignore aspect ratio, 4:keep aspect ratio (the effective resolution of the returned image will be different), 8:keep aspect ratio by expanding (the effective resolution of the returned image will be different)</div>
+<div class=tab>bit4 set (16): no smooth transformation</div>
+<div><strong>reserved</strong>: Reserved for future extension. Set to nullptr.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>nullptr if operation was not successful, otherwise a buffer containing the output image data. The user is in charge of releasing the buffer with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>string imageOut,table_2 effectiveRolutionOut=sim.getScaledImage(string imageIn,table_2 resolutionIn,table_2 desiredResolutionOut,number options)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

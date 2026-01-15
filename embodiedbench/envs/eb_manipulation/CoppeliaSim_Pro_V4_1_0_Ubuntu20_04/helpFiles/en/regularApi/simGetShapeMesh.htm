@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetShapeMesh</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetShapeMesh" id="simGetShapeMesh"></a>simGetShapeMesh / sim.getShapeMesh </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves a shape's mesh information. See also <a href="simGetShapeViz.htm">sim.getShapeViz</a>, <a href="simCreateMeshShape.htm">sim.createMeshShape</a> and <a href="simExportMesh.htm">sim.exportMesh</a> for a usage example.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simGetShapeMesh(simInt shapeHandle,simFloat** vertices,simInt* verticesSize,simInt** indices,simInt* indicesSize,simFloat** normals)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>shapeHandle</strong>: handle of the shape</div>
+<div><strong>vertices</strong>: receives the vertices. The user is in charge of destroying the array with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>. See <a href="simExportMesh.htm">simExportMesh</a> for a usage example.<br>
+</div>
+<div><strong>verticesSize</strong>: receives the size of the vertices array. See <a href="simExportMesh.htm">simExportMesh</a> for a usage example.<br>
+</div>
+<div><strong>indices</strong>: receives the indices. The user is in charge of destroying the array with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>. See <a href="simExportMesh.htm">simExportMesh</a> for a usage example.<br>
+</div>
+<div><strong>indicesSize</strong>: receives the size of the indice array. See <a href="simExportMesh.htm">simExportMesh</a> for a usage example.<br>
+</div>
+<div><strong>normals</strong>: receives the normals (3 times the size of indicesSize). The user is in charge of destroying the array with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>. Can be nullptr.</div>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>table vertices,table indices,table normals=sim.getShapeMesh(number shapeHandle)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>shapeHandle</strong>: handle of the shape. See <a href="simExportMesh.htm">sim.exportMesh</a> for a usage example.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>vertices</strong>: table of vertices</div>
+<div><strong>indices</strong>: table of indices</div>
+<div><strong>normals</strong>: table of normals</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simInsertPathCtrlPoints</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simInsertPathCtrlPoints" id="simInsertPathCtrlPoints"></a>simInsertPathCtrlPoints / sim.insertPathCtrlPoints </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Inserts one or several control points into a <a href="../paths.htm">path object</a>. See also <a href="simCutPathCtrlPoints.htm">sim.cutPathCtrlPoints</a> and <a href="simCreatePath.htm">sim.createPath</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simInsertPathCtrlPoints(simInt pathHandle,simInt options,simInt startIndex,simInt ptCnt,const simVoid* ptData)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>pathHandle</strong>: the handle of the path. Refer also to <a href="simGetObjectHandle.htm">simGetObjectHandle</a>.</div>
+<div><strong>options</strong>: bit-coded:</div>
+<div class=tab>bit0: if set (1), then the path will be closed (given that there are enough control points in the path)</div>
+<div class=tab>bit1: if set (2), then the expected value count (valCnt) for each point will be 16 instead of 11 (see further down)</div>
+<div><strong>startIndex</strong>: the zero-based index where the first new control point should be inserted.</div>
+<div><strong>ptCnt</strong>: the number of control points to insert.</div>
+<div><strong>ptData (input)</strong>: a buffer of ptCnt*valCnt values (float or int). ValCnt is 16 if bit1 of options is set, otherwise 11. Each new control point should have its properties described with following valCnt values:</div>
+<div class=tab>ptData[0]-ptData[2] (float values): the position of the control point (x,y,z), relative to the path object</div>
+<div class=tab>ptData[3]-ptData[5] (float values): the orientation of the control point in <a href="../eulerAngles.htm">Euler angles</a> (alpha,beta,gamma), relative to the path object</div>
+<div class=tab>ptData[6] (float value): the relative velocity at the control point</div>
+<div class=tab>ptData[7] (float value): the virtual distance at the control point</div>
+<div class=tab>ptData[8] (int value): the number of Bezier points at the control point</div>
+<div class=tab>ptData[9] (float value): the Bezier interpolation factor 1 at the control point</div>
+<div class=tab>ptData[10] (float value): the Bezier interpolation factor 2 at the control point</div>
+<div class=tab>ptData[11] (int value): the auxiliary flags at the control point</div>
+<div class=tab>ptData[12]-ptData[15] (float values): the 4 auxiliary values at the control point</div>
+
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.insertPathCtrlPoints(number pathHandle,number options,number startIndex,number ptCnt,table ptData)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>none</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

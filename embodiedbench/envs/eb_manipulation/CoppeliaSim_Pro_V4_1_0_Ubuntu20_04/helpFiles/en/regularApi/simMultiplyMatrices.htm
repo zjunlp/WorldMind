@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simMultiplyMatrices</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simMultiplyMatrices" id="simMultiplyMatrices"></a>simMultiplyMatrices / sim.multiplyMatrices </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Multiplies two transformation matrices. See also the other <a href="../apiFunctionListCategory.htm#coordinatesAndTransformations">matrix/transformation functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simMultiplyMatrices(const simFloat* matrixIn1,const simFloat* matrixIn2,simFloat* matrixOut)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>matrixIn1</strong>: the first input matrix</div>
+<div><strong>matrixIn2</strong>: the second input matrix</div>
+<div><strong>matrixOut</strong>: the output matrix (the result of the multiplication: matrixIn1*matrixIn2).</div>
+<div class=tab>A transformation matrix contains 12 values (the last row (0,0,0,1) is omitted):</div>
+<div class=tab>The x-axis of the orientation component is (matrix[0],matrix[4],matrix[8])</div>
+<div class=tab>The y-axis of the orientation component is (matrix[1],matrix[5],matrix[9])</div>
+<div class=tab>The z-axis of the orientation component is (matrix[2],matrix[6],matrix[10])</div>
+<div class=tab>The position component is (matrix[3],matrix[7],matrix[11])</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>table_12 resultMatrix=sim.multiplyMatrices(table_12 matrixIn1,table_12 matrixIn2)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>resultMatrix</strong>: the result matrix (a table containing 12 values (the last row (0,0,0,1) is omitted))</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

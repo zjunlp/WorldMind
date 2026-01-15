@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Plugins</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Plugins</h1>
+
+<p>A plugin is a shared library (e.g. a dll) that is automatically loaded by CoppeliaSim's <a href="mainClientApplication.htm">main client application</a> at program start-up, or dynamically loaded/unloaded via <a href="regularApi/simLoadModule.htm">sim.loadModule</a>/<a href="regularApi/simUnloadModule.htm">sim.unloadModule</a>. It allows CoppeliaSim's functionality to be extended by user-written functions (in a similar way as with <a href="addOns.htm">add-ons</a>). The language can be any language able to generate a shared library and able to call exported C-functions (e.g. in the case of Java, refer to <a href="http://gcc.gnu.org/java/">GCJ</a> and <a href="http://www.ikvm.net/">IKVM</a>). A plugin can also be used as a <em>wrapper</em> for running code written in other languages or even written for other microcontrollers (e.g. a plugin was written that handles and executes code for Atmel microcontrollers).<br>
+</p>
+
+<p>Plugins are usually used to customize the simulator and/or a particular simulation. Often, plugins are only used to provide a simulation with <a href="apiFunctionListCategory.htm#customizingLuaFunctions">custom script commands</a>, and so are used in conjunction with <a href="scripts.htm">scripts</a>. Other times, plugins are used to provide CoppeliaSim with a special functionality requiring either fast calculation capability (scripts are most of the times slower than compiled languages) or an interface to a hardware device (e.g. a real robot).<br>
+</p>
+
+<p>Each plugin is required to have following 3 entry point procedures:<br>
+</p>
+
+<pre class=lightBlueBox>extern &quot;C&quot; __declspec(dllexport) unsigned char simStart(void* reserved,int reservedInt);<br>extern &quot;C&quot; __declspec(dllexport) void simEnd();<br>extern &quot;C&quot; __declspec(dllexport) void* simMessage(int message,int* auxiliaryData,void* customData,int* replyData);</pre>
+
+<p>If one procedure is missing then the plugin will be unloaded and won't be operational. Refer to the <a href="userInterface.htm#ConsoleWindow">console window</a> at start-up for the loading status of plugins. Following briefly describes above three entry point purpose:<br>
+</p>
+<br>
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="simStart"></a>simStart
+</td></tr></table> 
+
+
+<p>This procedure will be called one time just after the main client application loaded the plugin. The procedure should:<br>
+</p>
+
+<li>check whether the version of CoppeliaSim is same or higher than the one that was used to develop the plugin (just make sure all commands you use in the plugin are supported!).<br>
+</li>
+<li>allocate memory, and prepare GUI related initialization work (if required). 
+</li>
+<li>
+register custom script functions (if required).
+</li>
+<li>
+register custom script variables (if required) .
+</li>
+<li>return the version number of this plugin if initialization was successful, otherwise 0. If 0 is returned, the plugin is unloaded and won't be operational. Due to backward compatibility, the version number is limited to values between 1 and 255. To overcome this limitation, one can additionaly also use following API functions: <a href="regularApi/simSetModuleInfo.htm">simSetModuleInfo</a> / <a href="regularApi/simGetModuleInfo.htm">simGetModuleInfo</a>.<br>
+</li>
+<br>
+<br>
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="simEnd"></a>simEnd
+</td></tr></table> 
+
+
+<p>This procedure will be called one time just before the simulation loop exits. The procedure should release all resources reserved since <strong>simStart</strong> was called.<br>
+</p>
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="simMessage"></a>simMessage
+</td></tr></table> 
+
+
+<p>This procedure will be called very often while the simulator is running. The procedure is in charge of monitoring messages of interest and reacting to them. It is important to react to following events (best by intercepting the <a href="apiConstants.htm#simulatorMessages">sim_message_eventcallback_instancepass</a> message) depending on your plugin's task:</p>
+<li>When objects were created, destroyed, scaled, or when models are loaded: make sure you reflect the change in the plugin (i.e. synchronize the plugin with the scene content)</li>
+<li>When scenes were loaded or the undo/redo functionality called: make sure you erase and reconstruct all plugin objects that are linked to the scene content</li>
+<li>When the scene was switched: make sure you erase and reconstruct all plugin objects that are linked to the scene content. In addition to this, remember that a scene switch will discard handles of following items:</li>
+<li class=tab><a href="apiFunctionListCategory.htm#TubeCommunicationFunctionality">communication tubes</a></li>
+<li class=tab><a href="apiFunctionListCategory.htm#signals">signals</a></li>
+<li class=tab><a href="apiFunctionListCategory.htm#bannerFunctions">banners</a></li>
+<li class=tab><a href="apiFunctionListCategory.htm#drawingObject">drawing objects</a></li>
+<li class=tab>etc.</li>
+<li>When the simulator is in an edit mode: make sure you disable any "special functionality" provided by the plugin, until the edit mode was ended. In particular, make sure you do not programmatically select <a href="objects.htm">scene objects</a>.</li>
+<li>When a simulation was launched: make sure you initialize your plugin elements if needed</li>
+<li>When a simulation ended: make sure you release any memory and plugin elements that are only required during simulation</li>
+<li>When the object selection state was changed, or a dialog refresh message was sent: make sure you actualize the dialogs that the plugin displays</li>
+
+
+
+<p>Refer to the messages of type <em><a href="apiConstants.htm#simulatorMessages">sim_message_eventcallback_</a></em> for more details. When writing plugins several additional points have to be observed or taken into account:
+</p>
+
+<li>Plugins have to be put into the same directory as the <a href="mainClientApplication.htm">main client application</a> and respect following naming: <em>simExtXXXX.dll</em> (Windows), <em>libsimExtXXXX.dylib</em> (Mac OSX), <em>libsimExtXXXX.so</em> (Linux), where <em>XXXX</em> is the name of the plugin. Use at least 4 characters and don't use underscores since the plugin would be ignored (however you should use underscores when your plugin itself loads some additional libraries (e.g. language resources like <em>simExtXXXX_de.dll</em>, etc.)).<br>
+</li>
+
+<li>When registering customized script functions or script variables, use a prefix and stick to it for all functions and variables that the module registers (e.g. <em>simLab.testMemory()</em>, <em>simLab.errorValue</em>, etc.).<br>
+</li>
+
+<li> Threads created in the plugin should be used very carefully, and should never call any simulator command (use them for background calculations or communication with hardware).
+</li>
+<li>When outputting messages, use <a href="regularApi/simAddLog.htm">simAddLog</a>.</li>
+
+<p>You are free to compile your plugin with whatever compiler you wish. If, however, you wish to write a Qt plugin (i.e. a plugin using the Qt framework) you should remember following:</p>
+
+<li>You are required to compile the plugin with the  same Qt version as the one used to compile CoppeliaSim. Have a look at the CoppeliaSim [Help --&gt; About] menu bar item for details about Qt version</li>
+<li>You should compile the plugin with the same compiler as  CoppeliaSim</li>
+
+<p>
+For more information on plugins, refer to following  repositories:
+</p>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtPluginSkeleton" target="_blank">simExtPluginSkeleton</a>: represents a plugin template that you can use to create your own plugin. See also <a href="https://github.com/CoppeliaRobotics/simExtPluginSkeletonNG" target="_blank">simExtPluginSkeletonNG</a><br>
+</li>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtVision" target="_blank">simExtVision</a>: a plugin that handles specific vision tasks (e.g. simulation of the Velodyne sensor, or simulation of an omnidirectional camera).<br>
+</li>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtBubbleRob" target="_blank">simExtBubbleRob</a>: illustrates how to add customized Lua functions and how to handle several specific <a href="models.htm">models</a>. Refer also to the <a href="pluginTutorial.htm">related plugin tutorial</a>.<br>
+</li>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtK3" target="_blank">simExtK3</a>: the plugin related to the KheperaIII model.<br>
+</li>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtRemoteApi" target="_blank">simExtRemoteApi</a>: the plugin related to the <a href="remoteApiOverview.htm">legacy remote API functionality</a> (server side).
+</li>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtROSInterface" target="_blank">simExtROSInterface</a>: the ROS package allowing you to build the <a href="rosInterf.htm">ROS Interface</a> for CoppeliaSim. </li>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtROS2Interface" target="_blank">simExtROS2Interface</a>: the ROS 2 package allowing you to build the <a href="ros2Interface.htm">ROS 2 Interface</a> for CoppeliaSim.</li>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtBlueZero" target="_blank">simExtBlueZero</a>: the <a href="blueZeroPlugin.htm">BlueZero</a> framework wrapped in a CoppeliaSim plugin. </li>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtMtb" target="_blank">simExtMtb</a>: illustrates a Qt plugin which  integrates a robot language interpreter (or other emulator) into CoppeliaSim. Refer also to its <a href="robotLanguageIntegrationTutorial.htm">related tutorial</a>.
+</li>
+<br>
+<p>CoppeliaSim plugins may be published under any license.</p>
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="mainClientApplication.htm">The main client application</a></li>
+<li><a href="pluginTutorial.htm">Plugin tutorial</a></li>
+<li><a href="robotLanguageIntegrationTutorial.htm">Robot language interpreter plugin tutorial</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

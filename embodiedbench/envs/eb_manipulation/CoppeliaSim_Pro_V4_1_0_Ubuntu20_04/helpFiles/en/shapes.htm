@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Shapes</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Shapes <img src="images/shapes1.jpg"></h1>
+
+
+<p>Shapes are rigid mesh <a href="objects.htm">objects</a> that are composed of triangular faces. They can be <a href="importExport.htm#Import">imported</a>, <a href="importExport.htm#Export">exported</a> and <a href="shapeEditModes.htm">edited</a>. They come in four different sub-types:
+</p>
+
+<li><img src="images/shapes2.jpg"> <strong>Simple random shape</strong>: can represent any mesh. It has one color and one set of visual attributes. Not optimised nor recommended for <a href="dynamicsModule.htm">dynamics collision response calculation</a> (since very slow and unstable).</li>
+
+<li><img src="images/shapes3.jpg"> <strong>Compound random shape</strong>: can represent any mesh. It has several colors and sets of visual attributes. Not optimised nor recommended for dynamics collision response calculation (since very slow and unstable). </li>
+
+<li><img src="images/shapes8.jpg"> <strong>Simple convex shape</strong>: represents a convex mesh with  one color and one set of visual attributes. Optimized for dynamics collision response calculation (but pure shapes are recommended).
+</li>
+
+<li><img src="images/shapes9.jpg"> <strong>Compound convex shape</strong>: represents a group of convex meshes with several colors and sets of visual attributes. Optimized for dynamics collision response calculation (but pure compound shapes are recommended).
+</li>
+
+<li><img src="images/shapes4.jpg"> <strong>Pure simple shape</strong>: represents a primitive shape (cuboid, cylinder or sphere (with additional variations depending on the used physics engine). A pure simple shape (or pure compound shape) is best suited for dynamics collision response calculation, since it will perform very fast and is stable. See the <a href="dynamicsModule.htm">dynamics module</a> section for more information.<br>
+</li>
+
+<li><img src="images/shapes5.jpg"> <strong>Pure compound shape</strong>: represents a group of primitive shapes (cuboid, cylinder or sphere). A pure compound shape (or pure simple shape) is best suited for dynamics collision response calculation, since it will perform very fast and is stable. See the <a href="dynamicsModule.htm">dynamics module</a> section for more information.<br>
+</li>
+
+<li><img src="images/shapes6.jpg"> <strong>Heightfield shape</strong>: can represent a terrain as a regular grid, where only the heights change. Heightfields can also be considered as pure simple shapes, and are optimized for dynamics collision response calculation.<br>
+</li>
+
+<p>By default, all imported shapes are simple shapes. Two or more simple shapes or compound shapes can however be grouped ([Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Group selected shapes]) or ungrouped ([Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Ungroup selected shapes]). Simple shapes can also be merged ([Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Merge selected shapes] in which case the visual properties become same for all composing elements. A shape can also be divided ([Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Divide selected shapes]), depending on its configuration: the division algorithm will extract each distinct element of a shape. Two elements are distinct if they don't share any common edge. Refer also to the <a href="buildingAModelTutorial.htm">model tutorial</a>. which illustrates how to correctly import and prepare shapes for a simulation model.<br>
+</p>
+
+<p>
+Pure shapes are mainly functional shapes. They are most of the time only used by the physics engine that performs on them much better and faster than on non-pure shapes (e.g. random or convex meshes). For that reason, pure shapes are often hidden in an invisible layer (e.g. layer 9). Refer to the<a href="layerSelectionDialog.htm"> layer selection dialog</a> and  the section on <a href="designingDynamicSimulations.htm">how to design dynamic simulations</a> for more information.</p>
+
+
+<p align=center><img src="images/shapes7.jpg"></p>
+<p class=imageLabel>[(a) 5 simple shapes (e.g. after import), (b) 1 simple shape (after merging), (c) 1 compound shape (composed by 5 simple shapes)]</p>
+<br>
+
+<p>Pure simple shapes can also be grouped, the resulting compound shape will however only be pure if all of its composing elements are also pure. Merging pure simple shapes will result in a non-pure simple shape.</p>
+
+<p>Shapes are <a href="collidableObjects.htm">collidable</a>, <a href="measurableObjects.htm">measurable</a>, <a href="detectableObjects.htm">detectable</a> and <a href="renderableObjects.htm">renderable</a><!-- and <a href="cuttableObjects.htm">cuttable</a>--> objects. This means that shapes:</p>
+
+<li>can be used in <a href="collisionDetection.htm">collision detections</a> against other collidable objects.<br>
+</li>
+
+<li>can be used in <a href="distanceCalculation.htm">minimum distance calculations</a> with other measurable objects. </li>
+
+<li>can be detected by <a href="proximitySensors.htm">proximity sensors</a>. </li>
+
+<li>can be detected by <a href="visionSensors.htm">vision sensors</a>. </li>
+
+<!--
+<li>can be cut by <a href="mills.htm">mills</a>. However, only simple non-pure shapes can be cuttable. </li>
+-->
+
+<p>The collidable, measurable, detectable and renderable properties of a shape can be altered in the <a href="commonPropertiesDialog.htm">object common properties</a>. Additionally, those properties can be overridden if the shape is part of a <a href="models.htm">model</a> which overrides them. Refer to the <a href="modelDialog.htm">model dialog</a> for more information.</p>
+
+<p>The shape calculations (i.e. collision, distance and proximity sensor calculations) available in CoppeliaSim are also available as stand-alone routines via the <a href="coppeliaGeometricRoutines.htm">Coppelia geometric routines</a>.</p>
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+
+<li><a href="coppeliaGeometricRoutines.htm">Coppelia geometric routines</a></li>
+<li><a href="apiFunctionListCategory.htm#shapeObject">Related API functions</a></li>
+<li><a href="shapeReferenceFrames.htm">Shape reference frame orientation</a></li>
+<li><a href="importExport.htm">Shape import/export operations</a></li>
+<li><a href="primitiveShapes.htm">Shape primitives</a></li>
+<li><a href="convexHull.htm">Convex hull operation</a></li>
+<li><a href="shapeEditModes.htm">Shape edit modes</a></li>
+<li><a href="shapeProperties.htm">Shape properties</a></li>
+<li><a href="commonPropertiesDialog.htm">Object common properties</a></li>
+<li><a href="designingDynamicSimulations.htm">How to design dynamic simulations</a></li>
+<li><a href="buildingAModelTutorial.htm">Building a clean model tutorial</a></li>
+<li><a href="modelDialog.htm">Model dialog</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

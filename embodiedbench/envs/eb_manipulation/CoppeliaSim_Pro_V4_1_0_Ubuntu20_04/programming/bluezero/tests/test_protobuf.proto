@@ -1,0 +1,8 @@
+syntax = "proto2";
+
+package b0.test.protobuf;
+
+message Message {
+  required string a = 1;
+  required int32 b = 2;
+}

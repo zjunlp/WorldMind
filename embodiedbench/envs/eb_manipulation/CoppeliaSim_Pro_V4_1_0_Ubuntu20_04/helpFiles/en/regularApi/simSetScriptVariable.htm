@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simSetScriptVariable</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simSetScriptVariable" id="simSetScriptVariable"></a>simSetScriptVariable / sim.setScriptVariable </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Sets or clears a script variable (i.e. a Lua variable). Call this only:<br>
+a) from the main thread, or:<br>
+b) from a thread that originated from a threaded child script. In that case, you cannot set a variable in a non-threaded child script.<br>
+See also <a href="simCallScriptFunction.htm">sim.callScriptFunction</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simSetScriptVariable(simInt scriptHandleOrType,const simChar* variableNameAtScriptName,simInt stackHandle)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>scriptHandleOrType</strong>: the handle of the script, otherwise the type of the script:</div>
+<div class=tab><em>sim_scripttype_mainscript</em> (0): the <a href="../mainScript.htm">main script</a> is the target.</div>
+<div class=tab><em>sim_scripttype_childscript</em> (1): a <a href="../childScripts.htm">child script</a> is the target. In that case, <em>arrayNameAtScriptName</em> should also contain the name of the object associated with the script.</div>
+<div class=tab><em>sim_scripttype_customizationscript</em> (6): a <a href="../customizationScripts.htm">customization script</a> is the target. In that case, <em>arrayNameAtScriptName</em> should also contain the name of the object associated with the script.</div>
+<div><strong>variableNameAtScriptName</strong>: the name of the variable. If <em>scriptHandleOrType</em> is <em>sim_scripttype_childscript</em>, or <em>sim_scripttype_customizationscript</em>, then <em>variableNameAtScriptName</em> should also contain the name of the object associated with the script: &quot;variableName@scriptName&quot;.</div>
+<div><strong>stackHandle</strong>: the <a href="simCreateStack.htm">handle of a stack object</a>. The top stack item represents the variable value. If the handle is 0, then the variable will be assigned the value <em>nil</em>. See also the <a href="../apiFunctionListCategory.htm#stacks">available stack functions</a>.</div>
+
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 in case of an error</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.setScriptVariable(string variableNameAtScriptName,number scriptHandleOrType,variable)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart, with the difference that a stack object is not required, and the desired variable value can directly be appended to the first two arguments.</div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>none</div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

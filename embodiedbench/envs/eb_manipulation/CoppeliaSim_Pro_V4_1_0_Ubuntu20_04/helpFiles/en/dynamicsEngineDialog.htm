@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Dynamics engines general properties</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Dynamics engines general properties</h1>
+
+<p>The dynamics engines general properties dialog is part of the <a href="dynamicsDialog.htm">general dynamics properties</a> dialog. The dialog displays the engine configurations and various engine specific global properties. In the <a href="dynamicsDialog.htm">general dynamics properties</a> dialog, click the <strong>Adjust engine parameters</strong> button to open following dialog:</p>
+
+
+<p align=center><img src="images/dynamicsEngineDialog.jpg"></p>
+<p class=imageLabel>[Dynamics engines general properties dialog]</p>
+<br>
+
+<p>Each engine has specific parameters that can be set globally (see hereafter) or locally (in the <a href="shapeDynamicEngineProperties.htm">material properties</a> or in the <a href="jointDynamicEngineProperties.htm">dynamics engines properties related to joints</a>). </p>
+
+<li><strong>Configuration</strong>: allows to quickly switch between predefined or custom configurations for the dynamics engines. It is however highly recommended to keep the default configuration to avoid compatibility problems (e.g. combining models that are supposed to run each with different configuration settings will never give good results).</li>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="bullet"></a>Bullet properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#bullet">Bullet physics library</a>. Make sure to also refer to the <a href="http://www.bulletphysics.org/">Bullet user manual</a> for details.</p>
+<li><strong>Bullet time step</strong>: specifies the desired time step for dynamics calculations. It is highly recommended to keep a time step of 5ms (default). Combined with a <a href="simulationPropertiesDialog.htm">simulation time step</a> of 50ms, this results in 10 dynamics calculation steps per <a href="simulation.htm#simulationLoop">simulation pass</a>.</li>
+<li><strong>Constraint solver type</strong>: the type of solver to be used.</li>
+<li><strong>Constraint solving iterations</strong>: specifies the number of iterations that will be used to solve constraints (large values usually result in slower but more precise simulations (generally)).</li>
+<li><strong>Internal scaling</strong>: specifies how dimensions are handled internally. If your dynamic scene is composed by small (&lt;3 cm) or very large shapes, you can improve simulation stability by adjusting the scaling factor. This is particularly true for the Bullet engine. When <strong>Full scaling</strong> is enabled, dimension-related values as well as mass-related values are scaled, otherwise, only dimension-related values are scaled.</li>
+<li><strong>Collision margin scaling</strong>: specifies how collision margins are scaled in relation to the internal scaling parameter. Following relationship is applied: new collision margin = Bullet collision margin * internal scaling * collision margin scaling. This setting can be overridden on a shape-basis (refer to the <a href="shapeDynamicEngineProperties.htm">material properties</a>).</li>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="ode"></a>ODE properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#ode">Open Dynamics Engine</a>. Make sure to also refer to the <a href="http://www.ode.org">ODE user manual</a> for details.</p>
+<li><strong>ODE time step</strong>: specifies the desired time step for dynamics calculations. It is highly recommended to keep a time step of 5ms (default). Combined with a <a href="simulationPropertiesDialog.htm">simulation time step</a> of 50ms, this results in 10 dynamics calculation steps per <a href="simulation.htm#simulationLoop">simulation pass</a>.</li>
+
+<li><strong>Use 'quickStep'</strong>: when selected, a fast iterative solving method will be used. The larger the<strong> QuickStep iterations</strong> property, the more precise the calculations (generally). When the quickStep method is not selected, calculations can be more precise and faster for small systems. Larger systems can however be very slow, unstable and can lead to sudden crashes!</li>
+
+<li><strong>Internal scaling</strong>: specifies how dimensions are handled internally. If your dynamic scene is composed by small (&lt;3 cm) or very large shapes, you can improve simulation stability by adjusting the scaling factor. When <strong>Full scaling</strong> is enabled, dimension-related values as well as mass-related values are scaled, otherwise, only dimension-related values are scaled.</li>
+<li><strong>Global ERP</strong>: the global Error Reduction Parameter, refer to the ODE documentation for more details.</li>
+
+<li><strong>Global CFM</strong>: the global Constraint Force Mixing, refer to the ODE documentation for more details.</li>
+
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="vortex"></a>Vortex properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#vortex">Vortex Studio engine</a>. Make sure to also refer to the <a href="https://www.cm-labs.com/vortex-studio/">Vortex user manual</a> for details.</p>
+<li><strong>Vortex time step</strong>: specifies the desired time step for dynamics calculations. It is highly recommended to keep a time step of 5ms (default). Combined with a <a href="simulationPropertiesDialog.htm">simulation time step</a> of 50ms, this results in 10 dynamics calculation steps per <a href="simulation.htm#simulationLoop">simulation pass</a>.</li>
+<li><strong>Contact tolerance</strong>: epsilon distance considered during collision    detection.</li>
+<li><strong>Auto-sleep</strong>:  if enabled, non-moving rigid bodies will be disabled until an event wakes them    up again.</li>
+<li><strong>Multithreading</strong>: enables multi-threaded algorithms for dynamics and collision processes.</li>
+<li><strong>Constraint properties</strong>: provides threshold values for constraint compliance,    damping and viscosity for each constraint equation.</li>
+<li class=tabTab><strong>Linear compliance</strong>: threshold compliance (1/stiffness) for linear position-based    equation like a spring.</li>
+<li class=tabTab><strong>Linear damping</strong>: threshold damping for linear position-based equation    like a spring.</li>
+<li class=tabTab><strong>Linear kinetic loss</strong>: threshold viscosity for linear velocity-based    equation (like friction). </li>
+<li class=tabTab><strong>Angular compliance</strong>: threshold compliance (1/stiffness) for orientation-based    equation.</li>
+<li class=tabTab><strong>Angular damping</strong>: threshold damping for orientation-based equation.</li>
+<li class=tabTab><strong>Angular kinetic loss</strong>: threshold viscosity for orientation velocity-based equation.</li>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="newton"></a>Newton properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#newton">Newton Dynamics Engine</a>. Make sure to also refer to the <a href="http://www.newtondynamics.com">Newton user manual</a> for details.</p>
+<li><strong>Newton time step</strong>: specifies the desired time step for dynamics calculations. It is highly recommended to keep a time step of 5ms (default). Combined with a <a href="simulationPropertiesDialog.htm">simulation time step</a> of 50ms, this results in 10 dynamics calculation steps per <a href="simulation.htm#simulationLoop">simulation pass</a>.</li>
+<li><strong>Constraint solving iterations</strong>: specifies the number of iterations that will be used to solve constraints (large values usually result in slower but more precise simulations (generally)).</li>
+<li><strong>Multithreading</strong>: enables multi-threaded algorithms for dynamics and collision processes.</li>
+<li><strong>Exact solver</strong>:  if enabled, a more precise solver will be used, which might however induce instabilities.</li>
+<li><strong>High joint accuracy</strong>:  if enabled, a more precise joint solver will be used, which might however induce instabilities.</li>
+<li><strong>Contact merge tolerance</strong>: the distance threshold where close contact points will be merged into one single contact point.</li>
+
+
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="vortexAdvices"></a>Vortex additional information
+</td></tr></table> 
+
+<p>Use the engine constraint properties to make all the constraints softer and consequently help avoiding numerical instability. For simulation involving very large masses, it is possible that the constraint relaxation has to be reduced. Those parameters are global and affect all constraints and collision contacts. For individual constraint relaxation you can refer to the constraint parameters directly where each constraint equation may be relaxed independently. For instability due to collision, it is possible to use skin thickness to smooth normal response or to increase the slip parameters in order to add viscosity in the contact friction. For chains of light rigid bodies and constraints subjected to large tension such as an hand mechanism grasping objects order of magnitude larger than the fingers, the use of angular velocity damping will help increasing the simulation robustness.</p>
+
+
+
+<br>
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="apiFunctionListCategory.htm#engineParameters">Engine properties setter and getter API functions</a></li>
+<li><a href="dynamicsDialog.htm">General dynamics properties</a></li>
+<li><a href="shapeDynamicEngineProperties.htm">Material properties</a></li>
+<li><a href="jointDynamicEngineProperties.htm">Dynamics engines properties related to joints</a></li>
+<li><a href="dynamicsModule.htm#bullet">Bullet physics library</a></li>
+<li><a href="dynamicsModule.htm#ode">Open Dynamics Engine</a></li>
+<li><a href="dynamicsModule.htm#vortex">Vortex Studio</a></li>
+<li><a href="dynamicsModule.htm#newton">Newton Dynamics</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

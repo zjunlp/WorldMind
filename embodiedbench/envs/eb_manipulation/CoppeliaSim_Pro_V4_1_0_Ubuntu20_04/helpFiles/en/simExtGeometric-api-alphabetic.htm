@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>Coppelia Geometric Routines, Lua API list</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body><div align="center"><table class="allEncompassingTable"><tr><td>
+<h1>Coppelia Geometric Routines<br>Lua API List (alphabetical order)</h1>
+
+<pre class=lightGreyBox>
+<a href="simExtGeometric-api.htm#simGeom.copyMesh">simGeom.copyMesh</a>
+<a href="simExtGeometric-api.htm#simGeom.copyOctree">simGeom.copyOctree</a>
+<a href="simExtGeometric-api.htm#simGeom.copyPtcloud">simGeom.copyPtcloud</a>
+<a href="simExtGeometric-api.htm#simGeom.createMesh">simGeom.createMesh</a>
+<a href="simExtGeometric-api.htm#simGeom.createMeshFromSerializationData">simGeom.createMeshFromSerializationData</a>
+<a href="simExtGeometric-api.htm#simGeom.createOctreeFromColorPoints">simGeom.createOctreeFromColorPoints</a>
+<a href="simExtGeometric-api.htm#simGeom.createOctreeFromMesh">simGeom.createOctreeFromMesh</a>
+<a href="simExtGeometric-api.htm#simGeom.createOctreeFromOctree">simGeom.createOctreeFromOctree</a>
+<a href="simExtGeometric-api.htm#simGeom.createOctreeFromPoints">simGeom.createOctreeFromPoints</a>
+<a href="simExtGeometric-api.htm#simGeom.createOctreeFromSerializationData">simGeom.createOctreeFromSerializationData</a>
+<a href="simExtGeometric-api.htm#simGeom.createPtcloudFromColorPoints">simGeom.createPtcloudFromColorPoints</a>
+<a href="simExtGeometric-api.htm#simGeom.createPtcloudFromPoints">simGeom.createPtcloudFromPoints</a>
+<a href="simExtGeometric-api.htm#simGeom.createPtcloudFromSerializationData">simGeom.createPtcloudFromSerializationData</a>
+<a href="simExtGeometric-api.htm#simGeom.destroyMesh">simGeom.destroyMesh</a>
+<a href="simExtGeometric-api.htm#simGeom.destroyOctree">simGeom.destroyOctree</a>
+<a href="simExtGeometric-api.htm#simGeom.destroyPtcloud">simGeom.destroyPtcloud</a>
+<a href="simExtGeometric-api.htm#simGeom.getBoxBoxDistance">simGeom.getBoxBoxDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getBoxPointDistance">simGeom.getBoxPointDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getBoxSegmentDistance">simGeom.getBoxSegmentDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getBoxTriangleDistance">simGeom.getBoxTriangleDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshMeshCollision">simGeom.getMeshMeshCollision</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshMeshDistance">simGeom.getMeshMeshDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshOctreeCollision">simGeom.getMeshOctreeCollision</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshOctreeDistance">simGeom.getMeshOctreeDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshPointDistance">simGeom.getMeshPointDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshPtcloudDistance">simGeom.getMeshPtcloudDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshSegmentCollision">simGeom.getMeshSegmentCollision</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshSegmentDistance">simGeom.getMeshSegmentDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshSerializationData">simGeom.getMeshSerializationData</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshTriangleCollision">simGeom.getMeshTriangleCollision</a>
+<a href="simExtGeometric-api.htm#simGeom.getMeshTriangleDistance">simGeom.getMeshTriangleDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreeOctreeCollision">simGeom.getOctreeOctreeCollision</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreeOctreeDistance">simGeom.getOctreeOctreeDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreePointCollision">simGeom.getOctreePointCollision</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreePointDistance">simGeom.getOctreePointDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreePtcloudCollision">simGeom.getOctreePtcloudCollision</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreePtcloudDistance">simGeom.getOctreePtcloudDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreeSegmentCollision">simGeom.getOctreeSegmentCollision</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreeSegmentDistance">simGeom.getOctreeSegmentDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreeSerializationData">simGeom.getOctreeSerializationData</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreeTriangleCollision">simGeom.getOctreeTriangleCollision</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreeTriangleDistance">simGeom.getOctreeTriangleDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getOctreeVoxels">simGeom.getOctreeVoxels</a>
+<a href="simExtGeometric-api.htm#simGeom.getPtcloudPointDistance">simGeom.getPtcloudPointDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getPtcloudPoints">simGeom.getPtcloudPoints</a>
+<a href="simExtGeometric-api.htm#simGeom.getPtcloudPtcloudDistance">simGeom.getPtcloudPtcloudDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getPtcloudSegmentDistance">simGeom.getPtcloudSegmentDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getPtcloudSerializationData">simGeom.getPtcloudSerializationData</a>
+<a href="simExtGeometric-api.htm#simGeom.getPtcloudTriangleDistance">simGeom.getPtcloudTriangleDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getSegmentPointDistance">simGeom.getSegmentPointDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getSegmentSegmentDistance">simGeom.getSegmentSegmentDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getTransformedPoints">simGeom.getTransformedPoints</a>
+<a href="simExtGeometric-api.htm#simGeom.getTrianglePointDistance">simGeom.getTrianglePointDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getTriangleSegmentDistance">simGeom.getTriangleSegmentDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.getTriangleTriangleDistance">simGeom.getTriangleTriangleDistance</a>
+<a href="simExtGeometric-api.htm#simGeom.scaleMesh">simGeom.scaleMesh</a>
+<a href="simExtGeometric-api.htm#simGeom.scaleOctree">simGeom.scaleOctree</a>
+<a href="simExtGeometric-api.htm#simGeom.scalePtcloud">simGeom.scalePtcloud</a></pre>
+
+<br>
+
+
+
+
+
+</td></tr></table></div></body>
+</html>

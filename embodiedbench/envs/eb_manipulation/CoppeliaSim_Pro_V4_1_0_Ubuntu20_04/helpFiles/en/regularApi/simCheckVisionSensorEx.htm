@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simCheckVisionSensorEx</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simCheckVisionSensorEx" id="simCheckVisionSensorEx"></a>simCheckVisionSensorEx / sim.checkVisionSensorEx </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Checks whether the vision sensor detects the indicated entity. This is the extended functionality version of <a href="simCheckVisionSensor.htm">sim.checkVisionSensor</a>. Detection is silent (no visual feedback) compared to <a href="simHandleVisionSensor.htm">sim.handleVisionSensor</a>. The <a href="../visionCallbackFunctions.htm">vision callback functions</a> will be called on the acquired image. Also, the renderable flag of the entity is overridden if the entity is an object. See also <a href="simReadVisionSensor.htm">sim.readVisionSensor</a>. <br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simFloat* simCheckVisionSensorEx(simInt sensorHandle,simInt entityHandle,simBool returnImage)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>sensorHandle</strong>: handle of the vision sensor object</div>
+<div><strong>entityHandle</strong>: handle of entity to detect (object or collection), or sim_handle_all to detect all detectable objects</div>
+<div><strong>returnImage</strong>: specifies what should be returned. If true, the sensor's image buffer is returned, otherwise its depth buffer is returned</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>image or depth buffer (use <a href="simGetVisionSensorResolution.htm">simGetVisionSensorResolution</a> for correct size), or nullptr in case of an error. The user is in charge of releasing the returned buffer with <a href="simReleaseBuffer.htm">simReleaseBuffer</a><br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>
+<div>table buffer=sim.checkVisionSensorEx(number sensorHandle,number entityHandle,boolean returnImage)</div>
+<div>string buffer=sim.checkVisionSensorEx(number sensorHandle,number entityHandle,boolean returnImage)</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>sensorHandle</strong>: handle of the vision sensor object. Can be combined with <a href="../apiConstants.htm#specialHandleFlags">sim.handleflag_codedstring</a> if you wish to retrieve the image or depth map coded in a string (much faster).</div>
+<div><strong>entityHandle</strong>: Similar to the C-function counterpart</div>
+<div><strong>returnImage</strong>: Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart: a table containing the image or depth buffer is returned</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

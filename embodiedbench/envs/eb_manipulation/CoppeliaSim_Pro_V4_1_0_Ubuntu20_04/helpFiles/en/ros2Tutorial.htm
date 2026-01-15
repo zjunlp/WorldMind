@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>ROS 2 tutorial</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>ROS 2 tutorial</h1>
+
+<p>This tutorial will try to explain in a simple way how you can manage to have CoppeliaSim <em>ROS 2 enabled</em>, based on <a href="https://index.ros.org/doc/ros2/Releases/Release-Foxy-Fitzroy/">ROS 2 Foxy</a>.</p>
+
+<p>First of all you should make sure that you have gone through the <a href="https://index.ros.org/doc/ros2/Tutorials/#tutorials">official ROS 2 tutorials</a>, at least the beginner section. Then, we assume that you have the latest Ubuntu running, that ROS is installed, and that the workspace folders are set. Here also refer to the <a href="https://index.ros.org/doc/ros2/Installation/">official documentation regarding the ROS 2 installation</a>.</p>
+
+<p>The general ROS 2 functionality in CoppeliaSim is supported via the <a href="rosInterf.htm">ROS 2 Interface</a> (<em>libsimExtROS2Interface.so</em>). The Linux distribution should include that file already compiled in <em>CoppeliaSim/compiledROSPlugins</em>, but it first needs to be copied to <em>CoppeliaSim/</em>, otherwise it won't be loaded. You might however experience plugin load problems, depending on your system specificities: make sure to always inspect the terminal window of CoppeliaSim for details about plugin load operations. Plugins are loaded when CoppeliaSim is launched. Also make sure to source the ROS 2 environment prior to running CoppeliaSim.</p>
+
+<p>If the plugin cannot be loaded, then you should recompile it by yourself. It is open source and can be modified as much as needed in order to support a specific feature or to extend its functionality. If specific messages/services/etc. need to be supported, make sure to edit files located in <em>simExtROSInterface/meta/</em>, prior to recompilation. There are<em> </em>2 packages:</p>
+
+<li><a href="https://github.com/CoppeliaRobotics/simExtROS2Interface" target="_blank">simExtROS2Interface</a>: this package is the <a href="rosInterf.htm">ROS 2 Interface</a> that will be compiled to a &quot;.so&quot; file, and that is used by CoppeliaSim.</li>
+<li><a href="https://github.com/CoppeliaRobotics/ros2_bubble_rob" target="_blank">ros2_bubble_rob</a>: this is the package of a very simple robot controller that connects to CoppeliaSim via the <a href="rosInterf.htm">ROS 2 Interface</a>. This node will be in charge of controlling the  red robot in the demo scene <em>controlTypeExamples/controlledViaRos.ttt</em></li>
+
+
+
+<p>Above packages should be copied to your <em>ros2_ws/src</em><em> </em>folder. </p>
+<p>In order to build the packages, navigate to the <em>ros2_ws</em> folder and type:</p>
+
+<pre class=lightGreyBox>
+$ export COPPELIASIM_ROOT_DIR=~/path/to/coppeliaSim/folder
+$ ulimit -s unlimited #otherwise compilation might freeze/crash
+$ colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
+</pre>
+
+<p>That's it! The packages should have been generated and compiled to a library, which is automatically copied to the CoppeliaSim installation folder. The plugin is now ready to be used.</p>
+
+<p>Now open a terminal, move to the CoppeliaSim installation folder and start CoppeliaSim. This is what you should have (or similar):</p>
+
+<pre class=lightGreyBox>
+$ ./coppeliaSim.sh
+...
+Plugin 'ROS2Interface': loading...
+Plugin 'ROS2Interface': load succeeded.
+...</pre>
+
+
+<p>Upon succesful ROS 2 Interface load, checking the available nodes gives this:</p>
+<pre class=lightGreyBox>
+$ ros2 node list
+/sim_ros2_interface</pre>
+
+<p>In an empty CoppeliaSim scene, select an object, then attach a <a href="childScripts.htm#nonThreaded">non-threaded child script</a> to it with [Menu bar --&gt; Add --&gt; Associated child script --&gt; non threaded]. Open the <a href="scriptEditor.htm">script editor</a> for that script and replace the content with following:</p>
+
+<pre class=lightRedBox>
+function subscriber_callback(msg)
+    -- This is the subscriber callback function
+    sim.addLog(sim.verbosity_scriptinfos,'subscriber receiver following Float32: '..msg.data)
+end
+
+function getTransformStamped(objHandle,name,relTo,relToName)
+    -- This function retrieves the stamped transform for a specific object
+    t=simROS2.getSystemTime()
+    p=sim.getObjectPosition(objHandle,relTo)
+    o=sim.getObjectQuaternion(objHandle,relTo)
+    return {
+        header={
+            stamp=t,
+            frame_id=relToName
+        },
+        child_frame_id=name,
+        transform={
+            translation={x=p[1],y=p[2],z=p[3]},
+            rotation={x=o[1],y=o[2],z=o[3],w=o[4]}
+        }
+    }
+end
+
+function sysCall_init()
+    -- The child script initialization
+    objectHandle=sim.getObjectAssociatedWithScript(sim.handle_self)
+    objectName=sim.getObjectName(objectHandle)
+    ros2InterfacePresent=simROS2
+
+    -- Prepare the float32 publisher and subscriber (we subscribe to the topic we publish):
+    if ros2InterfacePresent then
+        publisher=simROS2.createPublisher('/simulationTime','std_msgs/msg/Float32')
+        subscriber=simROS2.createSubscription('/simulationTime','std_msgs/msg/Float32','subscriber_callback')
+    end
+end
+
+function sysCall_actuation()
+    -- Send an updated simulation time message, and send the transform of the object attached to this script:
+    if ros2InterfacePresent then
+        simROS2.publish(publisher,{data=sim.getSimulationTime()})
+        simROS2.sendTransform(getTransformStamped(objectHandle,objectName,-1,'world'))
+        -- To send several transforms at once, use simROS2.sendTransforms instead
+    end
+end
+
+function sysCall_cleanup()
+    -- Following not really needed in a simulation script (i.e. automatically shut down at simulation end):
+    if rosInterfacePresent then
+        simROS.shutdownPublisher(publisher)
+        simROS.shutdownSubscriber(subscriber)
+    end
+end</pre>
+
+
+
+
+
+
+<p>Above script will publish the simulation time, and subscribe to it at the same time. It will also publish the transform of the object the script is attached to. You should be able to see the simulation time topic with:</p>
+
+<pre class=lightGreyBox>
+$ ros2 topic list</pre>
+
+<p>To see the message content, you can type:</p>
+
+<pre class=lightGreyBox>
+$ ros2 topic echo /simulationTime</pre>
+
+
+<p>Now load the demo scene <em>ros2InterfaceTopicPublisherAndSubscriber.ttt</em>, and run the simulation. The code in the <a href="childScripts.htm">child script</a> attached to <em>Vision_sensor</em> will enable a publisher to stream the vision sensor's image, and also enable a subscriber to listen to that same stream. The subscriber applies the read data to the  passive vision sensor, that is only used as a data container. So CoppeliaSim is streaming data, while listening to the same data! This is what is happening:</p>
+
+<p align=center><img src="images/rosTut1.jpg"></p>
+<p class=imageLabel>[Image publisher and image subscriber demo]</p>
+<br>
+
+
+
+<p>Try experimenting a little bit with the code. You can also visualize the image that CoppeliaSim streams with following command:</p>
+
+<pre class=lightGreyBox>
+$ ros2 run image_tools showimage --ros-args --remap image:=/visionSensorData</pre>
+
+
+<p>Had you been streaming simpler data, then you could also have visualized it with:</p>
+
+<pre class=lightGreyBox>
+$ ros2 topic echo /visionSensorData</pre>
+
+
+<p>Now stop the simulation and load the demo scene <em>controlTypeExamples/controlledViaRos2.ttt</em>, and run the simulation. The robot is simplistic, and also behaving in a simplistic way for simplification purposes. It is controlled via the <a href="rosInterf.htm">ROS 2 Interface</a>:</p>
+
+<p align=center><img src="images/rosBubbleRob.jpg"></p>
+<p class=imageLabel>[External client application controlling the  robot via ROS]</p>
+<br>
+
+
+
+<p>The child script attached to the  robot, and running in a non-threaded fashion, is in charge of following:</p>
+
+<li>determine some object handles (e.g. motor joint handles and proximity sensor handle)</li>
+<li>verify if the ROS 2 Interface is loaded</li>
+<li>Launch motor speed subscribers</li>
+<li>Launch a sensor publisher and a simulation time publisher</li>
+<li> and finally launch a client application. The application is called with some topic names as arguments, so that it will know which topics to listen to and to subscribe. The client application (<em>ros2BubbleRob</em>) is then taking over the control of the  robot via ROS 2.</li>
+
+<p>While simulation is running, copy and paste a few times the   robot. Notice that every copy is directly operational and independent. This is one of the many strengths of CoppeliaSim.</p>
+
+<p>Now stop the simulation and open a new scene, then drag following model into it: <em>Models/tools/ros2Interface helper tool.ttm</em>. This model is constituted by a single <a href="customizationScripts.htm">customization script</a> that offers following topic publishers and subscribers:</p>
+
+<li><em>startSimulation</em> topic: can be used to start a simulation by publishing on this topic a <em>std_msgs/msg/Bool</em> message.</li> 
+<li><em>pauseSimulation</em> topic: can be used to pause a simulation by publishing on this topic a <em>std_msgs/msg/Bool</em> message.</li> 
+<li><em>stopSimulation</em> topic: can be used to stop a simulation by publishing on this topic a <em>std_msgs/msg/Bool</em> message.</li> 
+<li><em>enableSyncMode</em> topic: by publishing a <em>std_msgs/msg/Bool</em> message on this topic, you can enable/disable the synchronous simulation mode.</li> 
+<li><em>triggerNextStep</em> topic: by publishing a <em>std_msgs/msg/Bool</em> message on this topic, you can trigger the next simulation step, while in the synchronous simulation mode.</li> 
+<li><em>simulationStepDone</em> topic: a message of type <em>std_msgs/msg/Bool</em> will be published at the end of each simulation pass.</li> 
+<li><em>simulationState</em> topic: messages of type <em>std_msgs/msg/Int32</em> will be published on a regular basis. <em>0</em> indicates that the simulation is stopped, <em>1</em> that it is running and <em>2</em> that it is paused.</li>
+<li><em>simulationTime</em> topic: messages of type <em>std_msgs/msg/Float32</em> will be published on a regular basis, indicating the current simulation time.</li>
+
+<p>Have a look at the content of the customization script, that can be fully customized for various purposes. Try generating topic messages from the command line, for instance:</p> 
+
+<pre class=lightGreyBox>
+$ ros2 topic pub /startSimulation std_msgs/msg/Bool '{data: true}' --once
+$ ros2 topic pub /pauseSimulation std_msgs/msg/Bool '{data: true}' --once
+$ ros2 topic pub /stopSimulation std_msgs/msg/Bool '{data: true}' --once
+$ ros2 topic pub /enableSyncMode std_msgs/msg/Bool '{data: true}' --once
+$ ros2 topic pub /startSimulation std_msgs/msg/Bool '{data: true}' --once
+$ ros2 topic pub /triggerNextStep std_msgs/msg/Bool '{data: true}' --once
+$ ros2 topic pub /triggerNextStep std_msgs/msg/Bool '{data: true}' --once
+$ ros2 topic pub /triggerNextStep std_msgs/msg/Bool '{data: true}' --once
+$ ros2 topic pub /stopSimulation std_msgs/msg/Bool '{data: true}' --once</pre>
+
+<p>In order to display the current simulation time, you could type:</p>
+
+<pre class=lightGreyBox>
+$ ros2 topic echo /simulationTime</pre>
+
+<p>Finally, make sure to have a look at the <a href="remoteApiOverview.htm">remote API functionality</a> and the <a href="blueZeroPlugin.htm">BlueZero framework</a> in CoppeliaSim: similarly to ROS, it allows for remote function execution, fast data streaming back and forth, is quite simple to use, leightweight and  cross-platform. The remote API functionality is available for 7 different languages. Both, the remote APi and the BlueZero framework  can be interesting alternatives to ROS in some cases.</p>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

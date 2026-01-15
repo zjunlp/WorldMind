@@ -1,0 +1,189 @@
+[
+  {
+    "Human instruction": "Place the microwaved slice of apple on to the white table.",
+    "Output": {
+      "language_plan": "This is a complex multi-step task requiring:\n1. **Get a knife** to slice the apple\n2. **Find and slice the apple**\n3. **Heat the apple slice in microwave**\n4. **Place on the dining table**\n\nI need to carefully manage the one-hand limit throughout.",
+      "executable_plan": [
+        { "action_id": 22, "action_name": "find a Apple", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 107, "action_name": "pick up the Apple", "predicted_state": "I am holding the Apple." },
+        { "action_id": 18, "action_name": "find a DiningTable", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the Apple", "predicted_state": "The Apple is on the DiningTable. My hand is empty." },
+        { "action_id": 34, "action_name": "find a Knife", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 127, "action_name": "pick up the Knife", "predicted_state": "I am holding the Knife." },
+        { "action_id": 22, "action_name": "find a Apple", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 160, "action_name": "slice the Apple", "predicted_state": "The Apple is now sliced. I am still holding the Knife." },
+        { "action_id": 18, "action_name": "find a DiningTable", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the Knife", "predicted_state": "The Knife is on the DiningTable. My hand is empty." },
+        { "action_id": 22, "action_name": "find a Apple slice", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 107, "action_name": "pick up the Apple slice", "predicted_state": "I am holding an Apple slice." },
+        { "action_id": 38, "action_name": "find a Microwave", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN." },
+        { "action_id": 133, "action_name": "put down the Apple slice", "predicted_state": "The Apple slice is inside the Microwave. My hand is empty." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED with Apple slice inside." },
+        { "action_id": 149, "action_name": "turn on the Microwave", "predicted_state": "The Microwave is ON, heating the Apple slice." },
+        { "action_id": 150, "action_name": "turn off the Microwave", "predicted_state": "The Microwave is OFF. The Apple slice is heated." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN. I can see the heated Apple slice." },
+        { "action_id": 107, "action_name": "pick up the heated Apple slice", "predicted_state": "I am holding the heated Apple slice." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED. I am holding the heated Apple slice." },
+        { "action_id": 18, "action_name": "find a DiningTable", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the heated Apple slice", "predicted_state": "The heated Apple slice is on the DiningTable. Task complete." }
+      ]
+    }
+  },
+  {
+    "Human instruction": "Place a heated slice of tomato in the kitchen sink.",
+    "Output": {
+      "language_plan": "Complex task requiring:\n1. **Get knife and slice tomato**\n2. **Heat tomato slice in microwave**\n3. **Place in sink**",
+      "executable_plan": [
+        { "action_id": 36, "action_name": "find a ButterKnife", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 130, "action_name": "pick up the ButterKnife", "predicted_state": "I am holding the ButterKnife." },
+        { "action_id": 35, "action_name": "find a Tomato", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 159, "action_name": "slice the Tomato", "predicted_state": "The Tomato is sliced. I am still holding the ButterKnife." },
+        { "action_id": 79, "action_name": "find a Sink", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the ButterKnife", "predicted_state": "The ButterKnife is near the Sink. My hand is empty." },
+        { "action_id": 35, "action_name": "find a Tomato slice", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 129, "action_name": "pick up the Tomato slice", "predicted_state": "I am holding a Tomato slice." },
+        { "action_id": 38, "action_name": "find a Microwave", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN." },
+        { "action_id": 133, "action_name": "put down the Tomato slice", "predicted_state": "The Tomato slice is inside the Microwave." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED." },
+        { "action_id": 149, "action_name": "turn on the Microwave", "predicted_state": "The Microwave is ON, heating the Tomato slice." },
+        { "action_id": 150, "action_name": "turn off the Microwave", "predicted_state": "The Microwave is OFF. Tomato slice is heated." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN." },
+        { "action_id": 129, "action_name": "pick up the heated Tomato slice", "predicted_state": "I am holding the heated Tomato slice." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED." },
+        { "action_id": 79, "action_name": "find a Sink", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the heated Tomato slice", "predicted_state": "The heated Tomato slice is in the Sink. Task complete." }
+      ]
+    }
+  },
+  {
+    "Human instruction": "Chill a potato in the refrigerator, prepare cook it in the microwave.",
+    "Output": {
+      "language_plan": "First locate a potato and pick it up, find the refrigerator, open it, and place the potato inside to chill. Close the refrigerator. After chilling, open the refrigerator again, find the potato, and pick it up. Close the refrigerator, find the microwave, open it, place the potato inside, and close the microwave to prepare it for cooking.",
+      "executable_plan": [
+        { "action_id": 1, "action_name": "find a Potato", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 81, "action_name": "pick up the Potato", "predicted_state": "I am holding the Potato." },
+        { "action_id": 78, "action_name": "find a Fridge", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 139, "action_name": "open the Fridge", "predicted_state": "The Fridge door is OPEN." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Potato is inside the Fridge. My hand is empty." },
+        { "action_id": 140, "action_name": "close the Fridge", "predicted_state": "The Fridge door is CLOSED." },
+        { "action_id": 139, "action_name": "open the Fridge", "predicted_state": "The Fridge door is OPEN. I see the chilled potato." },
+        { "action_id": 1, "action_name": "find a Potato", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 81, "action_name": "pick up the Potato", "predicted_state": "I am holding the chilled Potato." },
+        { "action_id": 140, "action_name": "close the Fridge", "predicted_state": "The Fridge door is CLOSED." },
+        { "action_id": 38, "action_name": "find a Microwave", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Potato is in the Microwave." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED. Task complete." }
+      ]
+    }
+  },
+  {
+    "Human instruction": "Heat up a potato and place it in the blue bin.",
+    "Output": {
+      "language_plan": "Locate the fridge and open it, find a potato inside and pick it up, then close the fridge. Find the microwave and open it, place the potato inside, and close the microwave. Turn on the microwave to heat the potato and turn it off after heating. Open the microwave and pick up the heated potato. Close the microwave, locate the blue bin, and place the heated potato in the blue bin.",
+      "executable_plan": [
+        { "action_id": 78, "action_name": "find a Fridge", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 139, "action_name": "open the Fridge", "predicted_state": "The Fridge door is OPEN." },
+        { "action_id": 1, "action_name": "find a Potato", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 81, "action_name": "pick up the Potato", "predicted_state": "I am holding the Potato." },
+        { "action_id": 140, "action_name": "close the Fridge", "predicted_state": "The Fridge door is CLOSED." },
+        { "action_id": 38, "action_name": "find a Microwave", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Potato is in the Microwave. My hand is empty." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED." },
+        { "action_id": 149, "action_name": "turn on the Microwave", "predicted_state": "The Microwave is ON, heating the potato." },
+        { "action_id": 150, "action_name": "turn off the Microwave", "predicted_state": "The Microwave is OFF. The potato is heated." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN. I see the heated potato." },
+        { "action_id": 1, "action_name": "find a Potato", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 81, "action_name": "pick up the Potato", "predicted_state": "I am holding the heated Potato." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED." },
+        { "action_id": 40, "action_name": "find a GarbageCan", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The heated Potato is in the GarbageCan. Task complete." }
+      ]
+    }
+  },
+  {
+    "Human instruction": "Transfer a tomato slice cooked in the microwave to the sink.",
+    "Output": {
+      "language_plan": "To achieve the goal, I need to find a knife and pick it up. Then, find a tomato and slice it. Since I cannot pick tomato when holding the knife, I need to put the knife at some place to keep safe. So I find a sink and put it down. Then I come back to find the sliced tomato and pick it up. Next, find the microwave and open it, put tomato slice down, and close it. After that, turn on the microwave, wait for sometime and turn off and open it. Find the tomato slice, pick it up, and close the microwave. Find a sink and put it down.",
+      "executable_plan": [
+        { "action_id": 34, "action_name": "find a Knife", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 127, "action_name": "pick up the Knife", "predicted_state": "I am holding the Knife." },
+        { "action_id": 35, "action_name": "find a Tomato", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 159, "action_name": "slice the Tomato", "predicted_state": "The Tomato is sliced. I am still holding the Knife." },
+        { "action_id": 79, "action_name": "find a Sink", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Knife is near the Sink. My hand is empty." },
+        { "action_id": 35, "action_name": "find a Tomato", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 129, "action_name": "pick up the Tomato", "predicted_state": "I am holding a Tomato slice." },
+        { "action_id": 38, "action_name": "find a Microwave", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Tomato slice is in the Microwave. My hand is empty." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED." },
+        { "action_id": 149, "action_name": "turn on the Microwave", "predicted_state": "The Microwave is ON, heating the tomato slice." },
+        { "action_id": 150, "action_name": "turn off the Microwave", "predicted_state": "The Microwave is OFF. The tomato slice is heated." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN." },
+        { "action_id": 35, "action_name": "find a Tomato", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 129, "action_name": "pick up the Tomato", "predicted_state": "I am holding the heated Tomato slice." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED." },
+        { "action_id": 79, "action_name": "find a Sink", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The heated Tomato slice is in the Sink. Task complete." }
+      ]
+    }
+  },
+  {
+    "Human instruction": "Slice some lettuce and cool it in the refrigerator so you can put it on the counter top.",
+    "Output": {
+      "language_plan": "First, find a knife and pick it up, then locate a lettuce and slice it. Since I'm holding a knife, I need to put down the knife on the counter top for safety. Next, find the sliced lettuce and pick it up. Locate the fridge, open it, and place the lettuce inside to cool. After cooling, open the fridge, find the lettuce, and pick it up. Close the fridge, then find the counter top and put the lettuce down on it.",
+      "executable_plan": [
+        { "action_id": 34, "action_name": "find a Knife", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 127, "action_name": "pick up the Knife", "predicted_state": "I am holding the Knife." },
+        { "action_id": 55, "action_name": "find a Lettuce", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 158, "action_name": "slice the Lettuce", "predicted_state": "The Lettuce is sliced. I am still holding the Knife." },
+        { "action_id": 39, "action_name": "find a CounterTop", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Knife is on the CounterTop. My hand is empty." },
+        { "action_id": 55, "action_name": "find a Lettuce", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 95, "action_name": "pick up the Lettuce", "predicted_state": "I am holding a Lettuce slice." },
+        { "action_id": 78, "action_name": "find a Fridge", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 139, "action_name": "open the Fridge", "predicted_state": "The Fridge door is OPEN." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Lettuce slice is in the Fridge. My hand is empty." },
+        { "action_id": 140, "action_name": "close the Fridge", "predicted_state": "The Fridge door is CLOSED." },
+        { "action_id": 139, "action_name": "open the Fridge", "predicted_state": "The Fridge door is OPEN. I see the cooled lettuce slice." },
+        { "action_id": 55, "action_name": "find a Lettuce", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 95, "action_name": "pick up the Lettuce", "predicted_state": "I am holding the cooled Lettuce slice." },
+        { "action_id": 140, "action_name": "close the Fridge", "predicted_state": "The Fridge door is CLOSED." },
+        { "action_id": 39, "action_name": "find a CounterTop", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Lettuce slice is on the CounterTop. Task complete." }
+      ]
+    }
+  },
+  {
+    "Human instruction": "Put a chilled slice of apple in the microwave.",
+    "Output": {
+      "language_plan": "Firstly, locate the knife and pick it up, then find an apple and slice it. Before picking anything, I need to put down the knife on the counter top for safe handling. Find the apple slice, pick it up, and then find the fridge. Open the fridge, place the apple slice inside, and close the fridge to chill it. After chilling, open the fridge, find the apple slice, and pick it up. Close the fridge, locate the microwave, open it, and place the apple slice inside, then close the microwave.",
+      "executable_plan": [
+        { "action_id": 34, "action_name": "find a Knife", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 127, "action_name": "pick up the Knife", "predicted_state": "I am holding the Knife." },
+        { "action_id": 22, "action_name": "find a Apple", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 160, "action_name": "slice the Apple", "predicted_state": "The Apple is sliced. I am still holding the Knife." },
+        { "action_id": 39, "action_name": "find a CounterTop", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Knife is on the CounterTop. My hand is empty." },
+        { "action_id": 22, "action_name": "find a Apple", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 107, "action_name": "pick up the Apple", "predicted_state": "I am holding an Apple slice." },
+        { "action_id": 78, "action_name": "find a Fridge", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 139, "action_name": "open the Fridge", "predicted_state": "The Fridge door is OPEN." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Apple slice is in the Fridge. My hand is empty." },
+        { "action_id": 140, "action_name": "close the Fridge", "predicted_state": "The Fridge door is CLOSED." },
+        { "action_id": 139, "action_name": "open the Fridge", "predicted_state": "The Fridge door is OPEN. I see the chilled apple slice." },
+        { "action_id": 22, "action_name": "find a Apple", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 107, "action_name": "pick up the Apple", "predicted_state": "I am holding the chilled Apple slice." },
+        { "action_id": 140, "action_name": "close the Fridge", "predicted_state": "The Fridge door is CLOSED." },
+        { "action_id": 38, "action_name": "find a Microwave", "predicted_state": "Exploration phase: target not visible, prediction skipped." },
+        { "action_id": 143, "action_name": "open the Microwave", "predicted_state": "The Microwave door is OPEN." },
+        { "action_id": 133, "action_name": "put down the object in hand", "predicted_state": "The Apple slice is in the Microwave. My hand is empty." },
+        { "action_id": 144, "action_name": "close the Microwave", "predicted_state": "The Microwave door is CLOSED. Task complete." }
+      ]
+    }
+  }
+]

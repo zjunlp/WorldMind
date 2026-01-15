@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Object Parameter IDs</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td>
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Object Parameter IDs</h1>
+
+<p>Refer to the API functions <a href="regularApi/simGetObjectInt32Parameter.htm">sim.getObjectInt32Parameter</a>, <a href="regularApi/simSetObjectInt32Parameter.htm">sim.setObjectInt32Parameter</a>, <a href="regularApi/simGetObjectFloatParameter.htm">sim.getObjectFloatParameter</a>, <a href="regularApi/simSetObjectFloatParameter.htm">sim.setObjectFloatParameter</a>, <a href="regularApi/simGetObjectStringParameter.htm">sim.getObjectStringParameter</a> and <a href="regularApi/simSetObjectStringParameter.htm">sim.setObjectStringParameter</a> for details on following values:<br>
+</p>
+
+
+<h3 class=subsectionBar><a name="sceneObjects" id="sceneObjects"></a>Scene objects</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.objintparam_visibility_layer (10)</strong>: int32 parameter : object visibility layer</div>
+<div><strong>sim.objfloatparam_abs_x_velocity (11)</strong>: float parameter (can only be read) : object absolute x velocity. This is a calculated value. Refer also to <a href="regularApi/simGetObjectVelocity.htm">sim.getObjectVelocity</a>.</div>
+<div><strong>sim.objfloatparam_abs_y_velocity (12)</strong>: float parameter (can only be read) : object absolute y velocity. This is a calculated value. Refer also to <a href="regularApi/simGetObjectVelocity.htm">sim.getObjectVelocity</a>.</div>
+<div><strong>sim.objfloatparam_abs_z_velocity (13)</strong>: float parameter (can only be read) : object absolute z velocity. This is a calculated value. Refer also to <a href="regularApi/simGetObjectVelocity.htm">sim.getObjectVelocity</a>.</div>
+<div><strong>sim.objfloatparam_abs_rot_velocity (14)</strong>: float parameter (can only be read) : object absolute rotational velocity. This is a calculated value. Refer also to <a href="regularApi/simGetObjectVelocity.htm">sim.getObjectVelocity</a>.</div>
+
+<div><strong>sim.objfloatparam_objbbox_min_x (15)</strong>: float parameter (can only be read) : object bounding box, min. x position (relative to the object reference frame)</div>
+<div><strong>sim.objfloatparam_objbbox_min_y (16)</strong>: float parameter (can only be read) : object bounding box, min. y position (relative to the object reference frame)</div>
+<div><strong>sim.objfloatparam_objbbox_min_z (17)</strong>: float parameter (can only be read) : object bounding box, min. z position (relative to the object reference frame)</div>
+<div><strong>sim.objfloatparam_objbbox_max_x (18)</strong>: float parameter (can only be read) : object bounding box, max. x position (relative to the object reference frame)</div>
+<div><strong>sim.objfloatparam_objbbox_max_y (19)</strong>: float parameter (can only be read) : object bounding box, max. y position (relative to the object reference frame)</div>
+<div><strong>sim.objfloatparam_objbbox_max_z (20)</strong>: float parameter (can only be read) : object bounding box, max. z position (relative to the object reference frame)</div>
+
+<div><strong>sim.objfloatparam_modelbbox_min_x (21)</strong>: float parameter (can only be read) : model bounding box, min. x position (relative to the object reference frame). Object needs to be flagged as model base.</div>
+<div><strong>sim.objfloatparam_modelbbox_min_y (22)</strong>: float parameter (can only be read) : model bounding box, min. y position (relative to the object reference frame). Object needs to be flagged as model base.</div>
+<div><strong>sim.objfloatparam_modelbbox_min_z (23)</strong>: float parameter (can only be read) : model bounding box, min. z position (relative to the object reference frame). Object needs to be flagged as model base.</div>
+<div><strong>sim.objfloatparam_modelbbox_max_x (24)</strong>: float parameter (can only be read) : model bounding box, max. x position (relative to the object reference frame). Object needs to be flagged as model base.</div>
+<div><strong>sim.objfloatparam_modelbbox_max_y (25)</strong>: float parameter (can only be read) : model bounding box, max. y position (relative to the object reference frame). Object needs to be flagged as model base.</div>
+<div><strong>sim.objfloatparam_modelbbox_max_z (26)</strong>: float parameter (can only be read) : model bounding box, max. z position (relative to the object reference frame). Object needs to be flagged as model base.</div>
+
+<div><strong>sim.objintparam_collection_self_collision_indicator (27)</strong>: int32 parameter : collection self-collision indicator.</div>
+<div><strong>sim.objfloatparam_transparency_offset (28)</strong>: float parameter : transparent object distance offset. When rendering transparent objects, they are ordered from back to front for rendering. With this value you can influence the ordering a bit.</div>
+<div><strong>sim.objintparam_manipulation_permissions (31)</strong>: int32 parameter : object manipulation permissions, bit-coded: bit0 set (1) --> object can be translated during non-simulation, bit1 set (2) --> object can be translated during simulation, bit2 set (4) --> object can be rotated during non-simulation, bit3 set (8) --> object can be rotated during simulation, bit4 set (16) --&gt; object manual shift settings are locked, bit5 set (32) --&gt; object nanual rotation settings are locked.</div>
+<div><strong>sim.objintparam_illumination_handle (32)</strong>: int32 parameter : -1 if object should be illuminated by all light objects, otherwise a light handle (or collection handle) for the light object(s) that should illuminate the object.</div>
+<div><strong>sim.objstringparam_dna (33)</strong>: string parameter : the object DNA string, if available. Can only be read.</div>
+<div><strong>sim.objfloatparam_size_factor (34)</strong>: float parameter : a size factor that will be automatically scaled when the object gets scaled.</div>
+<div><strong>sim.objstringparam_unique_id (35)</strong>: string parameter : a string that uniquely and persistently identifies an object. Can only be read.</div>
+<div><strong>sim.objintparam_visible (36)</strong>: int32 parameter : 0 if the shape is not visible. Can only be read.</div>
+
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+
+
+<h3 class=subsectionBar><a name="visionSensors" id="visionSensors"></a>Vision sensors</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.visionfloatparam_near_clipping (1000)</strong>: float parameter : near clipping plane</div>
+<div><strong>sim.visionfloatparam_far_clipping (1001)</strong>: float parameter : far clipping plane</div>
+<div><strong>sim.visionintparam_resolution_x (1002)</strong>: int32 parameter : resolution x</div>
+<div><strong>sim.visionintparam_resolution_y (1003)</strong>: int32 parameter : resolution y</div>
+<div><strong>sim.visionfloatparam_perspective_angle (1004)</strong>: float parameter : perspective projection angle</div>
+<div><strong>sim.visionfloatparam_ortho_size (1005)</strong>: float parameter : orthographic projection size</div>
+<div><strong>sim.visionintparam_disabled_light_components (1006)</strong>: int32 parameter : mask of disabled light components (ambient, diffuse, specular)</div>
+<div><strong>sim.visionintparam_rendering_attributes (1007)</strong>: int32 parameter : a combination of <a href="apiConstants.htm#renderingAttributes">rendering attributes</a>. Use with care.</div>
+<div><strong>sim.visionintparam_entity_to_render (1008)</strong>: int32 parameter : entity handle of the entity to render, or -1 to render all renderable objects.</div>
+<div><strong>sim.visionintparam_windowed_size_x (1009)</strong>: int32 parameter : size X of external windowed rendering. 0 for full-screen.</div>
+<div><strong>sim.visionintparam_windowed_size_y (1010)</strong>: int32 parameter : size Y of external windowed rendering. 0 for full-screen.</div>
+<div><strong>sim.visionintparam_windowed_pos_x (1011)</strong>: int32 parameter : pos X of external windowed rendering.</div>
+<div><strong>sim.visionintparam_windowed_pos_y (1012)</strong>: int32 parameter : pos Y of external windowed rendering.</div>
+<div><strong>sim.visionintparam_pov_focal_blur (1013)</strong>: int32 parameter : POV-Ray focal blur enabled flag.</div>
+<div><strong>sim.visionfloatparam_pov_blur_distance (1014)</strong>: float parameter : POV-Ray focal blur distance.</div>
+<div><strong>sim.visionfloatparam_pov_aperture (1015)</strong>: float parameter : POV-Ray aperture.</div>
+<div><strong>sim.visionintparam_pov_blur_sampled (1016)</strong>: int32 parameter : POV-Ray blur samples.</div>
+<div><strong>sim.visionintparam_render_mode (1017)</strong>: int32 parameter : Render mode. Use with care. 0=normal, 1=aux. channels, 2=object handles, 3=POV-Ray.</div>
+<div><strong>sim.visionintparam_perspective_operation (1018)</strong>: int32 parameter : whether the vision sensor operated in perspective mode (1) or orthogonal mode (0).</div>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+
+<h3 class=subsectionBar><a name="joints" id="joints"></a>Joints</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.jointintparam_motor_enabled (2000)</strong>: int32 parameter : dynamic motor enable state (0 or !=0)</div>
+<div><strong>sim.jointintparam_ctrl_enabled (2001)</strong>: int32 parameter : dynamic motor control loop enable state (0 or !=0)</div>
+<div><strong>sim.jointfloatparam_pid_p (2002)</strong>: float parameter : dynamic motor position control P parameter</div>
+<div><strong>sim.jointfloatparam_pid_i (2003)</strong>: float parameter : dynamic motor position control I parameter</div>
+<div><strong>sim.jointfloatparam_pid_d (2004)</strong>: float parameter : dynamic motor position control D parameter</div>
+<div><strong>sim.jointfloatparam_intrinsic_x (2005)</strong>: float parameter (can only be read) : joint transformation, position X</div>
+<div><strong>sim.jointfloatparam_intrinsic_y (2006)</strong>: float parameter (can only be read) : joint transformation, position Y</div>
+<div><strong>sim.jointfloatparam_intrinsic_z (2007)</strong>: float parameter (can only be read) : joint transformation, position Z</div>
+<div><strong>sim.jointfloatparam_intrinsic_qx (2008)</strong>: float parameter (can only be read) : joint transformation, quaternion X</div>
+<div><strong>sim.jointfloatparam_intrinsic_qy (2009)</strong>: float parameter (can only be read) : joint transformation, quaternion Y</div>
+<div><strong>sim.jointfloatparam_intrinsic_qz (2010)</strong>: float parameter (can only be read) : joint transformation, quaternion Z</div>
+<div><strong>sim.jointfloatparam_intrinsic_qw (2011)</strong>: float parameter (can only be read) : joint transformation, quaternion W</div>
+<div><strong>sim.jointfloatparam_velocity (2012)</strong>: float parameter (can only be read) : joint velocity. This is a calculated value.</div>
+<div><strong>sim.jointfloatparam_spherical_qx (2013)</strong>: float parameter (can only be written) : spherical joint quaternion (X part). Value is buffered (quaternion will only be written when float parameter 2016 is written)</div>
+<div><strong>sim.jointfloatparam_spherical_qy (2014)</strong>: float parameter (can only be written) : spherical joint quaternion (Y part). Value is buffered (quaternion will only be written when float parameter 2016 is written)</div>
+<div><strong>sim.jointfloatparam_spherical_qz (2015)</strong>: float parameter (can only be written) : spherical joint quaternion (Z part). Value is buffered (quaternion will only be written when float parameter 2016 is written)</div>
+<div><strong>sim.jointfloatparam_spherical_qw (2016)</strong>: float parameter (can only be written) : spherical joint quaternion (W part). Writes a quaternion using also buffered values (see parameters 2013-2015)</div>
+<div><strong>sim.jointfloatparam_upper_limit (2017)</strong>: float parameter : joint upper velocity limit. May only have an effect after simulation restart, or after resetting the joint with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a></div>
+<div><strong>sim.jointfloatparam_kc_k (2018)</strong>: float parameter : dynamic motor spring control K parameter</div>
+<div><strong>sim.jointfloatparam_kc_c (2019)</strong>: float parameter : dynamic motor spring control C parameter</div>
+<div><strong>sim.jointfloatparam_ik_weight (2021)</strong>: float parameter : joint IK resolution weight.</div>
+
+<div><strong>sim.jointfloatparam_error_x (2022)</strong>: float parameter : joint internal position error X (when joint is dynamically enabled). Can only be read.</div>
+<div><strong>sim.jointfloatparam_error_y (2023)</strong>: float parameter : joint internal position error Y (when joint is dynamically enabled). Can only be read.</div>
+<div><strong>sim.jointfloatparam_error_z (2024)</strong>: float parameter : joint internal position error Z (when joint is dynamically enabled). Can only be read.</div>
+<div><strong>sim.jointfloatparam_error_a (2025)</strong>: float parameter : joint internal orientation error alpha (euler(0)) (when joint is dynamically enabled). Can only be read.</div>
+<div><strong>sim.jointfloatparam_error_b (2026)</strong>: float parameter : joint internal orientation error beta (euler(1)) (when joint is dynamically enabled). Can only be read.</div>
+<div><strong>sim.jointfloatparam_error_g (2027)</strong>: float parameter : joint internal orientation error gamma (euler(2)) (when joint is dynamically enabled). Can only be read.</div>
+<div><strong>sim.jointfloatparam_error_pos (2028)</strong>: float parameter : joint internal position error (when joint is dynamically enabled). Can only be read.</div>
+<div><strong>sim.jointfloatparam_error_angle (2029)</strong>: float parameter : joint internal angular error (when joint is dynamically enabled). Can only be read.</div>
+<div><strong>sim.jointintparam_velocity_lock (2030)</strong>: int32 parameter : joint velocity lock mode enable state (when enabled and joint is in velocity mode and its target velocity is zero, then the joint is locked in place).</div>
+<div><strong>sim.jointintparam_vortex_dep_handle (2031)</strong>: int32 parameter : Vortex joint dependency, dependent joint handle. When written, the joint might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a> for the change to take effect.</div>
+<div><strong>sim.jointfloatparam_vortex_dep_multiplication (2032)</strong>: float parameter : Vortex joint dependency, multiplication factor. When written, the joint might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a> for the change to take effect.</div>
+<div><strong>sim.jointfloatparam_vortex_dep_offset (2033)</strong>: float parameter : Vortex joint dependency, offset. When written, the joint might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a> for the change to take effect.</div>
+
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="shapes" id="shapes"></a>Shapes</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.shapefloatparam_init_velocity_x (3000)</strong>: float parameter : x-component of the initial dynamic linear velocity of a dynamically enabled shape (static or non-static). The shape might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a></div>
+<div><strong>sim.shapefloatparam_init_velocity_y (3001)</strong>: float parameter : y-component of the initial dynamic linear velocity of a dynamically enabled shape (static or non-static). The shape might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a></div>
+<div><strong>sim.shapefloatparam_init_velocity_z (3002)</strong>: float parameter : z-component of the initial dynamic linear velocity of a dynamically enabled shape (static or non-static). The shape might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a></div>
+<div><strong>sim.shapeintparam_static (3003)</strong>: int32 parameter : static state (0 or !=0). Use with care when setting this parameter</div>
+<div><strong>sim.shapeintparam_respondable (3004)</strong>: int32 parameter : respondable state (0 or !=0). Use with care when setting this parameter during simulation (the shape might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a>)</div>
+<div><strong>sim.shapefloatparam_mass (3005)</strong>: float parameter : mass of the shape. Use with care when setting this parameter during simulation (the shape might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a>)</div>
+<div><strong>sim.shapefloatparam_texture_x (3006)</strong>: float parameter : texture x-coordinate. Has no effect when imported texture coordinates are used</div>
+<div><strong>sim.shapefloatparam_texture_y (3007)</strong>: float parameter : texture y-coordinate. Has no effect when imported texture coordinates are used</div>
+<div><strong>sim.shapefloatparam_texture_z (3008)</strong>: float parameter : texture z-coordinate. Has no effect when imported texture coordinates are used</div>
+<div><strong>sim.shapefloatparam_texture_a (3009)</strong>: float parameter : texture alpha-coordinate (<a href="eulerAngles.htm">Euler angle</a>). Has no effect when imported texture coordinates are used</div>
+<div><strong>sim.shapefloatparam_texture_b (3010)</strong>: float parameter : texture beta-coordinate (<a href="eulerAngles.htm">Euler angle</a>). Has no effect when imported texture coordinates are used</div>
+<div><strong>sim.shapefloatparam_texture_g (3011)</strong>: float parameter : texture gamma-coordinate (<a href="eulerAngles.htm">Euler angle</a>). Has no effect when imported texture coordinates are used</div>
+<div><strong>sim.shapefloatparam_texture_scaling_x (3012)</strong>: float parameter : texture scaling along x. Has no effect when imported texture coordinates are used</div>
+<div><strong>sim.shapefloatparam_texture_scaling_y (3013)</strong>: float parameter : texture scaling along y. Has no effect when imported texture coordinates are used</div>
+<div><strong>sim.shapeintparam_culling (3014)</strong>: int32 parameter : culling state (0 or !=0)</div>
+<div><strong>sim.shapeintparam_wireframe (3015)</strong>: int32 parameter : wireframe state (0 or !=0)</div>
+<div><strong>sim.shapeintparam_compound (3016)</strong>: int32 parameter : shape compound state (0 if shape is a simple shape, !=0 if shape is a compound shape)</div>
+<div><strong>sim.shapeintparam_convex (3017)</strong>: int32 parameter : shape convex state (!=0 if shape mesh(es) is/are convex). This is just a flag. Very careful when setting this value (make sure the mesh(es) is/are closed and perfectly convex). The flag is used to select special and faster collision calculation routines for the physics engines. See also next item</div>
+<div><strong>sim.shapeintparam_convex_check (3018)</strong>: int32 parameter : triggers a convectivity check for the given shape. Can only be set (parameter can be any value). The shape's convex state will be set. Normally not needed because done automatically.</div>
+<div><strong>sim.shapeintparam_respondable_mask (3019)</strong>: int32 parameter : respondable mask. When setting this parameter during simulation (the shape might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a>)</div> 
+
+<div><strong>sim.shapefloatparam_init_velocity_a (3020)</strong>: float parameter : alpha-component of the initial dynamic angular velocity of a dynamically enabled shape (static or non-static). The shape might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a></div>
+<div><strong>sim.shapefloatparam_init_velocity_b (3021)</strong>: float parameter : beta-component of the initial dynamic angular velocity of a dynamically enabled shape (static or non-static). The shape might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a></div>
+<div><strong>sim.shapefloatparam_init_velocity_g (3022)</strong>: float parameter : gamma-component of the initial dynamic angular velocity of a dynamically enabled shape (static or non-static). The shape might have to be reset with <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a></div>
+<div><strong>sim.shapestringparam_color_name (3023)</strong>: string parameter : the color name(s) contained in the shape. If several color strings are contained, they are separated by a space character. You can use those strings to modify the color of a simple shape contained in a compound shape with <a href="regularApi/simSetShapeColor.htm">sim.setShapeColor</a>. This parameter can only be written for shapes that are not compound shapes.</div>
+<div><strong>sim.shapeintparam_edge_visibility (3024)</strong>: int32 parameter : edge visibility state (0 or !=0).</div>
+<div><strong>sim.shapefloatparam_shading_angle (3025)</strong>: float parameter : shading angle.</div>
+<div><strong>sim.shapefloatparam_edge_angle (3026)</strong>: float parameter : edge threshold angle.</div>
+<div><strong>sim.shapeintparam_edge_borders_hidden (3027)</strong>: int32 parameter : hide edge borders (0 or !=0).</div>
+
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="proximitySensors" id="proximitySensors"></a>Proximity sensors</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.proxintparam_ray_invisibility (4000)</strong>: int32 parameter : detection ray invisibility state (0 or !=0)</div>
+<div><strong>sim.proxintparam_volume_type (4001)</strong>: int32 parameter : the <a href="apiConstants.htm#volumeTypes">volume type</a> of the proximity sensor. Can only be read.</div>
+<div><strong>sim.proxintparam_entity_to_detect (4002)</strong>: int32 parameter : entity handle of the entity to detect, or -1 to detect all detectable objects.</div>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="forceSensors" id="forceSensors"></a>Force sensors</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.forcefloatparam_error_x (5000)</strong>: float parameter : force sensor internal position error X. Can only be read.</div>
+<div><strong>sim.forcefloatparam_error_y (5001)</strong>: float parameter : force sensor internal position error Y. Can only be read.</div>
+<div><strong>sim.forcefloatparam_error_z (5002)</strong>: float parameter : force sensor internal position error Z. Can only be read.</div>
+<div><strong>sim.forcefloatparam_error_a (5003)</strong>: float parameter : force sensor internal orientation error alpha (euler(0)). Can only be read.</div>
+<div><strong>sim.forcefloatparam_error_b (5004)</strong>: float parameter : force sensor internal orientation error beta (euler(1)). Can only be read.</div>
+<div><strong>sim.forcefloatparam_error_g (5005)</strong>: float parameter : force sensor internal orientation error gamma (euler(2)). Can only be read.</div>
+<div><strong>sim.forcefloatparam_error_pos (5006)</strong>: float parameter : force sensor internal position error. Can only be read.</div>
+<div><strong>sim.forcefloatparam_error_angle (5007)</strong>: float parameter : force sensor internal angular error. Can only be read.</div>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="paths" id="paths"></a>Paths</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="graphs" id="graphs"></a>Graphs</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="lights" id="lights"></a>Lights</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.lightintparam_pov_casts_shadows (8000)</strong>: int32 parameter : POV-Ray light casts shadows.</div>
+<div><strong>sim.lightfloatparam_spot_exponent (8001)</strong>: float parameter : light spot exponent.</div>
+<div><strong>sim.lightfloatparam_spot_cutoff (8002)</strong>: float parameter : light spot cutoff.</div>
+<div><strong>sim.lightfloatparam_const_attenuation (8003)</strong>: float parameter : light constant attenuation factor.</div>
+<div><strong>sim.lightfloatparam_lin_attenuation (8004)</strong>: float parameter : light linear attenuation factor.</div>
+<div><strong>sim.lightfloatparam_quad_attenuation (8005)</strong>: float parameter : light quadratic attenuation factor.</div>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="cameras" id="cameras"></a>Cameras</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.cameraintparam_disabled_light_components (9000)</strong>: int32 parameter : mask of disabled light components (ambient, diffuse, specular)</div>
+<div><strong>sim.camerafloatparam_perspective_angle (9001)</strong>: float parameter : camera perspective angle.</div>
+<div><strong>sim.camerafloatparam_ortho_size (9002)</strong>: float parameter : camera orthographic size.</div>
+<div><strong>sim.cameraintparam_rendering_attributes (9003)</strong>: int32 parameter : a combination of <a href="apiConstants.htm#renderingAttributes">rendering attributes</a>. Use with care.</div>
+<div><strong>sim.cameraintparam_pov_focal_blur (9004)</strong>: int32 parameter : POV-Ray focal blur enabled flag.</div>
+<div><strong>sim.camerafloatparam_pov_blur_distance (9005)</strong>: float parameter : POV-Ray focal blur distance.</div>
+<div><strong>sim.camerafloatparam_pov_aperture (9006)</strong>: float parameter : POV-Ray aperture.</div>
+<div><strong>sim.cameraintparam_pov_blur_samples (9007)</strong>: int32 parameter : POV-Ray blur samples.</div>
+<div><strong>sim.visionfloatparam_near_clipping (9008)</strong>: float parameter : near clipping plane</div>
+<div><strong>sim.visionfloatparam_far_clipping (9009)</strong>: float parameter : far clipping plane</div>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="dummies" id="dummies"></a>Dummies</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.dummyintparam_link_type (10000)</strong>: int32 parameter : <a href="apiConstants.htm#dummyLinkTypes">dummy link type</a>. If you set this value for a dummy that is dynamically enabled or that will be come dynamically enabled, you might have to call <a href="regularApi/simResetDynamicObject.htm">sim.resetDynamicObject</a> on the two dummies for the effect to become active.</div>
+<div><strong>sim.dummyintparam_follow_path (10001)</strong>: int32 parameter : 1 if the dummy should follow its parent path, 0 otherwise.</div>
+<div><strong>sim.dummyfloatparam_follow_path_offset (10002)</strong>: float parameter : the offset on the path object, when following a path.</div>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<!--
+<h3 class=subsectionBar><a name="mills" id="mills"></a>Mills</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.millintparam_volume_type (11000)</strong>: int32 parameter : the <a href="apiConstants.htm#volumeTypes">volume type</a> of the mill. Can only be read.</div>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+-->
+
+<h3 class=subsectionBar><a name="octrees" id="octrees"></a>OC trees</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+
+<h3 class=subsectionBar><a name="pointClouds" id="pointClouds"></a>Point clouds</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+
+<!--
+<h3 class=subsectionBar><a name="mirrors" id="mirrors"></a>Mirrors</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div><strong>sim.mirrorfloatparam_width (12000)</strong>: float parameter : width of the mirror</div>
+<div><strong>sim.mirrorfloatparam_height (12001)</strong>: float parameter : height of the mirror</div>
+<div><strong>sim.mirrorfloatparam_reflectance (12002)</strong>: float parameter : reflectance of the mirror</div>
+<div><strong>sim.mirrorintparam_enable (12003)</strong>: int32 parameter : enable state of the mirror</div>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+-->
+
+
+<h3 class=subsectionBar><a name="collisionObjects" id="collisionObjects"></a>Collision objects</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+
+<h3 class=subsectionBar><a name="distanceObjects" id="distanceObjects"></a>Distance objects</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="ikGroups" id="ikGroups"></a>IK groups</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+<h3 class=subsectionBar><a name="gcsObjects" id="gcsObjects"></a>Geometric constraint solver objects</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<br>
+<div>More parameters you wish to adjust from the API? Ask us to add them for a future release!</div>
+</td>
+</tr>
+</table>
+<br>
+
+
+<br>
+<br>
+</td>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

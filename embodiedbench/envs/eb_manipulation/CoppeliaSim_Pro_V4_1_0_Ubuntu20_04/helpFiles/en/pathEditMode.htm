@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Path edit modes</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Path edit mode</h1>
+
+<p>Preliminary note: the path edit mode is a convenient and full-featured way to edit a <a href="paths.htm">path object</a>. Individual path points can however be shifted and erased without entering the path edit mode for minimalistic path modifications (when selecting individual path points, make sure no other <a href="objects.htm">object</a> than the path is selected).
+</p>
+
+<p>The path edit mode can be accessed with a click on the appropriate toolbar button:</p>
+
+<p align=center><img src="images/pathEditModeButton.jpg"></p>
+<p class=imageLabel>[Path edit mode toolbar button]</p>
+
+<p>The above toolbar button is only active if a path is selected. In path edit mode, the portion of the window that normally displays the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> is used to display the <a href="pathsControlPointsAndBezierPoints.htm">path control points</a> as a list. Items in the list can be selected with the mouse as for objects in the hierarchy window.<br>
+</p>
+
+<p align=center><img src="images/pathEditMode1.jpg"></p>
+<p class=imageLabel>[Path edit mode]</p>
+<br>
+
+
+<p>Individual control points can now be selected as was possible with regular objects. The last selected control point appears in white color, other selected control points in yellow, and non-selected control points in blue. In a similar way, control points can be directly translated with the mouse, using the toolbar's object/item translation toolbar button to translate the selected control point in a perpendicular plane to the view direction:
+</p>
+
+<p align=center><img src="images/objectShiftButton.jpg"></p>
+<p class=imageLabel>[Object/item translation toolbar button]</p>
+
+</p>
+<p>In the path edit mode, a path edit mode dialog displays:</p>
+
+<p align=center><img src="images/pathCtrlPointProperties.jpg"></p>
+<p class=imageLabel>[Control point properties dialog]</p>
+
+
+<li><strong>Path is closed</strong>: if selected, then a path's last <a href="pathsControlPointsAndBezierPoints.htm">control point</a> will be linked to its first control point to close the path and make its operation cyclic. A minimum of 3 control points are required for a path to be closed.<br>
+</li>
+
+<li><strong>Path is flat</strong>: if selected, then all control points (and subsequently all Bezier points) will be constraint to the z=0 plane of the path object's local reference frame.<br>
+</li>
+
+<li><strong>Automatic orientation</strong>: if enabled, then all control points and Bezier point's orientation will automatically be calculated in order to have a point's z-axis along the path, and its y-axis pointing outwards its curvature (if <strong>keep x up</strong> is enabled, the y-axis is not particularly constained). If disabled, the user determines the control point's orientation and the Bezier points' orientation will be interpolated from the path's control points' orientation.
+</li>
+
+<li><strong>Keep x up</strong>: if selected, then the automatic orientation functionality will align each Bezier point's z-axis along the path and keep its x-axis pointing along the path object's z-axis.
+</li>
+
+
+<li><strong>Clear selection</strong>: clears the selection of control points.
+</li>
+<li><strong>Invert selection</strong>: inverts the selection state of control points.
+</li>
+
+
+
+<li><strong>Make dummies</strong>: generates dummies at the locations where control points were selected.
+</li>
+
+
+
+
+<li><strong>Bezier interpolation factor 1 / 2</strong>: see the section on <a href="pathsControlPointsAndBezierPoints.htm">control points and Bezier points</a> for details. </li>
+
+<li><strong>Bezier point count</strong>: see the section on <a href="pathsControlPointsAndBezierPoints.htm">control points and Bezier points</a> for details. </li>
+
+<li><strong>Virtual distance</strong>: see the section on <a href="pathMovementAlongAPath.htm">movement along a path</a> for details. </li>
+
+<li><strong>Auxiliary flags</strong>: a flag that can be used for various purposes, and that can be queried via the <a href="regularApi/simGetDataOnPath.htm">sim.getDataOnPath</a> function.</li>
+
+<li><strong>Auxiliary channels 1-4</strong>: values that can be used for various purposes, and that can be queried via the <a href="regularApi/simGetDataOnPath.htm">sim.getDataOnPath</a> function.</li>
+
+
+<p> For precise positionning of control points, use the <a href="coordinateDialog.htm">coordinates and transformation dialog</a>. If you want to edit a control point's orientation, make sure the path's automatic orientation option is disabled (that option is enabled by default).<br>
+</p>
+
+<p>Copy/paste/delete/cut operations are supported with the regular key combination (i.e. ctrl-c, ctrl-v, delete and ctrl-x). Make sure the main <a href="pagesAndViews.htm">view</a> has the focus for key presses to have an effect. The paste operation will paste the copied control point(s) at the beginning of the control point list if no control point is selected, otherwise it (they) will be pasted after the selected control point (make sure no more than one control point is selected at this stage). The same copy/paste/delete/cut functionalities can also be accessed through the popup-menu or through [Main menu --&gt; Edit]. Additional operations include:<br>
+</p>
+
+<li><strong>Insert new path point at beginning of path / Insert new path point after selection</strong>: a new control point is inserted at the beginning of the path if no control point is selected, otherwise a new control point is inserted after current selection (make sure no more than one control point is selected in this case).<br>
+</li>
+
+<li><strong>Make new path from bezier curve</strong>: generates a new path object with the Bezier points of current path, i.e. the new path's control points will be the current path's Bezier Points.
+</li>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="paths.htm">Paths</a></li>
+<li><a href="pathsControlPointsAndBezierPoints.htm">Path control points and Bezier points</a></li>
+<li><a href="pathPropertiesDialog.htm">Path properties</a></li>
+<li><a href="pathImportExport.htm">Path import/export operations</a></li>
+<li><a href="coordinateDialog.htm">Coordinates and transformation dialog</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

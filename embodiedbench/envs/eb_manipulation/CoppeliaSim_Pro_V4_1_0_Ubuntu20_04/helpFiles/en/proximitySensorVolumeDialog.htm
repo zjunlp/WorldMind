@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Proximity sensor volume dialog</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Proximity sensor volume dialog</h1>
+
+<p>The proximity sensor volume dialog is part of the <a href="proximitySensorPropertiesDialog.htm">proximity sensor properties</a>. The dialog displays the volume settings and parameters of the last selected <a href="proximitySensors.htm">proximity sensor</a>. If no object is selected, the dialog is inactive. If more than one proximity sensor is selected, then some parameters can be copied from the last selected proximity sensor to the other selected proximity sensors (<strong>Apply to selection</strong>-buttons):
+</p>
+
+
+<p align=center><img src="images/proximitySensorVolumeDialog.jpg"></p>
+<p class=imageLabel>[Proximity sensor volume dialog]</p>
+<br>
+
+
+<li><strong>Volume type</strong>: the type of the volume. Six types are supported: ray, randomized ray, pyramid, cylinder, disc and cone.  Following figures describe the parameters characterizing each detection volume:<br>
+</li>
+
+<p align=center><img src="images/proximitySensorDialog2.jpg"></p>
+<p class=imageLabel>[Ray, pyramid and cylinder-type detection volume parameters]</p>
+<br>
+
+<p align=center><img src="images/proximitySensorDialog3.jpg"></p>
+<p class=imageLabel>[Disk and cone-type detection volume parameters]</p>
+<br>
+
+<li><strong>Face count</strong>, <strong>face count far</strong>, <strong>subdivisions</strong> and <strong>subdivisions far</strong> can be used to describe the detection volume with more or less precision. More precision also implies longer calculation times.<br>
+</li>
+
+<li><strong>Inside gap</strong>: parameter only available for the disc- and cone-type proximity sensors. Its value can vary between 0 and 1 and represents the amount of volume (proportionally) to remove. This feature can be used to create very sophisticated detection volumes by combining several sensors:<br>
+</li>
+
+<p align=center><img src="images/proximitySensorDialog4.jpg"></p>
+<p class=imageLabel>[Inside gap functionality and its application]</p>
+<br>
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="proximitySensors.htm">Proximity sensors</a></li>
+<li><a href="proximitySensorDescription.htm">Proximits sensor types and mode of operation</a></li>
+<li><a href="proximitySensorPropertiesDialog.htm">Proximity sensor properties</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

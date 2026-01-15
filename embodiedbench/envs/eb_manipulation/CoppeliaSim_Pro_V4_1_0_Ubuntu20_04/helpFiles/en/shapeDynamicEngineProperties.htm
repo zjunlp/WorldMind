@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Material properties</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Material properties</h1>
+
+<p>The material properties (i.e. dynamics engines properties related to <a href="shapes.htm">shapes</a>) can be accessed via the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a> dialog. The material properties of the last selected shape are displayed in a dialog:<br>
+</p>
+<p align=center><img src="images/physicsEngineProp1.jpg"></p>
+<p class=imageLabel>[Dynamics engines properties dialog related to shapes]</p>
+<br>
+
+
+<li><strong>Apply predefined settings</strong>: allows you to select a set of predefined settings for a specific behaviour (e.g. no friction).</li>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="bullet"></a>Bullet properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#bullet">Bullet physics library</a>. Make sure to also refer to the <a href="http://www.bulletphysics.org/">Bullet user manual</a> for details.</p>
+<li><strong>Friction (only Bullet V2.78)</strong>: a friction value used only with Bullet V2.78. Two colliding objects will have a combined friction value of value1*value2. This does not correspond to the real friction coefficient.</li>
+<li><strong>Friction (after Bullet V2.78)</strong>: a friction value used only with Bullet version after V2.78. Two colliding objects will have a combined friction value of value1*value2. This does not correspond to the real friction coefficient.</li>
+<li><strong>Restitution</strong>: a restitution value. Higher values tend to make collisions appear elastic. This does not correspond to the real restitution coefficient.</li>
+<li><strong>Linear damping</strong>: a linear movement damping value, that adds linear drag, and that can increase stability.</li>
+<li><strong>Angular damping</strong>: an angular movement damping value, that adds angular drag, and that can increase stability.</li>
+<li><strong>Sticky contact (only Bullet V2.78)</strong>: when this item is checked, then contact points will be very strong, but might lead to instabilities. It is recommended to keep this disabled. This feature is not needed for Bullet versions after V2.78</li>
+<li><strong>Auto-shrink convex mesh</strong>: when this item is checked, then convex meshes will be internally shrunk, in order to compensate the collision margin factor. It is recommended to keep this disabled.</li>
+<li><strong>Custom collision margin factor</strong>: when <strong>custom collision margin</strong> is set to true, this factor will override the default collision margin factor. The collision margin can helps improve stability. It is recommended to keep the default collision margin factor.</li>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="ode"></a>ODE properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#ode">Open Dynamics Engine</a>. Make sure to also refer to the <a href="http://www.ode.org">ODE user manual</a> for details.</p>
+<li><strong>Friction</strong>: a friction value. Two colliding objects will have a combined friction value of value1*value2. This does not correspond to the real friction coefficient.</li>
+<li><strong>Maximum contacts</strong>: the maximum number of contact points to generate. Two colliding objects will have a combined maximum contact value of (value1+value2)/2.</li>
+<li><strong>Soft ERP</strong>: <em>the error reduction parameter of  		the contact normal</em>, this is useful to make surfaces soft. Two colliding objects will have a combined soft ERP value of (value1+value2)/2.</li>
+<li><strong>Soft CFM</strong>: <em>the constraint force mixing  		parameter of the contact normal</em>, this is useful to make surfaces soft. Two colliding objects will have a combined soft CFM value of (value1+value2)/2.</li>
+<li><strong>Linear damping</strong>: a linear movement damping value, that adds linear drag, and that can increase stability.</li>
+<li><strong>Angular damping</strong>: an angular movement damping value, that adds angular drag, and that can increase stability.</li>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="vortex"></a>Vortex properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#vortex">Vortex Studio engine</a>. Make sure to also refer to the <a href="https://www.cm-labs.com/vortex-studio/">Vortex user manual</a> for details.</p>
+<li><strong>Restitution</strong>: collision normal response elasticity from 0 (inelastic) to 1 for pure    elastic. </li>
+<li><strong>Restitution threshold</strong>: velocity threshold below which restitution is    ignored. </li>
+<li><strong>Compliance</strong>: material softness (1/stiffness). </li>
+<li><strong>Damping</strong>: normal response damping, for soft contact (low stiffness). </li>
+<li><strong>Adhesive force</strong>: generates glue at the contact.</li>
+<li><strong>Linear velocity damping</strong>: artificial linear velocity damping. </li>
+<li><strong>Angular velocity damping</strong>: artificial angular velocity damping.</li>
+<li><strong>Auto angular  damping enabled</strong>: self-managed angular damping for    rigid bodies under large tension. Not recommended for wheels or rolling objects.</li>
+<li><strong>Auto angular damping tension ratio</strong>: scaling factor for the self-managed    angular damping algorithm.</li>
+<li><strong>Skin thickness</strong>: makes material softer within the skin thickness (makes grasping more stable). </li>
+<li><strong>Auto-slip enabled</strong>: self-management of the contact viscosity. </li>
+<li><strong>Fast moving</strong>: enables additional checks during collision detection    to prevent deep penetration or tunnel effect.</li>
+<li><strong>Treat pure shape as VxConvexMesh</strong>: handles a pure shape as a convex shape.</li>
+<li><strong>Treat convex shape as VxTriangleMeshBVTree</strong>: handles a convex shape as a OBB tree database (usually more accurate and stable than    convex shapes).</li>
+<li><strong>Treat random shape as VxTriangleMeshUVGrid</strong>: handles a random shape as a 2D grid database (more efficient for large terrain    database). 2 VxTriangleMeshUVGrids    will never collide with each other.</li>
+<li><strong>Auto-sleep</strong>: feature allowing to disable non-moving object to save simulation time. A part    is considered as sleeping when all velocities, acceleration are within corresponding    thresholds:</li>
+<li class=tabTab><strong>Threshold linear speed</strong>: linear velocity threshold. </li>
+<li class=tabTab><strong>Threshold linear acceleration</strong>: linear acceleration threshold.</li>
+<li class=tabTab><strong>Threshold angular speed</strong>: angular velocity threshold.</li>
+<li class=tabTab><strong>Threshold angular acceleration</strong>: angular acceleration threshold.</li>
+<li class=tabTab><strong>Threshold steps</strong>: minimum number of steps a    part must be awake prior to go to sleep again.</li>
+<li><strong>Linear primary axis</strong>: an axis in the friction plane. </li>
+<li class=tabTab><strong>Axis orientation</strong>: a vector indicating the orientation of the primary axis (the vector will be projected into the friction plane). The vector is relative to the shape reference frame.</li>
+<li class=tabTab><strong>Friction model</strong>: friction model along this axis.</li>
+<li class=tabTab><strong>Friction coefficient</strong>: friction coefficient (used for scaled box and    scaled box fast model). </li>
+<li class=tabTab><strong>Static friction scale</strong>: static friction/dynamic friction ratio.</li>
+<li class=tabTab><strong>Slip</strong>:  friction viscosity. </li>
+<li class=tabTab><strong>Slide</strong>:  friction desired relative velocity along this axis. </li>
+<li><strong>Linear secondary axis</strong>: second axis defining the friction plane.</li>
+<li><strong>Angular primary axis</strong>: allows adding angular friction around the    primary axis (rolling resistance). </li>
+<li><strong>Angular secondary axis</strong>: allows adding angular friction around the secondary    axis (rolling resistance).</li>
+<li><strong>Angular normal axis</strong>: allows adding angular friction around the normal axis (spin resistance).</li>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="newton"></a>Newton properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#newton">Newton Dynamics Engine</a>. Make sure to also refer to the <a href="http://www.newtondynamics.com">Newton user manual</a> for details.</p>
+<li><strong>Static friction</strong>: the static friction coefficient. Two colliding objects will have a combined friction value of value1*value2.</li>
+<li><strong>Kinetic friction</strong>: the kinetic friction coefficient. Two colliding objects will have a combined friction value of value1*value2.</li>
+<li><strong>Restitution</strong>: the restitution coefficient. Higher values tend to make collisions appear elastic. Two colliding objects will have a combined restitution value of value1+value2.</li>
+<li><strong>Linear drag</strong>: a linear drag value, which can improve stability.</li>
+<li><strong>Angular drag</strong>: an angular drag value, which can improve stability.</li>
+<li><strong>Fast moving</strong>: enables additional checks during collision detection to prevent deep penetration or tunnel effect..</li>
+
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="vortexAdvices"></a>Vortex additional information
+</td></tr></table> 
+
+<p>Material properties defines how a single shape should behave when colliding with another shape. A collision involves two shapes and their respective material properties. A contact material combines those two material properties into a merged set of properties used to generate the contact forces between the two colliding shapes during the execution of the simulation. The rules for merging two contact materials are as follow:</p>
+<li><strong>Compliance</strong>: take the most compliant and associated damping and restitution.</li>
+<li><strong>Adhesive force</strong>: use the larger value.</li>
+<li><strong>Skin thickness</strong>: use the larger value.</li>
+<li><strong>Friction model</strong>: If the two models are different, priority goes as follow: <strong>none</strong>, <strong>boxProportional</strong>, <strong>scaledBox</strong>, <strong>scaledBoxFast</strong>, <strong>box</strong>, <strong>neutral</strong>. The friction models definitions are:</li>
+<li class=tabTab><strong>None</strong>: no friction.</li>
+<li class=tabTab><strong>BoxProportional</strong>: n/a.</li>
+<li class=tabTab><strong>ScaledBox</strong>: friction boundary = normal force * friction coefficient.</li>
+<li class=tabTab><strong>ScaledBoxFast</strong>: use contact matching and contact force from the previous step. Falls back to scaledBox for a new contact.</li>
+<li class=tabTab><strong>Box</strong>: n/a.</li>
+<li class=tabTab><strong>Neutral</strong>: The lowest priority so the other model is used. If both are neutral, it is frictionless.</li>
+<li class=tabTab>If the two models are the same, use the lowest friction coefficient.</li>
+
+<p>If the friction is not isotropic, different friction properties may be provided in the 2 directions defining the friction plane (linear primary and secondary axes). The axis orientation is a vector in the object's local frame. It's projection in the friction plane defines the linear primary direction. The axis orientation is only used for anisotropic materials. If two anisotropic materials are interacting, one of them will be used, user cannot currently prioritize which one.</p>
+
+
+<br>
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="apiFunctionListCategory.htm#engineParameters">Engine properties setter and getter API functions</a></li>
+<li><a href="shapeDynamicsProperties.htm">Shape dynamics properties</a></li>
+<li><a href="dynamicsEngineDialog.htm">Dynamics engines general properties</a></li>
+<li><a href="dynamicsModule.htm#bullet">Bullet physics library</a></li>
+<li><a href="dynamicsModule.htm#ode">Open Dynamics Engine</a></li>
+<li><a href="dynamicsModule.htm#vortex">Vortex Studio</a></li>
+<li><a href="dynamicsModule.htm#newton">Newton Dynamics</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

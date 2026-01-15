@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>The script dialog</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Script dialog</h1>
+
+<p>The script dialog is located at [Menu bar --&gt; Tools --&gt; Scripts]. Alternatively, it can also be accessed through its toolbar button:<br>
+</p>
+
+<p align=center><img src="images/scriptPropDialog1.jpg"></p>
+<p class=imageLabel>[Script toolbar button]</p>
+<br>
+
+<p align=center><img src="images/scriptPropDialog2.jpg"></p>
+<p class=imageLabel>[Script dialog]</p>
+<br>
+
+
+<li><strong>Insert new script</strong>: allows adding new <a href="scripts.htm">scripts</a>.</li>
+
+<li><strong>Script listing</strong>: all scripts that are loaded. Scripts can be removed by using the delete-key. A double-click opens the script in the <a href="scriptEditor.htm">script editor</a>. A script can also be opened with a double-click on a script icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>.<br>
+</li>
+
+<li><strong>Disabled</strong>: indicates whether the script is enabled or disabled. For a given <a href="models.htm">model</a>, it is also possible to disable all of its child- and customization scripts in the <a href="modelDialog.htm">model dialog</a>.<br>
+</li>
+
+<li><strong>Execute just once</strong>: this item applies only to <a href="childScripts.htm#threaded">threaded child scripts</a>. When this item is unchecked, then a thread that ended will be relaunched by the <a href="mainScript.htm">main script</a>.<br>
+</li>
+
+<li><strong>Disable with error</strong>: since <a href="customizationScripts.htm">customization scripts</a> run constantly, it can be difficult to react to a script error. By enabling this checkbox, a customization script will disable itself upon an error.<br>
+</li>
+
+<li><strong>Associated object</strong>: <a href="objects.htm">object</a> that is currently associated with the script.<br>
+</li>
+
+<li><strong>Execution priority</strong>: specifies the execution priority for a script. The execution priority relates only to same-type scripts (i.e. <a href="childScripts.htm#nonThreaded">non-threaded child scripts</a>, <a href="childScripts.htm#threaded">threaded child scripts</a>, or <a href="customizationScripts.htm">customization scripts</a>), and only to scripts that are siblings in the scene hierarchy. More details can be found <a href="scriptExecution.htm">here</a>. </li>
+
+<li><strong>Tree traveral</strong>: specifies when a script is executed, in relation to the scripts attached further down in the scene hierarchy (its <em>descendants scripts</em>). With <em>reverse</em>, the descendant scripts are first executed, with <em>forward</em>, the descendant scripts are executed last. <em>Same as parent</em> uses the same tree traversal as the first ancestor script. The tree traversal relates only to same-type scripts (i.e. <a href="childScripts.htm#nonThreaded">non-threaded child scripts</a>, <a href="childScripts.htm#threaded">threaded child scripts</a>, or <a href="customizationScripts.htm">customization scripts</a>). More details can be found <a href="scriptExecution.htm">here</a>. </li>
+
+<li><a name="debugMode"></a><strong>Debug mode</strong>: offers a simple way to monitor function calls and to watch variables. The functionality is enabled by intercepting every call (once before it actually happens, and also once it has executed) and calling the debug function <em>__HIDDEN__.debug.entryFunc</em> in the script <em>lua/sim.lua</em> (which can be modified by the user if needed). Following debug modes are supported:</li>
+<li class=tab><em>watch system calls</em>: monitors only calls originating from outside the script</li>
+<li class=tab><em>watch variables, ~1 second interval</em>: monitors changes in variables at an approximate one second interval. <a href="regularApi/simSetDebugWatchList.htm">sim.setDebugWatchList</a> can be used to watch specific variables only.</li>
+<li class=tab><em>watch all calls (slow)</em>: monitors all function calls</li>
+<li class=tab><em>watch variables (slow)</em>: monitors changes in variables at each function call (before and after). <a href="regularApi/simSetDebugWatchList.htm">sim.setDebugWatchList</a> can be used to watch specific variables only.</li>
+<li class=tab><em>watch calls and variables (slow)</em>: monitors all function calls and changes in variables. <a href="regularApi/simSetDebugWatchList.htm">sim.setDebugWatchList</a> can be used to watch specific variables only.</li>
+
+
+<br>
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="scriptEditor.htm">The script editor</a></li>
+<li><a href="scriptExecution.htm">Script execution</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

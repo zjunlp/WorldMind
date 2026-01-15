@@ -1,0 +1,76 @@
+{
+  "reward": 0.30000000000000004,
+  "num_invalid_actions": 1,
+  "empty_plan": 0,
+  "worldmind_discrimination_results": [
+    {
+      "action": "pick up the Ladle",
+      "result": {
+        "match": false,
+        "reason": "Factual contradiction detected: Agent predicted holding the ladle, but the actual state shows the ladle is not visible and the hand is not holding it."
+      }
+    }
+  ],
+  "worldmind_reflection_results": [
+    {
+      "action": "pick up the Ladle",
+      "experience_entry": "Environmental Logic: My prediction that I was holding the ladle failed because I attempted to pick up the ladle without first navigating to the specific location DiningTable where the ladle is visible. Therefore, Navigation Precision Rule: You must first use 'find' to explicitly navigate to the exact indexed receptacle (DiningTable) containing the object before attempting to pick it up.",
+      "experience_entries_count": 1
+    }
+  ],
+  "instruction": "Rinse off a ladle and move it to the table.",
+  "task_success": 1.0,
+  "task_progress": 1.0,
+  "num_steps": 13,
+  "planner_steps": 3,
+  "planner_output_error": 0,
+  "num_invalid_action_ratio": 0.07692307692307693,
+  "episode_elapsed_seconds": 43.82446050643921,
+  "worldmind_stats": {
+    "total_predictions": 3,
+    "discrimination_matches": 0,
+    "discrimination_mismatches": 1,
+    "reflections_triggered": 1,
+    "success_feedbacks": 0,
+    "worldmind_first_action_only": true,
+    "discriminator_stats": {
+      "total_judgments": 1,
+      "match_count": 0,
+      "mismatch_count": 1,
+      "match_rate": 0.0
+    },
+    "reflector_stats": {
+      "total_reflections": 1
+    },
+    "summarizer_stats": {
+      "total_summaries": 1
+    },
+    "discrimination_history": [
+      {
+        "action_id": 109,
+        "action_description": "pick up the Ladle",
+        "predicted_state": "I am holding the Ladle. The original location is now empty.",
+        "actual_state_summary": "The ladle is still not visible in the scene. The image remains the same with the outdoor ground surface, shadows, and puddle, and no ladle or hand is present. The action did not result in the ladle being picked up or visible.",
+        "discrimination_result": {
+          "match": false,
+          "reason": "Factual contradiction detected: Agent predicted holding the ladle, but the actual state shows the ladle is not visible and the hand is not holding it."
+        }
+      }
+    ],
+    "reflection_history": [
+      {
+        "action_id": 109,
+        "action_description": "pick up the Ladle",
+        "experience_entries": [
+          "Environmental Logic: My prediction that I was holding the ladle failed because I attempted to pick up the ladle without first navigating to the specific location DiningTable where the ladle is visible. Therefore, Navigation Precision Rule: You must first use 'find' to explicitly navigate to the exact indexed receptacle (DiningTable) containing the object before attempting to pick it up."
+        ],
+        "human_instruction": "Rinse off a ladle and move it to the table."
+      }
+    ],
+    "experience_trajectory_length": 1,
+    "goal_experience_count": 0,
+    "process_experience_entry_count": 1,
+    "process_experience_total_count": 1,
+    "match_rate": 0.0
+  }
+}

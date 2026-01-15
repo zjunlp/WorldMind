@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Triangle edit modes</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Triangle edit mode</h1>
+
+<p>The triangle edit mode can be accessed with a click on the appropriate toolbar button:</p>
+
+<p align=center><img src="images/shapeEditModeButton.jpg"></p>
+<p class=imageLabel>[Shape edit mode toolbar button]</p>
+
+<p>The above toolbar button is only active if a <a href="shapes.htm"> shape</a> is selected. If the last selected shape is not a simple shape, but a compound shape, the <a href="groupedShapeEditMode.htm">edit mode for compound shapes</a> will be activated instead. In the triangle edit mode all triangles composing the shape are individually displayed. A triangle has two faces, the front face and the back face. The front face is displayed in blue while the back face is displayed in red. When selecting triangles (using the same procedure as for selecting <a href="objects.htm">objects</a>), they will appear in yellow and the last selected triangle in white. Shortcut copy/cut/paste/delete is supported (ctrl-c, ctrl-x, ctrl-v, delete). Selection can be cleared with the esc-key, with the deselect toolbar button, or by ctrl-clicking onto an empty area of the <a href="scenes.htm">scene</a>. A shift-selection will select all triangles under the selection area, also hidden triangles (if you wish to only select visible triangles via a shift-selection, hold down the ctrl-key in addition to the shift-key). In the triangle edit mode, the portion of the window that normally displays the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> is used to display the triangles of the shape being edited as a list. Items in the list can be selected with the mouse as for objects in the hierarchy window.
+</p>
+
+<p align=center><img src="images/triangleEditMode1.jpg"></p>
+<p class=imageLabel>[Triangle edit mode]</p>
+<br>
+
+
+<p>After entering the triangle edit mode, the edit menu items ([Menu bar --&gt; Edit]) will become specific to the triangle edit mode, and following dialog will display:
+</p>
+
+<p align=center><img src="images/triangleEditModeDlg.jpg"></p>
+<p class=imageLabel>[Triangle edit mode dialog]</p>
+
+
+
+<li><strong>Triangle / Vertex / Edge edit mode</strong>: the currently activated edit mode. The user can switch from one edit mode to the others via these buttons (the selected items will be preserved).</li>
+
+<li><strong>Clear selection</strong>: clears the selection of triangles.
+</li>
+<li><strong>Invert selection</strong>: inverts the selection state of triangles.
+</li>
+
+<li><strong>Extract shape</strong>: will create a simple shape based on currently selected triangles. The shape will be added to the scene but might not be visible (the shape in edit mode and the newly created shape coincide in position and orientation, or the first visibility layer is disabled). The triangle selection will remain.<br>
+</li>
+
+<li><strong>Extract cuboid</strong>: will create a rectangular (pure) simple shape based on currently selected triangles (will orient the new cuboid in a same way as the minimum bounding box encompassing the selected triangles).  The triangle selection will remain. This operation is useful when a complex mesh shape needs to be modeled in a simplified way to allow <a href="designingDynamicSimulations.htm">efficient dynamics simulation</a> for instance.<br>
+</li>
+
+<li><strong>Extract cylinder</strong>: will create a cylindrical (pure) simple shape based on currently selected triangles (will orient the new cylinder in a same way as the minimum bounding box encompassing the selected triangles).  The triangle selection will remain. This operation is useful when a complex mesh shape needs to be modeled in a simplified way to allow <a href="designingDynamicSimulations.htm">efficient dynamics simulation</a> for instance.<br>
+</li>
+
+<li><strong>Extract sphere</strong>: will create a spherical (pure) simple shape based on currently selected triangles  (will orient the new spheroid in a same way as the minimum bounding box encompassing the selected triangles).  The triangle selection will remain. This operation is useful when a complex mesh shape needs to be modeled in a simplified way to allow <a href="designingDynamicSimulations.htm">efficient dynamics simulation</a> for instance.<br>
+</li>
+
+
+<li><strong>Flip</strong>: flips the selected triangles's side (from red to blue and from blue to red).
+</li>
+
+<li><strong>Subdivide largest triangles</strong>: this will divide large triangles. Unless you want to reduce triangle sizes in order to obtain a more differentiated illumination of large surfaces, it is not recommended to reduce triangle sizes (unless you know exactly what you are doing). Instead, you can adjust the triangle size for the calculation structures globally (in the <a href="environmentPropertiesDialog.htm">environment dialog</a>).<br>
+</li>
+
+
+<p>Triangles can be directly translated with the mouse, using the toolbar's object/item translation button to translate the selected triangle(s) in a perpendicular plane to the view direction:<br>
+</p>
+
+<p align=center><img src="images/objectShiftButton.jpg"></p>
+<p class=imageLabel>[Object/item translation toolbar button]</p>
+
+</p>
+<p align=center><img src="images/triangleEditMode2.jpg"></p>
+<p class=imageLabel>[Shape in triangle edit mode]</p>
+<br>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="shapes.htm">Shapes</a></li>
+<li><a href="shapeEditModes.htm">Shape edit modes</a></li>
+<li><a href="vertexEditMode.htm">Vertex edit mode</a></li>
+<li><a href="edgeEditMode.htm">Edge edit mode</a></li>
+<li><a href="groupedShapeEditMode.htm">Edit mode for compound shapes</a></li>
+<li><a href="designingDynamicSimulations.htm">Designing dynamic simulations</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

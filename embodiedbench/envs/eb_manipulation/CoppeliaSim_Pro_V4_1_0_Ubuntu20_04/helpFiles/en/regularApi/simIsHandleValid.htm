@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simIsHandleValid</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simIsHandleValid" id="simIsHandleValid"></a>simIsHandleValid / sim.isHandleValid </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Checks whether a general object handle is still valid. When a general object is destroyed (e.g. programmatically or via the user interface), then its related handle is not valid anymore and will trigger an error when used. Use this function to avoid triggering an error. See also <a href="simGetObjectHandle.htm">sim.getObjectHandle</a>, <a href="simGetCollectionHandle.htm">sim.getCollectionHandle</a>, <a href="simGetCollisionHandle.htm">sim.getCollisionHandle</a>, <a href="simGetDistanceHandle.htm">sim.getDistanceHandle</a>, <a href="simGetIkGroupHandle.htm">sim.getIkGroupHandle</a>, <a href="simGetScriptHandle.htm">sim.getScriptHandle</a> and <a href="simGetObjectUniqueIdentifier.htm">sim.getObjectUniqueIdentifier</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simIsHandleValid(simInt generalObjectHandle,simInt generalObjectType)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>generalOjectHandle</strong>: handle of a general-type object (e.g. scene object, collision object, distance object, etc.)</div>
+<div><strong>generalOjectType</strong>: type of the general object. Refer to the <a href="../apiConstants.htm#generalObjectTypes">general object types</a>. Can be -1, in which case the specified handle is checked for validity in all types (handles of different types never overlap)</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful, 0 if the handle is not valid anymore, or 1 if the handle is still valid.<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number result=sim.isHandleValid(number generalObjectHandle,number generalObjectType=-1)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

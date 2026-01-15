@@ -1,0 +1,40 @@
+# Navigation Environment Configuration
+model_name: gpt-4o-mini
+model_type: remote
+down_sample_ratio: 1
+language_only: False
+eval_sets: []
+chat_history: False
+n_shots: 3
+multiview: False
+detection_box: False
+multistep: False
+resolution: 500
+exp_name: navigation_baseline
+visual_icl: False
+env_feedback: True
+tp: 1
+
+# WorldMind Settings
+enable_worldmind: False
+use_vision_discriminator: false
+use_experience_trajectory: true
+detailed_output: true
+use_separate_summarization: false
+
+# Goal Experience Settings (extracted from successful trajectories)
+enable_goal_experience: true
+goal_experience_top_k: 2
+
+# Process Experience Settings (extracted from prediction errors)
+enable_process_experience: true
+process_experience_top_k: 2
+
+# Experience Refine Settings
+enable_experience_refine: true
+
+# Use WorldMind template
+use_worldmind_template: true
+
+# Resume from checkpoint
+resume: false

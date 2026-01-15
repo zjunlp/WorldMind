@@ -1,0 +1,78 @@
+{
+  "environments": [
+    {
+      "BuildDir": "${projectDir}\\build",
+      "vcpkgRoot": "${projectDir}\\..\\vcpkg"
+    }
+  ],
+  "configurations": [
+    {
+      "name": "x86-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x86" ],
+      "buildRoot": "${env.BuildDir}\\${name}",
+      "installRoot": "${env.BuildDir}\\install\\${name}",
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.vcpkgRoot}\\scripts\\buildsystems\\vcpkg.cmake"
+        }
+      ],
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x86-Release",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "inheritEnvironments": [ "msvc_x86" ],
+      "buildRoot": "${env.BuildDir}\\${name}",
+      "installRoot": "${env.BuildDir}\\install\\${name}",
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.vcpkgRoot}\\scripts\\buildsystems\\vcpkg.cmake"
+        }
+      ],
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${env.BuildDir}\\${name}",
+      "installRoot": "${env.BuildDir}\\install\\${name}",
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.vcpkgRoot}\\scripts\\buildsystems\\vcpkg.cmake"
+        }
+      ],
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x64-Release",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${env.BuildDir}\\${name}",
+      "installRoot": "${env.BuildDir}\\install\\${name}",
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.vcpkgRoot}\\scripts\\buildsystems\\vcpkg.cmake"
+        }
+      ],
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": ""
+    }
+  ]
+}

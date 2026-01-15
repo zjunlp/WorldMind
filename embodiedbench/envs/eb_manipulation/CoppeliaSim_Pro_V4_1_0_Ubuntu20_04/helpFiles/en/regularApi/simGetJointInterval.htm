@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetJointInterval</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetJointInterval" id="simGetJointInterval"></a>simGetJointInterval / sim.getJointInterval </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves the interval parameters of a joint. See also <a href="simSetJointInterval.htm">sim.setJointInterval</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simGetJointInterval(simInt objectHandle,simBool* cyclic,simFloat* interval)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>objectHandle</strong>: handle of the joint</div>
+<div><strong>cyclic</strong>: indicates whether the joint is cyclic (the joint varies between -pi and +pi in a cyclic manner)<br>
+</div>
+<div><strong>interval</strong>: interval of the joint. interval[0] is the joint minimum allowed value, interval[1] is the joint range (the maximum allowed value is interval[0]+interval[1]). When the joint is &quot;cyclic&quot;, then the interval parameters don't have any meaning.<br>
+</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>boolean cyclic,table_2 interval=sim.getJointInterval(number objectHandle)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>objectHandle</strong>: handle of the joint</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>cyclic</strong>: indicates whether the joint is cyclic (the joint varies between -pi and +pi in a cyclic manner). <br>
+</div>
+<div><strong>interval</strong>: interval of the joint. interval[1] is the joint minimum allowed value, interval[2] is the joint range (the maximum allowed value is interval[1]+interval[2]). When the joint is &quot;cyclic&quot;, then the interval parameters don't have any meaning.<br>
+</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

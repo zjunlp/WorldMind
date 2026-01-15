@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Coppelia kinematics routines</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Coppelia Kinematics Routines (<a href="auxiliaryApiOverview.htm">auxiliary API</a>)</h1>
+
+<p>The <a href="https://github.com/CoppeliaRobotics/coppeliaKinematicsRoutines" target="_blank">Coppelia Kinematics Routines</a> is a collection of C++ functions that allow to solve forward/inverse kinematics tasks for any type of mechanism (redundant/non-redundant, containing nested loops, etc.). Those functions give CoppeliaSim its kinematics calculation capability.</p>
+
+<p>You can embedd and use the Coppelia Kinematics Routines in your stand-alone application, which then can programmatically set up complex kinematics tasks in two different ways: </p>
+<li><a href="#fromExport">Setting up a kinematic task from exported kinematic content</a>: by first building your kinematics task in CoppeliaSim,  exporting its kinematic content, and importing it into your application.</li>
+<li><a href="#fromScratch">Setting up a kinematic task from scratch</a>: by building your kinematics task from scratch directly in your application</li>
+
+<p>Refer also to the Coppelia Kinematics Routines C++ API documentation:</p>
+
+<li><a href="coppeliaKinematicsRoutinesApi-alphabetic.htm">Coppelia Kinematics Routines C++ API list (in alphabetical order)</a></li>
+<li><a href="coppeliaKinematicsRoutinesApi-category.htm">Coppelia Kinematics Routines C++ API list (by category)</a></li>
+
+<p>The Coppelia Kinematics Routines source code is not directly part of CoppeliaSim, and carries separate licensing conditions. Refer to the source code for details, and <a href="http://coppeliarobotics.com/contact">contact us</a>.</p>
+
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="fromExport"></a>Setting up a kinematic task from exported kinematic content
+</td></tr></table> 
+
+<p>The idea is to normally build your kinematic task inside of CoppeliaSim via the GUI, then to export the kinematic content of a scene [Menu bar --&gt; File --&gt; Export --&gt; Kinematics content...], which can then be imported and used via the Coppelia Kinematics Routines. A minimalistic application using this approach could look like:</p>
+
+<pre class=lightBlueBox>#include &quot;ik.h&quot;
+
+int main(int argc, char* argv[])
+{
+    // Read the exported kinematic file:
+    FILE *file;
+    file=fopen(&quot;robot.ik&quot;,&quot;rb&quot;);
+    if (file)
+    {
+        fseek(file,0,SEEK_END);
+        unsigned long fl=ftell(file);
+        int dataLength=(int)fl;
+        fseek(file,0,SEEK_SET);
+        std::vector&lt;unsigned char&gt; data;
+        data.resize(dataLength);
+        fread((char*)&amp;data[0],dataLength,1,file);
+        fclose(file);
+        
+        // Initialize the environment and import the kinematic data:
+        ikCreateEnvironment();
+        ikLoad(&amp;data[0],dataLength);
+        
+        // Get some handles from the robot model:
+        int motorHandles[7];
+        ikGetObjectHandle(&quot;robot_joint1&quot;,motorHandles+0);
+        ikGetObjectHandle(&quot;robot_joint2&quot;,motorHandles+1);
+        ikGetObjectHandle(&quot;robot_joint3&quot;,motorHandles+2);
+        ikGetObjectHandle(&quot;robot_joint4&quot;,motorHandles+3);
+        ikGetObjectHandle(&quot;robot_joint5&quot;,motorHandles+4);
+        ikGetObjectHandle(&quot;robot_joint6&quot;,motorHandles+5);
+        ikGetObjectHandle(&quot;robot_joint7&quot;,motorHandles+6);
+        int targetHandle;
+        ikGetObjectHandle(&quot;robot_target&quot;,&targetHandle);
+        int baseHandle;
+        ikGetObjectHandle(&quot;LBR_iiwa_7_R800&quot;,&baseHandle);
+        
+        // Get the initial target dummy transformation, of the robot:
+        C7Vector initTargetTransf;
+        ikGetObjectTransformation(targetHandle,baseHandle,&amp;initTargetTransf);
+        
+        simReal v=0.0;
+        while (true)
+        {
+            // Slightly modify the position of the target dummy:
+            v+=simReal(0.01)
+            C7Vector targetTransf(initTargetTransf);
+            targetTransf.X(2)+=simReal(sin(v)*0.1);
+            ikSetObjectTransformation(targetHandle,baseHandle,&amp;targetTransf);
+
+            // calculate IK:
+            ikHandleIkGroup(ik_handle_all);
+
+            // Read the corresponding robot joint angles and do something with them:
+            simReal config[7];
+            for (int i=0;i&lt;7;i++)
+                ikGetJointPosition(motorHandles[i],config+i);
+        }
+        ikEraseEnvironment();
+    }
+    return(0);
+}</pre>
+
+<p>Refer also to the following examples: <a href="https://github.com/CoppeliaRobotics/standAloneKinematicsDemo1" target="_blank">standAloneKinematicsDemo1</a>, <a href="https://github.com/CoppeliaRobotics/standAloneKinematicsDemo2" target="_blank">standAloneKinematicsDemo2</a>, <a href="https://github.com/CoppeliaRobotics/standAloneKinematicsDemo3" target="_blank">standAloneKinematicsDemo3</a>. Those demo applications use the Coppelia Kinematics Routines described here, combined with the <a href="legacyRemoteApiOverview.htm">legacy remote API</a> functionality to control different robots in inverse/forward kinematics mode. The demo scenes <em>standAloneKinematicsDemo1.ttt</em>, <em>standAloneKinematicsDemo2</em>.ttt and <em>standAloneKinematicsDemo3.ttt</em> launch the <em>standAloneKinematicsDemo1</em>, <em>standAloneKinematicsDemo2</em> and respectively <em>standAloneKinematicsDemo3</em> applications automatically.</p>
+
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd>
+  <td class=subsectionTd>
+<a name="fromScratch"></a>Setting up a kinematic task from scratch
+</td></tr></table> 
+
+
+
+<p>Follow the method below to perform kinematic calculations from within your own external application:</p>
+
+<pre class=lightBlueBox>#include &quot;ik.h&quot;
+
+int main(int argc, char* argv[])
+{
+    // Create the IK environment:
+    ikCreateEnvironment();
+
+    // Create a simple 3 DoF kinematic chain:
+    int tipHandle,targetHandle;
+    int joint1Handle,joint2Handle,joint3Handle;
+    ikCreateJoint(nullptr,ik_jointtype_revolute,&amp;joint1Handle);
+    ikCreateJoint(nullptr,ik_jointtype_revolute,&amp;joint2Handle);
+    C7Vector tr(C4Vector(1.57,0.0,0.0),C3Vector::zeroVector);
+    ikSetObjectTransformation(joint2Handle,-1,&amp;tr);
+    ikSetObjectParent(joint2Handle,joint1Handle,true);
+    ikCreateJoint(nullptr,ik_jointtype_revolute,&amp;joint3Handle);
+    tr.X=C3Vector(0.0,0.0,0.2);
+    ikSetObjectTransformation(joint3Handle,-1,&amp;tr);
+    ikSetObjectParent(joint3Handle,joint2Handle,true);
+    ikCreateDummy(nullptr,&amp;tipHandle);
+    tr.Q.clear();
+    tr.X=C3Vector(0.0,0.0,0.4);
+    ikSetObjectTransformation(tipHandle,-1,&amp;tr);
+    ikSetObjectParent(tipHandle,joint3Handle,true);
+    ikCreateDummy(nullptr,&amp;targetHandle);
+    ikSetObjectTransformation(targetHandle,-1,&amp;tr);
+    ikSetLinkedDummy(tipHandle,targetHandle);
+    // we now have: joint1 --&gt; joint2 --&gt; joint3 --&gt; tipDummy &lt;...&gt; targetDummy
+
+    // Create an IK group that constrains the chain tip to follow (in position)
+    // the target dummy:
+    int ikGroup;
+    ikCreateIkGroup(nullptr,&amp;ikGroup);
+    int ikElementIndex;
+    ikAddIkElement(ikGroup,tipHandle,&amp;ikElementIndex);
+    ikSetIkElementConstraints(ikGroup,ikElementIndex,ik_constraint_position);
+
+    ikGetObjectTransformation(targetHandle,-1,&amp;tr);
+    while (true)
+    {
+        // Slightly move the target dummy:
+        tr.X=tr.X+C3Vector(0.001,0.002,-0.0001);
+        ikSetObjectTransformation(targetHandle,-1,&amp;tr)
+
+        // Solve IK:
+        int result;
+        ikHandleIkGroup(ikGroup,&amp;result);
+        if (result==ik_result_fail)
+            break;
+
+        // Read joint values:
+        simReal joint1Angle,joint2Angle,joint3Angle;
+        ikGetJointPosition(joint1Handle,&amp;joint1Angle);
+        ikGetJointPosition(joint2Handle,&amp;joint2Angle);
+        ikGetJointPosition(joint3Handle,&amp;joint3Angle);
+    }
+    return(0);
+}</pre>
+
+
+
+<br>
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="inverseKinematicsModule.htm">Forward/inverse kinematics overview</a></li>
+<li><a href="kinematicsPlugin.htm">The kinematics plugin for CoppeliaSim</a></li>
+
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

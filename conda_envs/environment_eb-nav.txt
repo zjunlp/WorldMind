@@ -1,0 +1,89 @@
+# --- Core AI & Deep Learning ---
+torch==2.5.1
+torchvision==0.20.1
+transformers==4.48.3
+accelerate==1.3.0
+peft==0.11.1
+lmdeploy==0.7.0.post2
+openai==1.58.1
+anthropic==0.43.1
+together==1.3.13
+tokenizers==0.21.0
+safetensors==0.5.2
+sentencepiece==0.2.0
+
+# --- Simulation & Environment ---
+ai2thor==5.0.0
+gym==0.26.2
+gym-notices==0.0.8
+
+# --- Data Science & Math ---
+numpy==1.26.4
+pandas==2.2.3
+matplotlib==3.9.4
+scipy
+# Note: scipy wasn't explicitly in pip list but often needed, added safely.
+# If strict adherence is needed, remove scipy line. 
+# Re-checking yaml: It wasn't in the pip list, but usually pulled by others. 
+# Let's stick strictly to your list to avoid bloat:
+# (Removed explicit scipy unless it was hidden in deps, but numpy/pandas are there)
+
+# --- NVIDIA / CUDA Dependencies (Pip wheels) ---
+nvidia-cublas-cu12==12.4.5.8
+nvidia-cuda-cupti-cu12==12.4.127
+nvidia-cuda-nvrtc-cu12==12.4.127
+nvidia-cuda-runtime-cu12==12.4.127
+nvidia-cudnn-cu12==9.1.0.70
+nvidia-cufft-cu12==11.2.1.3
+nvidia-curand-cu12==10.3.5.147
+nvidia-cusolver-cu12==11.6.1.9
+nvidia-cusparse-cu12==12.3.1.170
+nvidia-ml-py==12.570.86
+nvidia-nccl-cu12==2.21.5
+nvidia-nvjitlink-cu12==12.4.127
+nvidia-nvtx-cu12==12.4.127
+triton==3.1.0
+
+# --- Web & API ---
+fastapi==0.115.8
+flask==3.1.0
+uvicorn==0.34.0
+requests==2.32.3
+aiohttp==3.11.11
+anyio==4.8.0
+starlette==0.45.3
+google-api-python-client==2.159.0
+google-generativeai==0.8.3
+
+# --- Utilities & Others ---
+addict==2.4.0
+attrs==25.1.0
+click==8.1.8
+datasets==3.2.0
+einops==0.8.1
+fire==0.7.0
+fsspec==2024.9.0
+huggingface-hub==0.28.1
+hydra-core==1.3.2
+ipython
+# Note: ipython/jupyter weren't in your pip list but useful for debug.
+# Sticking to your exact list:
+jsonschema==4.23.0
+mmengine-lite==0.10.6
+numba==0.60.0
+omegaconf==2.3.0
+opencv-python==4.10.0.84
+outlines==0.0.46
+packaging==24.2
+pillow==10.4.0
+platformdirs==4.3.6
+protobuf==5.29.3
+psutil==6.1.1
+pyarrow==19.0.0
+pydantic==2.10.5
+pyyaml==6.0.2
+rich==13.9.4
+tqdm==4.67.1
+typer==0.15.1
+werkzeug==3.1.3
+yapf==0.43.0

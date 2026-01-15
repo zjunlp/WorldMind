@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>CoppeliaSim API</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Regular API</h1>
+
+<p>The regular API is part of the <a href="apisOverview.htm">CoppeliaSim API framework</a>.</p>
+
+<p>The regular API is composed by several hundreds of functions that can be called from a C/C++ application (<a href="plugins.htm">plugin</a> or <a href="mainClientApplication.htm">main client application</a>), or an <a href="scripts.htm">embedded script</a>.  CoppeliaSim <a href="apiFunctionListAlphabetical.htm">functions</a> and <a href="apiConstants.htm">constants</a> can easily be recognized from their &quot;sim&quot;- or &quot;_sim&quot;-prefix (e.g. sim.handleCollision). Make sure not to mix-up the <a href="apiFunctionListAlphabetical.htm">regular API</a> (sometimes also &quot;API&quot; in short) with the <a href="remoteApiOverview.htm">remote API</a>. </p>
+
+<p>
+The regular API can be extended by custom lua functions, that plugins or the main client application register. <a href="apiFunctionListCategory.htm#customizingLuaFunctions">Custom lua functions</a> can be recognized from their <em>sim*.</em>-prefix. </p>
+
+<p class=warningBox>All units going to, or coming from the <a href="apiFunctionListAlphabetical.htm">API</a> are in meters, kilograms, seconds and <strong>radians</strong> or a combination of those (unless otherwise explicitly indicated). The <a href="userInterface.htm">user interface</a> units are in meters, kilograms, seconds and <strong>degrees</strong>.</p>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="apiFunctionListAlphabetical.htm">Alphabetical regular API function list</a></li>
+<li><a href="apiFunctionListCategory.htm">Regular API function list by category</a></li>
+<li><a href="apiConstants.htm">API constants</a></li>
+<li><a href="accessingGeneralObjects.htm">Accessing objects programmatically</a></li>
+<li><a href="explicitHandling.htm">Explicit and non-explicit calls</a></li>
+<li><a href="remoteApiOverview.htm">Remote API</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

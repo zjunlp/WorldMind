@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Remote API Constants</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td>
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1><a href="remoteApiOverview.htm">Remote API</a> Constants</h1>
+
+<p class=warningBox>The remote API, or <em>legacy remote API</em>, should not be mixed-up with the <a href="b0RemoteApiOverview.htm">B&Oslash;-based remote API</a>, which is a newer version of the remote API that is more flexible, easier to use and most importantly, much simpler to extend.</p>
+
+<h3 class=relatedApiFunctions>Refer also to the <a href="apiConstants.htm">regular API constants</a></h3>
+
+<h3 class=subsectionBar><a name="functionErrorCodes"></a><a name="returnCodes"></a>Remote API function return codes</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div>A remote API function return can be <strong>a combination of following flags</strong>:</div>
+<br>
+<div>simx_return_ok (<strong>0</strong>)</div>
+<div class=tab>The function executed fine</div>
+<div>simx_return_novalue_flag (<strong>1 </strong>(i.e. bit 0))</div>
+<div class=tab>There is no command reply in the input buffer. This should not always be considered as an error, depending on the selected <a href="#operationModes">operation mode</a></div>
+<div>simx_return_timeout_flag (<strong>2 </strong>(i.e. bit 1))</div>
+<div class=tab>The function timed out (probably the network is down or too slow)</div>
+<div>simx_return_illegal_opmode_flag (<strong>4</strong> (i.e. bit 2))</div>
+<div class=tab>The specified operation mode is not supported for the given function</div>
+<div>simx_return_remote_error_flag (<strong>8</strong> (i.e. bit 3))</div>
+<div class=tab>The function caused an error on the server side (e.g. an invalid handle was specified)</div>
+<div>simx_return_split_progress_flag (<strong>16</strong> (i.e. bit 4))</div>
+<div class=tab>The communication thread is still processing previous split command of the same type</div>
+<div>simx_return_local_error_flag (<strong>32 </strong>(i.e. bit 5))</div>
+<div class=tab>The function caused an error on the client side</div>
+<div>simx_return_initialize_error_flag (<strong>64</strong> (i.e. bit 6))</div>
+<div class=tab>simxStart was not yet called</div>
+</td>
+</tr>
+</table>
+<br>
+
+
+
+
+<h3 class=subsectionBar><a name="operationModes"></a>Remote API function operation modes</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+
+<div>When most remote API functions are called, they will be translated into commands that might travel to the server, and come back as a command reply from the server. The operation mode of a remote API function defines what exactly happens to those commands and command replies:</div>
+<br>
+
+<div>simx_opmode_oneshot</div>
+<div class=tab><strong>Non-blocking mode</strong>. The command is sent and a previous reply to the same command returned (if available). The function doesn't wait for the actual reply.</div>
+<div>simx_opmode_blocking (or simx_opmode_oneshot_wait)</div>
+<div class=tab><strong>Blocking mode</strong>. The command is sent, and the function will wait for the actual reply and return it (if the function doesn't time out). The received command reply will be removed from the inbox buffer (other operation modes will leave their command replies in the inbox buffer)</div>
+<div>simx_opmode_streaming + alpha</div>
+<div class=tab><strong>Non-blocking mode</strong>. The command is sent and a previous reply to the same command returned (if available). The command will be continuously executed on the server side. The function doesn't wait for the actual reply. Alpha is a value between 0-65535 representing the delay in ms wanted, before the same command gets executed again on the server side.</div>
+<div>simx_opmode_oneshot_split + beta (not recommended)</div>
+<div class=tab><strong>Non-blocking mode</strong>. The command is sent in small chunks, and a previous reply to the same command returned (if available). The server will also send the reply in small chunks. The function doesn't wait for the actual reply. Beta is a value between 100 and 65535 representing the maximum chunk size in bytes to send. Small values won't slow down the communication framework, but it will take more time until the full command has been transferred. With large values, commands are transferred faster, but the communication framework might appear frozen while chunks are being transferred.</div>
+<div>simx_opmode_streaming_split + beta (not recommended)</div>
+<div class=tab><strong>Non-blocking mode</strong>. The command is sent in small chunks and a previous reply to the same command returned (if available). The command will be continuously executed on the server side, which will also send the replies in small chunks. The function doesn't wait for the actual reply. Beta is a value between 100 and 65535 representing the maximum chunk size in bytes to send. Small values won't slow down the communication framework, but it will take more time until the full command has been transferred. With large values, commands are transferred faster, but the communication framework might appear frozen while chunks are being transferred.</div>
+<div>simx_opmode_discontinue</div>
+<div class=tab><strong>Non-blocking mode</strong>. The command is sent and a previous reply to the same command returned (if available). A same command will be erased from the server side if the command is of streaming or continuous type. The same will happen on the client's input buffer. The function doesn't wait for the actual reply.</div>
+<div>simx_opmode_buffer</div>
+<div class=tab><strong>Non-blocking mode</strong>. A previous reply to the same command is returned (if available). The command is not send, nor does the function wait for the actual reply.</div>
+<div>simx_opmode_remove</div>
+<div class=tab><strong>Non-blocking mode</strong>. A previous reply to the same command is cleared from the input buffer (if available). The command is not send, nor does the function return any specific values, except for the return code. Can be useful to free some memory on the client side.</div>
+<br>
+<div>Make sure to also read the <a href="remoteApiModusOperandi.htm">remote API modus operandi section</a>.</div>
+</tr>
+</table>
+<br>
+
+
+
+
+
+
+
+<h3 class=subsectionBar><a name="inboxMessageInfoType" id="inboxMessageInfoType"></a>Inbox message info type</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div>Following values to be used with the <a href="remoteApiFunctions.htm#simxGetInMessageInfo">simxGetInMessageInfo</a> function:</div>
+<br>
+<div>simx_headeroffset_version</div>
+<div class=tab>The version of the remote API server software</div>
+<div>simx_headeroffset_message_id</div>
+<div class=tab>The last received message ID. This value is incremental, but some values might be skipped</div>
+<div>simx_headeroffset_client_time</div>
+<div class=tab>The time stamp that was generated by the client when the message was initially sent to the server</div>
+<div>simx_headeroffset_server_time</div>
+<div class=tab>The time stamp that was generated by the server when commands were last executed on the server</div>
+<div>simx_headeroffset_scene_id</div>
+<div class=tab>A unique ID identifying the scene currently displayed</div>
+<div>simx_headeroffset_server_state</div>
+<div class=tab>The server state, bit coded:</div>
+<div class=tab>bit0 set: simulation not stopped</div>
+<div class=tab>bit1 set: simulation paused</div>
+<div class=tab>bit2 set: real-time switch on</div>
+<div class=tab>bit3-bit5: the edit mode type (0=no edit mode, 1=triangle, 2=vertex, 3=edge, 4=path, 5=UI)</div>
+</td>
+</tr>
+</table>
+<br>
+
+
+
+
+
+
+
+
+<h3 class=subsectionBar><a name="outboxMessageInfoType" id="outboxMessageInfoType"></a>Outbox message info type</h3>
+<table class=apiConstantsTable >
+<tr>
+<td>
+<div>Following values to be used with the <a href="remoteApiFunctions.htm#simxGetOutMessageInfo">simxGetOutMessageInfo</a> function:</div>
+<br>
+<div>simx_headeroffset_version</div>
+<div class=tab>The version of the remote API client software</div>
+<div>simx_headeroffset_message_id</div>
+<div class=tab>The next message ID that will be sent. This value is incremental.</div>
+<div>simx_headeroffset_client_time</div>
+<div class=tab>The current time on the client side</div>
+</td>
+</tr>
+</table>
+<br>
+
+
+
+
+
+
+
+
+<br>
+<br>
+</td>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

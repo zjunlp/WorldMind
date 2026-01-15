@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simAddGhost</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simAddGhost" id="simAddGhost"></a>simAddGhost / sim.addGhost </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Adds a light copy of a shape in its current configuration, as a ghost object. Ghosts have a visual start and end time, and are automatically played back during simulation (i.e. visualized), but they do not influence a simulation otherwise. Ghost are a convenient way to visually compare several simulation runs. Ghosts can be modified or cleared with <a href="simModifyGhost.htm">sim.modifyGhost</a>. Ghosts can also be cleared in the <a href="../environmentPropertiesDialog.htm">environment properties</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simAddGhost(simInt ghostGroup,simInt objectHandle,simInt options,simFloat startTime,simFloat endTime,const simFloat* color)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>ghostGroup</strong>: an identifier that allows grouping several ghosts</div>
+<div><strong>objectHandle</strong>: the handle of a shape, or the handle of a model base. Only currently visible shapes can be duplicated as ghosts.</div>
+<div><strong>options</strong>: bit-coded:</div>
+<div class=tab><strong>bit0 (1)</strong> set=the provided objectHandle is a model base, and all visible shapes in the model will be duplicated as ghosts</div>
+<div class=tab><strong>bit1 (2)</strong> set=the provided start- and end-times will be played-back in real-time</div>
+<div class=tab><strong>bit2 (4)</strong> set=preserve the original colors</div>
+<div class=tab><strong>bit3 (8)</strong> set=force invisible objects to appear too</div>
+<div class=tab><strong>bit4 (16)</strong> set=create an invisible ghost</div>
+<div class=tab><strong>bit5 (32)</strong> set=backface culling for the ghost (only when using custom colors)</div>
+<div><strong>startTime</strong>: the time at which the ghost should appear.</div>
+<div><strong>endTime</strong>: the time at which the ghost should disappear.</div>
+<div><strong>color</strong>: 12 values that represent the color of the ghost (ambient_diffuse RGB, 3 reserved values (set to zero), specular RGB and emissive RGB). Can be nullptr for default colors.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful, otherwise a ghost ID. Several ghosts might share the same  ID (e.g. when a ghost was added with bit0 of <strong>options</strong> set)</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number ghostId=sim.addGhost(number ghostGroup,number objectHandle,number options,number startTime,number endTime,table_12 color=nil)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

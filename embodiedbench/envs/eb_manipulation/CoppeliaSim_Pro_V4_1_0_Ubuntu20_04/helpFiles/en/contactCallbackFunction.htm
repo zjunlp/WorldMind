@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Contact callback function</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>The contact callback function</h1>
+
+<p>A <a href="childScripts.htm">non-threaded child script</a>, or a <a href="customizationScripts.htm">customization script</a> can include a contact callback function. When present, and the physics engine detected a collision between two <a href="designingDynamicSimulations.htm#staticAndRespondable">respondable</a> shapes, then the contact callback function will be called with appropriate arguments, allowing the user to customize the handling of contacts. The contact callback function might be called very often, sometimes more than several hundreds of times per simulation step (remember also that by default, the physics engine will be called 10 times for one simulation step). For that reason, keep things simple, in order to avoid slowing down the simulation.</p>
+
+<p>Following represents a typical contact callback function:<br>
+</p>
+
+<pre class=lightRedBox>
+function <strong>sysCall_contactCallback</strong>(inData)
+    -- Will objects with inData.handle1 and inData.handle2 respond to dynamic collision?
+    local retData={}
+    retData.ignoreContact=false -- handle contact here
+    retData.collisionResponse=true -- shapes will collide
+
+    if inData.engine==sim.physics_bullet then
+        retData.bullet={}
+        retData.bullet.friction=0
+        retData.bullet.restitution=0
+    end
+
+    if inData.engine==sim.physics_ode then
+        retData.ode={}
+        retData.ode.maxContacts=16
+        retData.ode.mu=0
+        retData.ode.mu2=0
+        retData.ode.bounce=0
+        retData.ode.bounceVel=0
+        retData.ode.softCfm=0
+        retData.ode.softErp=0
+        retData.ode.motion1=0
+        retData.ode.motion2=0
+        retData.ode.motionN=0
+        retData.ode.slip1=0
+        retData.ode.slip2=0
+        retData.ode.fDir1={0,0,0}
+        local mode=1 -- bit-coded. See below
+        -- 1=dContactMu2
+        -- 2=dContactFDir1
+        -- 4=dContactBounce
+        -- 8=dContactSoftERP
+        -- 16=dContactSoftCFM
+        -- 32=dContactMotion1
+        -- 64=dContactMotion2
+        -- 128=dContactSlip1
+        -- 256=dContactSlip2
+        -- 512=dContactApprox1_1
+        -- 1024=dContactApprox1_2
+        -- 2048=dContactApprox1
+        retData.ode.contactMode=mode
+    end
+
+    if inData.engine==sim.physics_vortex then
+    end
+
+    if inData.engine==sim.physics_newton then
+        retData.newton={}
+        retData.newton.staticFriction=0
+        retData.newton.kineticFriction=0
+        retData.newton.restitution=0
+    end
+
+    return(retData)
+end</pre>
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="childScripts.htm">Child scripts</a></li>
+<li><a href="customizationScripts.htm">Customization scripts</a></li>
+<li><a href="dynCallbackFunctions.htm">Dynamics callback functions</a></li>
+<li><a href="jointCallbackFunctions.htm">Joint callback functions</a></li>
+
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

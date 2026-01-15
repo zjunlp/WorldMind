@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simLoadImage</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simLoadImage" id="simLoadImage"></a>simLoadImage / sim.loadImage </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Loads an image from file or memory. See also <a href="simSaveImage.htm">sim.saveImage</a>, <a href="simGetScaledImage.htm">sim.getScaledImage</a>, <a href="simTransformImage.htm">sim.transformImage</a> and <a href="simSetVisionSensorCharImage.htm">sim.setVisionSensorCharImage</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simUChar* simLoadImage(simInt* resolution,simInt options,const simChar* filenameOrBuffer,simVoid* reserved)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>resolution</strong>: a pointer that will accept the image resolution.</div>
+<div><strong>options</strong>: bit-coded. If bit0 is set (1), then the returned image is rgba, otherwise it is rgb.</div>
+<div><strong>filename</strong>: the name of the file to read. The file extension indicates the format. If you wish to load an image from a memory buffer, then have filename point to that memory buffer.</div>
+<div><strong>reserved</strong>: Set to nullptr if you load an image from file. If you load an image from a memory buffer, this should be to an integer pointer where the first pointed integer is the size of the memory buffer.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>nullptr if operation was not successful, otherwise a buffer containing the image data. The user is in charge of releasing the buffer with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>string image,table_2 resolution=sim.loadImage(number options,string filenameOrBuffer)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart. To load an image from a string buffer, simply prefix the buffer with &quot;@mem&quot;.</div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

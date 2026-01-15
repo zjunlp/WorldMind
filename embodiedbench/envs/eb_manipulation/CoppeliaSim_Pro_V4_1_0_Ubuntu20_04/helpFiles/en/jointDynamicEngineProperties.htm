@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Dynamics engines properties related to joints</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Dynamics engines properties related to joints</h1>
+
+<p>The dynamics engines properties related to <a href="joints.htm">joints</a> can be accessed via the <a href="jointDynamicsProperties.htm">joint dynamics properties</a> dialog. The engine specific properties of the last selected joint are displayed in a dialog. If more than one joint is selected, then properties can be copied from the last selected joint to the other selected joints (<strong>Apply all properties to selected joints</strong>):<br>
+</p>
+<p align=center><img src="images/physicsEngineProp2.jpg"></p>
+<p class=imageLabel>[Dynamics engines properties dialog related to joints]</p>
+
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="bullet"></a>Bullet properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#bullet">Bullet physics library</a>. Make sure to also refer to the <a href="http://www.bulletphysics.org/">Bullet user manual</a> for details.</p>
+<li><strong>Normal CFM</strong>: a<em> constraint force mixing</em> parameter used when away from limits.</li>
+<li><strong>Stop ERP</strong>: an <em>error reduction parameter</em> at the limits.</li>
+<li><strong>Stop CFM</strong>: a <em>constraint force mixing</em> parameter at the limits.</li>
+
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="ode"></a>ODE properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#ode">Open Dynamics Engine</a>. Make sure to also refer to the <a href="http://www.ode.org">ODE user manual</a> for details.</p>
+<li><strong>Normal CFM</strong>: a<em> constraint force mixing</em> parameter used when away from limits.</li>
+<li><strong>Stop ERP</strong>: an <em>error reduction parameter</em> at the limits.</li>
+<li><strong>Stop CFM</strong>: a <em>constraint force mixing</em> parameter at the limits. Togehter with the <strong>Stop ERP</strong> parameter, <em>spongy</em> or <em>soft</em> limits can be created (is not supposed to work correctly with powered joints)</li>
+<li><strong>Bounce</strong>: a value that regulates the bouncyness at limits (i.e. a restitution parameter).</li>
+<li><strong>Fudge factor</strong>: an arbitrary value that can help make a joint behave <em>correctly</em>, e.g. be less <em>jumpy</em> when moving away from limits.</li>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="vortex"></a>Vortex properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#vortex">Vortex Studio engine</a>. Make sure to also refer to the <a href="https://www.cm-labs.com/vortex-studio/">Vortex user manual</a> for details.</p>
+<li><strong>Joint axis friction</strong>: allows to define internal friction along or    around a constraint axis. </li>
+<li class=tabTab><strong>Enabled</strong>: enables internal friction. </li>
+<li class=tabTab><strong>Proportional</strong>: if true, friction is proportional to the tension in the constraint. </li>
+<li class=tabTab><strong>Coefficient</strong>: for proportional friction force, the friction is proportional to the tension    * coefficient.</li>
+<li class=tabTab><strong>Maximum force</strong>: for non-proportional friction, the friction force can    be provided directly by the user.</li>
+<li class=tabTab><strong>Loss</strong>: viscosity factor. </li>
+<li><strong>Joint axis limits</strong>: manages the positional or angular limits along    or around a constraint axis. </li>
+<li class=tabTab><strong>Lower/upper restitution</strong>: bounciness.</li>
+<li class=tabTab><strong>Lower/upper stiffness</strong>: linear of angular stiffness of the limit’s    spring.</li>
+<li class=tabTab><strong>Lower/upper damping</strong>: linear of angular damping of the limit’s    spring.</li>
+<li class=tabTab><strong>Lower/upper maximum force</strong>: force or torque boundary of the limit’s    spring.</li>
+
+
+<li><strong>Joint dependency</strong>: properties allowing to dynamically link two dynamically enabled joints. Two linked joints will share/exchange their respective loads (i.e. a force/torque applied to one will be transmitted to the other one, and vice-versa).</li>
+<li class=tabTab><strong>Dependent joint</strong>: the joint that is linked to this one. This property doesn't appear as reflective (i.e. the dependency won't display for the dependent joint), in order to be able to link the dependent joint to other joints for complex dependency set-ups. All dependent joints must share a same parent shape for proper operation.</li>
+<li class=tabTab><strong>Multiplication factor</strong>: the multiplication factor that links the dependent joints. A factor or 1 will let two linked revolute joints rotate in the same direction, at the same rate.</li>
+<li class=tabTab><strong>Offset</strong>: not yet used. Keep at 0.</li>
+
+
+<li><strong>X axis position</strong>: relaxation and friction parameters along the constraint    X axis (position).</li>
+<li class=tabTab><strong>Relaxation</strong>: relaxation allows controlling the corresponding constraint strength. </li>
+<li class=fourTabs><strong>Enabled</strong>: enables the relaxation. </li>
+<li class=fourTabs><strong>Stiffness</strong>: spring stiffness for position-based equation.</li>
+<li class=fourTabs><strong>Damping</strong>: spring damping for position-based equation.</li>
+<li class=fourTabs><strong>Loss</strong>: viscosity for velocity-based equation.</li>
+<li class=tabTab><strong>Friction</strong>:  internal friction along the axis.</li>
+<li class=fourTabs><strong>Enabled</strong>: enables internal friction for this axis. </li>
+<li class=fourTabs><strong>Proportional</strong>: makes friction proportional to the tension in the joint. </li>
+<li class=fourTabs><strong>Coefficient</strong>: friction set to tension * coefficient.</li>
+<li class=fourTabs><strong>Maximum force</strong>: if non-proportional, friction force is manually set by    the user.</li>
+<li class=fourTabs><strong>Loss</strong>: friction force viscosity. </li>
+<li><strong>Y axis position</strong>: relaxation and friction parameters along the constraint    Y axis (position).</li>
+<li><strong>Z axis position</strong>: relaxation and friction parameters along the constraint Z    axis (position).</li>
+<li><strong>X axis orientation</strong>: relaxation and friction parameters around the    constraint X axis (orientation).</li>
+<li><strong>Y axis orientation</strong>: relaxation and friction parameters around the    constraint Y axis (orientation).</li>
+<li><strong>Z axis orientation</strong>: relaxation and friction parameters around the constraint Z axis (orientation).</li>
+
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="newton"></a>Newton properties
+</td></tr></table> 
+
+<p>Properties related to the <a href="dynamicsModule.htm#newton">Newton Dynamics Engine</a>. Make sure to also refer to the <a href="http://www.newtondynamics.com">Newton user manual</a> for details.</p>
+<li><strong>Joint dependency</strong>: properties allowing to dynamically link two dynamically enabled joints. Two linked joints will share/exchange their respective loads (i.e. a force/torque applied to one will be transmitted to the other one, and vice-versa).</li>
+<li class=tabTab><strong>Dependent joint</strong>: the joint that is linked to this one. This property doesn't appear as reflective (i.e. the dependency won't display for the dependent joint), in order to be able to link the dependent joint to other joints for complex dependency set-ups. All dependent joints must share a same parent shape for proper operation.</li>
+<li class=tabTab><strong>Multiplication factor</strong>: the multiplication factor that links the dependent joints. A factor or 1 will let two linked revolute joints rotate in the same direction, at the same rate.</li>
+<li class=tabTab><strong>Offset</strong>: not yet used. Keep at 0.</li>
+
+
+
+
+<br>
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="apiFunctionListCategory.htm#engineParameters">Engine properties setter and getter API functions</a></li>
+<li><a href="jointDynamicsProperties.htm">Joint dynamics properties</a></li>
+<li><a href="dynamicsEngineDialog.htm">Dynamics engines general properties</a></li>
+<li><a href="dynamicsModule.htm#bullet">Bullet physics library</a></li>
+<li><a href="dynamicsModule.htm#ode">Open Dynamics Engine</a></li>
+<li><a href="dynamicsModule.htm#vortex">Vortex Studio</a></li>
+<li><a href="dynamicsModule.htm#newton">Newton Dynamics</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

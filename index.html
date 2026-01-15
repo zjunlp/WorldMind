@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorldMind: Aligning Agentic World Models</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@300;400;600&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 全局参数设置 (在此处统一修改) --- */
+        :root {
+            /* 1. 颜色设置 */
+            --primary-dark: #202124;
+            --author-blue: #4a90b8;
+            --accent-blue: #4285f4;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-gray: #eaeaea;
+            --static-border-color: #e0e0e0; /* 静态灰色边框颜色 */
+            
+            /* 2. 尺寸与布局参数 */
+            --nav-height: 60px; /* 导航栏高度 */
+            
+            /* [参数1] 方框内边距：控制文字距离方框边框的距离 */
+            --card-padding: 200px; 
+
+            /* [参数2] 页面宽度控制 (所有章节统一使用) */
+            /* 宽度占比 */
+            --card-full-width: 98%; 
+            /* 最大宽度限制 (调大此数值，所有卡片都会变宽) */
+            --card-max-width: 1500px;
+
+            /* [参数3] 蓝色边框粗细 */
+            /* 鼠标悬停时，上/右/下三侧蓝色边框的粗细 */
+            --hover-border-width: 2px;
+            
+            /* [参数4] 左侧边框粗细 (灰色和蓝色动态条) */
+            --left-border-width: 6px;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #4a4a4a;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            padding-top: var(--nav-height);
+        }
+
+        /* --- 1. 顶部导航栏 --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid #f0f0f0;
+            z-index: 1000;
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #5f6368;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            position: relative;
+            padding: 18px 0;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* 图标和文字的间距 */
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-dark);
+        }
+
+        /* 导航下划线 */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary-dark);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            opacity: 0;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+            opacity: 1;
+        }
+
+        /* --- 2. 头部区域 & Home Container --- */
+        /* Home 容器用于包裹 Abstract 之前的内容，方便导航定位 */
+        #home {
+            scroll-margin-top: var(--nav-height); /* 防止锚点被导航栏遮挡 */
+        }
+
+        .header-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'DM Sans', sans-serif;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--primary-dark);
+        }
+
+        .title-main {
+            font-size: 3.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .title-sub {
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .authors {
+            font-size: 1.2rem;
+            color: var(--author-blue);
+            margin-bottom: 15px;
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.8;
+        }
+
+        .authors a {
+            color: var(--author-blue);
+            text-decoration: none;
+        }
+        
+        .authors a:hover {
+            text-decoration: underline;
+        }
+
+        .affiliations {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        .email {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.95rem;
+            color: #777;
+        }
+
+        /* --- 3. 按钮组 --- */
+        .link-block {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-x { background-color: #000; }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background-color: #000;
+        }
+
+        .btn i { margin-right: 8px; }
+
+        /* --- 4. 视频轮播 --- */
+        .carousel-section {
+            max-width: 1150px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .carousel-wrapper {
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            position: relative;
+            padding-bottom: 45%; /* 16:9 Aspect Ratio */
+            height: 0;
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            background-color: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            transition: 0.3s;
+            user-select: none;
+            z-index: 10;
+        }
+
+        .next { right: 20px; }
+        .prev { left: 20px; }
+        .prev:hover, .next:hover { background-color: rgba(255,255,255,0.4); }
+
+        .video-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        /* --- 5. 通用卡片布局基础 --- */
+        .paper-section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            /* [参数] 统一内边距 */
+            /* padding: var(--card-padding);  原有写法，注释掉 */
+            padding: 40px var(--card-padding); /* 上下40px，左右用变量 */
+            margin: 30px auto;
+            border: 1px solid var(--border-gray);
+            position: relative;
+            box-sizing: border-box; 
+            
+            /* [重要调整] 所有章节统一使用的宽度设置 */
+            width: var(--card-full-width);
+            max-width: var(--card-max-width);
+        }
+
+        .paper-section h2 {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .paper-section p {
+            text-align: justify;
+            font-size: 1.1rem;
+            color: #4a4a4a;
+        }
+
+        /* --- 6. 静态卡片样式 (用于 Abstract 和 Citation) --- */
+        /* 特点：只有样式区别(灰色边框、无悬停)，无尺寸区别 */
+        .static-card {
+            box-shadow: none; 
+            transition: none; 
+            /* 强制显示左侧灰色边框 */
+            border-left: var(--left-border-width) solid var(--static-border-color) !important; 
+        }
+        
+        .static-card:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* --- 7. 交互式卡片样式 (用于 Method, Results 等) --- */
+        /* 特点：只有样式区别(动态蓝条、悬停效果)，无尺寸区别 */
+        .interactive-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-left: 0; /* 左边框由伪元素代替 */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden; 
+        }
+
+        /* 左侧动态蓝色进度条 (初始高度0) */
+        .interactive-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: var(--left-border-width);
+            height: 0%;
+            background-color: var(--accent-blue);
+            transition: all 0.4s ease;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        /* 悬停时的状态 */
+        .interactive-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            
+            /* [参数] 悬停时边框粗细 */
+            border-top: var(--hover-border-width) solid var(--accent-blue);
+            border-right: var(--hover-border-width) solid var(--accent-blue);
+            border-bottom: var(--hover-border-width) solid var(--accent-blue);
+        }
+
+        /* 悬停时左侧条伸展 */
+        .interactive-card:hover::before {
+            height: 100%;
+        }
+
+        /* --- Motivation / Visualization --- */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .sub-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ccc;
+        }
+        .sub-card.failure { border-color: #e74c3c; }
+        .sub-card.success { border-color: #27ae60; }
+        
+        .sub-card h3 { margin-top: 0; font-size: 1.1rem; }
+
+        /* --- Table --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            text-align: left;
+        }
+        tr:last-child td { border-bottom: none; }
+        
+        /* --- BibTeX --- */
+        pre {
+            background-color: #f4f6f8;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.9rem;
+            border: 1px solid #e1e4e8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 60px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .title-main { font-size: 2.5rem; }
+            .title-sub { font-size: 1.5rem; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .paper-section { padding: 25px; margin: 20px 10px; }
+            /* 移动端恢复宽度为100% */
+            .paper-section { width: 100%; max-width: 100%; } 
+        }
+
+        /* --- 强制全文字体设置为 Times New Roman --- */
+        body, 
+        h1, h2, h3, h4, h5, h6,
+        .nav-link,
+        .title-main,
+        .title-sub,
+        .authors,
+        .affiliations,
+        .paper-section h2,
+        .analysis-tab-btn,
+        .figure-caption,
+        .figure-caption-text,
+        .insight-text,
+        .env-card h4,
+        .btn {
+            font-family: 'Times New Roman', Times, serif !important;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a class="nav-link" onclick="scrollToSection('home')"><i class="fas fa-home"></i> Home</a></li>
+            <li><a class="nav-link" onclick="scrollToSection('abstract')"><i class="fas fa-file-alt"></i> Abstract</a></li>
+            <li><a class="nav-link" onclick="scrollToSection('method')"><i class="fas fa-layer-group"></i> Method</a></li>
+            <li><a class="nav-link" onclick="scrollToSection('results')"><i class="fas fa-chart-bar"></i> Results</a></li>
+            <li><a class="nav-link" onclick="scrollToSection('analysis')"><i class="fas fa-microscope"></i> Analysis</a></li>
+            <li><a class="nav-link" onclick="scrollToSection('bibtex')"><i class="fas fa-quote-right"></i> Citation</a></li>
+        </ul>
+    </nav>
+
+    <!-- 包裹 Abstract 之前的内容为 Home -->
+    <div id="home">
+        <div class="header-container">
+            <h1>
+                <span class="title-main">WorldMind</span>
+                <span class="title-sub">Aligning Agentic World Models via Knowledgeable Experience Learning</span>
+            </h1>
+
+            <div class="authors">
+                Baochang Ren<sup>♠</sup>, 
+                Yunzhi Yao<sup>♠</sup>, 
+                Rui Sun<sup>♦</sup>, 
+                Shuofei Qiao<sup>♠</sup>, <br>
+                Ningyu Zhang<sup>♠</sup>,
+                Huajun Chen<sup>♠</sup>*
+            </div>
+
+            <div class="affiliations">
+                <span><sup>♠</sup> Zhejiang University</span> &nbsp;&nbsp;&nbsp;
+                <span><sup>♦</sup> University of California, Los Angeles</span>
+            </div>
+
+            <div class="email">
+                {baochang.ren, zhangningyu}@zju.edu.cn
+            </div>
+            <div style="font-size: 0.85rem; color: #999; margin-top: 5px;">* Corresponding author</div>
+
+            <div class="link-block">
+                <a href="#" class="btn">
+                    <i class="fas fa-file-pdf"></i> arXiv
+                </a>
+                <a href="#" class="btn">
+                    <i class="fab fa-github"></i> Code
+                </a>
+                <a href="#" class="btn">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="white" style="margin-right: 6px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                    X
+                </a>
+            </div>
+        </div>
+
+        <div class="carousel-section">
+            <div class="carousel-wrapper">
+                <div class="slide active">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/Habitat.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-label">Habitat Environment</div>
+                </div>
+                <div class="slide">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/ALFRED.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-label">ALFRED Environment</div>
+                </div>
+                <button class="prev" onclick="plusSlides(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="next" onclick="plusSlides(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Visualization -->
+        <section class="paper-section interactive-card" id="visualization">
+            <h2>Visualizing the Physical Hallucination Problem</h2>
+            <p>
+                Current LLM agents often understand the "why" but fail at the "how", leading to plans that are logically sound but physically impossible.
+            </p>
+            
+            <div class="comparison-grid">
+                <div class="sub-card failure">
+                    <h3 style="color:#e74c3c;"><i class="fas fa-times"></i> Without WorldMind</h3>
+                    <p><strong>Goal:</strong> "Slice bread."</p>
+                    <p><strong>Action:</strong> Tries to slice without holding a knife.</p>
+                    <p><strong>Result:</strong> <span style="color:#e74c3c; font-weight:bold">Physical Hallucination.</span></p>
+                </div>
+                <div class="sub-card success">
+                    <h3 style="color:#27ae60;"><i class="fas fa-check"></i> With WorldMind</h3>
+                    <p><strong>Goal:</strong> "Slice bread."</p>
+                    <p><strong>Simulation:</strong> <em>"Error: Need tool."</em> ➜ Pick up knife.</p>
+                    <p><strong>Result:</strong> <span style="color:#27ae60; font-weight:bold">Success via Experience.</span></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Abstract -->
+    <section class="paper-section static-card" id="abstract">
+        <h2>1. Abstract</h2>
+        <p>
+            Current Large Language Models (LLMs) exhibit a critical modal disconnect: they possess vast semantic knowledge but lack the procedural grounding to respect the immutable laws of the physical world. Consequently, while these agents implicitly function as world models, their simulations often suffer from <strong>physical hallucinations</strong>—generating plans that are logically sound but physically unexecutable.
+        </p>
+        <p>
+            To bridge this gap, we introduce <strong>WorldMind</strong>, a framework that autonomously constructs a symbolic <strong>World Knowledge Repository (WKR)</strong> by synthesizing environmental feedback. Specifically, it unifies <strong>Process Experience</strong> to enforce physical feasibility via prediction errors and <strong>Goal Experience</strong> to guide task optimality through successful trajectories. Experiments on EB-ALFRED and EB-Habitat demonstrate that WorldMind achieves superior performance compared to baselines with remarkable cross-model and cross-environment transferability.
+        </p>
+    </section>
+
+    <!-- Method -->
+    <section class="paper-section interactive-card" id="method">
+        <h2>Method: The WorldMind Framework</h2>
+        <p>
+            WorldMind transforms autonomous agents into empirical learners. Instead of relying on resource-intensive training, it employs a <strong>Predict-Act-Verify</strong> loop to align the agent's internal world model with reality.
+        </p>
+        
+        <div style="display: flex; gap: 20px; margin: 40px 0; flex-wrap: wrap; justify-content: center;">
+            
+            <div style="flex: 3.5; min-width: 250px;">
+                <img src="assets/intro.jpg" 
+                     alt="Conceptual Illustration" 
+                     style="display: block; width: 100%; height: 300px; object-fit: contain; border-radius: 8px; border: 1px solid #eee; background-color: #fff;">
+                
+                <div style="margin-top: 15px; font-family: 'Open Sans', sans-serif; font-size: 0.9rem; color: #444; line-height: 1.5; text-align: justify; background: #f9f9f9; padding: 12px 15px; border-radius: 6px; border-left: 4px solid #4a90b8;">
+                    <strong>Figure 1: Conceptual Illustration of Experiential Alignment.</strong> 
+                    The agent aligns its internal world model via 
+                    <span style="color:#d35400; font-weight:600;">Process Experience</span> and 
+                    <span style="color:#2980b9; font-weight:600;">Goal Experience</span>.
+                </div>
+            </div>
+
+            <div style="flex: 6.5; min-width: 300px;">
+                <img src="assets/framework.jpg" 
+                     alt="WorldMind Framework" 
+                     style="display: block; width: 100%; height: 300px; object-fit: contain; border-radius: 8px; border: 1px solid #eee; background-color: #fff;">
+                
+                <div style="margin-top: 15px; font-family: 'Open Sans', sans-serif; font-size: 0.9rem; color: #444; line-height: 1.5; text-align: justify; background: #f9f9f9; padding: 12px 15px; border-radius: 6px; border-left: 4px solid #4a90b8;">
+                    <strong>Figure 2: Overview of the WorldMind Framework.</strong> 
+                    The agent autonomously constructs a World Knowledge Repository (WKR) by unifying 
+                    <span style="color:#d35400; font-weight:600;">Process Experience</span> (from prediction errors) and 
+                    <span style="color:#2980b9; font-weight:600;">Goal Experience</span> (from successful trajectories) to guide grounded simulation.
+                </div>
+            </div>
+
+        </div>
+
+        <p>
+            The core innovation lies in separating knowledge into two streams: <strong>Process Experience</strong> for physical boundaries (e.g., "cannot open a closed fridge without being close") and <strong>Goal Experience</strong> for high-level planning shortcuts.
+        </p>
+    </section>
+
+    <!-- Results -->
+
+    <section class="paper-section interactive-card" id="results">
+        <h2>Experimental Results</h2>
+        
+        <div class="env-section-inner">
+            <div class="env-header">
+                <div class="env-title-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3 style="margin: 0; font-size: 1.3rem;">Task Environments</h3>
+            </div>
+            
+            <p style="margin-bottom: 20px; font-size: 0.95rem; color: #666;">
+                We utilize three diverse environments to evaluate the agent's alignment with reality, ranging from high-level planning to precise low-level control.
+            </p>
+
+            <div class="env-grid">
+                <div class="env-card">
+                    <div class="env-card-icon" style="background-color: #ff9f43;">
+                        <i class="fas fa-laptop-house"></i>
+                    </div>
+                    <h4>EB-ALFRED</h4>
+                    <p>
+                        <strong>Household Planning</strong><br>
+                        Long-horizon task decomposition (e.g., "Slice & heat tomato") based on AI2-THOR.
+                    </p>
+                </div>
+
+                <div class="env-card">
+                    <div class="env-card-icon" style="background-color: #54a0ff;">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h4>EB-Habitat</h4>
+                    <p>
+                        <strong>Rearrangement</strong><br>
+                        Object logistics tasks (e.g., "Move pear to sofa") built upon Habitat 2.0.
+                    </p>
+                </div>
+
+                <div class="env-card">
+                    <div class="env-card-icon" style="background-color: #1dd1a1;">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h4>EB-Navigation</h4>
+                    <p>
+                        <strong>Low-Level Control</strong><br>
+                        Precise atomic actions (e.g., "Move 0.25m") requiring strict spatial reasoning.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+
+        <p style="margin-bottom: 30px;">
+            Below are the detailed performance comparisons on the <strong>EB-ALFRED</strong> and <strong>EB-Habitat</strong> environments, along with ablation studies. Click the tabs to explore.
+        </p>
+
+        <div class="results-container">
+            
+            <div class="results-sidebar">
+                <button class="result-tab-btn active" onclick="openResult(event, 'tab-alfred')">
+                    <i class="fas fa-robot"></i> EB-ALFRED
+                </button>
+                <button class="result-tab-btn" onclick="openResult(event, 'tab-habitat')">
+                    <i class="fas fa-home"></i> EB-Habitat
+                </button>
+                <button class="result-tab-btn" onclick="openResult(event, 'tab-ablation')">
+                    <i class="fas fa-layer-group"></i> Ablation Study
+                </button>
+                <button class="result-tab-btn" onclick="openResult(event, 'tab-nav')">
+                    <i class="fas fa-map-marker-alt"></i> Navigation
+                </button>
+            </div>
+
+            <div class="results-display-area">
+                
+                <div id="tab-alfred" class="result-content active">
+                    <div class="result-header">
+                        <i class="fas fa-robot" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                        <h3>Performance on EB-ALFRED</h3>
+                    </div>
+                    
+                    <img src="assets/table1.png" alt="Table 1: ALFRED Results" class="result-img">
+                    
+                    <div class="table-caption">
+                        <span class="label">Table 1:</span> 
+                        <strong>Main Results on the EB-ALFRED Environment.</strong>
+                        Comparison of Success Rate (SR) and Goal Condition (GC). WorldMind achieves superior performance in tasks requiring long-horizon planning.
+                    </div>
+
+                    <div class="analysis-box">
+                        <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                        <ul>
+                            <li><strong>Superior Success Rate:</strong> With GPT-4.1-mini, WorldMind achieves an SR of <strong>50.0%</strong>, significantly outperforming ReAct (41.6%).</li>
+                            <li><strong>Improved Process Adherence:</strong> The Goal Condition (GC) score improves to <strong>50.8%</strong>, indicating better sub-goal completion.</li>
+                            <li><strong>Visual Robustness:</strong> Shows remarkable stability in the "Visual Appearance" subset.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="tab-habitat" class="result-content">
+                    <div class="result-header">
+                        <i class="fas fa-home" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                        <h3>Performance on EB-Habitat</h3>
+                    </div>
+                    
+                    <img src="assets/table2.png" alt="Table 2: Habitat Results" class="result-img">
+                    
+                    <div class="table-caption">
+                        <span class="label">Table 2:</span> 
+                        <strong>Main Results on the EB-Habitat Environment.</strong>
+                        Evaluation on five subsets: Base, Common, Complex, Visual, and Spatial.
+                    </div>
+
+                    <div class="analysis-box">
+                        <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                        <ul>
+                            <li><strong>Consistent Gains:</strong> WorldMind outperforms the ReAct baseline by <strong>+9.2%</strong> SR on GPT-4.1-mini.</li>
+                            <li><strong>Safety & Feasibility:</strong> Significant improvement in Spatial Awareness demonstrates effective physical filtering.</li>
+                            <li><strong>Error Reduction:</strong> Drastic reduction in "Invalid Action" errors compared to baselines.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="tab-ablation" class="result-content">
+                    <div class="result-header">
+                        <i class="fas fa-layer-group" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                        <h3>Ablation Study</h3>
+                    </div>
+                    
+                    <img src="assets/table3.png" alt="Table 3: Ablation Study" class="result-img">
+                    
+                    <div class="table-caption">
+                        <span class="label">Table 3:</span> 
+                        <strong>Impact of Goal Guidance and Process Supervision.</strong>
+                        Isolating the contributions of Goal Experience and Process Experience.
+                    </div>
+
+                    <div class="analysis-box">
+                        <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                        <ul>
+                            <li><strong>Goal Experience:</strong> Primarily enhances the Goal Condition (GC) metric, preventing navigational drift.</li>
+                            <li><strong>Process Experience:</strong> Drives improvements in Success Rate (SR) by acting as a physical safeguard.</li>
+                            <li><strong>Synergy:</strong> The full model performs best, confirming the need for both heuristic guidance and physical verification.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="tab-nav" class="result-content">
+                    <div class="result-header">
+                        <i class="fas fa-map-marker-alt" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                        <h3>Low-Level Navigation Tasks</h3>
+                    </div>
+                    
+                    <img src="assets/table4.png" alt="Table 4: Navigation Results" class="result-img">
+                    
+                    <div class="table-caption">
+                        <span class="label">Table 4:</span> 
+                        <strong>Generalization to Low-Level Control (EB-Navigation).</strong>
+                        Evaluating control of atomic actions (e.g., "Rotate 90 degrees").
+                    </div>
+
+                    <div class="analysis-box">
+                        <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                        <ul>
+                            <li><strong>Granularity Generalization:</strong> WorldMind effectively bridges high-level reasoning and low-level execution (+10.0% for GPT-3.5).</li>
+                            <li><strong>Oscillation Reduction:</strong> Retrieving successful trajectories helps maintain consistent behavior.</li>
+                            <li><strong>Model Agnostic:</strong> Improvements observed across both GPT-3.5 and GPT-4.1 backbones.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <style>
+            /* --- Environment Section Styles --- */
+            .env-section-inner {
+                background: #f8f9fa;
+                border-radius: 10px;
+                padding: 25px;
+                border: 1px solid #eaeaea;
+                margin-bottom: 30px;
+            }
+
+            .env-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .env-title-icon {
+                width: 32px;
+                height: 32px;
+                background-color: var(--primary-dark);
+                color: white;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 10px;
+                font-size: 0.9rem;
+            }
+
+            .env-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+
+            .env-card {
+                background: #fff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                padding: 20px 15px;
+                text-align: center;
+                transition: all 0.2s ease;
+            }
+
+            .env-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                border-color: var(--accent-blue);
+            }
+
+            .env-card-icon {
+                width: 50px;
+                height: 50px;
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 15px auto;
+                font-size: 1.3rem;
+                box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            }
+
+            .env-card h4 {
+                margin: 0 0 8px 0;
+                color: #333;
+                font-size: 1rem;
+                font-weight: 700;
+            }
+
+            .env-card p {
+                font-size: 0.85rem !important;
+                color: #666;
+                line-height: 1.4;
+                margin: 0;
+                text-align: center !important;
+            }
+
+            /* --- Results Tabs Styles --- */
+            .results-container {
+                display: flex;
+                gap: 25px;
+                margin-top: 20px;
+                min-height: 500px;
+            }
+
+            .results-sidebar {
+                width: 240px;
+                flex-shrink: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .result-tab-btn {
+                background: #fff;
+                border: 1px solid #e0e0e0;
+                padding: 15px 20px;
+                text-align: left;
+                cursor: pointer;
+                border-radius: 8px;
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 500;
+                font-size: 0.9rem;
+                color: #555;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .result-tab-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                border-color: #d0d0d0;
+            }
+
+            .result-tab-btn.active {
+                background-color: var(--accent-blue);
+                color: #fff;
+                border-color: var(--accent-blue);
+                box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+            }
+
+            .result-tab-btn.active i { color: #fff; }
+            .result-tab-btn i { width: 20px; text-align: center; color: #888; }
+
+            .results-display-area {
+                flex: 1;
+                background: #fff;
+                border: 1px solid #eee;
+                border-top: 4px solid var(--accent-blue);
+                border-radius: 8px;
+                padding: 30px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            }
+
+            .result-content { display: none; animation: fadeIn 0.4s ease; }
+            .result-content.active { display: block; }
+
+            .result-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 25px;
+                border-bottom: 1px solid #f0f0f0;
+                padding-bottom: 15px;
+            }
+            .result-header h3 { margin: 0; font-size: 1.4rem; color: #333; font-weight: 700; }
+
+            .result-img {
+                width: 100%;
+                height: auto;
+                border-radius: 6px;
+                border: 1px solid #f0f0f0;
+                display: block;
+                margin-bottom: 20px;
+            }
+
+            .table-caption {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 0.9rem;
+                color: #444;
+                line-height: 1.5;
+                text-align: justify;
+                background: #f9f9f9;
+                padding: 15px;
+                border-radius: 6px;
+                border-left: 4px solid #ff9f43;
+                margin-bottom: 25px;
+            }
+            .table-caption .label { font-weight: 700; color: #e67e22; margin-right: 5px; }
+
+            .analysis-box {
+                background-color: #f8faff;
+                border: 1px solid #e1e8f5;
+                border-radius: 8px;
+                padding: 20px;
+            }
+            .analysis-box h4 { margin-top: 0; margin-bottom: 10px; color: var(--accent-blue); font-size: 1rem; }
+            .analysis-box ul { margin: 0; padding-left: 20px; }
+            .analysis-box li { margin-bottom: 8px; color: #555; font-size: 0.9rem; }
+
+            @media (max-width: 900px) {
+                .env-grid { grid-template-columns: 1fr; }
+                .results-container { flex-direction: column; }
+                .results-sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding-bottom: 10px; }
+                .result-tab-btn { white-space: nowrap; }
+            }
+        </style>
+
+        <script>
+            function openResult(evt, tabName) {
+                var i, content, tablinks;
+                content = document.getElementsByClassName("result-content");
+                for (i = 0; i < content.length; i++) {
+                    content[i].style.display = "none";
+                    content[i].classList.remove("active");
+                }
+                tablinks = document.getElementsByClassName("result-tab-btn");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).style.display = "block";
+                document.getElementById(tabName).classList.add("active");
+                evt.currentTarget.className += " active";
+            }
+        </script>
+    </section>
+
+    <!-- Analysis -->
+    <section class="paper-section interactive-card" id="analysis">
+        <h2>Analysis</h2>
+        <p style="margin-bottom: 30px;">
+            We conducted in-depth analysis to understand the mechanism of WorldMind. Our findings reveal that the constructed World Knowledge Repository (WKR) captures universal physical laws, enabling robust generalization across models and environments.
+        </p>
+
+        <div class="analysis-container">
+            
+            <div class="analysis-sidebar">
+                <button class="analysis-tab-btn tab-btn-1 active" onclick="openAnalysis(event, 'ana-transfer')">
+                    Cross-Model Experience Transfer
+                </button>
+                <button class="analysis-tab-btn tab-btn-2" onclick="openAnalysis(event, 'ana-env')">
+                    Cross-Environment Analysis
+                </button>
+                <button class="analysis-tab-btn tab-btn-3" onclick="openAnalysis(event, 'ana-error')">
+                    Error Analysis
+                </button>
+            </div>
+
+            <div class="analysis-display-area">
+                
+                <div id="ana-transfer" class="analysis-content active">
+                    <div class="analysis-header">
+                        <h3 style="border-bottom-color: #9b59b6; color: #8e44ad;">Cross-Model Experience Transfer Analysis</h3>
+                    </div>
+                    
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <img src="assets/analysis1.png" alt="Cross-Model Transfer" class="analysis-img-small">
+                        <div class="figure-caption-text">
+                            <strong>Figure 3: Performance of Cross-Model Experience Transfer.</strong><br>
+                            Comparison of success rates when exchanging the WKR between GPT-3.5 and GPT-4.1.
+                        </div>
+                    </div>
+
+                    <div class="insight-box insight-box-purple">
+                        <h4 class="insight-header" style="color: #8e44ad;">
+                            <i class="fas fa-search" style="margin-right: 8px;"></i> Key Insights
+                        </h4>
+                        
+                        <div class="insight-row">
+                            <div class="insight-number" style="background-color: #8e44ad;">1</div>
+                            <div class="insight-text">
+                                <strong>Bidirectional Gains:</strong> Sharing experience yields significant gains. For instance, GPT-3.5-turbo using the repository from GPT-4.1-mini improves SR by <strong>4.4%</strong> on EB-ALFRED, confirming that the learned physical laws are model-agnostic.
+                            </div>
+                        </div>
+
+                        <div class="insight-row">
+                            <div class="insight-number" style="background-color: #8e44ad;">2</div>
+                            <div class="insight-text">
+                                <strong>Shared World Models:</strong> These results validate the transferability of WorldMind's knowledge, offering a foundational possibility for constructing <strong>shared world models</strong> to facilitate multi-agent collaboration in broader settings.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ana-env" class="analysis-content">
+                    <div class="analysis-header">
+                        <h3 style="border-bottom-color: #1abc9c; color: #16a085;">Cross-Environment Analysis</h3>
+                    </div>
+                    
+                    <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 20px;">
+                        <div style="flex: 1; text-align: center;">
+                            <img src="assets/analysis2-1.png" alt="Web Agent Accuracy" class="analysis-img-small">
+                            <div class="figure-caption-text">
+                                <strong>Figure 4(a): Accuracy Analysis.</strong><br>
+                                Performance on hybrid tasks.
+                            </div>
+                        </div>
+                        <div style="flex: 1; text-align: center;">
+                            <img src="assets/analysis2-2.png" alt="Web Agent Error" class="analysis-img-small">
+                            <div class="figure-caption-text">
+                                <strong>Figure 4(b): Error Distribution.</strong><br>
+                                Comparative failure analysis.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-box insight-box-teal">
+                        <h4 class="insight-header" style="color: #16a085;">
+                            <i class="fas fa-search" style="margin-right: 8px;"></i> Key Insights
+                        </h4>
+                        
+                        <div class="insight-row">
+                            <div class="insight-number" style="background-color: #16a085;">1</div>
+                            <div class="insight-text">
+                                <strong>Context Switching:</strong> WorldMind effectively manages dynamic switching between web interfaces (information seeking) and embodied environments (physical execution).
+                            </div>
+                        </div>
+
+                        <div class="insight-row">
+                            <div class="insight-number" style="background-color: #16a085;">2</div>
+                            <div class="insight-text">
+                                <strong>Overall Accuracy Boost:</strong> Beyond basic completion, WorldMind significantly improves <strong>Overall Accuracy</strong> (success across both domains), demonstrating robustness in complex, multi-modal workflows where baselines often fail.
+                            </div>
+                        </div>
+
+                        <div class="insight-row">
+                            <div class="insight-number" style="background-color: #16a085;">3</div>
+                            <div class="insight-text">
+                                <strong>Mitigating Hallucination:</strong> The error analysis reveals that WorldMind drastically reduces execution errors, ensuring the agent navigates transitions without premature termination due to physical hallucinations.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ana-error" class="analysis-content">
+                    <div class="analysis-header">
+                        <h3 style="border-bottom-color: #e74c3c; color: #c0392b;">Error Analysis</h3>
+                    </div>
+                    
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <img src="assets/analysis3.png" alt="Error Analysis Chart" class="analysis-img-small">
+                        <div class="figure-caption-text">
+                            <strong>Figure 5: Error Analysis in EB-ALFRED/Habitat.</strong><br>
+                            Comparison of error distributions.
+                        </div>
+                    </div>
+
+                    <div class="insight-box insight-box-red">
+                        <h4 class="insight-header" style="color: #c0392b;">
+                            <i class="fas fa-search" style="margin-right: 8px;"></i> Key Insights
+                        </h4>
+                        
+                        <div class="insight-row">
+                            <div class="insight-number" style="background-color: #c0392b;">1</div>
+                            <div class="insight-text">
+                                <strong>Physical Filter:</strong> In EB-Habitat, WorldMind reduces "Invalid Actions" for GPT-3.5-turbo from 105 to 67, confirming that Process Experience acts as an effective physical filter.
+                            </div>
+                        </div>
+
+                        <div class="insight-row">
+                            <div class="insight-number" style="background-color: #c0392b;">2</div>
+                            <div class="insight-text">
+                                <strong>Safe Exploration:</strong> Consequently, "Timeouts" rise from 4 to 30, indicating that by avoiding immediate fatal errors, the agent is able to explore the environment for longer periods safely.
+                            </div>
+                        </div>
+
+                        <div class="insight-row">
+                            <div class="insight-number" style="background-color: #c0392b;">3</div>
+                            <div class="insight-text">
+                                <strong>Logical Alignment:</strong> In EB-ALFRED, "Wrong Terminations" drop significantly (46 to 19), demonstrating that Goal Experience provides meta-level guidance to prevent premature quitting.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <style>
+            /* --- Analysis Container --- */
+            .analysis-container {
+                display: flex;
+                gap: 30px;
+                margin-top: 20px;
+                min-height: 500px;
+            }
+
+            .analysis-sidebar {
+                width: 260px;
+                flex-shrink: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 10px;
+            }
+
+            /* --- Sidebar Buttons with Hover Float Effect --- */
+            .analysis-tab-btn {
+                background: transparent;
+                border: none;
+                border-left: 3px solid #e0e0e0;
+                padding: 15px 20px;
+                text-align: left;
+                cursor: pointer;
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 500;
+                font-size: 1rem;
+                color: #888;
+                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition */
+            }
+
+            /* Hover Effect: Float & Shadow */
+            .analysis-tab-btn:hover {
+                transform: translateX(5px); /* Move right slightly */
+                background-color: #f9f9f9;
+                color: var(--primary-dark);
+                border-left-color: #ccc;
+            }
+
+            /* Active States - Specific Colors */
+            .analysis-tab-btn.tab-btn-1.active { 
+                color: #8e44ad; border-left-color: #8e44ad; font-weight: 700; background: #fdfaff;
+                transform: translateX(5px);
+            }
+            .analysis-tab-btn.tab-btn-2.active { 
+                color: #16a085; border-left-color: #16a085; font-weight: 700; background: #f0fcf9;
+                transform: translateX(5px);
+            }
+            .analysis-tab-btn.tab-btn-3.active { 
+                color: #c0392b; border-left-color: #c0392b; font-weight: 700; background: #fff5f5;
+                transform: translateX(5px);
+            }
+
+            /* Content Area */
+            .analysis-display-area {
+                flex: 1;
+                background: #fff;
+                padding: 10px;
+            }
+
+            .analysis-content { display: none; animation: fadeIn 0.4s ease; }
+            .analysis-content.active { display: block; }
+
+            .analysis-header h3 {
+                margin-top: 0;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 1.5rem;
+                border-bottom: 2px solid #eee;
+                padding-bottom: 15px;
+                margin-bottom: 25px;
+            }
+
+            /* Image Styling */
+            .analysis-img-small {
+                display: block;
+                max-width: 100%;
+                max-height: 280px; 
+                width: auto;
+                margin: 0 auto 10px auto; 
+                border-radius: 6px;
+                border: 1px solid #f0f0f0;
+            }
+
+            .figure-caption-text {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 0.85rem;
+                color: #666;
+                line-height: 1.4;
+                margin-top: 8px;
+            }
+
+            /* --- Insight Boxes (Dynamic Colors) --- */
+            .insight-box {
+                margin-top: 25px;
+                padding: 20px 25px;
+                background-color: #fdfdfd;
+                border: 1px solid #f2f2f2;
+                border-left-width: 5px;
+                border-left-style: solid;
+                border-radius: 4px;
+            }
+
+            .insight-box-purple { border-left-color: #8e44ad; }
+            .insight-box-teal { border-left-color: #16a085; }
+            .insight-box-red { border-left-color: #c0392b; }
+
+            .insight-header {
+                margin-top: 0;
+                margin-bottom: 15px;
+                font-size: 1.1rem;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+            }
+
+            .insight-row {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 15px;
+            }
+
+            .insight-number {
+                color: #fff;
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+                font-size: 0.8rem;
+                margin-right: 12px;
+                margin-top: 3px; 
+                flex-shrink: 0;
+                font-family: 'Source Code Pro', monospace;
+            }
+
+            .insight-text {
+                font-size: 0.95rem;
+                color: #333;
+                line-height: 1.6;
+            }
+
+            /* Mobile Responsive */
+            @media (max-width: 900px) {
+                .analysis-container { flex-direction: column; }
+                .analysis-sidebar { 
+                    flex-direction: row; 
+                    overflow-x: auto; 
+                    border-bottom: 1px solid #eee;
+                    padding-bottom: 0;
+                }
+                .analysis-tab-btn {
+                    border-left: none;
+                    border-bottom: 3px solid transparent;
+                    border-radius: 0;
+                    white-space: nowrap;
+                    padding: 10px 15px;
+                }
+                .analysis-tab-btn:hover { transform: none; background-color: transparent; }
+                
+                .analysis-tab-btn.tab-btn-1.active { border-bottom-color: #8e44ad; transform: none; }
+                .analysis-tab-btn.tab-btn-2.active { border-bottom-color: #16a085; transform: none; }
+                .analysis-tab-btn.tab-btn-3.active { border-bottom-color: #c0392b; transform: none; }
+            }
+        </style>
+
+        <script>
+            function openAnalysis(evt, tabName) {
+                var i, content, tablinks;
+                content = document.getElementsByClassName("analysis-content");
+                for (i = 0; i < content.length; i++) {
+                    content[i].style.display = "none";
+                    content[i].classList.remove("active");
+                }
+                tablinks = document.getElementsByClassName("analysis-tab-btn");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).style.display = "block";
+                document.getElementById(tabName).classList.add("active");
+                evt.currentTarget.className += " active";
+            }
+        </script>
+    </section>
+
+
+
+
+    <!-- Citation -->
+    <section class="paper-section static-card" id="bibtex">
+        <h2>Citation</h2>
+        <pre><code>@inproceedings{ren2026worldmind,
+  title={Aligning Agentic World Models via Knowledgeable Experience Learning},
+  author={Ren, Baochang and Yao, Yunzhi and Sun, Rui and Qiao, Shuofei and Zhang, Ningyu and Chen, Huajun},
+  booktitle={Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year={2026}
+}</code></pre>
+    </section>
+
+    <footer>
+        <p>
+            &copy; 2026 ZJUNLP.
+        </p>
+    </footer>
+
+    <script>
+        // --- 视频轮播逻辑 ---
+        let slideIndex = 1;
+        
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+                slides[i].classList.remove("active");
+            }
+            slides[slideIndex-1].style.display = "block";  
+            slides[slideIndex-1].classList.add("active");
+        }
+
+        // --- 导航跳转 ---
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            const offset = 80; 
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+
+        // --- 滚动监听 ---
+        window.addEventListener('scroll', function() {
+            // 只保留导航栏高亮 (Scroll Spy)
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            
+            // [修改点] 在数组中添加 'analysis'
+            const sections = ['home', 'abstract', 'method', 'results', 'analysis', 'bibtex'];
+            
+            let current = null; 
+
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                // 偏移量，避免刚碰到边缘就高亮
+                if (winScroll >= (element.offsetTop - 150)) {
+                    current = section;
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (current && link.getAttribute('onclick').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

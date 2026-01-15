@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>BlueWorkforce Middleware</title>
+    </head>
+    <body>
+        <h1>BlueWorkforce Middleware</h1>
+        <h2>Requirements</h2>
+        <h3>Goal and Context</h3>
+        The goal of the BlueWorkforce Middleware (BWM) is to provide an easy to use framework for developing distributed robotic applications.
+
+        <h3>System Requirements</h3>
+        Must run on all the relevant hardware platforms, i.e. Intel 32-bit and 64-bit, ARM (Raspberry PI).
+        The system will use TCP/IP for networking, and the ZeroMQ (ZMQ) library for message transport, so as to make possible connecting pairs or groups of sockets using the topologies offered by ZMQ.
+        <h3>Application Requirements</h3>
+        The main actors are the nodes.
+        A node is a process running in a box.
+        There may be multiple nodes running on the same box.
+        A node can have multiple ZMQ sockets.
+        Nodes should be identified by some human readable name.
+        Sockets should be identified by some human readable name.
+        There must be a node/socket name resolution layer that allows nodes to connect their sockets to external sockets just by using the human readable name.
+        Nodes should report their status in a standardized way.
+        Nodes shouls accept parameter change commands.
+        Nodes shouls report parameter change events.
+
+
+    </body>
+</html>
+

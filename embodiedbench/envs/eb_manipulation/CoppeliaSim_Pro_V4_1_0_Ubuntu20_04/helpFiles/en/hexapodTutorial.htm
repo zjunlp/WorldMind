@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Hexapod tutorial</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Hexapod tutorial</h1>
+
+<p>In this tutorial we will be building a hexapod walking robot. Make sure that you have read the <a href="bubbleRobTutorial.htm">BubbleRob tutorial</a> and the <a href="rigidBodyTutorial.htm">tutorial on importing and preparing rigid bodies</a> before starting with this one. The CoppeliaSim CAD data, courtesy of Lyall Randell, related to this tutorial (&quot;hexapod.dxf&quot;) is located in CoppeliaSim's installation folder's &quot;cadFiles&quot; folder. A finished <a href="models.htm">model</a> related to this tutorial can be found in CoppeliaSim's model browser. Click [Menu bar --&gt; File --&gt; Import --&gt; Mesh...] then select the file to import. Also refer to the section on <a href="importExport.htm">how to import/export shapes</a>. A dialog pops open asking about mesh scaling and mesh orientation. Click <strong>Ok</strong>. Several <a href="shapes.htm">shapes</a> were imported and are located in the middle of the <a href="scenes.htm">scene</a>. The shapes also appear in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> on the left hand side of the main window. Depending on how the original CAD data was exported, the imported CAD data could be at a different scale, different location, or even grouped as a single shape. The assigned color of imported shapes is random. Following figure shows the imported shapes:<br>
+</p>
+
+<p align=center><img src="images/hexaTut1.jpg"></p>
+<br>
+
+<p>As you can see, the hexapod robot has 6 identical legs. So instead of preparing each leg individually, we will prepare one leg, and when it is done, just copy-and-paste it to the right locations! Select in the scene the shapes to delete (use the ctrl-click and/or the shift-click for the selection process), then press the delete-key (make sure you kept the leg pointing towards the world x-axis):<br>
+</p>
+
+<p align=center><img src="images/hexaTut2.jpg"></p>
+<br>
+
+<p>The import operation has left us with 3 <a href="shapes.htm">shapes</a> per leg, so we will need to subdivide those 3 shapes further, in order to have separate shapes for the leg-links and the leg-servo motors. Select the 3 shapes then click [Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Divide selected shapes]. You can see that this operation has divided the shape closest to the robot body into 3 sub-shapes, where we only expected 2 sub-shapes. To correct for this, select the left and right link elements as shown in following figure:<br>
+</p>
+
+<p align=center><img src="images/hexaTut3.jpg"></p>
+<br>
+
+<p>While the two shapes are still selected, click [Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Merge selected shapes] in order to merge them into a single shape.<br>
+</p>
+
+<p>In next step, we will add the <a href="joints.htm">joints</a> required for our leg mechanism. One way of doing this is to add the joints into the scene, then specify their appropriate position and orientation (through the <a href="positionDialog.htm">position dialog</a> or the <a href="orientationDialog.htm">orientation dialog</a>). This is however not possible, when you don't know the exact joint positions as in our case, and so we will have to extract them from the shapes that we have:<br>
+</p>
+
+<p>Select the 3 shapes that represent the servo motors, copy them (ctrl-c or [Menu bar --&gt; Edit --&gt; Copy selected objects]), then create a new scene with  [Menu bar --&gt; File --&gt; New scene], then paste the shapes (ctrl-v or [Menu bar --&gt; Edit --&gt; Paste Buffer]). We are now in another scene (scene 2), and whatever we do here will not affect our original scene. Now keep the 3 servo motors selected and click [Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Merge selected shapes] to merge them as a single shape. Then enter the <a href="triangleEditMode.htm">triangle edit mode</a>. All triangles composing our shape are now displayed and can be manipulated.<br>
+</p>
+
+<p>Switch to <a href="pagesAndViews.htm">page</a> 2 and move your <a href="cameras.htm">camera</a> closer to the shape with the fit-to-view toolbar button:</p>
+<p align=center><img src="images/fitToViewButton.jpg"></p>
+
+<p>Shift-select all triangles composing one of the servo motors' output shaft as illustrated in following figures:<br>
+</p>
+
+<p align=center><img src="images/hexaTut4.jpg"></p>
+<br>
+
+<p>Then click the <strong>Extract shape</strong> button in the shape edit mode dialog. Do the same with the two other servo motor output shafts (for the third servo motor, you will have to switch to page 3 to be able to shift-select its output shaft):<br>
+</p>
+
+<p align=center><img src="images/hexaTut5.jpg"></p>
+<br>
+
+<p>Switch back to page 1, leave the edit mode, then delete the shape representing the 3 servo motors. Now the extracted shafts become clearly visible:</p>
+<p align=center><img src="images/hexaTut5b.jpg"></p>
+<br>
+
+<p>We can use the extracted shapes to precisely position our joints. Click [Menu bar --&gt; Add --&gt; Joint --&gt; Revolute] to insert a revolute joint into the scene. The default position is at (0;0;0) and its default orientation is vertical. While the joint is still selected, ctrl-select the shape representing the vertical output shaft, then open the <a href="positionDialog.htm">position dialog</a> , move to <strong>position</strong> tab  and click  the <strong>Apply to selection</strong> button.<br>
+</p>
+
+<p>This just positioned the joint at the exact same coordinates as the vertical output shaft! Now repeat the procedure with two additional joints and the two horizontal shafts. All joints are in position now, however, only the first added joint has the correct orientation. Select the two last added joints, then enter (-90,0,0) for the <strong>Alpha</strong>, <strong>Beta</strong> and <strong>Gamma</strong> items in the <a href="orientationDialog.htm">orientation dialog</a>, on the <strong>orientation</strong> tab, then click the <strong>Apply to selection</strong> button. All joints have the right position and orientation now. Select all 3 joints, copy them to the buffer (ctrl-c), switch back to the initial scene (scene 1), then paste the buffer (ctrl-v). This is what you should have:<br>
+</p>
+
+<p align=center><img src="images/hexaTut7.jpg"></p>
+<br>
+
+<p>You can now adjust the joint sizes (check the <strong>Joint length</strong> and <strong>Joint diameter</strong> items) in the <a href="jointProperties.htm">joint properties</a> dialog (that you can open by double-clicking a joint icon in the scene hierarchy). Additionally, we want the 2 horizontal joints to be located at y-coordinate 0, and the vertical joint to be located at a z-coordinate similar to its servo motor:<br>
+</p>
+
+<p align=center><img src="images/hexaTut8.jpg"></p>
+<br>
+
+<p>Rename your joints to &quot;hexa_joint1&quot;, &quot;hexa_joint2&quot; and &quot;hexa_joint3&quot; (from body to foot). You can do this by double-clicking the joint's names in the scene hierarchy. Now let's set the initial joint values so that when the leg is horizontally stretched, all joint values are zero: in the joint dialog, item <strong>Position</strong>, set -30 and +120 for &quot;hexa_joint2&quot; and &quot;hexa_joint3&quot;. Notice how joints are in torque/force mode. In our case we want to be able to control those joints in <a href="inverseKinematicsModule.htm">inverse kinematics</a> mode, but we also want the inverse kinematics results to be applied as <a href="dynamicsModule.htm">dynamics</a> position control values. To do this, we will set the joints in inverse kinematics mode (select &quot;joint is in inverse kinematics mode&quot; in the <strong>Joint mode</strong> section). In addition to that, we also activate the <strong>Hybrid operation</strong> for that joint (this tells CoppeliaSim that the inverse kinematics calculation results will be applied to the joint as dynamic target value). Click <strong>Apply to selection</strong> to apply the changes you just performed to the other two joints that are selected. <br>
+</p>
+
+<p>At this point, we should prepare the visual appearance of our shapes, group them if required, and prepare corresponding pure shapes for the <a href="dynamicsModule.htm">dynamic simulation</a>. Details on how this is done will not be explained here, since the procedure is very similar to what is done in the <a href="rigidBodyTutorial.htm">tutorial on importing and preparing rigid bodies</a>. Once you finished this step, this is what you should have (visible and hidden parts):<br>
+</p>
+
+<p align=center><img src="images/hexaTut9.jpg"></p>
+<br>
+
+<p>The above scene is &quot;tutorials\Hexapod\hexapod intermediate step.ttt&quot;. Notice following:<br>
+</p>
+
+<li>
+the <a href="objects.htm">objects</a> have been appropriately named/renamed. </li>
+
+<li>the hexapod's body used for dynamics (&quot;hexa_bodyRespondable&quot;) was simplified as 3 cuboids (the space in-between has been filled).<br>
+</li>
+
+<li>The tip of the leg is represented as a pure sphere, since pure spheres are most stable/fast for dynamic simulations.<br>
+</li>
+
+<li>The masses, inertia properties, etc. have been set for best performance. It always requires some (lots of!) testing to find good (i.e. stable) parameters.<br>
+</li>
+
+<li>Consecutive link elements won't cause collision responses (the <strong>Respondable masks</strong> in the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a> dialog have been set accordingly).<br>
+</li>
+
+<p>Next, we will be linking current elements of the mechanism. Select &quot;hexa_link3Respondable&quot; then &quot;hexa_joint3&quot;, and click [Menu bar --&gt; Edit --&gt; Make last selected object parent]. Do the same with &quot;hexa_joint3&quot; and &quot;hexa_link2Respondable&quot;, &quot;hexa_link2Respondable&quot; and &quot;hexa_joint2&quot;, &quot;hexa_joint2&quot; and &quot;hexa_link1Respondable&quot;, &quot;hexa_link1Respondable&quot; and &quot;hexa_joint1&quot;, and finally &quot;hexa_joint1&quot; and &quot;hexapod&quot;. We have assembled the first leg. Start the <a href="simulation.htm">simulation</a> and observe how rigid objects are constrained by the joints. Notice also that joints are not keeping a fixed position, but slowly drifting: this is because we haven't yet defined an inverse kinematics task for our kinematic chain representing the leg. This is what we will be doing next.<br>
+</p>
+
+<p>Add a <a href="dummies.htm">dummy object</a> with [Menu bar --&gt; Add --&gt; Dummy]. Rename it to &quot;hexa_footTip&quot;. Now position the dummy at the tip of the leg, where the leg is contacting the floor. You can achieve this by using the <a href="objectMovement.htm">object manipulation</a> toolbar buttons, or by using the <a href="positionDialog.htm">position dialog</a>. In former case, it can be useful to adjust the position step-by-step by switching to orthogonal projection views on page 2, page 3, page 4, page 5 or page 6. Once done, the dummy's absolute position should be close to (0.204,0,0). Next, attach the dummy to &quot;hexa_link3&quot; (drag the dummy onto &quot;hexa_link3&quot; in the scene hierarchy). Then copy and paste &quot;hexa_footTip&quot; and rename the copy to &quot;hexa_footTarget&quot;.<br>
+</p>
+
+<p>What we want at this stage, is to have &quot;hexa_footTip&quot; follow &quot;hexa_footTarget&quot;, while having the attached mechanism automatically adjust for that (i.e. while having the new joint positions automatically calculated). We have to define an inverse kinematic task:<br>
+</p>
+
+<p>First, let's inform the two dummies that they are a <em>tip-target</em> pair for inverse kinematics resolution. Double-click the dummy icon of &quot;hexa_footTip&quot; in the scene hierarchy: this opens the <a href="dummyPropertiesDialog.htm">dummy properties</a> dialog. In the <strong>Dummy-dummy linking</strong> section, specify &quot;hexa_footTarget&quot; as <strong>Linked dummy</strong>. Notice how both dummies got linked through a red stippled line in the scene hierarchy (the two dummies are also linked in the scene through a red line, but since both dummies are coincident, the line cannot be seen). In the same dialog, <strong>Link type</strong> is already &quot;IK, tip-target&quot;, which is the default value. This is what you should have by now:<br>
+</p>
+
+<p align=center><img src="images/hexaTut10.jpg"></p>
+<br>
+
+<p>Now open the <a href="ikDialog.htm">inverse kinematics dialog</a>, and click <strong>Add new IK group</strong>. A new item appears in the <strong>IK groups</strong> list: &quot;IK_Group&quot;. While that item is selected, open the <a href="ikElementDialog.htm">IK element dialog</a> (click Edit IK elements) and indicate  &quot;hexa_footTip&quot; in the drop-down box right to <strong>Add new IK element with tip</strong>. Then click <strong>Add new IK element with tip</strong>. Close the dialog, and attach &quot;hexa_footTarget&quot; to &quot;hexapod&quot;. Our inverse kinematics task is ready for this leg! Let's test it.<br>
+</p>
+
+<p>First, temporarily disable dynamics by opening the <a href="dynamicsDialog.htm">general dynamics properties</a> dialog, then unchecking <strong>Dynamics enabled</strong>. Next, start the simulation and in the scene hierarch select &quot;hexa_footTarget&quot;. Move the &quot;hexa_footTarget&quot; around with the mouse: the leg should follow. Stop the simulation and enable dynamics again.<br>
+</p>
+
+<p>We will control the hexapod robot by generating the movement for one leg, and applying it in a delayed way for all 6 legs, where each leg will have a different delay. We implement this by having one <a href="childScripts.htm">child script</a> generating the movement sequence for one leg, and having 6 additional child scripts applying that movement sequence in a delayed manner. Select &quot;hexa_joint1&quot; and click [Menu bar --&gt; Add --&gt; Associated child script --&gt; Non threaded]. We just attached a child script to the &quot;hexa_joint1&quot; object.<br>
+</p>
+
+<p>Now we will duplicate the leg 5 times. Select all objects composing the leg (hidden objects as well): from &quot;hexa_joint1&quot; to &quot;hexa_footTip&quot;. Also select &quot;hexa_footTarget&quot;. Make sure that &quot;hexa_bodyRespondable&quot; and &quot;hexa_body&quot; are not selected, then copy and paste the objects. Open the <a href="orientationDialog.htm">orientation dialog</a>, move to <strong>orientation</strong> tab and  enter &quot;60&quot; for the <strong>Around Z</strong> item. Make sure the transformation will be relative to <strong>World</strong>, then click <strong>Z-rotate selection</strong>. Paste the initial leg another time, then adjust the <strong>Around Z</strong> item to 120, then click <strong>Z-rotate selection</strong> again. Repeat the procedure for the remaining 3 legs (make sure you adjust the rotation angle to 180, 240 and finally 300 degrees). This is what you should have:<br>
+</p>
+
+<p align=center><img src="images/hexaTut11.jpg"></p>
+<br>
+
+<p>Let's attach all legs to the body. Select &quot;hexa_joint1#0&quot; through &quot;hexa_joint1#4&quot;, then &quot;hexapod&quot;, and click [Menu bar --&gt; Edit --&gt; Make last selected object parent]. In the scene hierarch, collapse all leg trees by clicking their &quot;-&quot; icon. Then select &quot;hexa_footTarget#0&quot; through &quot;hexa_footTarget#4&quot;, then &quot;hexapod&quot;, and click [Menu bar --&gt; Edit --&gt; Make last selected object parent].<br>
+</p>
+
+<p>Open the inverse kinematics dialog. Notice how the inverse kinematics tasks were also copied. This is what you should have:<br>
+</p>
+
+<p align=center><img src="images/hexaTut12.jpg"></p>
+<br>
+
+<p>Close the inverse kinematics dialog. Open the <a href="objectSelectionDialog.htm">object selection dialog</a> with [Menu bar --&gt; Tools --&gt; Selection], or by pressing the appropriate toolbar button. Click <strong>Clear Selection</strong>, then <strong>Dummies: 0/13</strong>. All dummies in the scene have been selected. Deselect (with ctrl-click) the dummy that is not part of the hexapod robot. We now have our 12 dummies on the hexapod selected. Now open the <a href="commonPropertiesDialog.htm">object common properties</a>. In the <strong>Visibility layers </strong>section, disable layer 3 and enable layer 11, then click the related <strong>Apply to selection</strong> button. This just sent all dummies to the visibility layer 11, effectively making them invisible. Have a look at the <a href="layerSelectionDialog.htm">layer selection dialog</a> if you wish to temporarily enable/disable some layers.<br>
+</p>
+
+
+<p>Next, send all joints to the visibility layer 10 by following the same procedure as above.<br>
+</p>
+
+
+<p>Then add a new dummy to the scene and rename it &quot;hexa_base&quot;. Also send it to the visibility layer 11. Then make it child of &quot;hexapod&quot;. &quot;hexa_base&quot; represents the position  of our hexapod robot, that we selected to be (0;0;0).<br>
+</p>
+
+<p>Now let's define the hexapod <a href="models.htm">model</a>. As you might have noticed, when you click an object on the hexapod robot, only that object gets selected. But what we now want is to protect individual objects from modification, and select the whole robot instead. For each object composing the hexapod robot, except for the object &quot;hexapod&quot;, enable the  <strong>Select base of model instead</strong> item in the object common properties dialog. Clear the selection, then select &quot;hexapod&quot;. In the same dialog, enable the <strong>Object is model base</strong> item. Now click any object on the hexapod robot: the whole robot now gets selected instead:<br>
+</p>
+
+<p align=center><img src="images/hexaTut13.jpg"></p>
+<br>
+
+<p>Now attach a <a href="childScripts.htm#nonThreaded">non-threaded child script</a> to &quot;hexapod&quot;. Create another scene (scene 3), and open the &quot;hexapod.ttm&quot; model file. Double-click the child script icon of object &quot;hexapod&quot; to open the <a href="scriptEditor.htm">script editor</a>. Copy the script, switch back to the original scene (scene 1), double-click the child script icon of object &quot;hexapod&quot; and paste the script. Repeat the same procedure for the child scripts associated with each leg. Notice how all child scripts associated with the hexapod's legs are exactly the same. A last element is still missing: we need each leg to apply the movement sequence with a different time delay. If you take a closer look at the legs' child scripts, they are each reading a delay value from their <a href="userParameters.htm">user parameters</a> with the instruction:</p>
+<pre class=lightRedBox>
+modulePos=sim.getUserParameter(sim.handle_self,'modulePosition')</pre>
+
+<p>
+You can open the <a href="userParameters.htm">user parameter dialog</a> by double-clicking the  icon on the right hand side of a child or customization script. Add the exact same parameters as the hexapod in the other scene. Run the simulation. The hexapod robot should now walk.</p>
+<p>Using a script to control a robot or model is only one way of doing. CoppeliaSim offers many different ways (also combined), have a look at the <a href="externalControllerTutorial.htm">external controller tutorial</a>, or at the <a href="pluginTutorial.htm">plugin tutorial</a>.<br>
+</p>
+
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

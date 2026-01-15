@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Lua crash course</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Lua crash course</h1>
+
+<p>Following crash course is an extremely condensed extract from the official Lua reference manual. For more details refer to the <a href="http://www.lua.org">Lua website</a> and to the numerous examples contained in the demo scenes.<br>
+</p>
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="lexicalConventions"></a>Lexical conventions
+</td></tr></table> 
+
+
+<li>
+Lua is a case sensitive language. &quot;and&quot;, &quot;And&quot; or &quot;AND&quot; are not the same. </li>
+
+<li>
+Following are Lua keywords:
+  <pre class=lightRedBox>
+and       break     do        else      elseif
+end       false     for       function  if
+in        local     nil       not       or
+repeat    return    then      true      until     while</pre>
+</li>
+
+<li>
+Following strings denote other tokens:
+  <pre class=lightRedBox>
++     -     *     /     %     ^     #
+==    ~=    <=    >=    <     >     =
+(     )     {     }     [     ]
+;     :     ,     .     ..    ...</pre>
+</li>
+
+<li>
+Literal strings can be delimited by matching single or double quotes (e.g. 'hello' or &quot;hello&quot;) </li>
+
+
+<li>
+A comment starts with a double hyphen (--) anywhere outside of a string. e.g.:
+<pre class=lightRedBox>
+a=4 -- variable a is now 4!</pre>
+</li>
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="valuesAndTypes"></a>Values and types
+</td></tr></table> 
+
+<li>
+Lua is a dynamically typed language which means that variables do not have types; only values do.
+</li>
+
+<li>
+There are 8 basic types in Lua:
+<pre class=lightRedBox>
+<strong>nil</strong>       type of the value nil whose main property is to be different from any other value.
+          It usually represents the absence of a useful value
+<strong>boolean</strong>   values false and true (both nil and false make a condition false;
+          any other value makes it true)
+<strong>number</strong>    real numbers
+<strong>string</strong>    arrays of characters (strings may contain any 8-bit character,
+          including embedded zeros)
+<strong>function</strong>  Lua functions
+<strong>userdata</strong>  can hold arbitrary C data (corresponds to a block of raw memory)
+<strong>thread</strong>    independent threads of execution used to implement coroutines
+<strong>table</strong>     arrays that can hold values of any type except nil</pre>
+</li>
+
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="variables"></a>Variables
+</td></tr></table> 
+
+<li>There are 3 kinds of variables: global variables, local variables and table fields. Any variable is assumed to be global unless explicitely declared as local<br>
+</li>
+
+<li>
+Before the first assignment to a variable, its value is nil
+</li>
+
+<li>Square brackets are used to index a table (e.g. value=table[x]). The first value in a table is at position 1 (and not 0 as for C arrays)<br>
+</li>
+
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="statements"></a>Statements
+</td></tr></table> 
+
+<li>Lua allows multiple assignments. The syntax for assignments defines a list of variables on the left side and a list of expressions on the right side. The elements in both lists are separated by commas:
+<pre class=lightRedBox>
+x,y,z = myTable[1],myTable[2],myTable[3]</pre>
+</li>
+
+<li>
+Relational operators (always result in <strong>false</strong> or <strong>true</strong>)
+<pre class=lightRedBox>
+<strong>==</strong>     equality
+<strong>~=</strong>     negation of equality
+<strong><</strong>      smaller than
+<strong>></strong>      bigger than
+<strong><=</strong>     smaller or equal than
+<strong>>=</strong>     bigger or equal than</pre>
+</li>
+
+<li>
+<strong>If</strong> control structure (by example):
+<pre class=lightRedBox>
+if value1==value2 then
+    print('value1 and value2 are same!')
+end</pre>
+</li>
+
+<li>
+<strong>For</strong> control structure (by example):
+<pre class=lightRedBox>
+for i=1,4,1 do -- count from 1 to 4 with increments of 1
+    print(i)
+end</pre>
+</li>
+
+<li>
+<strong>While</strong> control structure (by example):
+<pre class=lightRedBox>i=0<br>while i~=4 do<br>    i=i+1<br>end</pre>
+</li>
+
+<li>
+<strong>Repeat</strong> control structure (by example):
+<pre class=lightRedBox>i=0<br>repeat<br>    i=i+1<br>until i==4</pre>
+</li>
+
+<li>
+<strong>Table</strong> operations (by example):
+<pre class=lightRedBox>myTable={'firstValue',2,3} -- builds a table with 3 values<br>print(myTable[1]) -- prints the first element in the table<br>table.insert(myTable,4) -- appends the number 4 to the table</pre>
+</li>
+
+<li>
+Concatenation (by example):
+<pre class=lightRedBox>a=' hello'<br>b=' world'<br>c=a..b -- c contains 'hello world'</pre>
+</li>
+
+<li>
+Length operator #:
+<pre class=lightRedBox>stringLength=#'hello world'<br>tableSize=#{1,2,3,4,5}</pre>
+</li>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="http://www.lua.org">Lua website</a></li>
+<li><a href="scripts.htm">Embedded scripts</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

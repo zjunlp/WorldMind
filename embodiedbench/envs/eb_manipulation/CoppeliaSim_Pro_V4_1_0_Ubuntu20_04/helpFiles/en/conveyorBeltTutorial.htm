@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Conveyor belt / caterpillar tutorial</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Conveyor belt / caterpillar tutorial</h1>
+
+<p>In this tutorial we will be building a conveyor belt (or caterpillar, in which case have a look at the very end of this tutorial) from A to Z. Following figure illustrates the <a href="simulation.htm">simulation</a> <a href="scenes.htm">scene</a> that we will design:<br>
+</p>
+
+<p align=center><img src="images/convBeltTut1.jpg"></p>
+
+<p>We will build a conveyor belt that should behave exactly as a real one, where each conveyor belt pad is individually simulated dynamically. This means that smaller objects could get trapped in-between two adjacent pads for example. This type of simulation can be quite calculation intensive and slows down the overall simulation process. There is an alternative, simplified way to model a conveyor belt which will also be explained in this tutorial and clearly marked as <strong>METHOD B</strong> (in contrast to <strong>METHOD A</strong> where individual pads are simulated).<br>
+</p>
+
+<p>First of all, freshly start CoppeliaSim. The conveyor belt in the figure above is basically constituted by a <a href="paths.htm">path object</a> that drives several pads along its trajectory. Add a circular path with [Popup menu --&gt; Add --&gt; Path --&gt; Circle type]. In order to see the path from above, switch to <a href="pagesAndViews.htm">page</a> 6. Use the fit-to-view toolbar button to bring the camera closer:</p>
+
+<p align=center><img src="images/fitToViewButton.jpg"></p>
+
+
+<p>With the path object selected, notice how the path is defined by blue points, in-between which a Bezier interpolation is performed. You can also distinguish a red sphere, which represents the path position, which is not the position of the path, but rather <a href="pathPositionCalculationMethod.htm">a position along the path</a>.<br>
+</p>
+
+<p>Before attaching pads to the path, let's prepare the correct size and shape of the path. You can <a href="pathImportExport.htm">import a path</a>, or you can modify and edit an existing path, and we will opt for the second alternative. While the path is selected, enter the path edit mode by clicking the path edit mode toolbar button:</p>
+
+<p align=center><img src="images/pathEditModeButton.jpg"></p>
+
+<p>We are now in the <a href="pathEditMode.htm">path edit mode</a>. We want to design a conveyor belt that is 10 cm thick, 20 cm wide and 1 m long. The individual pads making up the belt will be 5 mm thick<br>
+</p>
+
+<p>In the path edit mode dialog, check the <strong>Path is flat</strong> and <strong>Keep x up</strong> items. Select all path points, then open the <a href="positionDialog.htm">position dialog</a>, on the <strong>position scaling</strong> tab, enter 3 times a scaling factor of &quot;0.19&quot; on the right-hand side, and click <strong>Scale position</strong>. This just scaled the path appropriately. Using the mouse wheel, come closer to the path. Select the uppermost <a href="pathsControlPointsAndBezierPoints.htm">path point</a>. Copy it with ctrl-c. Then select it again and paste the buffer just after the selected position with ctrl-v. We just created a path point coincident with the uppermost path point: we copied the path point #13, and pasted a copy of it just afterwards. The new path point is path point #14 as illustrated in these figures:<br>
+</p>
+<p align=center><img src="images/convBeltTut3.jpg"></p>
+
+<p>Now repeat the same procedure with the lowermost path point. Now that we have the two middle path points duplicated, we can stretch the path, i.e. move the left and right parts apart: select in the scene hierarchy path points #6 to path points #14, and  on the <strong>translation</strong> tab of the <a href="positionDialog.htm">position dialog</a>, for item <strong>Along X</strong>, enter &quot;-0.5&quot; then click <strong>X-translate selection</strong>. Now zoom a little bit out. This is what you should have:<br>
+</p>
+
+<p align=center><img src="images/convBeltTut4.jpg"></p>
+
+
+<p>Now select the left-hand side path points, and shift them in a similar way by 0.5 m towards the positive x coordinate. The path is ready:<br>
+</p>
+
+<p align=center><img src="images/convBeltTut5.jpg"></p>
+
+<p>Leave the path edit mode, select the path and in the <a href="userInterface.htm#InformationText">information text</a> section of the main window notice the line &quot;Last selected object type: Path (Bezier curve point count=270, total length=2.2985, p=+0.0000, Vn=+0.0000)&quot;. This tells us that the length of the path is 2.2985 meters. We can now figure out how many pads we want, their widths, and what the inter-pad distance should be. We go with 40 pads and a width of 5 cm, which results in an inter-pad distance of 0.75 cm<br>
+</p>
+
+<p>Click [Popup menu --&gt; Add --&gt; Primitive shape --&gt; Cuboid]. The <a href="primitiveShapes.htm">primitive shape dialog</a> appears that allows you to adjust various parameters. Enter (0.05; 0.005; 0.18) for the x-, y-, and z-sizes.<br>
+</p>
+
+<table class=lightYellowTable>
+<tr>
+<td>
+<div><strong>METHOD A</strong></div>
+<div>simply click <strong>Ok</strong>. This adds a <a href="shapes.htm">pure shape</a> that is dynamic and respondable to the scene. Switch to page 1. Now you can see the added shape. Rename it to &quot;pad0&quot; (you can rename any <a href="objects.htm">object</a> by double-clicking its name in the scene hierarchy). With the <a href="positionDialog.htm">position dialog</a>, set the pad's absolute z-coordinate to 0. Double-click the pad's icon in the scene hierarchy to open the <a href="shapeProperties.htm">shape properties</a> dialog. Adjust its color (click the <strong>Adjust outside color</strong> item). Then, in the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a> dialog, check the <strong>Static</strong> item in order to have the pad not fall during simulation. In the <a href="commonPropertiesDialog.htm">object common properties</a>, check following items: <strong>Select base of model instead</strong>, <strong><a href="collidableObjects.htm">Collidable</a></strong>, <strong><a href="measurableObjects.htm">Measurable</a></strong>, <strong><a href="renderableObjects.htm">Renderable</a></strong>, and all <strong><a href="detectableObjects.htm">Detectable</a> properties</strong>. In the <strong>Visibility layers</strong> section, enable also layer 9 (but keep layer 1 also enabled).<br>
+</div>
+</td>
+</tr>
+</table>
+<br>
+<table class=lightYellowTable>
+<tr>
+<td>
+<div><strong>METHOD B</strong></div>
+<div>uncheck the <strong>Create dynamic and respondable shape</strong> item and click <strong>Ok</strong>. This adds a <a href="shapes.htm">pure shape</a> that is static to the scene. Switch to page 1. Now you can see the added shape. Rename it to &quot;pad0&quot; (you can rename any <a href="objects.htm">object</a> by double-clicking its name in the scene hierarchy). With the <a href="positionDialog.htm">position dialog</a>, set the pad's absolute z-coordinate to 0. Double-click the pad's icon in the scene hierarchy to open the <a href="shapeProperties.htm">shape properties</a> dialog. Adjust its color (click the<strong>Adjust outside color</strong>item). In the <a href="commonPropertiesDialog.htm">object common properties</a>, check following item: <strong>Select base of model instead, <strong><a href="collidableObjects.htm">Collidable</a></strong>, <strong><a href="measurableObjects.htm">Measurable</a></strong>, <strong><a href="renderableObjects.htm">Renderable</a></strong>, and all <strong><a href="detectableObjects.htm">Detectable</a> properties</strong></strong>. In <strong>METHOD B</strong>, the conveyor belt pads don't have a dynamic function!<br>
+</div>
+</td>
+</tr>
+</table>
+
+<p>Next, we would like to attach the pad to the path, so that it automatically follows the path's trajectory, if the path's intrinsic position is modified with <a href="regularApi/simSetPathPosition.htm">sim.setPathPosition</a>. For this task we will need a helper object: a <a href="dummies.htm">dummy</a>. Click [Popup menu --&gt; Add --&gt; Dummy]. Rename the dummy to &quot;padLink0&quot;. Adjust the dummy's orientation to (0;-90;0) via the <a href="orientationDialog.htm">orientation dialog</a>, on the <strong>orientation</strong> tab. Attach the pad to the dummy by selecting the pad, then the dummy, then clicking [Popup menu --&gt; Edit --&gt; Make last selected object parent]. Next, attach the dummy to the path in a similar way (parenting can also be achieved by drag-and-drop in the scene hierarchy). Double-click the dummy icon in the scene hierarchy to open the <a href="dummyPropertiesDialog.htm">dummy properties</a> dialog. Check the<strong> Follow parent path (only direct parent)</strong> item: notice how the dummy and the pad just <em>jumped</em> to the path's red sphere's location. While the dummy is still selected, set the copy increment item to &quot;0.0575&quot;. This indicates that if the dummy is copied, then its offset on the path will automatically be incremented by 0.0575 meters, i.e. the width of the pad plus the inter-pad distance.  In the object common properties dialog, hide the dummy in layer 11 (deactivate layer 3 and activate layer 11).<br>
+</p>
+
+<p>Now we will add the remaining 39 pads. Select the dummy and the pad, and copy the selection with ctrl-c. Then paste the buffer exactly 39 times by pressing 39 times ctrl-v. Clear the selection with the esc-key, then select &quot;padLink1&quot; to &quot;padLink39&quot; in the scene hierarchy (make sure you don't select the pads but just the dummies!), then select the path, then click [Popup menu --&gt; Edit --&gt; Make last selected object parent]. This is what you should have:<br>
+</p>
+
+<p align=center><img src="images/convBeltTut6.jpg"></p>
+
+<p>In next step, we will add a simplified housing for the conveyor belt. Add a pure cylinder with dimensions (0.12; 0.12; 0.2) to the scene. Set its z-position to 0, its x-position to 0.5, then adjust its color. Copy and paste it, and move the copy to x-coordinate -0.5 meters. Add a pure cuboid with dimensions (1.0; 0.09; 0.18). Set its z-position to 0, and adjust its color. Select the two cylinders and the cuboid that you just added, then click [Popup menu --&gt; Edit --&gt; Grouping/Merging --&gt; Group selected shapes]. Rename the resulting shape to &quot;conveyorBelt&quot;. In the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a> dialog, make &quot;conveyorBelt&quot; <strong>static</strong>, and in the <a href="commonPropertiesDialog.htm">object common properties</a>, check<strong> <a href="collidableObjects.htm">Collidable</a></strong>, <strong><a href="measurableObjects.htm">Measurable</a></strong>, <strong><a href="renderableObjects.htm">Renderable</a></strong>, and all <strong><a href="detectableObjects.htm">Detectable</a> properties</strong>. Press also the <strong>Visibility layer</strong> button 9. Then attach the path to &quot;conveyorBelt&quot;.<br>
+</p>
+
+<table class=lightYellowTable>
+<tr>
+<td>
+<div><strong>METHOD B</strong></div>
+<div>add a pure cuboid with dimensions (1.0; 0.1; 0.18). Set its z-position to 0. Rename the resulting shape to &quot;conveyorForwarder&quot;. In the shape dialog, make &quot;conveyorForwarder&quot; <strong>static</strong>, and in the object common properties dialog send the object to the <strong>Visibility layer</strong> 9 (disable button 1 and enable button 9). Then attach &quot;conveyorForwarder&quot; to &quot;conveyorBelt&quot;. &quot;ConveyorForwarder&quot; is the object that will move other objects lying on it along with a little trick (see further below).<br>
+  <br>
+</div>
+</td>
+</tr>
+</table>
+
+
+<p align=center><img src="images/convBeltTut7.jpg"></p>
+
+<p>Now rotate the conveyor body by 90 degrees around the absolute x-axis, and set its coordinates to (0.0; 0.0; 0.5). Select the path, and in the <a href="pathPropertiesDialog.htm">path properties</a> uncheck <strong>Show path line</strong>, <strong>Show orientation of points</strong> and <strong>Show current position on path</strong>. Select &quot;conveyorBelt&quot; and in the object common properties dialog, check the<strong> Object is model base</strong> items. Click <strong>Edit model properties</strong> and in the <strong>Model content acknowledgments/Info</strong> section, add some text that you wish displayed every time the conveyor <a href="models.htm">model</a> is loaded. Finally collapse the hierarchy tree starting at &quot;conveyorBelt&quot;. Our model is almost ready:
+</p>
+
+<p align=center><img src="images/convBeltTut8.jpg"></p>
+
+<p>Notice that clicking any <a href="objects.htm">object</a> on the conveyor belt <a href="models.htm">model</a>, the whole model gets selected. If you wish to select individual objects, you can still do this in the scene hierarchy, or by holding down the shift and ctrl keys (both at the same time!) when clicking an object.</p>
+
+<p>The intrinsic position of the path (thus, the movement of the path) can also be modified through the API function <a href="regularApi/simSetPathPosition.htm">sim.setPathPosition</a>. Have a look at the other conveyor belt models in the model browser for an example on how to do this.<br>
+</p>
+
+
+<table class=lightYellowTable>
+<tr>
+<td>
+<div><strong>METHOD A</strong></div>
+<div>select the &quot;conveyorBelt&quot; object and click [Menu bar --&gt; Add --&gt; Associated child script --&gt; Non threaded]. This just attached a <a href="childScripts.htm#nonThreaded">non-threaded child script</a> to the model base. Double-click on the child script icon in the scene hierarchy to open the child script. Replace the script with following code:<br></div>
+
+<pre class=lightRedBox>
+function sysCall_init()
+    pathHandle=sim.getObjectHandle("Path")
+    sim.setPathTargetNominalVelocity(pathHandle,0) -- for backward compatibility
+end
+
+function sysCall_cleanup()
+ 
+end 
+
+function sysCall_sensing()
+
+end 
+
+function sysCall_actuation()
+    beltVelocity=0.1 -- in meters/seconds
+    local dt=sim.getSimulationTimeStep()
+    local pos=sim.getPathPosition(pathHandle)
+    pos=pos+beltVelocity*dt
+    sim.setPathPosition(pathHandle,pos) -- update the path's intrinsic position
+end</pre>
+
+<div>What above code effectively does is following: in each simulation pass, the intrinsic position of the path is modified in order to generate the intrinsic motion of the conveyor belt.</div>
+
+</td>
+</tr>
+</table>
+
+<br>
+
+<table class=lightYellowTable>
+<tr>
+<td>
+<div><strong>METHOD B</strong></div>
+<div>select the &quot;conveyorBelt&quot; object and click [Menu bar --&gt; Add --&gt; Associated child script --&gt; Non threaded]. This just attached a <a href="childScripts.htm#nonThreaded">non-threaded child script</a> to the model base. Double-click on the child script icon in the scene hierarchy to open the child script. Replace the script with following code:<br></div>
+
+<pre class=lightRedBox>
+function sysCall_init()
+    pathHandle=sim.getObjectHandle("Path")
+    forwarder=sim.getObjectHandle('conveyorForwarder')
+    sim.setPathTargetNominalVelocity(pathHandle,0) -- for backward compatibility
+end
+
+function sysCall_cleanup()
+ 
+end 
+
+function sysCall_sensing()
+
+end 
+
+function sysCall_actuation()
+    beltVelocity=0.1 -- in meters/seconds
+    local dt=sim.getSimulationTimeStep()
+    local pos=sim.getPathPosition(pathHandle)
+    pos=pos+beltVelocity*dt
+    sim.setPathPosition(pathHandle,pos) -- update the path's intrinsic position
+
+    -- Here we "fake" the transportation pads with a single
+    -- static cuboid that we dynamically reset at each
+    -- simulation pass (while not forgetting to set its initial
+    -- velocity vector) :
+
+    local relativeLinearVelocity={-beltVelocity,0,0}
+    -- Reset the dynamic cuboid from the simulation
+    -- (it will be removed and added again):
+    sim.resetDynamicObject(forwarder)
+    -- Compute the absolute velocity vector:
+    local m=sim.getObjectMatrix(forwarder,-1)
+    m[4]=0 -- Make sure the translation component is discarded
+    m[8]=0 -- Make sure the translation component is discarded
+    m[12]=0 -- Make sure the translation component is discarded
+    local absoluteLinearVelocity=sim.multiplyVector(m,relativeLinearVelocity)
+    -- Now set the initial velocity of the dynamic cuboid:
+    sim.setObjectFloatParameter(forwarder,3000,absoluteLinearVelocity[1])
+    sim.setObjectFloatParameter(forwarder,3001,absoluteLinearVelocity[2])
+    sim.setObjectFloatParameter(forwarder,3002,absoluteLinearVelocity[3])
+end</pre>
+
+<div>What above code effectively does is following: in each simulation pass, the intrinsic position of the path is modified in order to generate the intrinsic motion of the conveyor belt. At the same time, in each simulation pass, the &quot;conveyorForwarder&quot; object is &quot;dynamically reset&quot; (removed and then directly added again from/to the dynamic simulation) and an initial velocity set. The initial velocity is what will make other objects lying on it move! This is much less calculation intensive than to simulate each conveyor belt pad individually.</div>
+
+</td>
+</tr>
+</table>
+
+
+<p>To conclude this tutorial, we will save the model that we just created, so that it will appear in CoppeliaSim's <a href="userInterface.htm#ModelBrowser">model browser</a>. Select the model, then click [Menu bar --&gt; File --&gt; Save model as...]. A dialog appears that allows adjusting the model thumbnail image. Once you are satisfied with the thumbnail image, click <strong>Ok</strong> and navigate to CoppeliaSim's &quot;models/equipment&quot; folder and save the model.<br>
+</p>
+<br>
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="caterpillar"></a>Making a caterpillar
+</td></tr></table> 
+
+<p>
+in CoppeliaSim, caterpillars are simulated by using several dynamic cylinders along the caterpillar, to give the impression the caterpillar is moving the vehicle, when in fact, the cylinders are! This means that the caterpillar pads are just &quot;eye candy&quot;, and dynamically not enabled (they should be <strong>static</strong> and <strong>non-respondable</strong>). The method of creating caterpillars is actually very similar to making a conveyor belt with <strong>METHOD B</strong>. Following figure illustrates the caterpillar concept in CoppeliaSim: </p>
+
+<p align=center><img src="images/convBeltTut9.jpg"></p>
+
+
+
+
+
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+function sysCall_init()
+    sim.addLog(sim.verbosity_msgs,"Simulator launched, welcome!")
+end
+
+function sysCall_cleanup()
+    sim.addLog(sim.verbosity_msgs,"Leaving...")
+end
+
+function sysCall_beforeSimulation()
+    sim.addLog(sim.verbosity_msgs,"Simulation started.")
+end
+
+function sysCall_afterSimulation()
+    sim.addLog(sim.verbosity_msgs,"Simulation stopped.")
+    ___m=nil
+end
+
+function sysCall_sensing()
+    local s=sim.getSimulationState()
+    if s==sim.simulation_advancing_abouttostop and not ___m then
+        sim.addLog(sim.verbosity_msgs,"simulation stopping...")
+        ___m=true
+    end
+end
+
+function sysCall_suspend()
+    sim.addLog(sim.verbosity_msgs,"Simulation suspended.")
+end
+
+function sysCall_resume()
+    sim.addLog(sim.verbosity_msgs,"Simulation resumed.")
+end
+
+--[[ Following callbacks are also supported:
+function sysCall_nonSimulation()
+end
+
+
+function sysCall_beforeMainScript()
+    local outData={doNotRunMainScript=false} -- when true, then the main script won't be executed
+    return outData
+end
+
+function sysCall_actuation()
+end
+
+function sysCall_suspended()
+end
+
+function sysCall_beforeInstanceSwitch()
+end
+
+function sysCall_afterInstanceSwitch()
+end
+
+function sysCall_beforeCopy(inData)
+    for key,value in pairs(inData.objectHandles) do
+        sim.addLog(sim.verbosity_msgs,"Object with handle "..key.." will be copied")
+    end
+end
+
+function sysCall_afterCopy(inData)
+    for key,value in pairs(inData.objectHandles) do
+        sim.addLog(sim.verbosity_msgs,"Object with handle "..key.." was copied")
+    end
+end
+
+function sysCall_beforeDelete(inData)
+    for key,value in pairs(inData.objectHandles) do
+        sim.addLog(sim.verbosity_msgs,"Object with handle "..key.." will be deleted")
+    end
+    -- inData.allObjects indicates if all objects in the scene will be deleted
+end
+
+function sysCall_afterDelete(inData)
+    for key,value in pairs(inData.objectHandles) do
+        sim.addLog(sim.verbosity_msgs,"Object with handle "..key.." was deleted")
+    end
+    -- inData.allObjects indicates if all objects in the scene were deleted
+end
+
+function sysCall_afterCreate(inData)
+    for i=1,#inData.objectHandles,1 do
+        sim.addLog(sim.verbosity_msgs,"Object with handle "..inData.objectHandles[i].." was created")
+    end
+end
+--]]

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simWaitForSignal</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simWaitForSignal" id="simWaitForSignal"></a>simWaitForSignal / sim.waitForSignal </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Waits for a signal. Signals are cleared at simulation start. This function will first check whether an integer signal with that name is present, then if a float signal with that name is present and finally if a string signal with that name is present. The function only returns when the signal is present (defined). This function can only be called from <a href="../childScripts.htm">child scripts</a> running in a thread (since this is a blocking operation) and is not available from the C-API. See also the <a href="../apiFunctionListCategory.htm#signals">other signal functions</a> and <a href="simWait.htm">sim.wait</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn><div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>
+<div>Number/string signalValue=sim.waitForSignal(string signalName)</div>
+<br>
+<div>The function is equivalent to:</div>
+<br>
+<pre class=lightRedBoxNoMarginAndSmall>
+signalValue=nil
+while (signalValue==nil) do
+    signalValue=sim.getIntegerSignal(signalName) or sim.getFloatSignal(signalName) or
+                                                  sim.getStringSignal(signalName)
+    if (signalValue==nil) then
+        sim.switchThread()
+    end
+end</pre>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>signalName</strong>: name of the signal</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>signalValue</strong>: value of the signal</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

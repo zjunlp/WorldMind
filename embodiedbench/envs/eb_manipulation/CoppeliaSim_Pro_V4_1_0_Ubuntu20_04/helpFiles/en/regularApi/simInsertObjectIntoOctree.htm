@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simInsertObjectIntoOctree</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simInsertObjectIntoOctree" id="simInsertObjectIntoOctree"></a>simInsertObjectIntoOctree / sim.insertObjectIntoOctree </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Inserts an object into an <a href="../octrees.htm">OC tree</a>, as voxels. Each voxel will store a color and a tag value. See also <a href="simSubtractObjectFromOctree.htm">sim.subtractObjectFromOctree</a>, <a href="simInsertVoxelsIntoOctree.htm">sim.insertVoxelsIntoOctree</a> and the other <a href="../apiFunctionListCategory.htm#octree">OC tree related functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simInsertObjectIntoOctree(simInt octreeHandle,simInt objectHandle,simInt options,const simUChar* color,simUInt tag,simVoid* reserved)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>octreeHandle</strong>: the handle of the OC tree. See also <a href="simGetObjectHandle.htm">simGetObjectHandle</a></div>
+<div><strong>objectHandle</strong>: the handle of the object to insert. Only potentially <a href="../collidableObjects.htm">collidable objects</a> are supported</div>
+<div><strong>options</strong>: reserved. Set to 0</div>
+<div><strong>color</strong>: a pointer to one RGB triple, specifying the red, green and blue color components (0-255). Can be nullptr.</div>
+<div><strong>tag</strong>: a uint32 value, which is user-defined.</div>
+<div><strong>reserved</strong>: reserved for future extensions. Set to nullptr</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful, otherwise the total number of voxels in the OC tree
+</div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number totalVoxelCnt=sim.insertObjectIntoOctree(number octreeHandle,number objectHandle,number options,table color=nil,number tag=0)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

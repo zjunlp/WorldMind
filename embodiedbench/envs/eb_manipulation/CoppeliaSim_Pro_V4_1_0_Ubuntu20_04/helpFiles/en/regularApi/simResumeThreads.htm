@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simResumeThreads</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simResumeThreads" id="simResumeThreads"></a>simResumeThreads / sim.resumeThreads </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>In conjunction with <a href="simSetThreadResumeLocation.htm">sim.setThreadResumeLocation</a>, sim.resumeThreads allows specifying when and in which order threads are resumed. By default, CoppeliaSim doesn't use &quot;regular&quot; threads, but something similar to hybrid threads (which behave like coroutines, but can also behave like regular threads). This allows much more flexibility and execution control of the threads. Once a thread switched to another thread, it will resume execution at the beginning of next simulation pass by default. In order to also have full synchronization control between threads, you can assign a resume location and order to each thread. When sim.resumeThreads(x) is called, all threads that were assigned a resume location of x will be resumed. See also <a href="simSetThreadResumeLocation.htm">sim.setThreadResumeLocation</a>, <a href="simSetThreadSwitchTiming.htm">sim.setThreadSwitchTiming</a>, <a href="simSwitchThread.htm">sim.switchThread</a> and <a href="simSetThreadIsFree.htm">sim.setThreadIsFree</a>. This function can only be called in the <a href="../mainScript.htm">main script</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn><div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number count=sim.resumeThreads(number location)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>location</strong>: indicates a location value associated with threads (through the <a href="simSetThreadResumeLocation.htm">sim.setThreadResumeLocation</a> function). Only threads with the same location value will be resumed.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>count</strong>: number of resumed threads.</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

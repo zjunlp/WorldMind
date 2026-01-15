@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simReadCustomDataBlock</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simReadCustomDataBlock" id="simReadCustomDataBlock"></a>simReadCustomDataBlock / sim.readCustomDataBlock </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Reads custom data that is stored inside of an object, a script or a scene (i.e. the data is part of the object, the script or the scene).  Reads also custom data for the application's currrent session. See also <a href="simWriteCustomDataBlock.htm">sim.writeCustomDataBlock</a>, <a href="simReadCustomDataBlockTags.htm">sim.readCustomDataBlockTags</a> and the <a href="../apiFunctionListCategory.htm#packing">data packing/unpacking functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simChar* simReadCustomDataBlock(simInt objectHandle,const simChar* tagName,simInt* dataSize)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>objectHandle</strong>: handle of the object or script where the data is stored, or sim_handle_scene if the data is stored in the scene, or sim_handle_app if the data is stored in the application's current session.</div>
+<div><strong>tagName</strong>: a string that identifies the data. <br>
+</div>
+<div><strong>dataSize</strong>: a pointer to an integer receiving the size of the returned buffer.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>the custom data block, or nil in case of an error (or if the data is not present). The user is in charge of releasing the returned buffer with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>.<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>string customDataBlock=sim.readCustomDataBlock(number objectHandle,string tagName)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart. In addition, you can specify sim.handle_self for the <strong>objectHandle</strong> argument, if your target is the current script.</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart.</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

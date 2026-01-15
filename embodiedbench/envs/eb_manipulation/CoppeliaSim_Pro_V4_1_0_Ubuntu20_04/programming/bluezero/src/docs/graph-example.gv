@@ -1,0 +1,29 @@
+digraph G {
+    graph [overlap=false, splines=true, bgcolor="white"];
+    
+    node [shape=box, color=black, fontcolor=black];
+    N_graph_console [label="graph_console"];
+    N_publisher [label="publisher-1"];
+    N_resolver [label="resolver"];
+    N_server [label="server-1"];
+    N_client [label="client-1"];
+    N_subscriber_1 [label="subscriber-1"];
+    N_subscriber_2 [label="subscriber-2"];
+    
+    node [shape=ellipse, color=blue];
+    T_A [label="A", fontcolor=blue];
+    T_graph [label="graph", fontcolor=blue];
+    
+    node [shape=diamond, color=red];S_control [label="control", fontcolor=red];
+    S_resolv [label="resolv", fontcolor=red];
+    
+    edge [color=black, len=1.6];
+    N_publisher -> T_A;
+    N_resolver -> T_graph;
+    T_graph -> N_graph_console;
+    T_A -> N_subscriber_1;
+    T_A -> N_subscriber_2;
+    N_resolver -> S_resolv;
+    N_server -> S_control;
+    S_control -> N_client;
+}

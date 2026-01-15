@@ -1,0 +1,5 @@
+{
+  "instruction": "Move one of the pear items to the indicated sofa.",
+  "eval_set": "base",
+  "knowledge": []
+}

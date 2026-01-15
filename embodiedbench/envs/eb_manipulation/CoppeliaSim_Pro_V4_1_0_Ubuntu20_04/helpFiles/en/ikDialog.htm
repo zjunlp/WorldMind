@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Inverse kinematics dialog</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Inverse kinematics dialog</h1>
+
+
+<p>The inverse kinematics dialog is part of the <a href="calculationModuleDialog.htm">calculation module properties dialog</a>, which is located at [Menu bar --&gt; Tools --&gt; Calculation module properties]. You can also open the dialog with a click on its <a href="userInterface.htm#toolbars">toolbar</a> button:<br>
+</p>
+
+<p align=center><img src="images/calculationModuleButton.jpg"></p>
+<p class=imageLabel>[Calculation module properties toolbar button]</p>
+<br>
+
+<p>In the calculation module properties dialog, click  the <strong>Inverse kinematics</strong> button to display the inverse kinematics dialog:
+</p>
+
+
+<p align=center><img src="images/ikDialog2.jpg"></p>
+<p class=imageLabel>[Inverse kinematics dialog]</p>
+<br>
+
+<li><strong>Inverse kinematics enabled</strong>: enables or disables all inverse kinematics calculations.<br>
+</li>
+
+
+
+<li><strong>Add new IK group</strong>: adds a new empty IK group. IK groups can contain one or more IK elements. IK elements are basic kinematic chain IK tasks, and IK groups can group them for simultaneous solving. Use simultaneous solving only when needed (longer calculation time than sequential solving). An IK element always has to be associated with an IK group and can't exist by itself. The list below the button displays all IK groups that will be solved during IK calculations. An IK group in the list needs to be selected in order to have its parameters visualized in the rest of the dialog. The order in the list is important (IK group1's result might be needed for IK group2 to perform correctly or faster). The two buttons next to the list allow changing the position of the selected IK group.<br>
+</li>
+
+<li><strong>IK group is active</strong>: allows turning on and off individual IK groups.<br>
+</li>
+
+
+<li><strong>Explicit handling</strong>: indicates whether the selected IK group should be explicitly handled. If checked, IK calculation for this IK group will not be handled when sim.handleIkGroup(sim.handle_all_except_explicit) is called, but only if sim.handleIkGroup(sim.handle_all) or sim.handleIkGroup(ikGroupHandle) is called. This is useful if the user wishes to handle kinematics for that IK group in a <a href="childScripts.htm">child script</a> rather than in the <a href="mainScript.htm">main script</a> (if not checked, IK calculation for that IK group will be handled twice, once when sim.handleIkGroup(sim.handle_all_except_explicit) is called in the main script, and once when sim.handleIkGroup(ikGroupHandle) is called in the child script). Refer also to the section on <a href="explicitHandling.htm">explicit and non-explicit calls</a>.<br>
+</li>
+
+<li><strong>Calc. method</strong>: calculation method to use for the specified IK group resolution. <strong>Pseudo inverse</strong> is the fastest method but can be unstable when the target and tip lie too far apart, when a kinematic chain is overconstrained or when the mechanism is close to a singular configuration or the target is out of reach. <strong>DLS</strong> is slower but more stable since it is a damped resolution method (the damping factor can be specified (<strong>Damping</strong>)). This is a good choice when the <strong>pseudo inverse</strong> method might fail.<br>
+</li>
+
+<li><strong>Damping</strong>: the damping factor when using a damped resolution method (<strong>DLS</strong>). Large values result in more stable resolution but are much slower. It is important to adjust this value appropriately.<br>
+</li>
+
+<li><strong>Max. iterations</strong>: a maximum number of iterations can be specified. This is the maximum number of calculation passes for a given IK group, until its specified resolution accuracy was reached. Damped resolution (<strong>DLS</strong>) usually requires more iterations than a non-damped resolution (pseudo inverse).<br>
+</li>
+
+<li><strong>Ignore max. step sizes</strong>: the maximum step sizes specified in the<a href="jointProperties.htm"> joint properties</a> will be ignored if this property is checked.<br>
+</li>
+
+
+<li><strong>Edit conditional parameters</strong>: allows adjusting conditional resolution parameters for the selected IK group. Following dialog will pop open:</li>
+
+<p align=center><img src="images/ikConditionalDialog.jpg"></p>
+<p class=imageLabel>[IK conditional resolution dialog]</p>
+
+
+
+<li class=tabTab><strong>Perform if...</strong> : this is the conditional resolution section. The user can select in the drop-down list an IK group whose IK resolution result will dictate whether current IK group will be solved. Is considered as successful an IK group calculation whose IK elements all lie within their specified linear/angular precision.<br>
+</li>
+
+<li class=tabTab><strong>Restore if... </strong>: allows restoring the initial IK group configuration (joint values) if resolution didn't succeed (positional and/or orientational precision was not reached). Combined with the conditional solving above, the user can for instance combine two different calculation methods. This is useful in case a manipulator's target might be out of reach or close to a singularity: the first resolution attempt will then try solving the IK group with a non-damped resolution method (pseudo inverse, fast), and if not successful, a second attempt will try to solve it with a damped resolution method (DLS, slower). The user is of course also free to &quot;manually&quot; handle IK resolution from within a script, plugin, etc.
+</li>
+
+<br>
+
+<li><strong>Edit IK elements</strong>: allows to edit the various IK elements relative to the selected IK group. Clicking this button opens the <a href="ikElementDialog.htm">IK element dialog</a>. </li>
+
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="inverseKinematicsModule.htm">Inverse kinematics</a></li>
+<li><a href="basicsOnIkGroupsAndIkElements.htm">Basics on IK groups and IK elements</a></li>
+<li><a href="solvingIkAndFk.htm">Solving IK and FK for any type of mechanism</a></li>
+<li><a href="ikElementDialog.htm">IK element dialog</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

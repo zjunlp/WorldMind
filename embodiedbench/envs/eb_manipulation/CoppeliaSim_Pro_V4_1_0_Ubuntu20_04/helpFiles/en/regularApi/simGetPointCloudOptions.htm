@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetPointCloudOptions</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetPointCloudOptions" id="simGetPointCloudOptions"></a>simGetPointCloudOptions / sim.getPointCloudOptions </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Gets various properties of a <a href="../pointClouds.htm">point cloud</a>. See also <a href="simSetPointCloudOptions.htm">sim.setPointCloudOptions</a> and the other <a href="../apiFunctionListCategory.htm#pointCloud">point cloud related functions</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simGetPointCloudOptions(simInt pointCloudHandle,simFloat* maxVoxelSize,simInt* maxPtCntPerVoxel,simInt* options,simFloat* pointSize,simVoid* reserved)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>pointCloudHandle</strong>: the handle of the point cloud. See also <a href="simGetObjectHandle.htm">simGetObjectHandle</a></div>
+<div><strong>maxVoxelSize</strong>: the maximum size of the OC tree voxels containing points</div>
+<div><strong>maxPtCntPerVoxel</strong>: the maximum number of points allowed in a same OC tree voxel</div>
+<div><strong>options</strong>: bit-coded:</div>
+<div class=tab>bit0 set (1): points have random colors</div>
+<div class=tab>bit1 set (2): show OC tree structure</div>
+<div class=tab>bit2 set (4): reserved. keep unset</div>
+<div class=tab>bit3 set (8): do not use an OC tree structure. When enabled, point cloud operations are limited, and point clouds will not be <a href="../collidableObjects.htm">collidable</a>, <a href="../measurableObjects.htm">measurable</a> or <a href="../detectableObjects.htm">detectable</a> anymore, but adding points will be much faster</div>
+<div class=tab>bit4 set (16): color is emissive</div>
+<div><strong>pointSize</strong>: the size of the points, in pixels</div>
+<div><strong>reserved</strong>: reserved for future extensions. Set to nullptr</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>1 if operation was successful</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number maxVoxelSize,number maxPtCntPerVoxel,number options,number pointSize=sim.getPointCloudOptions(number pointCloudHandle)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

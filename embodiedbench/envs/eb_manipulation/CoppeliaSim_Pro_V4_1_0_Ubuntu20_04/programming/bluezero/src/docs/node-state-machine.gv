@@ -1,0 +1,13 @@
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [style=invis]; q_start q_end;
+	node [style=rounded,shape=box];
+	q_start -> created [ label = "new" ];
+	created -> ready [ label = "init()" ];
+	ready -> ready [ label = "spinOnce()" ];
+	ready -> terminated [ label = "cleanup()" ];
+	terminated -> q_end [ label = "delete" ];
+}
+
+# dot -Tpng node-state-machine.gv > node-state-machine.png

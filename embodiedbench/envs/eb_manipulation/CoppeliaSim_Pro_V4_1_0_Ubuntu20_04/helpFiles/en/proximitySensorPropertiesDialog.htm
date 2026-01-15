@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Proximity sensor properties</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Proximity sensor properties</h1>
+
+<p>The proximity sensor properties are part of the <a href="sceneObjectPropertiesDialog.htm">scene object properties </a>dialog, which is located at [Menu bar --&gt; Tools --&gt; Scene object properties]. You can also open the dialog with a double-click on an object icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>, or with a click on its <a href="userInterface.htm#toolbars">toolbar</a> button:<br>
+</p>
+
+<p align=center><img src="images/objectPropertyToolbarButton.jpg"></p>
+<p class=imageLabel>[Scene object properties toolbar button]</p>
+<br>
+
+<p>In the scene object properties dialog, click  the <strong>Proximity sensor</strong> button to display the proximity sensor dialog (the <strong>Proximity sensor</strong> button only appears if the last selection is a <a href="proximitySensors.htm">proximity sensor</a><a href="graphs.htm"></a><a href="dummies.htm"></a><a href="joints.htm"></a><a href="shapes.htm"></a><a href="lights.htm"></a><a href="cameras.htm"></a><a href="paths.htm"></a>). The dialog displays the settings and parameters of the last selected proximity sensor. If more than one proximity sensor is selected, then some parameters can be copied from the last selected proximity sensor to the other selected proximity sensors (<strong>Apply to selection</strong>-buttons):<br>
+</p>
+
+
+<p align=center><img src="images/proximitySensorDialog1.jpg"></p>
+<p class=imageLabel>[Proximity sensor dialog]</p>
+<br>
+
+
+<li><strong>Enable all proximity sensors</strong>: enables or disables the proximity sensor functionality for all proximity sensors.<br>
+</li>
+
+<li><strong>Explicit handling</strong>: indicates whether the sensor should be explicitely handled. If checked, the sensor will not be handled when sim.handleProximitySensor(sim.handle_all_except_explicit) is called, but only if sim.handleProximitySensor(sim.handle_all) or sim.handleProximitySensor(proximitySensorHandle) is called. This is useful if the user wishes to handle the sensor in a <a href="childScripts.htm">child script</a> rather than in the <a href="mainScript.htm">main script</a> (if not checked the sensor will be handled twice, once when sim.handleProximitySensor(sim.handle_all_except_explicit) is called in the main script, and once when sim.handleProximitySensor(proximitySensorHandle) is called in the child script). Refer also to the section on <a href="explicitHandling.htm">explicit and non-explicit calls</a>.<br>
+</li>
+
+<li><strong>Sensor subtype</strong>: select the most suited sensor type for your application. Available types include: ultrasonic, infrared, laser, inductive and capacitive. This setting has no direct effect on how the proximity sensor will operate, it will simply discard some <a href="entities.htm">entities</a> from detection that were not tagged as <em>detectable by ultrasonic sensor</em> or <em>detectable by laser</em> for instance. Entities can be individually tagged in the <a href="commonPropertiesDialog.htm">object common properties</a> (check/uncheck any item in the <strong>Detectable properties</strong>-section).<br>
+</li>
+
+
+
+<li><strong>Entity to detect</strong>: allows specifying what <a href="entities.htm">entity</a> should be detected. Remember that only appropriately tagged <a href="detectableObjects.htm">detectable objects</a> will be detected.<br>
+</li>
+
+<li><strong>Show volume parameters</strong>: Toggles the <a href="proximitySensorVolumeDialog.htm">proximity sensor volume dialog</a>. That dialog allows to customize a proximity sensor's detection volume.</li>
+
+<li><strong>Show detection parameters</strong>: opens the <a href="proximitySensorDetectionParameterDialog.htm">proximity sensor detection parameter dialog</a>. That dialog allows to customize various detection parameters. </li>
+
+
+
+
+
+<li><strong>Show volume when detecting</strong>: displays or hides the detection volume when the proximity sensor detects something.</li>
+
+
+<li><strong>Show volume when not detecting</strong>: displays or hides the detection volume when the proximity sensor doesn't detect anything.</li>
+
+
+<li><strong>Sensing point size</strong>: the size of the sensing point. This has no effect on calculations (the sensing point, even if displayed big, is always considered as a point).</li>
+
+<li><strong>Colors</strong>: allows adjusting the color of the various elements of a proximity sensor.
+</li>
+
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="proximitySensors.htm">Proximity sensors</a></li>
+<li><a href="proximitySensorDescription.htm">Proximits sensor types and mode of operation</a></li>
+<li><a href="detectableObjects.htm">Detectable objects</a></li>
+<li><a href="commonPropertiesDialog.htm">Object common properties</a></li>
+<li><a href="proximitySensorVolumeDialog.htm">Proximity sensor volume dialog</a></li>
+<li><a href="proximitySensorDetectionParameterDialog.htm">Proximity sensor detection parameter dialog</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

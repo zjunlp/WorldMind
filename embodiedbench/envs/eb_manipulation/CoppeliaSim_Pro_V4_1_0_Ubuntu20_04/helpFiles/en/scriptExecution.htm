@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Script execution order</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Script execution order</h1>
+
+<p>Scripts are not executed in a random fashion: script type, script location and script settings can influence when (in relation to others) a script is being executed. A simple rule to remember is: the more <em>important</em> or <em>persistent</em> a script is, the later it will be called/executed. </p>
+<p>Execution order is first based on script type. We have following order, from first executed to last executed:</p>
+<li><a href="childScripts.htm#threaded">threaded child scripts</a> are launched/resumed (order can be adjusted via <a href="regularApi/simSetThreadResumeLocation.htm">sim.setThreadResumeLocation</a>)</li>
+<li><a href="childScripts.htm#nonThreaded">non-threaded child scripts</a> are called</li>
+<li><a href="customizationScripts.htm">customization scripts</a> are called</li>
+<li><a href="addOns.htm">add-on scripts</a> are called</li>
+<li><a href="sandboxScript.htm">the sandbox script</a> is called</li>
+<p>Because child scripts are <a href="simulationScripts.htm">simulation scripts</a>, they will only run as long as the simulation is running (i.e. they are not <em>persistent</em>). This is not the case  with customization scripts, add-on scripts and the sandbox script, which run also after a simulation stop. Additionally, add-on scripts and the sandbox script also continue to run when switching to a different scene. Above sequence makes sense since <em>important</em> scripts can be designed to rely and operate on data produced by less <em>important</em> scripts.</p>
+<p> As an example, the callback <em>sysCall_sensing</em> will be called in following sequence: first in child scripts, then in customization scripts, in add-on scripts, and finally in the sandbox script.</p>
+<p>Within a script type, the execution order is a function of a script's position in the scene hierarchy, and its following 2 <a href="scriptProperties.htm">script settings</a>:</p>
+
+<li><strong>Execution priority</strong>: specifies the execution priority for a script. The execution priority relates only to same-type scripts, and only to scripts that are siblings in the scene hierarchy. </li>
+<p align=center><img src="images/scriptTreeTraversal1.jpg"></p>
+<p class=imageLabel>[Script execution order based on <em>execution priority</em> setting]</p>
+
+
+<li><strong>Tree traveral</strong>: specifies when a script is executed, in relation to the scripts attached further down in the scene hierarchy (its <em>descendants scripts</em>). With <em>reverse</em>, the descendant scripts are first executed, with <em>forward</em>, the descendant scripts are executed last. <em>Same as parent</em> uses the same tree traversal as the first ancestor script. The tree traversal relates only to same-type scripts. Default is <em>reverse</em>.</li>
+<p align=center><img src="images/scriptTreeTraversal2.jpg"></p>
+<p class=imageLabel>[Script execution order based on <em>tree traversal</em> setting]</p>
+
+<p> Following diagram illustrates a concret example scene:</p>
+
+<p align=center><img src="images/scriptTreeTraversal3.jpg"></p>
+<p class=imageLabel>[Example scene and child script execution order]</p>
+
+
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="childScripts.htm">Child scripts</a></li>
+<li><a href="customizationScripts.htm">Customization scripts</a></li>
+<li><a href="addOns.htm">Add-on scripts</a></li>
+<li><a href="sandboxScript.htm">The sandbox script</a></li>
+<li><a href="scriptProperties.htm">Script properties</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

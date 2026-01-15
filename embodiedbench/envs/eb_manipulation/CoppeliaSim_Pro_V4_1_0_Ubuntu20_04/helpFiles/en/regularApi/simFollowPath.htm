@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simFollowPath</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simFollowPath" id="simFollowPath"></a>simFollowPath / sim.followPath </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Moves an object along a path object. This function can only be called from <a href="../childScripts.htm">child scripts</a> running in a thread (since this is a blocking operation) and is not available from the C-API. See also <a href="simRMLPos.htm">sim.rmlPos</a>, <a href="simRMLVel.htm">sim.rmlVel</a> and <a href="simMoveToObject.htm">sim.moveToObject</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn><div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number deltaTimeLeft =sim.followPath(number objectHandle,number pathHandle,number positionAndOrOrientation,number relativeDistanceOnPath,number velocity,number accel)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div></div>
+<div><strong>objectHandle</strong>: handle of the object to be moved<br>
+</div>
+<div><strong>pathHandle</strong>: handle of the path object</div>
+<div><strong>positionAndOrOrientation</strong>: a value between 1 and 3 (1: only position is modified, 2: only orientation is modified, 3: position and orientation is modified). Can be nil in which case 3 is applied.<br>
+</div>
+<div><strong>relativeDistanceOnPath</strong>: a value between 0 and 1, where 0 is the beginning of the path, and 1 the end of the path. Make sure you selected the appropriate path length calculation method (refer to the <a href="../pathPositionCalculationMethod.htm">path position calculation method</a> section).<br>
+</div>
+<div><strong>velocity</strong>: movement nominal velocity. </div>
+<div><strong>accel</strong>: the acceleration/deceleration.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div></div>
+<div><strong>deltaTimeLeft</strong>: if the time needed to follow the path is not a multiple of the simulation time step, then deltatimeLeft is the execution time left at current simulation time. deltaTimeLeft is also memorized internally on a thread-basis and used as compensation or correction factor in subsequent blocking commands. deltaTimeLeft is nil in case of an error.<br>
+</div>
+<div></div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

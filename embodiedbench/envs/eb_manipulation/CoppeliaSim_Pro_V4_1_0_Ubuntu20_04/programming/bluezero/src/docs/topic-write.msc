@@ -1,0 +1,7 @@
+msc {
+    hscale = "2";
+
+    n [ label="node" ], p [ label="XPUB" ];
+
+    n->p [ label="b0::message::MessageEnvelope" ];
+}

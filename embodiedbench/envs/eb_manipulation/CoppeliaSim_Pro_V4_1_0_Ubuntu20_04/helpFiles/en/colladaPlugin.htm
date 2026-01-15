@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Collada importer/exporter plugin</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Collada importer/exporter plugin</h1>
+
+<p>The collada file format (*.dae) is supported for import/export operations via a plugin, <a href="https://github.com/CoppeliaRobotics/simExtCollada" target="_blank">simExtCollada</a>. Currently, only triangular or polygonal meshes are imported/exported. A future version will also support reading/writing physics-related information. If the  collada plugin was correctly loaded, you can access the plugin dialog via [Plugins --&gt; COLLADA import/export...]:</p>
+
+<p align=center><img src="images/colladaPluginDlg.jpg"></p>
+<p class=imageLabel>[Collada plugin dialog]</p>
+<br>
+
+<li><strong>Merge imported meshes</strong>: if checked, then all imported meshes will be merged into a single <a href="shapes.htm">simple shape</a>. This option is useful if the collada file contains too many individual meshes (e.g. more than 1000-2000).<br>
+</li>
+
+<li><strong>Import meshes only</strong>: by default, the plugin imports all available nodes: meshes become <a href="shapes.htm">shapes</a>, transformations become <a href="dummies.htm">dummies</a>, rotations become <a href="jointDescription.htm">revolute joints</a>, and translations become <a href="jointDescription.htm">prismatic joints</a>. In order to import only meshes, check this item (in that case, the node hierarchy will not be preserved).<br>
+</li>
+
+<li><strong>Ungroup compound shapes</strong>: if enabled, then compound meshes will be represented as single <a href="shapes.htm">simple shapes</a>.<br>
+</li>
+
+<li><strong>Scaling factor (collada import)</strong>: a scaling factor used during the import operation. If the meshes in the collada file are expressed in mm for instance, and you keep the scaling factor at 1, then everything will appear way too large, or even not appear at all in the scene view.
+</li>
+
+<li><strong>Import</strong>: imports data from a collada file.</li>
+
+<li><strong>Export animation</strong>: if enabled, then each rendered scene will be exported as a distinct scene during simulation. The file will be written at the end of a simulation.<br>
+</li>
+
+<li><strong>Export shapes only</strong>: by default all visible objects will be exported as a node in the collada file. Checking this item will export shapes only.</li>
+<li><strong>Scaling factor (collada export)</strong>: a scaling factor used during the export operation.</li>
+<li><strong>Export</strong>: exports a single scene with all visible objects.</li>
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

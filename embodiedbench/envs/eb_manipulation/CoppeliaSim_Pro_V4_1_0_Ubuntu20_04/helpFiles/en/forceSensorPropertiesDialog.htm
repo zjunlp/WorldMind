@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Force sensor properties</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Force sensor properties</h1>
+
+
+<p>The force sensor properties are part of the <a href="sceneObjectPropertiesDialog.htm">scene object properties </a>dialog, which is located at [Menu bar --&gt; Tools --&gt; Scene object properties]. You can also open the dialog with a double-click on an object icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>, or with a click on its <a href="userInterface.htm#toolbars">toolbar</a> button:<br>
+</p>
+
+<p align=center><img src="images/objectPropertyToolbarButton.jpg"></p>
+<p class=imageLabel>[Scene object properties toolbar button]</p>
+<br>
+
+<p>In the scene object properties dialog, click  the <strong>Force sensor</strong> button to display the force sensor dialog (the <strong>Force sensor</strong> button only appears if the last selection is a <a href="forceSensors.htm">force sensor</a><a href="visionSensors.htm"></a><a href="proximitySensors.htm"></a><a href="graphs.htm"></a><a href="dummies.htm"></a><a href="joints.htm"></a><a href="shapes.htm"></a><a href="lights.htm"></a><a href="cameras.htm"></a><a href="paths.htm"></a>). The dialog displays the settings and parameters of the last selected force sensor. If more than one force sensor is selected, then some parameters can be copied from the last selected force sensor to the other selected force sensors (<strong>Apply to selection</strong>-buttons):
+</p>
+
+
+
+<p align=center><img src="images/forceSensorDialog1.jpg"></p>
+<p class=imageLabel>[Force sensor dialog]</p>
+<br>
+
+<li><strong>Filter</strong>: when force or torque data is acquired by the force sensor, then it is accumulated and can be filtered in order to obtain less jittery values.<br>
+</li>
+
+<li><strong>Sample size</strong>: the number of values that should be used for the filter. <em>1</em> will not filter values (raw output).</li>
+
+<li><strong>Average value</strong>: if selected, then the force sensor will deliver average values (average of <strong>sample size</strong> values).<br>
+</li>
+
+<li><strong>Median value</strong>: if selected, then the force sensor will deliver median values (median of <strong>sample size</strong> values).<br>
+</li>
+
+
+<li><strong>Trigger settings</strong>: this section allows to set up some automatic triggering conditions. A trigger will call the <a href="triggerCallbackFunctions.htm">trigger callback function</a> (inside which one could for instance <a href="regularApi/simBreakForceSensor.htm">break the force sensor</a>).<br>
+</li>
+
+<li><strong>Force threshold</strong>: the amplitude of the force vector that activates a threshold violation.<br>
+</li>
+
+<li><strong>Torque threshold</strong>: the amplitude of the torque vector that activates a threshold violation </li>
+
+<li><strong>Consecutive threshold violations for breaking</strong>: the number of consecutive times the sensor is allowed to violate a threshold before triggering.
+</li>
+
+
+<li><strong>Object size</strong>: size of the sensor's 3D representation. This has no functional effect.<br>
+</li>
+
+<li><strong>Adjust color A / B</strong>: allows adjusting the two colors of a force sensor.
+</li>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="forceSensors.htm">Force sensors</a></li>
+<li><a href="triggerCallbackFunctions.htm">Trigger callback function</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

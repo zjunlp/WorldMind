@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>IK element dialog</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>IK element dialog</h1>
+
+<p>The IK element dialog is part of the <a href="ikDialog.htm">inverse kinematics dialog</a>. The dialog displays the various IK elements of a given IK group. In the <a href="ikDialog.htm">inverse kinematics dialog</a>, select an IK group then click the <strong>Edit IK elements</strong> button to open the IK element dialog:</p>
+
+<p align=center><img src="images/ikElementDialog.jpg"></p>
+<p class=imageLabel>[IK element dialog]</p>
+<br>
+
+<li><strong>Add new IK element with tip</strong>: adds a new IK element (defined by its tip <a href="dummies.htm">dummy</a>) with default values. An IK group can contain several IK elements, displayed in the list. The IK elements in the list will be solved simultaneously during IK calculations (simultaneously because they are part of the same IK group). Order in the list is not important. Selecting an IK element in the list will display its properties and parameters.<br>
+</li>
+
+<li><strong>Element is active</strong>: allows to turn the selected  IK element on and off. Invalid IK elements might be turned off automatically during simulation.<br>
+</li>
+
+<li><strong>Base</strong>: the base object of the IK chain. Keep in mind that constraints are specified relative to the base object's orientation if not specified otherwise.<br>
+</li>
+
+<li><strong>Target</strong>: the dummy that the tip should follow. Targets should not be part of the specified kinematic chain (otherwise resolution of the IK element might be impossible), but it is recommended to build the target on top of the base (to keep a clean scene hierarchy). If the selected tip dummy is not linked to any other dummy, or if the link type is not <strong>IK, tip-target</strong>, then a warning message will be displayed instead of the target dummy name.
+</li>
+
+<li><strong>Constraints</strong>: constraints that need to be respected during IK element solving. Positional constraints are specified relative to the base by default but another dummy object can be selected as a constraint reference frame (<strong>Relative to coordinate frame</strong> item). Overconstrained IK elements won't be solved properly and are unstable. It is important to carefully analyze what constraints are needed, and relative to what reference frame. However it is sometimes difficult to not over-constrain an IK element. In that case choose a damped resolution method (<strong>DLS</strong>) for the IK group and adjust the damping factor appropriately. But remember that damped resolution is slower. (<strong>X</strong>, <strong>Y</strong> and <strong>Z</strong> are related to the position (the tip will follow the target 's position), <strong>Alpha-Beta</strong> and <strong>Gamma</strong> are related to the orientation (the tip will follow the target's orientation)).<br>
+</li>
+
+
+<li><strong>Linear / angular precisions</strong>: specifies the desired linear / angular precision (the IK element is considered solved if the tip is within the linear and angular precision of the target (considering the specified constraints)).<br>
+</li>
+
+
+<li><strong>Linear / angular weights</strong>: IK resolution weight for the positional or orientational resolution. The user can choose to give priority to position-following or orientation-following for IK element resolution. This can be particularly useful with redundant mechanisms.
+</li>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="inverseKinematicsModule.htm">Inverse kinematics</a></li>
+<li><a href="basicsOnIkGroupsAndIkElements.htm">Basics on IK groups and IK elements</a></li>
+<li><a href="solvingIkAndFk.htm">Solving IK and FK for any type of mechanism</a></li>
+<li><a href="ikDialog.htm">Inverse kinematics dialog</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

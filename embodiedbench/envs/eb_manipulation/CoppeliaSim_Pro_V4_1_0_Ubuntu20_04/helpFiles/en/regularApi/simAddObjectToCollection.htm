@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simAddObjectToCollection</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simAddObjectToCollection" id="simAddObjectToCollection"></a>simAddObjectToCollection / sim.addObjectToCollection </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>
+Adds an object (or a group of objects) to a <a href="../collections.htm">collection</a>. See also <a href="simEmptyCollection.htm">sim.emptyCollection</a>, <a href="simRemoveCollection.htm">sim.removeCollection</a>, <a href="simGetCollectionHandle.htm">sim.getCollectionHandle</a>, <a href="simGetObjectHandle.htm">sim.getObjectHandle</a>, <a href="simGetCollectionObjects.htm">sim.getCollectionObjects</a> and <a href="simCreateCollection.htm">sim.createCollection</a>. </td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simAddObjectToCollection(simInt collectionHandle,simInt objectHandle,simInt what,simInt options)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>collectionHandle</strong>: the handle of a collection.</div>
+<div><strong>objectHandle</strong>: the handle of an object.</div>
+<div><strong>what</strong>: the type of object (or group of objects) to add. Following are allowed values: <em>sim_handle_single</em> (for a single object), <em>sim_handle_all</em> (for all objects in the scene), <em>sim_handle_tree</em> (for a tree of objects), or <em>sim_handle_chain</em> (for a chain of objects (i.e. an inverted tree)).</div>
+<div><strong>options</strong>: bit-coded options:</div>
+<div class=tab>bit 0 set (1): the specified object (or group of objects) is removed from the collection. Otherwise it is added.</div>
+<div class=tab>bit 1 set (2): the specified object is not included in the group of objects, if sim_handle_tree or sim_handle_chain is specified (i.e. the tree base or tip is excluded).</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.addObjectToCollection(number collectionHandle,number objectHandle,number what,number options)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>-</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

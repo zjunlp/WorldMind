@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simRMLStep</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simRMLStep" id="simRMLStep"></a>simRMLStep / sim.rmlStep </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Executes a call to the <a href="http://www.reflexxes.com">Reflexxes Motion Library type II or IV</a>. The Reflexxes Motion Library provides instantaneous trajectory generation capabilities for motion control systems. This function steps forward a trajectory generation algorithm previously prepared via <a href="simRMLPos.htm">sim.rmlPos</a> or <a href="simRMLVel.htm">sim.rmlVel</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simRMLStep(simInt handle,simDouble timeStep,simDouble* newPosVelAccel,simVoid* auxData,simVoid* reserved)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>handle</strong>: the handle of the object created via <a href="simRMLPos.htm">simRMLPos</a> or <a href="simRMLVel.htm">simRMLVel</a>.</div>
+<div><strong>timeStep</strong>: the cycle time</div>
+<div><strong>newPosVelAccl</strong>: the new position, velocity and acceleration (output values). Values are arranged as {pos1,pos2,..,posN,vel1,vel2,..,velN,accel1,accel2,..,accelN}</div>
+<div><strong>auxData</strong>: can be nullptr. Otherwise in/out extension data. The first byte indicates how many additional in/out values we wish to set/get. Following  auxiliary values can be set/get:</div>
+<div class=tab>value 1 (output): Bytes 2-9 (double):  returns the <strong>synchronization time</strong> (the time needed to reach the desired state. This time does not include the cycle time of the current call to simRMLStep)</div>
+<div><strong>reserved</strong>: reserved for future extensions. Set to nullptr.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 in case of an error, otherwise the return value of function RMLPosition or RMLVelocity in the Reflexxes Motion Library:</div>
+<div class=tab>1: final state reached</div>
+<div class=tab>0: final state not yet reached</div>
+<div class=tab>-100: RML_ERROR_INVALID_INPUT_VALUES</div>
+<div class=tab>-101: RML_ERROR_EXECUTION_TIME_CALCULATION</div>
+<div class=tab>-102: RML_ERROR_SYNCHRONIZATION</div>
+<div class=tab>-103: RML_ERROR_NUMBER_OF_DOFS</div>
+<div class=tab>-104: RML_ERROR_NO_PHASE_SYNCHRONIZATION</div>
+<div class=tab>-105: RML_ERROR_NULL_POINTER</div>
+<div class=tab>-106: RML_ERROR_EXECUTION_TIME_TOO_BIG</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number result,table newPosVelAccel,number synchronizationTime=sim.rmlStep(number handle,number timeStep)
+<br>
+<br>
+
+<div>If you wish to use this function in a blocking mode, consider using <a href="simRMLMoveToPosition.htm">sim.rmlMoveToPosition</a> or <a href="simRMLMoveToJointPositions.htm">sim.rmlMoveToJointPositions</a> instead.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Refer to the C-function documentation</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Refer to the C-function documentation</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

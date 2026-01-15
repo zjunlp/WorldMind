@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Path control points and Bezier points</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Path control points and Bezier points</h1>
+
+
+<p>A <a href="paths.htm">path</a> has a position and orientation component (or channel), and can additionally also have a component that describes a velocity profile. A path is defined by control points that describe the path as a succession of linked segments. Control points are only visible when the path is selected:
+</p>
+
+<p align=center><img src="images/pathsCtrl1.jpg"></p>
+<p class=imageLabel>[Two simple identical path objects. The path on the right-hand side is selected (control points become visible)]</p>
+<br>
+
+<p>The first control point of a path (the start point) is indicated as a sphere, where the remaining of the control points are indicated as cubes. A path can be open or closed. When closed, it becomes cyclic.<br>
+</p>
+
+<p align=center><img src="images/pathsCtrl2.jpg"></p>
+<p class=imageLabel>[A closed path]</p>
+<br>
+
+
+<p>Each control point has attributes that can describe the path in more details around its vicinity: each control point can describe if and how a Bezier curve should be calculated. Following illustrates this property:<br>
+</p>
+
+<p align=center><img src="images/pathsCtrl3.jpg"></p>
+<p class=imageLabel>[Two identical path objects. The path on the right-hand side is selected (control points become visible)]</p>
+<br>
+
+
+<p>By default, Bezier points are always visible (also when the object is not selected) and are displayed as small red-green-blue arrows indicating the x-, y- and z-axis of the Bezier point (which effectively is a point with orientation). The Bezier curve section is described by 3 parameters as can be seen in following figure:<br>
+</p>
+
+
+<p align=center><img src="images/pathsCtrl4.jpg"></p>
+<p class=imageLabel>[Parameters describing a Bezier curve section]</p>
+<br>
+
+
+<p>The Bezier interpolation factors indicate where the Bezier curve section starts and ends, and the Bezier point count indicates how detailed (or smooth) the curve should be. A Bezier point count of 1 technically disables the Bezier curve interpolation mechanism, but for simplicity, the control point is then referred to as a Bezier point.<br>
+</p>
+
+<p>The position and orientation of a control point can be manually adjusted in the <a href="pathEditMode.htm">path edit mode</a>. A Bezier point orientation however cannot be individually adjusted. It is rather automatically calculated. By default, the orientation of the Bezier points will <em>follow</em> the path curvature (if the automatic orientation option is enabled), otherwise they are interpolated with the control points' orientations as illustrated by following figure:<br>
+</p>
+
+<p align=center><img src="images/pathsCtrl4.jpg"></p>
+<p class=imageLabel>[Two similar path objects, the left one has the automatic orientation enabled]</p>
+<br>
+
+
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="paths.htm">Paths</a></li>
+<li><a href="pathPositionCalculationMethod.htm">Path position and length calculation method</a></li>
+<li><a href="pathMovementAlongAPath.htm">Movement along a path</a></li>
+<li><a href="pathPropertiesDialog.htm">Path properties</a></li>
+<li><a href="pathImportExport.htm">Path import/export operations</a></li>
+<li><a href="pathEditMode.htm">Path edit mode</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

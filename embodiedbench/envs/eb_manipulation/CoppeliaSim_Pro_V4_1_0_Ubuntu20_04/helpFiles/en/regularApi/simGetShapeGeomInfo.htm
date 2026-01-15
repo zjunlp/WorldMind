@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simGetShapeGeomInfo</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simGetShapeGeomInfo" id="simGetShapeGeomInfo"></a>simGetShapeGeomInfo / sim.getShapeGeomInfo </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Retrieves geometric information related to a shape. See also <a href="simGetShapeMesh.htm">sim.getShapeMesh</a>.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simGetShapeGeomInfo(simInt shapeHandle,simInt* intData,simFloat* floatData,simVoid* reserved)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>shapeHandle</strong>: handle of the shape. See also <a href="simGetObjectHandle.htm">simGetObjectHandle</a>.</div>
+<div><strong>intData (output)</strong>: pointer to 5 integer values:</div>
+<div class=tab>intData[0]: the <a href="../apiConstants.htm#pureTypes">pure type</a> of the shape. Undefined if the shape is a compound shape.</div>
+<div><strong>floatData (output)</strong>: pointer to 5 float values:</div>
+<div class=tab>floatData[0]: X-size or diameter of the pure shape. Undefined if the shape is a compound shape or not pure.</div>
+<div class=tab>floatData[1]: Y-size of the pure shape. Undefined if the shape is a compound shape or not pure.</div>
+<div class=tab>floatData[2]: Z-size or height of the pure shape. Undefined if the shape is a compound shape or not pure.</div>
+<div class=tab>floatData[3]: Inside scaling. Undefined if the shape is a compound shape or not pure.</div>
+<div><strong>reserved</strong>: reserved for future extensions. Set to nullptr.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 in case of an error, otherwise bit-coded:</div>
+<div class=tab>bit0 set (1): shape is a compound shape</div>
+<div class=tab>bit1 set (2): shape is pure</div>
+<div class=tab>bit2 set (4): shape is convex</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number result,number pureType,table_4 dimensions=sim.getShapeGeomInfo(number shapeHandle)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>shapeHandle</strong>: handle of the shape. See also <a href="simGetObjectHandle.htm">sim.getObjectHandle</a>.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>result</strong>: bit-coded:</div>
+<div class=tab>bit0 set (1): shape is a compound shape</div>
+<div class=tab>bit1 set (2): shape is pure</div>
+<div class=tab>bit2 set (4): shape is convex</div>
+<div><strong>pureType</strong>: the <a href="../apiConstants.htm#pureTypes">pure type</a> of the shape. Undefined if the shape is a compound shape.</div>
+<div><strong>dimensions</strong>: table to 4 values giving information about the shape's dimensions:</div>
+<div class=tab>dimensions[1]: X-size or diameter of the pure shape. Undefined if the shape is a compound shape or not pure.</div>
+<div class=tab>dimensions[2]: Y-size of the pure shape. Undefined if the shape is a compound shape or not pure.</div>
+<div class=tab>dimensions[3]: Z-size or height of the pure shape. Undefined if the shape is a compound shape or not pure.</div>
+<div class=tab>dimensions[4]: Inside scaling. Undefined if the shape is a compound shape or not pure.</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

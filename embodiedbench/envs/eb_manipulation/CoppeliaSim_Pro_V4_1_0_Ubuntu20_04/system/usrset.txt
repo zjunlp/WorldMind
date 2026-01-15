@@ -1,0 +1,2 @@
+
+allowOldEduRelease=7501

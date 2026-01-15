@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Building a clean model tutorial</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Building a clean model tutorial</h1>
+
+<p>This tutorial will guide you step-by-step into building a clean simulation model, of a robot, or any other item. This is a very important topic, maybe the most important aspect, in order to have a nice looking, fast displaying, fast simulating and stable simulation model.</p>
+
+<p>To illustrate the model building process, we will be building following manipulator:</p>
+
+<p align=center><img src="images/modelTut1.jpg"></p>
+<p class=imageLabel>[Model of robotic manipulator]</p>
+<br>
+
+
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="visibleShapes"></a>Building the visible shapes
+</td></tr></table> 
+
+<p>When building a new model, first, we handle only the visual aspect of it: the dynamic aspect (its undelying even more simplified/optimized model), joints, sensors, etc. will be handled at a later stage.</p>
+
+<p>We could now directly create primitive shapes in CoppeliaSim with [Menu bar --&gt; Add --&gt; Primitive shape --&gt; ...]. When doing this, we have the option to create <a href="shapes.htm">pure shapes, or regular shapes</a>. Pure shape will be optimized for dynamic interaction, and also directly be dynamically enabled (i.e. fall, collide, but this can be disabled at a later stage). Primitive shapes will be simple meshes, which might not contain enough details or geometric accuracy for our application. Our other option in that case would be to import a mesh from an external application.</p>
+
+
+<p>When importing CAD data from an external application, the most important is to make sure that the CAD model is not too heavy, i.e. doesn't contain too many triangles. This requirement is important since a heavy model will be slow in display, and also slow down various calculation modules that might be used at a later stage (e.g. <a href="distanceCalculation.htm">minimum distance calculation</a>, or <a href="dynamicsModule.htm">dynamics</a>). Following example is typically a no-go (even if, as we will see later, there are means to simplify the data within CoppeliaSim):</p>
+<p>&nbsp;</p>
+
+<p align=center><img src="images/modelTut2.jpg"></p>
+<p class=imageLabel>[Complex CAD data (in solid and wireframe)]</p>
+<br>
+
+<p>Above CAD data is very heavy: it contains many triangles (more than 47'000), which would be ok if we would just use a single instance of it in an empty scene. But most of the time you will want to simulate several instances of a same robot, attach various types of grippers, and maybe have those robots interact with other robots, devices, or the environment. In that case, a simulation scene can quickly become too slow. Generally, we recommend to model a robot with no more than a total of 20'000 triangles, but most of the time 5'000-10'000 triangles would just do fine as well. Remember: less is better, in almost every aspect.</p>
+
+<p>What makes above model so heavy? First, models that contain holes and small details will require much more triangular faces for a correct representation. So, if possible, try to remove all the holes, screws, the inside of objects, etc. from your original model data. If you have the original model data represented as parametric surfaces/objects, then it is most of the time a simple matter of selecting the items and deleting them (e.g. in Solidworks). The second important step is to export the original data with a limited precision: most CAD applications let you specify the level of details of exported meshes. It might also be important to export the objects in several steps, when the drawing consists of large and small objects; this is to avoid having large objects too precisely defined (too many triangles) and small objects too roughly defined (too few triangles): simply export large objects first (by adjusting the desired precision settings), then small objects (by adjusting up precision settings).</p>
+
+<p>CoppeliaSim supports currently following CAD data formats: <a href="importExport.htm">OBJ</a>, <a href="importExport.htm">STL</a>, <a href="importExport.htm">DXF</a>, <a href="importExport.htm">3DS</a> (Windows only), and <a href="colladaPlugin.htm">Collada</a>. <a href="urdfPlugin.htm">URDF</a> is also supported, but not mentionned here since it is not a pure mesh-based file format.</p>
+
+<p>Now suppose that we have applied all possible simplifications as described in previous section. We might still end-up with a too heavy mesh after import:</p>
+
+<p align=center><img src="images/modelTut3.jpg"></p>
+<p class=imageLabel>[Imported CAD data]</p>
+<br>
+
+<p>You can notice that the whole robot was imported as a single mesh. We will see later how to divide it appropriately. Notice also the wrong orientation of the imported mesh: best is to keep the orientation as it is, until the whole model was built, since, if at a later stage we want to import other items that are related to that same robot, they will automatically have the correct position/orientation relative to the original mesh.</p>
+
+<p>At this stage, we have several functions at our disposal, to simplify the mesh:</p>
+
+<li><strong>Automatic mesh division:</strong> allows to generate a new shape for all elements that are not linked together via a common edge. This does not always work for the selected mesh, but is always worth a try, since working on mesh elements gives us more control than if we had to work on all elements at the same time. The function can be accessed with [Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Divide selected shapes]. Sometimes, a mesh will be divided more than expected. In that case, simply merge elements that logically belong together (i.e. that will have the same visual attributes and that are part of the same link) back into one single shape ([Menu bar --&gt; Edit -&gt; Grouping/Merging --&gt; Merge selected shapes]).</li>
+<li><strong>Extract the convex hull:</strong> allows to simplify the mesh by transforming it into a convex hull. The function can be accessed with [Menu bar --&gt; Edit --&gt; Morph selection into convex shapes].</li>
+<li><strong>Decimate the mesh:</strong> allows to reduce the number of triangles contained in the mesh. The function can be accessed with [Menu bar --&gt; Edit --&gt; Decimate selected shape...].</li>
+<li><strong>Remove the inside of the mesh:</strong> allows to simplify the mesh by removing its inside. This function is based on <a href="visionSensors.htm">vision sensors</a> and might give more or less satisfying results depending on the selected settings. The function can be accessed with [Menu bar --&gt; Edit --&gt; Extract inside of selected shape].</li>
+
+<p>There is no predefined order in which above functions can/should be applied (except for the first item in the list, which should always be tried first), it heavily depends on the geometry of the mesh we are trying to simplify. Following image illustrates above functions applied to the imported mesh (let's suppose the first item in the list didn't work for us):</p>
+
+<p align=center><img src="images/modelTut4.jpg"></p>
+<p class=imageLabel>[Convex hull, decimated mesh, and extracted inside]</p>
+<br>
+
+<p>Notice how the convex hull doesn't help us at this stage. We decide to use the mesh decimation function first, and run the function twice in order to divide the number of triangles by a total of 50. Once that is done, we extract the inside of the simplified shape and discard it. We end-up with a mesh containing a total of 2'660 triangles (the original imported mesh contained more than 136'000 triangles!). The number of triangles/vertices a shape contains can be seen in the <a href="geometryDialog.htm">shape geometry dialog</a>. 2'660 triangles are extremely few triangles for a whole robot model, and the visual appearance might suffer a little bit from it. </p>
+
+<p>At this stage we can start to divide the robot into separate links (remember, we currently have only a single shape for the whole robot). You can do this in two different ways:</p>
+
+<li><strong>Automatic mesh division:</strong> this function, which was already described in previous section,  will inspect the shape and generate a new shape for all elements that are not linked together via a common edge. This does not always work, but is always worth a try. The function can be accessed with [Menu bar --&gt; Edit --&gt; Grouping/merging --&gt; Divide selected shapes].</li>
+<li><strong>Manual mesh division:</strong> via the the <a href="triangleEditMode.htm">triangle edit mode</a>, you can manually select the triangles than logically belong together, then click <strong>Extract shape</strong>. This will generate a new shape in the scene. Delete the selected triangles after that operation.</li>
+
+
+<p>In the case of our mesh, method 1 worked fine:</p>
+
+<p align=center><img src="images/modelTut5.jpg"></p>
+<p class=imageLabel>[Divided mesh]</p>
+<br>
+
+<p>Now, we could further refine/simplify individual shapes. Sometimes also, a shape might look better if its convex hull is used instead. Othertimes, you will have to use several of above's described techniques iteratively, in order to obtain the desired result. Take for instance following mesh:</p>
+
+<p align=center><img src="images/modelTut6.jpg"></p>
+<p class=imageLabel>[Imported mesh]</p>
+<br>
+
+<p>The problem with above's shape is that we cannot simplify it nicely, because of the holes it contains. So we have to go the more complicated way via the <a href="shapeEditModes.htm">shape edit mode</a>, where we can extract individual elements that logically belong to the same convex sub-entity. This process can take several iterations: we first extract 3 approximate convex elements. For now, we ignore the triangles that are part of the two holes. While editing a shape in the shape edit mode, it can be convenient to switch the <a href="layerSelectionDialog.htm">visibility layers</a>, in order to see what is covered by other scene items.</p>
+
+<p align=center><img src="images/modelTut7.jpg"></p>
+<p class=imageLabel>[Step 1]</p>
+<br>
+
+<p>We end up with a toal of three shapes, but two of them will need further improvement. Now we can erase the triangles that are part of the holes. Finally, we extract the convex hull individually for the 3 shapes, then merge them back together with [Menu bar --> Edit --> Grouping/Merging --> merge selected shapes]:</p>
+
+<p align=center><img src="images/modelTut8.jpg"></p>
+<p class=imageLabel>[Step 2]</p>
+<br>
+
+<p>In CoppeliaSim, we can enable/disable edge display for each shape. We can also specify an angle that will be taken into account for the edge display. A similar parameter is the <strong>shading angle</strong>, that dictates how facetted the shape will display. Those parameters, and a few others such as the shape <strong>color</strong>, can be adjusted in the <a href="simulationPropertiesDialog.htm">shape properties</a>. Remember that <a href="shapes.htm">shapes come in various flavours</a>. In this tutorial we have only dealt with simple shapes up to now: a simple shape has a single set of visual attributes (i.e. one color, one shading angle, etc.). If you merge two shapes, then the result will be a simple shape. You can also group shapes, in which case, each shape will retain its visual attributes.</p>
+
+<p>In next step, we can merge elements that logically belong together (if they are part of the same rigid element, and if they have the same visual attributes). Then we change the visual attributes of the various elements. The easiest ist to adjust a few shapes that have different colors and visual attributes, and if we name the color with a specific string, we can later easily programmatically change that color, also if the shape is part of a compound shape. Then, we select all the shapes that have the same visual attributes, then control-select the shape that was already adjusted, then click <strong>Apply to selection</strong>, once for the <strong>Colors</strong>, once for the <strong>other properties</strong>, in the <a href="shapeProperties.htm">shape properties</a>: this transfers all visual attributes to the selected shapes (including the color name if you provided one). We end up with 17 individual shapes:</p>
+
+<p align=center><img src="images/modelTut9.jpg"></p>
+<p class=imageLabel>[Adjusted visual attributes]</p>
+<br>
+
+<p>Now we can group the shapes that are part of the same link with [Menu bar --&gt; Edit --&gt; Grouping/merging -&gt; Group selected shapes]. We end up with 7 shapes: the base of the robot (or base of the robot's hierarchy tree), and 6 mobile links. It is also important to correctly name your objects: you we do this with a double-click on the object name in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>. The base should always be the robot or model name, and the other objects should always contain the base object name, like: <em>robot</em> (base), <em>robot_link1</em>, <em>robot_proximitySensor</em>, etc. By defaut, shapes will be assigned to visibility layer 1, but can be changed in the <a href="commonPropertiesDialog.htm">object common properties</a>. By default, only <a href="layerSelectionDialog.htm">visibility layers 1-8 are activated for the scene</a>. We now have following (the model <em>ResizableFloor_5_25</em> was temporarily made invisible in the <a href="modelDialog.htm">model properties dialog</a>):</p>
+
+<p align=center><img src="images/modelTut10.jpg"></p>
+<p class=imageLabel>[Individual elements compositn the robot]</p>
+<br>
+
+<p>When a shape is created or modified, CoppeliaSim will automatically set its reference frame position and orientation. A shape's reference frame will always be positioned at the shape's geometric center. The frame orientation will be selected so that the shape's bounding box remains as small as possible. This does not always look nice, but we can always reorient a shape's reference frame at any time. We now reorient the reference frames of all our created shapes with [Menu bar --&gt; Edit --&gt; Reorient bounding box --&gt; with reference frame of world]. You have more options to reorient a reference frame in the <a href="geometryDialog.htm">shape geometry dialog</a>.</p>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="joints"></a>Building the joints
+</td></tr></table> 
+
+
+<p>Now we will take care of the joints/motors. Most of the time, we know the exact position and orientation of each of the joints. In that case, we simply add the joints with [Menu bar --&gt; Add --&gt; Joints --&gt; ...], then we can change their position and orientation with the <a href="positionDialog.htm">position dialog</a> and <a href="orientationDialog.htm">orientation dialog</a>. In other situations, we only have the Denavit-Hartenberg (i.e. D-H) parameters. In that case, we can build our joints via the tool model located in <em>Models/tools/Denavit-Hartenberg joint creator.ttm</em>, in the model browser. Othertimes, we have no information about the joint locations and orientations. Then, we need to extract them from the imported mesh. Let's suppose this is our case. Instead of working on the modified, more approximate mesh, we open a new scene, and import the original CAD data again. Most of the time, we can extract meshes or primitive shapes from the original mesh. The first step is to subdivide the original mesh. If that does not work, we do it via the <a href="triangleEditMode.htm">triangle edit mode</a>. Let's suppose that we could divide the original mesh. We now have smaller objects that we can inspect. We are looking for revolute shapes, that could be used as reference to create joints at their locations, with the same orientation. First, remove all objects that are not needed. It is sometimes also useful to work across several opened scenes, for easier visualization/manipulation. In our case, we focus first on the base of the robot: it contains a cylinder that has the correct position for the first joint. In the triangle edit mode, we have:</p>
+
+<p align=center><img src="images/modelTut11.jpg"></p>
+<p class=imageLabel>[Robot base: normal and triangle edit mode visualization]</p>
+<br>
+
+<p>We change the camera view via the <a href="userInterface.htm#toolbars">page selector</a> <a href="userInterface.htm#toolbars">toolbar button</a>, in order to look at the object from the side. The <a href="userInterface.htm#toolbars">fit-to-view toolbar button</a> can come in handy to correctly frame the object in edition. Then we switch to the <a href="vertexEditMode.htm">vertex edit mode</a> and select all vertices that belong to the upper disc. Remember that by switching some <a href="layerSelectionDialog.htm">layers</a> on/off, we can hide other objects in the scene. Then we switch back to the triangle edit mode:</p>
+
+<p align=center><img src="images/modelTut12.jpg"></p>
+<p class=imageLabel>[Selected upper disc, vertex edit mode (1 &amp; 2), triangle edit mode (3)]</p>
+<br>
+
+<p>Now we click <strong>Extract cylinder</strong> (<strong>Extract shape</strong> would also work in that case), this just created a cylinder shape in the scene, based on the selected triangles. We leave the edit mode and discard the changes. Now we add a revolute joint with [Menu bar --&gt; Add --&gt; Joint --&gt; Revolute], keep it selected, then control-select the extracted cylinder shape. In the <a href="positionDialog.htm">position dialog</a>, on the <strong>position</strong> tab, we click <strong>Apply to selection</strong>: this basically copies the x/y/z position of the cylinder to the joint. Both positions are now identical. In the <a href="orientationDialog.htm">orientation dialog</a>, on the <strong>orientation</strong> tab, we also click <strong>Apply to selection</strong>: the orientation of our selected objects is now also the same. Sometimes, we will need to additionally rotate the joint about 90/180 degrees around its own reference frame in order to obtain the correct orientation or rotation direction. We could do that on the <strong>rotation</strong> tab of that dialog if needed (in that case, do not forget to click the <strong>Own frame</strong> button). In a similar way we could also shift the joint along its axis, or even do more complex operations. This is what we have:</p>
+
+<p align=center><img src="images/modelTut13.jpg"></p>
+<p class=imageLabel>[Joint in correct location, with the correct orientation]</p>
+<br>
+
+<p>Now we copy the joint back into our original scene, and save it (do not forget to save your work on a regular basis! The undo/redo function is useful, but doesn't protect you against other mishaps). We repeat above procedure for all the joints in our robot, then rename them. We also make all joints a little bit longer in the <a href="jointProperties.htm">joint properties</a>, in order to see them all. By defaut, joints will be assigned to visibility layer 2, but can be changed in the <a href="commonPropertiesDialog.htm">object common properties</a>. We assign now all joints to visibility layer 10, then temporarily <a href="layerSelectionDialog.htm">enable visibility layer 10 for the scene</a> to also visualize those joints (by default, only visibility layers 1-8 are activated for the scene). This is what we have (the model <em>ResizableFloor_5_25</em> was temporarily made invisible in the <a href="modelDialog.htm">model properties dialog</a>):</p>
+
+<p align=center><img src="images/modelTut14.jpg"></p>
+<p class=imageLabel>[Joints in correct configuration]</p>
+<br>
+
+<p>At this point, we could start to build the model hierarchy and finish the model definition. But if we want opur robot to be <a href="designingDynamicSimulations.htm">dynamically enabled</a>, then there is an additional intermediate step:</p>
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="dynamicShapes"></a>Building the dynamic shapes
+</td></tr></table> 
+
+<p>If we want our robot to be <a href="designingDynamicSimulations.htm">dynamically enabled</a>, i.e. react to collisions, fall, etc., then we need to create/configure the shapes appropriately: a shape can be:</p>
+
+<li><strong>dynamic or static:</strong> a dynamic (or non-static) shape will fall and be influences by external forces/torques. A static (or non-dynamic) shape on the other hand, will stay in place, or follow the movement of its parent in the scene hierarchy.</li>
+<li><strong>respondable or non-respondable</strong>: a respondable shape will cause a collision reaction with other respondable shapes. They (and/or) their collider, will be influenced in their movement if they are dynamic. On the other hand, non-respondable shapes will not compute a collision response if they collide with other shapes.</li>
+
+<p>Above two points are illustrated <a href="designingDynamicSimulations.htm#staticAndRespondable">here</a>. Respondable shapes should be as simple as possible, in order to allow for a fast and stable simulation. A physics engine will be able to simulate following 5 types of shapes with various degrees of speed and stability:</p>
+
+<li><strong><a href="designingDynamicSimulations.htm#pureShapes">Pure shapes</a>:</strong> a pure shape will be stable and handled very efficiently by the physics engine. The draw-back is that pure shapes are limited in geometry: mostly cuboids, cylinders and spheres. If possible, use those for items that are in contact with other items for a longer time (e.g. the feet of a humanoid robot, the base of a serial manipulator, the fingers of a gripper, etc.). Pure shapes can be created with [Menu bar --&gt; Add --&gt; Primitive shape].</li>
+<li><strong><a href="designingDynamicSimulations.htm#pureShapes">Pure compound shapes</a>:</strong> a pure compound shape is a grouping of several pure shapes. It performs almost as well as pure shapes and shares similar properties. Pure compound shapes can be generated by grouping several pure shapes [Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Group selected shapes].</li>
+<li><strong><a href="designingDynamicSimulations.htm#convexShapes">Convex shapes</a></strong>: a convex shape will be a little bit less stable and take a little bit more computation time when handled by the physics engine. It allows for a more general geometry (only requirement: it need to be convex) than pure shapes. If possible, use convex shapes for items that are sporadically in contact with other items (e.g. the various links of a robot). Convex shapes can be generated with [Menu bar --&gt; Add --&gt; Convex hull of selection] or with [Menu bar --&gt; Edit --&gt; Morph selection into convex shapes].</li>
+<li><strong><a href="designingDynamicSimulations.htm#convexShapes">Compound convex shapes, or convex decomposed shapes</a></strong>: a convex decomposed shape is a grouping of several convex shapes. It performs almost as well as convex shapes and shares similar properties. Convex decomposed shapes can be generated by grouping several convex shapes [Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Group selected shapes], with [Menu bar --&gt; Add --&gt; Convex decomposition of selection...], or with [Menu bar --&gt; Edit --&gt; Morph selection into its convex decomposition...].</li>
+<li><strong>Random shapes</strong>: a random shape is a shape that is not convex nor pure. It generally has poor performance (calculation speed and stability). Avoid using random shapes as much as possible.</li>
+
+<p>So the order of preference would be: pure shapes, pure compound shapes, convex shapes, compound convex shapes, and finally random shapes. Make sure to also read <a href="shapes.htm">this page</a>. In case of the robot we want to build, we will make the base of the robot as a pure cylinder, and the other links as convex or convex decomposed shapes.</p>
+
+<p>We could use the dynamically enabled shapes also as the visible parts of the robot, but that would probably not look good enough. So instead, we will build for each visible shape we have created in <a href="#visibleShapes">the first part of the tutorial</a> a dynamically enabled counterpart, which we will keep hidden: the hidden part will represent the dynamic model and be exclusively used by the physics engine, while the visible part will be used for visualization, but also for <a href="distanceCalculation.htm">minimum distance calculations</a>, <a href="proximitySensors.htm">proximity sensor detections</a>, etc.</p>
+
+<p>We select object <em>robot</em>, copy-and-paste it into a new scene (in order to keep the original model intact) and start the <a href="triangleEditMode.htm">triangle edit mode</a>. If object <em>robot</em> was a compound shape, we  would first have had to ungroup it ([Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Ungroup selected shapes]) then merge the individual shapes ([Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Merge selected shapes]) before being able to start the triangle edit mode. Now we select the few triangles that represent the power cable, and erase them. Then we select all triangles in that shape, and click Extract cylinder. We can now leave the edit mode and we have our base object represented as a pure cylinder:</p>
+
+
+<p align=center><img src="images/modelTut15.jpg"></p>
+<p class=imageLabel>[Pure cylinder generation procedure, in the triangle edit mode]</p>
+<br>
+
+
+<p>We rename the new shape (with a double-click on its name in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>) as <em>robot_dyn</em>, assign it to visibility layer 9, then copy it to the original scene. The rest of the links will be modelled as convex shapes, or compound convex shapes. We now select the first mobile link (i.e. object <em>robot_link1</em>) and generate a convex shape from it with [Menu bar --> Add --> Convex hull of selection]. We rename it to <em>robot_link_dyn1</em> and assign it to visibility layer 9. When extracting the convex hull doesn't retain enough details of the original shape, then you could still manually extract several convex hulls from its composing elements, then group all the convex hulls with [Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Group selected shapes]. If that appears to be problematic or time consuming, then you can automatically extract a convex decomposed shape with [Menu bar --&gt; Add --&gt; Convex decomposition of selection...]:</p>
+
+<p align=center><img src="images/modelTut16.jpg"></p>
+<p class=imageLabel>[Original shape, and convex shape pendant]</p>
+<br>
+
+<p align=center><img src="images/modelTut17.jpg"></p>
+<p class=imageLabel>[Original shape, and convex decomposed shape pendant]</p>
+<br>
+
+<p>We now repeat the same procedure for all remaining robot links. Once that is done, we attach each visible shape to its corresponding invisible dynamic pendant. We do this by selecting first the visible shape, then via control-click selecting its dynamic pendant then [Menu bar --&gt; Edit --&gt; Make last selected object parent]. The same result can be achieved by dragging the visible shape onto its dynamic pendant in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>:</p>
+
+<p align=center><img src="images/modelTut18.jpg"></p>
+<p class=imageLabel>[Visible shapes attached to their dynamic pendants]</p>
+<br>
+
+<p>We still need to take care of a few things: first, since we want the dynamic shapes only visible to the physics engine, but not to the other calculation modules, we uncheck all <strong>object special properties</strong> for the dynamic shapes, in the <a href="commonPropertiesDialog.htm">object common properties</a>.</p>
+
+<p>Then, we still have to configure the dynamic shapes as <em>dynamic</em> and <em>respondable</em>. We do this in the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a>. Select first the base dynamic shape (i.e. <em>robot_dyn</em>), then check the <strong>Body is respondable</strong> item. Enable the first 4 <strong>Local respondable mask</strong> flags, and disable the last 4 <strong>Local respondable mask</strong> flags: it is important for consecutive respondable links not to collide with each other. For the first mobile dynamic link in our robot (i.e. <em>robot_link_dyn1</em>), we also enable the <strong>Body is respondable</strong> item, but this time we disable the first 4 <strong>Local respondable mask</strong> flags, and enable the last 4 <strong>Local respondable mask</strong> flags. We repeat the above procedure with all other dynamic links, while always alternating the <strong>Local respondable mask</strong> flags: once the model will be defined, consecutive dynamic shapes of the robot will not generate any collision response when interacting with each other. Try to always end up with a construction where the dynamic base of the robot, and the dynamic last link of the robot have only the first 4 <strong>Local respondable mask</strong> flags enabled, so that we can attach the robot to a mobile platform, or attach a gripper to the last dynamic link of the robot without dynamic collision interferences.</p>
+
+<p>Finally, we still need to tag our dynamic shapes as <strong>Body is dynamic</strong>. We do this also in the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a>. We can then enter the mass and inertia tensor properties manually, or have those values automatically computed (recommended) by clicking <strong>Compute mass &amp; inertia properties for selected convex shapes</strong>. Remember also <a href="designingDynamicSimulations.htm#masses">this</a> and <a href="designingDynamicSimulations.htm#inertias">that</a> dynamic design considerations. This dynamic base of the robot is a special case: most of the time we want the base of the robot (i.e. <em>robot_dyn</em>) to be non-dynamic (i.e. static), otherwise, if used alone, the robot might fall during movement. But as soon as we attach the base of the robot to a mobile platform, we want the base to become dynamic (i.e. non-static). We do this by enabling the <strong>Set to dynamic if gets parent</strong> item, then disabling the<strong> Body is dynamic item</strong>. Now run the simulation: all dynamic shapes, except for the base of the robot, should fall. That attached visual shapes will follow their dynamic pendants.</p>
+
+
+<br>
+<br>
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="modelDefinition"></a>Model definition
+</td></tr></table> 
+
+<p>Now we are ready to define our model. We start by building the model herarchy: we attach the last dynamic robot link (<em>robot_link_dyn6</em>) to its corresponding joint (<em>robot_joint6</em>) by selecting <em>robot_link_dyn6</em>, then control-selecting <em>robot_joint6</em>, then [Menu bar --&gt; Edit --&gt; Make last selected object parent]. We could also have done this step by simply dragging object <em>robot_link_dyn6</em> onto <em>robot_link6</em> in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>. We go on by now attaching <em>robot_joint6</em> to <em>robot_link_dyn5</em>, and so on, until arrived at the base of the robot. We now have following scene hierarchy:</p>
+
+<p align=center><img src="images/modelTut19.jpg"></p>
+<p class=imageLabel>[Robot model hierarchy]</p>
+<br>
+
+<p>It is nice and more logical to have a simple name for the model base, since the model base will also represent the model itself. So we rename <em>robot</em> to <em>robot_visibleBase</em>, and <em>robot_dyn</em> to <em>robot</em>. Now we select the base of the hierarchy tree (i.e. object <em>robot</em>) and in the <a href="commonPropertiesDialog.htm">object common properties</a> we enable <strong>Object is model base</strong>. We also enable <strong>Object/model can transfer or accept DNA</strong>. A model bounding box appeared, encompassing the whole robot. The bounding box however appears to be too large: this is because the bounding box also encompasses the invisible items, such as the joints. We now exclude the joints from the model bounding box by enabling the <strong>Don't show as inside model selection</strong> item for all joints. We could do the same procedure for all invisible items in our model. This is also a useful option in order to also exclude large sensors or other items from the model bounding box. We now have following situation:</p> 
+
+<p align=center><img src="images/modelTut20.jpg"></p>
+<p class=imageLabel>[Robot model bounding box]</p>
+<br>
+
+<p>We now protect our model from accidental modification. We select all visible objects in the robot, then enable <strong>Select base of model instead</strong>: if we now click a visible link in the scene, the base of the robot will be selected instead. This allows us to manipulate the model as if it was a single object. We can still select visible objects in the robot via control-shift-clicking in the scene, or by selecting the object in the scene hierarchy. We now put the robot into a correct default position/orientation. First, we save current scene as a reference (e.g. if at a later stage we need to import CAD data that have the same orientation at the curent robot). Then we select the model and <a href="coordinateDialog.htm">modify its position/orientation</a> appropriately. It is considered good practice to position the model (i.e. its base object) at X=0 and Y=0. </p>
+
+<p align=center><img src="images/modelTut21.jpg"></p>
+<p class=imageLabel>[Robot model in default configuration]</p>
+<br>
+
+
+<p>We now run the simulation: the robot will collapse, since the joints are not controlled by default. <a href="#joints">When we added the joints in the previous stage</a>, we created joints in force/torque mode, but their motor or controller was disabled (by default). We can now adjust our joints to our requirements. In our case, we want a simple PID controller for each one of them. In the joint dynamic properties, we click <strong>Motor enabled</strong> and adjust the <strong>maximum torque</strong>. We then click <strong>Control loop enabled</strong> and select <strong>Position control (PID)</strong>. We now run the simulation again: the robot should hold its position. Try to switch the current physics engine to see if the behaviour is consistent across all supported physics engines. You can do this via the appropriate <a href="userInterface.htm#toolbars">toolbar button</a>, or in the <a href="dynamicsDialog.htm">general dynamics properties</a>.</p>
+
+<p>During simulation, we now verify the scene dynamic content via the <a href="userInterface.htm#toolbars">Dynamic content visualization &amp; verification toolbar button</a>. Now, only items that are taken into account by the physics engine will be display, and the display is <a href="designingDynamicSimulations.htm#dynamicContentVisualization">color-coded</a>. It is <strong>very important</strong> to always do this, and specially when your dynamic model doesn't behave as expected, in order to quickly debug the model. Similarly, always look at the scene hierarchy during simulation: dynamically enabled objects should display a ball-bounding icon on the right-hand side of their name.</p>
+
+<p align=center><img src="images/modelTut22.jpg"></p>
+<p class=imageLabel>[Dynamic content visualization &amp; verification]</p>
+<br>
+
+<p>Finally, we need to prepare the robot so that we can easily attach a gripper to it, or easily attach the robot to a mobile platform (for instance). Two dynamically enabled shapes can be rigidly attached to each other in two different ways:</p>
+
+<li><strong>by grouping them</strong>: select the shapes, then [Menu bar --&gt; Edit --&gt; Grouping/Merging --&gt; Group selected shapes].</li>
+<li><strong>by attaching them via a force/torque sensor</strong>: a <a href="forceSensors.htm">force torque sensor</a> can also act as a rigid link between two separate dynamically enabled shapes.</li>
+
+<p>In our case, only option 2 is of interest. We create a force/torque sensor with [Menu bar --&gt; Add --&gt; Force sensor], then move it to the tip of the robot, then attach it to object <em>robot_link_dyn6</em>. We change its size and visual appearance appropriately (a red force/torque sensor is often perceived as an optional attachment point, check the various robot models available). We also change its name to <em>robot_attachment</em>:</p>
+
+<p align=center><img src="images/modelTut23.jpg"></p>
+<p class=imageLabel>[Attachment force/torque sensor]</p>
+<br>
+
+<p>Now we drag a gripper model into the scene, keep it selected, then control-click the attachment force sensor, then click the <a href="userInterface.htm#toolbars">Assembling/disassembling toolbar button</a>. The gripper goes into place:</p>
+
+<p align=center><img src="images/modelTut24.jpg"></p>
+<p class=imageLabel>[Attached gripper]</p>
+<br>
+
+<p>The gripper knew how to attach itself because it was appropriately configured during its model definition. We now also need to properly configure the robot model, so that it will know how to attach itself to a mobile base for instance. We select the robot model, then click <strong>Assembling</strong> in the <a href="commonPropertiesDialog.htm">object common properties</a>. Set an empty string for <strong>'Parent' match values</strong>, then click <strong>Set matrix</strong>. This will memorize the current base object's local transformation matrix, and use it to position/orient itself relative to the mobile robot's attachment point. To verify that we did things right, we drag the model <em>Models/robots/mobile/KUKA Omnirob.ttm</em> into the scene. Then we select our robot model, then control-click one of the attachment points on the mobile platform, then click the <a href="userInterface.htm#toolbars">Assembling/disassembling toolbar button</a>. Our robot should correctly place itself on top of the mobile robot:</p>
+
+<p align=center><img src="images/modelTut25.jpg"></p>
+<p class=imageLabel>[Attached robot]</p>
+<br>
+
+<p>Now we could add additional items to our robot, such as sensors for instance. At some point we might also want to attach <a href="scripts.htm">embedded scripts</a> to our model, in order to control its behaviour or configure it for various purposes. In that case, make sure to understand <a href="accessingGeneralObjects.htm">how object handles are accessed from embedded scripts</a>. We can also control/access/interface our model from a <a href="plugins.htm">plugin</a>, from a <a href="remoteApiOverview.htm">remote API</a> client, from a <a href="rosInterfaces.htm">ROS</a> node, from a <a href="blueZeroPlugin.htm">BlueZero</a> node, or from an <a href="addOns.htm">add-on</a>.</p>
+
+
+<p>Now we make sure we have reverted the changes done during robot and gripper attachment, we collapse the hierarchy tree of our robot model, select the base of our model, then save it with [Menu bar --> File --> Save model as...]. If we saved it in the <em>model</em> folder, then the model will be available in the <a href="userInterface.htm#ModelBrowser">model brower</a>.</p>
+
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

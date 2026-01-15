@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>BubbleRob tutorial</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>BubbleRob tutorial</h1>
+
+<p>This tutorial will try to introduce quite many CoppeliaSim functionalities while designing the simple mobile robot <em>BubbleRob</em>. The CoppeliaSim scene file related to this tutorial is located in CoppeliaSim's installation folder's <em>tutorials/BubbleRob</em> folder. Following figure illustrates the simulation scene that we will design:<br>
+</p>
+
+<p align=center><img src="images/bubbleRobTut1.jpg"></p>
+<br>
+
+<p>Since this tutorial will fly over many different aspects, make sure to also have a look at the <a href="tutorials.htm">other tutorials</a>, mainly the <a href="buildingAModelTutorial.htm">tutorial about building a simulation model</a>. First of all, freshly start CoppeliaSim. The simulator displays a default <a href="scenes.htm">scene</a>. We will start with the body of <em>BubbleRob</em>.</p>
+
+<p>We add a primitive sphere of diameter 0.2 to the scene with [Menu bar --&gt; Add --&gt; Primitive shape --&gt; Sphere]. We adjust the <strong>X-size</strong> item to 0.2, then click <strong>OK</strong>. The created sphere will appear in the <a href="layerSelectionDialog.htm">visibility layer</a> 1 by default, and be <a href="designingDynamicSimulations.htm#staticAndRespondable">dynamic and respondable</a> (since we kept the item <strong>Create dynamic and respondable shape</strong> enabled). This means that <em>BubbleRob's</em> body will be falling and able to react to collisions with other respondable shapes (i.e. simulated by the physics engine). We can see this is the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a>: items <strong>Body is respondable</strong> and <strong>Body is dynamic</strong> are enabled. We start the simulation (via the toolbar button, or by pressing &lt;control-space&gt; in the scene window), and copy-and-paste the created sphere (with [Menu bar --&gt; Edit --&gt; Copy selected objects] then [Menu bar --&gt; Edit -&gt; Paste buffer], or with &lt;control-c&gt; then &lt;control-v&gt;): the two spheres will react to collision and roll away. We stop the simulation: the duplicated sphere will automatically be removed. This default behaviour can be modified in the <a href="simulationPropertiesDialog.htm">simulation dialog</a>.</p>
+
+<p>We also want the <em>BubbleRob's</em> body to by usable by the other calculation modules (e.g. the <a href="distanceCalculation.htm">minimum distance calculation module</a>). For that reason, we enable <strong><a href="collidableObjects.htm">Collidable</a></strong>, <strong><a href="measurableObjects.htm">Measurable</a></strong>, <strong><a href="renderableObjects.htm">Renderable</a></strong> and <strong><a href="detectableObjects.htm">Detectable</a></strong> in the <a href="commonPropertiesDialog.htm">object common properties</a> for that shape, if not already enabled. If we wanted, we could now also change the visual appearance of our sphere in the <a href="shapeProperties.htm">shape properties</a>.</p>
+
+<p>Now we open the <a href="positionDialog.htm">position dialog</a> on the <strong>translation</strong> tab, select the sphere representing <em>BubbleRob's</em> body, and  enter 0.02 for <strong>Along Z</strong>. We make sure that the<strong> Relative to</strong>-item is set to <strong>World</strong>. Then we click <strong>Translate selection</strong>. This translates all selected objects by 2 cm along the absolute Z-axis, and effectively lifted our sphere a little bit. In the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>, we double-click the sphere's name, so that we can edit its name. We enter <em>bubbleRob</em> and press enter.</p>
+
+<p>Next we will add a <a href="proximitySensors.htm">proximity sensor</a> so that <em>BubbleRob</em> knows when it is approaching obstacles: we select [Menu bar --&gt; Add --&gt; Proximity sensor --&gt; Cone type]. In the <a href="orientationDialog.htm">orientation dialog</a> on the <strong>orientation</strong> tab, we enter 90 for <strong>Around Y</strong> and for <strong>Around Z</strong>, then click <strong>Rotate selection</strong>. In the <a href="positionDialog.htm">position dialog</a>, on the <strong>position</strong> tab, we enter 0.1 for <strong>X-coord.</strong> and 0.12 for <strong>Z-coord.</strong> The proximity sensor is now correctly positioned relative to <em>BubbleRob's</em> body. We double-click the proximity sensor's icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> to open <a href="proximitySensorPropertiesDialog.htm">its properties</a> dialog. We click <strong>Show volume parameter </strong> to open the <a href="proximitySensorVolumeDialog.htm">proximity sensor volume dialog</a>. We adjust items <strong>Offset</strong> to 0.005, <strong>Angle</strong> to 30 and <strong>Range</strong> to 0.15. Then, in the <a href="proximitySensorPropertiesDialog.htm">proximity sensor properties</a>, we click <strong>Show detection parameters</strong>. This opens the <a href="proximitySensorDetectionParameterDialog.htm">proximity sensor detection parameter dialog</a>. We uncheck item <strong>Don't allow detections if distance smaller than</strong> then close that dialog again. In the scene hierarchy, we double-click the proximity sensor's name, so that we can edit its name. We enter <em>bubbleRob_sensingNose</em> and press enter.<br>
+</p>
+
+<p>We select <em>bubbleRob_sensingNose</em>, then control-select <em>bubbleRob</em>, then click [Menu bar --&gt; Edit --&gt; Make last selected object parent]. This attaches the sensor to the body of the robot. We could also have dragged <em>bubbleRob_sensingNose</em> onto <em>bubbleRob</em> in the scene hierarchy. This is what we now have:<br>
+</p>
+
+<p align=center><img src="images/bubbleRobTut2.jpg"></p>
+<p class=imageLabel>[Proximity sensor attached to <em>bubbleRob's</em> body]</p>
+<br>
+
+<p>Next we will take care of <em>BubbleRob's</em> wheels. We create a new scene with [Menu bar --&gt; File --&gt; New scene]. It is often very convenient to work across several scenes, in order to visualize and work only on specific elements. We add a pure primitive cylinder with dimensions (0.08,0.08,0.02). As for the body of <em>BubbleRob</em>, we enable  <strong><a href="collidableObjects.htm">Collidable</a></strong>, <strong><a href="measurableObjects.htm">Measurable</a></strong>, <strong><a href="renderableObjects.htm">Renderable</a></strong> and <strong><a href="detectableObjects.htm">Detectable</a></strong> in the <a href="commonPropertiesDialog.htm">object common properties</a> for that cylinder, if not already enabled. Then we set the cylinder's absolute position to (0.05,0.1,0.04) and its absolute orientation to (-90,0,0).  We change the name to <em>bubbleRob_leftWheel</em>. We copy and paste the wheel, and set the absolute Y coordinate of the copy to -0.1. We rename the copy to <em>bubbleRob_rightWheel</em>. We select the two wheels, copy them, then switch back to scene 1, then paste the wheels.</p>
+
+<p>We now need to add <a href="joints.htm">joints</a> (or motors) for the wheels. We click [Menu bar --&gt; Add --&gt; Joint --&gt; Revolute] to add a revolute joint to the scene. Most of the time, when adding a new object to the scene, the object will appear at the origin of the world. We Keep the joint selected, then control-select <em>bubbleRob_leftWheel</em>. In the <a href="positionDialog.htm">position dialog</a>, on the <strong>position</strong> tab, we click the <strong>Apply to selection</strong> button: this positioned the joint at the center of the left wheel. Then, in the <a href="orientationDialog.htm">orientation dialog</a>, on the <strong>orientation</strong> tab, we do the same: this oriented the joint in the same way as the left wheel. We rename the joint to <em>bubbleRob_leftMotor</em>. We now double-click the joint's icon in the scene hierarchy to open the <a href="jointProperties.htm">joint properties</a> dialog. Then we click <strong>Show dynamic parameters</strong> to open the <a href="jointDynamicsProperties.htm">joint dynamics properties</a> dialog. We <strong>enable the motor</strong>, and check item <strong>Lock motor when target velocity is zero</strong>. We now repeat the same procedure for the right motor and rename it to <em>bubbleRob_rightMotor</em>. Now we attach the left wheel to the left motor, the right wheel to the right motor, then attach the two motors to <em>bubbleRob</em>. This is what we have:</p>
+
+<p align=center><img src="images/bubbleRobTut3.jpg"></p>
+<p class=imageLabel>[Proximity sensor, motors and wheels]</p>
+<br>
+
+
+
+
+<p>We run the simulation and notice that the robot is falling backwards. We are still missing a third contact point to the floor. We now add a small slider (or caster). In a new scene we and add a pure primitive sphere with diameter 0.05 and make the sphere <strong><a href="collidableObjects.htm">Collidable</a></strong>, <strong><a href="measurableObjects.htm">Measurable</a></strong>, <strong><a href="renderableObjects.htm">Renderable</a></strong> and <strong><a href="detectableObjects.htm">Detectable</a></strong> (if not already enabled), then rename it to <em>bubbleRob_slider</em>. We set the <strong>Material</strong> to <em>noFrictionMaterial </em>in the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a>. To rigidly link the slider with the rest of the robot, we add a<a href="forceSensors.htm"> force sensor object</a> with [Menu bar --&gt; Add --&gt; Force sensor]. We rename it to <em>bubbleRob_connection</em> and shift it up by 0.05. We attach the slider to the force sensor, then copy both objects, switch back to scene 1 and paste them. We then shift the force sensor by -0.07 along the absolute X-axis, then attach it to the robot body. If we run the simulation now, we can notice that the slider is slightly moving in relation to the robot body: this is because both objects (i.e. <em>bubbleRob_slider</em> and <em>bubbleRob</em>) are colliding with each other. To avoid strange effects during dynamics simulation, we have to inform CoppeliaSim that both objects do not mutually collide, and we do this in following way: in the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a>, for <em>bubbleRob_slider</em> we set the <strong>local respondable mask</strong> to 00001111, and for <em>bubbleRob</em>, we set the<strong> local respondable mask</strong> to 11110000. If we run the simulation again, we can notice that both objects do not interfere anymore. This is what we now have:</p>
+
+<p align=center><img src="images/bubbleRobTut4.jpg"></p>
+<p class=imageLabel>[Proximity sensor, motors, wheels and slider]</p>
+<br>
+
+<p>We run the simulation again and notice that <em>BubbleRob</em> slightly moves, even with locked motor. We also try to run the simulation with different physics engines: the result will be different. Stability of dynamic simulations is tightly linked to masses and inertias of the involved non-static shapes. For an explanation of this effect, make sure to carefully read <a href="designingDynamicSimulations.htm#masses">this</a> and <a href="designingDynamicSimulations.htm#inertias">that</a> sections. We now try to correct for that undesired effect. We select the two wheels and the slider, and in the shape dynamics dialog we click three times <strong>M=M*2 (for selection)</strong>. The effect is that all selected shapes will have their masses multiplied by 8. We do the same with the inertias of the 3 selected shapes, then run the simulation again: stability has improved. In the joint dynamics dialog, we set the <strong>Target velocity</strong> to 50 for both motors. We run the simulation: <em>BubbleRob</em> now moves forward and eventually falls off the floor. We reset the <strong>Target velocity</strong> item to zero for both motors.<br>
+</p>
+
+<p>The object <em>bubbleRob</em> is at the base of all <a href="objects.htm">objects</a> that will later form the <em>BubbleRob</em> <a href="models.htm">model</a>. We will define the model a little bit later. In the mean time, we want to define a collection of objects that represent <em>BubbleRob</em>. For that we define a <a href="collections.htm">collection object</a>. We click [Menu bar --&gt; Tools --&gt; Collections] to open the <a href="collectionsDialog.htm">collection dialog</a>. Alternatively we can also open the dialog by clicking the appropriate toolbar button:<br>
+</p>
+
+<p align=center><img src="images/collectionDialog1.jpg"></p>
+<br>
+
+<p>In the collection dialog, we click <strong>Add new collection</strong>. A new collection object appears in the list just below. For now the newly added collection is still empty (not defined). While the new collection item is selected in the list, select <em>bubbleRob</em> in the scene hierarchy, and then click <strong>Add</strong> in the collection dialog. Our collection is now defined as containing all objects of the hierarchy tree starting at the <em>bubbleRob</em> object (the collection's composition is displayed in the <strong>Composing elements and attributes</strong> section). To edit the collection name, we double-click it, and rename it to <em>bubbleRob_collection</em>. We close the collection dialog.<br>
+</p>
+
+<p>At this stage we want to be able to track the minimum distance between BubbleRob and any other object. For that, we open the <a href="distanceCalculation.htm">distance dialog</a> with [Menu bar --&gt; Tools --&gt; Calculation module properties]. Alternatively we can also open the calculation module properties dialog with the appropriate toolbar button:<br>
+</p>
+
+
+<p align=center><img src="images/calculationModuleButton.jpg"></p>
+<br>
+
+
+
+<p>In the distance dialog, we click <strong>Add new distance object</strong> and select a distance pair: <em>[collection] bubbleRob_collection - all other measurable objects in the scene</em>. This just added a distance object that will measure the smallest distance between collection <em>bubbleRob_collection</em> (i.e. any <a href="measurableObjects.htm">measurable object</a> in that collection) and any other measurable object in the scene. We rename the distance object to <em>bubbleRob_distance</em> with a double-click in its name. We close the distance dialog. When we now run the simulation, we won't see any difference, since the distance object will try to measure (and display) the smallest distance segment between <em>BubbleRob</em> and any other measurable object in the scene. The problem is that at this stage there is no other measurable object in the scene (the shape defining the floor has its measurable property turned off by default). At a later stage in this tutorial, we will add obstacles to our scene.<br>
+</p>
+
+
+<p>Next we are going to add a <a href="graphs.htm">graph object</a> to <em>BubbleRob</em> in order to display above smallest distance, but also <em>BubbleRob's</em> trajectory over time. We click [Menu bar --&gt; Add --&gt; Graph] and rename it to <em>bubbleRob_graph</em>. We attach the graph to <em>bubbleRob</em>, and set the graph's absolute coordinates to (0,0,0.005).  Now we open the <a href="graphPropertiesDialog.htm">graph properties</a> dialog by double-clicking its icon in the scene hierarchy. We uncheck <strong>Display XYZ-planes</strong>, then click <strong>Add new data stream to record</strong> and select <strong>Object: absolute x-position</strong> for the <strong>Data stream type</strong>, and <em>bubbleRob_graph</em> for the <strong>Object / item to record</strong>. An item has appeared in the <strong>Data stream recording list</strong>. That item is a data stream of <em>bubbleRob_graph's</em> absolute x-coordinate (i.e. the <em>bubbleRobGraph's</em> object absolute x position will be recorded). Now we also want to record the y and z positions: we add those data streams in a similar way as above. We now have 3 data streams that represent BubbleRob's x-, y- and z-trajectories. We are going to add one more data stream so that we are able to track the minimum distance between our robot and its environment: we click <strong>Add new data stream to record</strong> and select <strong>Distance: segment length</strong> for the <strong>Data stream type</strong>, and <em>bubbleRob_distance</em> for the <strong>Object / item to record</strong>.  In the <strong>Data stream recording list</strong>, we now rename Data to bubbleRob_x_pos, Data0 to bubbleRob_y_pos, Data1 to bubbleRob_z_pos, and Data2 to bubbleRob_obstacle_dist.
+</p>
+
+<p>We select <em>bubbleRob_x_pos</em> in the <strong>Data Stream recording list</strong> and in the <strong>Time graph properties</strong> section, uncheck <strong>Visible</strong>. We do the same for <em>bubbleRob_y_pos</em> and <em>bubbleRob_z_pos</em>. By doing so, only the <em>bubbleRob_obstacle_dist</em> data stream will be visible in a time graph. Following is what we should have:</p>
+
+
+<p align=center><img src="images/bubbleRobTut5.jpg"></p>
+<p class=imageLabel>[Graph properties]</p>
+<br>
+
+
+
+<p>Next we will set-up a 3D curve that displays <em>BubbleRob's</em> trajectory: we click <strong>Edit 3D curves</strong> to open the<a href="graphCurvePropertiesDialog.htm"> XY graph and 3D curve dialog</a>, then click <strong>Add new curve</strong>. In the dialog that pops open, we select <em>bubbleRob_x_pos</em> for the <strong>X-value</strong> item, <em>bubbleRob_y_pos</em> for the <strong>Y-value</strong> item and <em>bubbleRob_z_pos</em> for the <strong>Z-value</strong> item. We rename the newly added curve from <em>Curve</em> to bubbleRob_path.  Finally, we check the <strong>Relative to world</strong> item and set <strong>Curve width</strong> to 4:<br>
+</p>
+
+<p align=center><img src="images/bubbleRobTut6.jpg"></p>
+<p class=imageLabel>[3D curve properties]</p>
+<br>
+
+
+<p>We close all dialogs related to graphs. Now we set one motor <strong>target velocity</strong> to 50, run the simulation, and will see <em>BubbleRob's</em> trajectory displayed in the scene. We then stop the simulation and reset the motor target velocity to zero.<br>
+</p>
+
+
+<p>We add a pure primitive cylinder with following dimensions: (0.1, 0.1, 0.2). We want this cylinder to be static (i.e. not influenced by gravity or collisions) but still exerting some collision responses on non-static respondable shapes. For this, we disable <strong>Body is dynamic</strong> in the <a href="shapeDynamicsProperties.htm">shape dynamics properties</a>. We also want our cylinder to be  <strong><a href="collidableObjects.htm">Collidable</a></strong>, <strong><a href="measurableObjects.htm">Measurable</a></strong>, <strong><a href="renderableObjects.htm">Renderable</a></strong> and <strong><a href="detectableObjects.htm">Detectable</a></strong>. We do this in the <a href="commonPropertiesDialog.htm">object common properties</a>. Now, while the cylinder is still selected, we click the object translation toolbar button:<br>
+</p>
+<p align=center><img src="images/objectShiftButton.jpg"></p>
+<br>
+
+
+<p>Now we can drag any point in the scene: the cylinder will follow the movement while always being constrained to keep the same Z-coordinate. We copy and paste the cylinder a few times, and move them to positions around <em>BubbleRob</em> (it is most convenient to perform that while looking at the scene from the top). During object shifting, holding down the shift key allows to perform smaller shift steps. Holding down the ctrl key allows to move in an orthogonal direction to the <em>regular</em> direction(s). When done, select the camera pan toolbar button again:<br>
+</p>
+
+
+<p align=center><img src="images/cameraShiftButton.jpg"></p>
+<br>
+
+<p>We set a <strong>target velocity</strong> of 50 for the left motor and run the simulation: the graph view now displays the distance to the closest obstacle and the distance segment is visible in the scene too. We stop the simulation and reset the target velocity to zero.<br>
+</p>
+
+<p>We now need to finish <strong>BubbleRob</strong> as a <a href="models.htm">model</a> definition. We select the model base (i.e. object <em>bubbleRob</em>) then check items <strong>Object is model base</strong> and <strong>Object/model can transfer or accept DNA</strong> in the <a href="commonPropertiesDialog.htm">object common properties</a>: there is now a stippled bounding box that encompasses all objects in the model hierarchy. We select the two joints, the proximity sensor and the graph, then enable item <strong>Ignored by model bounding box</strong> and click <strong>Apply to selection</strong>, in the same dialog: the model bounding box now ignores the two joints and the proximity sensor. Still in the same dialog, we disable <strong>camera visibility layer</strong> 2, and enable <strong>camera visibility layer</strong> 10 for the two joints and the force sensor: this effectively hides the two joints and the force sensor, since layers 9-16 are disabled by default. At any time we can <a href="layerSelectionDialog.htm">modify the visibility layers for the whole scene</a>. To finish the model definition, we select the vision sensor, the two wheels, the slider, and the graph, then enable item <strong>Select base of model instead</strong>: if we now try to select an object in our model in the scene, the whole model will be selected instead, which is a convenient way to handle and manipulate the whole model as a single object. Additionally, this protects the model against inadvertant modification. Individual objects in the model can still be selected in the scene by click-selecting them with control-shift, or normally selecting them in the scene hierarchy. We finally collapse the model tree in the scene hierarchy. This is what we have:</p>
+
+<p align=center><img src="images/bubbleRobTut7.jpg"></p>
+<p class=imageLabel>[<em>BubbleRob</em> model definition]</p>
+<br>
+
+
+
+<p>Next we will add a <a href="visionSensors.htm">vision sensor</a>, at the same position and orientation as <em>BubbleRob's</em> proximity sensor. We open the model hierarchy again, then click [Menu bar --&gt; Add --&gt; Vision sensor --&gt; Perspective type], then attach the vision sensor to the proximity sensor, and set the local position and orientation of the vision sensor to (0,0,0). We also make sure the vision sensor is not not visible, not part of the model bounding box, and that if clicked, the model will be selected instead. In order to customize the vision sensor, we open <a href="visionSensorPropertiesDialog.htm">its properties</a> dialog. We set the <strong>Far clipping plane</strong> item to 1, and the <strong>Resolution x</strong> and <strong>Resolution y</strong> items to 256 and 256.  We add a floating view to the scene, and over the newly added floating view, right-click [Popup menu --&gt; View --&gt; Associate view with selected vision sensor] (we make sure the vision sensor is selected during that process). 
+
+
+<p>We attach a non-threaded child script to the vision sensor by clicking [Menu bar --&gt; Add --&gt; Associated child script --&gt; Non threaded]. We double-click the little  icon that appeared next to the vision sensor in the scene hierarchy: this opens the child script that we just added. We copy and paste following code into the <a href="scriptEditor.htm">script editor</a>, then close it:<br>
+</p>
+
+<pre class=lightRedBox>
+function sysCall_vision(inData)
+    simVision.sensorImgToWorkImg(inData.handle) -- copy the vision sensor image to the work image
+    simVision.edgeDetectionOnWorkImg(inData.handle,0.2) -- perform edge detection on the work image
+    simVision.workImgToSensorImg(inData.handle) -- copy the work image to the vision sensor image buffer
+end
+
+function sysCall_init()
+end
+</pre>
+
+<p>
+To be able to see the vision sensor's image, we start the simulation, then stop it again.<br>
+</p>
+
+<p>The last thing that we need for our scene is a small <a href="childScripts.htm">child script</a> that will control <em>BubbleRob's</em> behavior. We select <em>bubbleRob</em> and click [Menu bar --&gt; Add --&gt; Associated child script --&gt; Non threaded]. We double-click the script icon that appeared next to <em>bubbleRob's</em> name in the scene hierarchy and copy and paste following code into the <a href="scriptEditor.htm">script editor</a>, then close it:<br>
+</p>
+<pre class=lightRedBox>
+function speedChange_callback(ui,id,newVal)
+    speed=minMaxSpeed[1]+(minMaxSpeed[2]-minMaxSpeed[1])*newVal/100
+end
+
+function sysCall_init()
+    -- This is executed exactly once, the first time this script is executed
+    bubbleRobBase=sim.getObjectAssociatedWithScript(sim.handle_self) -- this is bubbleRob's handle
+    leftMotor=sim.getObjectHandle("bubbleRob_leftMotor") -- Handle of the left motor
+    rightMotor=sim.getObjectHandle("bubbleRob_rightMotor") -- Handle of the right motor
+    noseSensor=sim.getObjectHandle("bubbleRob_sensingNose") -- Handle of the proximity sensor
+    minMaxSpeed={50*math.pi/180,300*math.pi/180} -- Min and max speeds for each motor
+    backUntilTime=-1 -- Tells whether bubbleRob is in forward or backward mode
+    -- Create the custom UI:
+        xml = '&lt;ui title=&quot;'..sim.getObjectName(bubbleRobBase)..' speed&quot; closeable=&quot;false&quot; resizeable=&quot;false&quot; activate=&quot;false&quot;&gt;'..[[
+        &lt;hslider minimum=&quot;0&quot; maximum=&quot;100&quot; onchange=&quot;speedChange_callback&quot; id=&quot;1&quot;/&gt;
+        &lt;label text=&quot;&quot; style=&quot;* {margin-left: 300px;}&quot;/&gt;
+        &lt;/ui&gt;
+        ]]
+    ui=simUI.create(xml)
+    speed=(minMaxSpeed[1]+minMaxSpeed[2])*0.5
+    simUI.setSliderValue(ui,1,100*(speed-minMaxSpeed[1])/(minMaxSpeed[2]-minMaxSpeed[1]))
+end
+
+function sysCall_actuation()
+    result=sim.readProximitySensor(noseSensor) -- Read the proximity sensor
+    -- If we detected something, we set the backward mode:
+    if (result&gt;0) then backUntilTime=sim.getSimulationTime()+4 end 
+
+    if (backUntilTime&lt;sim.getSimulationTime()) then
+        -- When in forward mode, we simply move forward at the desired speed
+        sim.setJointTargetVelocity(leftMotor,speed)
+        sim.setJointTargetVelocity(rightMotor,speed)
+    else
+        -- When in backward mode, we simply backup in a curve at reduced speed
+        sim.setJointTargetVelocity(leftMotor,-speed/2)
+        sim.setJointTargetVelocity(rightMotor,-speed/8)
+    end
+end
+
+function sysCall_cleanup()
+	simUI.destroy(ui)
+end</pre>
+
+<p>We run the simulation. <em>BubbleRob</em> now moves forward while trying to avoid obstacles (in a very basic fashion). While the simulation is still running, change <em>BubbleRob's</em> velocity, and copy/paste it a few times. Also try to scale a few of them while the simulation is still running. Be aware that the minimum distance calculation functionality might be heavily slowing down the simulation, depending on the environment. You can turn that functionality on and off in the <a href="distanceCalculation.htm">distance dialog</a>, by checking / unchecking the <strong>Enable all distance calculations</strong> item.</p>
+<p>Using a script to control a robot or model is only one way of doing. CoppeliaSim offers many different ways (also combined), have a look at the <a href="externalControllerTutorial.htm">external controller tutorial</a>.</p>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

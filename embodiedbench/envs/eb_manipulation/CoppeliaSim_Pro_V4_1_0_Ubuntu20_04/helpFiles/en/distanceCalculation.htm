@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Distance calculation</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Distance calculation</h1>
+
+
+<p>CoppeliaSim can measure the minimum distance between two <a href="measurableObjects.htm">measurable</a> <a href="entities.htm">entities</a> in a very flexible way. The calculation is an exact minimum distance calculation. The distance calculation module will only measure distances; it does however not directly react to them. Following figure illustrates the distance calculation functionality:<br>
+  <br>
+  <br>
+</p>
+
+<p align=center><img src="images/distanceCalculation1.jpg"></p>
+<p class=imageLabel>[(1) Minimum distance calculation between two manipulators, (2) Minimum distance calculation between a robot and an obstacle]</p>
+<br>
+
+<p>The distance calculation module allows registering distance objects  which are measurable entity-pairs. During <a href="simulation.htm">simulation</a>, the minimum distance segment of each registered distance object can then be visualized, or recorded in a graph object. Refer to <a href="graphs.htm">graphs</a> and <a href="dataStreamTypes.htm">graph data stream types</a> for more information about how to record distance objects. Registered distance objects are automatically duplicated (copied) if their two composing entities are duplicated simultaneously in a copy-paste operation.<br>
+</p>
+
+<p>The distance calculation routines used in the minimum distance calculation module are also available as stand-alone routines via the <a href="coppeliaGeometricRoutines.htm">Coppelia geometric routines</a>.</p>
+
+
+
+<p>The distance calculation dialog is part of the <a href="calculationModuleDialog.htm">calculation module properties dialog</a>, which is located at [Menu bar --&gt; Tools --&gt; Calculation module properties]. You can also open the dialog with a click on its <a href="userInterface.htm#toolbars">toolbar</a> button:<br>
+</p>
+
+<p align=center><img src="images/calculationModuleButton.jpg"></p>
+<p class=imageLabel>[Calculation module properties toolbar button]</p>
+<br>
+
+<p>In the calculation module properties dialog, click  the <strong>Distance calculation</strong> button to display the distance calculation dialog:
+</p>
+
+
+
+<p align=center><img src="images/distanceCalculation3.jpg"></p>
+<p class=imageLabel>[Distance calculation dialog]</p>
+<br>
+
+<li><strong>Enable all distance calculations</strong>: allows enabling or disabling distance calculation of all registered distance objects.
+</li>
+
+<li><strong>Add new distance object</strong>: allows specifying  two entities for distance calculation. The list below the button displays all registered distance objects that can be renamed with a double-click. Individual distance objects in the list can be selected, and related properties are then displayed below (see hereafter).<br>
+</li>
+
+
+<li><strong>Explicit handling</strong>: indicates whether the selected distance object should be explicitly handled. If checked, distance calculation for this distance object will not be handled when sim.handleDistance(sim.handle_all_except_explicit) is called, but only if sim.handleDistance(sim.handle_all) or sim.handleDistance(distanceObjectHandle) is called. This is useful if the user wishes to handle distance measurement for that distance object in a <a href="childScripts.htm">child script</a> rather than in the <a href="mainScript.htm">main script</a> (if not checked, distance calculation for that distance object will be handled twice, once when sim.handleDistance(sim.handle_all_except_explicit) is called in the main script, and once when sim.handleDistance(distanceObjectHandle) is called in the child script). Refer also to the section on <a href="explicitHandling.htm">explicit and non-explicit calls</a>.<br>
+</li>
+
+<li><strong>Use threshold</strong>: a distance threshold can be specified to speed-up calculations when the distance pair entities are far apart and distance doesn't need to be calculated then.<br>
+</li>
+
+<li><strong>Display distance segment</strong>: if enabled, then a minimum distance segment of that distance object becomes visible in the scene.<br>
+</li>
+
+<li><strong>Segment width</strong>: width of the distance segment.</li>
+
+<li><strong>Segment color</strong>: allows adjusting the color of the distance segment.
+</li>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+
+<li><a href="coppeliaGeometricRoutines.htm">Coppelia geometric routines</a></li>
+<li><a href="apiFunctionListCategory.htm#distanceObject">Related API functions</a></li>
+<li><a href="measurableObjects.htm">Measurable objects</a></li>
+<li><a href="objects.htm">Scene objects</a></li>
+<li><a href="collections.htm">Collections</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

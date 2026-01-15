@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Simulation dialog</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Simulation dialog</h1>
+
+<p>The simulation dialog can be accessed with [Menu bar --&gt; Simulation --&gt; Simulation settings] or by clicking following toolbar button:<br>
+</p>
+
+<p align=center><img src="images/simulationDialog1.jpg"></p>
+<p class=imageLabel>[Simulation toolbar button]</p>
+<br>
+
+<p align=center><img src="images/simulationDialog2.jpg"></p>
+<p class=imageLabel>[Simulation settings dialog]</p>
+<br>
+
+<li><strong>Time step</strong>: the <a href="simulation.htm">simulation</a> time step. Each time the <a href="mainScript.htm">main script</a> was executed, the simulation time is incremented by the simulation time step. Using large time steps results in fast but inaccurate/unstable simulations. Small time steps on the other hand will (generally) lead to more precise simulations, but will take more time. It is highly recommended to keep a default time step.<br>
+</li>
+
+<li><strong>Simulation passes per frame (ppf)</strong>: the number of simulation passes for one rendering pass. A value of 10 would mean that the main script is executed 10 times (10 simulation steps) before the screen is refreshed. If you have a slow graphic card, you can choose to display only one frame out of two for instance.<br>
+</li>
+
+<li><strong>Pause when simulation time higher than</strong>: allows specifying a simulation time at which the simulation will be paused (e.g. to be able to analyze some results at a specific simulation time).<br>
+</li>
+
+<li><strong>Pause on script error</strong>: if enabled, then a simulation will be paused when a <a href="scripts.htm">script</a> error occurs.<br>
+</li>
+
+<li><strong>Full screen at simulation start</strong>: if enabled, then simulation starts in full screen mode. Be aware that in full screen mode, dialogs and messages won't appear or won't be visible, and only the left mouse button will be active. For that reason that mode is only recommended once a scene is properly configured and final. Full screen mode can be left with the esc-key, and toggled via the  <a href="apiConstants.htm#booleanParameters">boolean parameter</a> <em>sim_booparam_fullscreen</em> during simulation. Unler Linux and MacOS the full-screen mode might only partially be supported, and switching back to normal mode might fail on certain systems.</li>
+
+
+<li><strong>Real-time simulation, multiplication factor</strong>: if selected, then the simulation time will try to follow the real-time. A multiplication factor of X would try to run a simulation X times faster than real-time.<br>
+</li>
+
+<li><strong>Try catching up when behind</strong>: during real-time simulation, it can happen that the simulation time is not able to follow the real-time (e.g. because of some momentarily heavy calculations). In that case, if this check-box is selected, then the simulation time will try catching up the lost time (e.g. when the calculation load is again reduced), which results in an apparent speed-up.<br>
+</li>
+
+
+<li><strong>Reset scene to initial state</strong>: when selected, then all <a href="objects.htm">objects</a> will be reset to their initial state: this includes the object local position, local  orientation and  its parent (as long as the object wasn't modified otherwise (e.g. scaled)), <a href="joints.htm">joint</a> and <a href="paths.htm">path</a> intrinsic positions, floating <a href="pagesAndViews.htm">view</a> positions and sizes, etc. This means that the next simulation run will execute in a same way as previous one, unless heavy changes were undertaken (<a href="shapes.htm">shape</a> scaling, object removal, etc.). Some minor settings are ignored by this item.<br>
+</li>
+
+<li><strong>Remove new objects</strong>: when selected, then scene objects added during a simulation run will be removed at the end of the simulation.<br>
+</li>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="simulation.htm">Simulation</a></li>
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

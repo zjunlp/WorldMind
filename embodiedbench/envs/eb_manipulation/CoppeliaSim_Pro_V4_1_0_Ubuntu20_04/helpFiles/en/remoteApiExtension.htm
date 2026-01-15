@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Extending the remote API</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Extending the remote API</h1>
+
+<p class=warningBox>The remote API, or <em>legacy remote API</em>, should not be mixed-up with the <a href="b0RemoteApiOverview.htm">B&Oslash;-based remote API</a>, which is a newer version of the remote API that is more flexible, easier to use and most importantly, much simpler to extend.</p>
+
+<p>Instead of extending the functions that the remote API offers, one can  use the generic remote API function <a href="remoteApiFunctions.htm#simxCallScriptFunction">simxCallScriptFunction</a>: this will call a CoppeliaSim script function, which can then execute any type of operation locally, then return data. The called script function should always have following input/output form:</p>
+
+<pre class=lightRedBox>
+function myFunctionName(inInts,inFloats,inStrings,inBuffer)
+	-- inInts, inFloats and inStrings are tables
+	-- inBuffer is a string
+    
+    -- Perform any type of operation here.
+
+	-- Always return 3 tables and a string, e.g.:
+	return {},{},{},''
+end</pre>
+
+<br>
+
+<p>The remote API client application would then call above script function in following manner (e.g. via a Python script):</p>
+
+<pre class=lightPurpleBox>
+inputInts=[1,2,3]
+inputFloats=[53.21,17.39]
+inputStrings=['Hello','world!']
+inputBuffer=bytearray()
+inputBuffer.append(78)
+inputBuffer.append(42)
+res,retInts,retFloats,retStrings,retBuffer=sim.simxCallScriptFunction(clientID,'objectName',sim.sim_scripttype_childscript,
+                'myFunctionName',inputInts,inputFloats,inputStrings,inputBuffer,sim.simx_opmode_blocking)
+if res==sim.simx_return_ok:
+    print (retInts)
+    print (retFloats)
+    print (retStrings)
+    print (retBuffer)</pre>
+
+<br>
+
+<p>Make sure that the script, where you are trying to call a function, is initialized: trying to call a function in a <a href="simulationScripts.htm">simulation script</a>, while simulation is not running will not work. Similarly, trying to call a function in a <a href="childScripts.htm#threaded">threaded child script</a> that has already ended (or not yet started) will not work.</p>
+
+<p>For other usage examples, refer to the various files named <em>complexCommandTest.*</em> in folder <em>programming/remoteApiBindings</em>.</p>
+
+
+
+<br>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="remoteApiModusOperandi.htm">Remote API modus operandi</a></li>
+<br>
+<br>
+ </tr>
+ <tr>
+   <td > 
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

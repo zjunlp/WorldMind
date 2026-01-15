@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Edge edit modes</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Edge edit mode</h1>
+
+<p>The edge edit mode can be accessed with a click on the appropriate toolbar button:</p>
+
+<p align=center><img src="images/shapeEditModeButton.jpg"></p>
+<p class=imageLabel>[Shape edit mode toolbar button]</p>
+
+<p>The above toolbar button is only active if a <a href="shapes.htm"> shape</a> is selected. If the last selected shape is not a simple shape, but a compound shape, the <a href="groupedShapeEditMode.htm">edit mode for compound shapes</a> will be activated instead. In the edge edit mode all edges composing the shape are individually displayed in red. When selecting edges (using the same procedure as for selecting <a href="objects.htm">objects</a>), they will appear in yellow and the last selected edge in white. Edges can be deleted with the delete-key, however edges cannot be copied, cut nor pasted. Selection can be cleared with the esc-key, with the deselect toolbar button, or by ctrl-clicking onto an empty area of the <a href="scenes.htm">scene</a>. A shift-selection will select all edges under the selection area, also hidden edges (if you wish to only select visible edges via a shift-selection, hold down the ctrl-key in addition to the shift-key). In the edge edit mode, the portion of the window that normally displays the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> is used to display the edges of the shape being edited as a list. Items in the list can be selected with the mouse as for objects in the hierarchy window. </p>
+
+<p align=center><img src="images/edgeEditMode1.jpg"></p>
+<p class=imageLabel>[Edge edit mode]</p>
+<br>
+
+
+<p>After entering the edge edit mode, the edit menu items ([Menu bar --&gt; Edit]) will become specific to the edge edit mode, and following dialog will display:
+</p>
+
+<p align=center><img src="images/edgeEditModeDlg.jpg"></p>
+<p class=imageLabel>[Edge edit mode dialog]</p>
+
+<li><strong>Triangle / Vertex / Edge Edit Mode</strong>: the currently activated edit mode. The user can switch from one edit mode to the others via these buttons (the selected items will be preserved).</li>
+
+<li><strong>Show Hidden Edges</strong>: when selected, will display also hidden edges.
+</li>
+
+<li><strong>Automatic Edge Following</strong>: when selected, and an edge is selected, that edge will be followed until a loop was created, until the edge changes direction abruptly (<strong>Max. dir. change angle</strong>), or until the edge disappears (<strong>Max. edge angle</strong>). This is a useful feature when you want to extract not only a local edge (one side of a triangle), but a global one (a shape's edge). An edge is only followed in one direction. </li>
+
+<p align=center><img src="images/edgeEditMode2.jpg"></p>
+<p class=imageLabel>[Edge following]</p>
+<br>
+
+<li><strong>Clear selection</strong>: clears the selection of edges.
+</li>
+<li><strong>Invert selection</strong>: inverts the selection state of edges.
+</li>
+
+<li><strong>Extract path</strong>: will create a <a href="paths.htm">path object</a> based on currently selected edges. Each edge represents the segment between two consecutive <a href="pathsControlPointsAndBezierPoints.htm">control points</a> in the path (Bezier interpolation is turned off (each control point has a Bezier point count of 1)). This path extraction functionality is very useful in many different situations (e.g. make a welding robot follow the edge of an object, or have a rail-type object generate its corresponding path).<br>
+</li>
+
+
+<p>Edges can be directly translated with the mouse, using the toolbar's object/item translation button to translate the selected edge(s) in a perpendicular plane to the view direction:
+</p>
+
+<p align=center><img src="images/objectShiftButton.jpg"></p>
+<p class=imageLabel>[Object/item translation toolbar button]</p>
+<br>
+
+<p align=center><img src="images/edgeEditMode3.jpg"></p>
+<p class=imageLabel>[Shape in edge edit mode, with extracted path object]</p>
+<br>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="shapes.htm">Shapes</a></li>
+<li><a href="shapeEditModes.htm">Shape edit modes</a></li>
+<li><a href="triangleEditMode.htm">Triangle edit mode</a></li>
+<li><a href="vertexEditMode.htm">Vertex edit mode</a></li>
+<li><a href="groupedShapeEditMode.htm">Edit mode for compound shapes</a></li>
+<li><a href="paths.htm">Paths</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

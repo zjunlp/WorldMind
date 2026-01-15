@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Dummy properties</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Dummy properties</h1>
+
+<p>The dummy properties are part of the <a href="sceneObjectPropertiesDialog.htm">scene object properties </a>dialog, which is located at [Menu bar --&gt; Tools --&gt; Scene object properties]. You can also open the dialog with a double-click on an object icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>, or with a click on its <a href="userInterface.htm#toolbars">toolbar</a> button:<br>
+</p>
+
+<p align=center><img src="images/objectPropertyToolbarButton.jpg"></p>
+<p class=imageLabel>[Scene object properties toolbar button]</p>
+<br>
+
+<p>In the scene object properties dialog, click  the <strong>Dummy</strong> button to display the dummy dialog (the <strong>Dummy</strong> button only appears if the last selection is a <a href="dummies.htm">dummy</a><a href="joints.htm"></a><a href="shapes.htm"></a><a href="lights.htm"></a><a href="cameras.htm"></a><a href="paths.htm"></a>). The dialog displays the settings and parameters of the last selected dummy. If more than one dummy is selected, then some parameters can be copied from the last selected dummy to the other selected dummies (<strong>Apply to selection</strong>-buttons):<br>
+</p>
+
+
+<p align=center><img src="images/dummyDialog1.jpg"></p>
+<p class=imageLabel>[Dummy dialog]</p>
+<br>
+
+<li><strong>Linked dummy</strong>: dummy linked to this one. Linked dummies (easily recognizable by a colored segment linking them, in the <a href="scenes.htm">scene</a> and the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>) have special properties and behavior, see next item for more details.<br>
+</li>
+
+<li><strong>Link type</strong>: the link type will specify the behavior of the linked dummies during simulation. If <strong>Dynamics, overlap constraint</strong> is specified, then the two dummies will try to overlap their respective position/orientation to create dynamics loop closure constraints (refer to the section on <a href="designingDynamicSimulations.htm">designing dynamic simulations</a> for more details). If <strong>IK, tip-target</strong> is specified, then the two linked dummies form a tip-target pair used for <a href="inverseKinematicsModule.htm">inverse kinematics calculations</a>.<br>
+</li>
+
+<li><strong>Follow parent path orientation (only indirect parent)</strong>: if selected, then a dummy that is parented with a <a href="paths.htm">path</a> (only indirect parent) will follow the orientation (not the position) of the closest <a href="pathsControlPointsAndBezierPoints.htm">Bezier point</a> of that path. Refer also to the <a href="regularApi/simFollowPath.htm">sim.followPath</a> <a href="apiOverview.htm">API</a> function (using the sim.followPath function, the dummy doesn't require to be parented with the path).<br>
+</li>
+
+<li><strong>Follow parent path (only direct parent)</strong>: if selected and the dummy's direct parent is a path object, then the dummy's position and orientation will be automatically calculated by the path (i.e. it will be interpolated from the path's Bezier points). Two alternatives are possible: <strong>Free on path</strong> or <strong>Fixed on path</strong>. Refer also to the <a href="regularApi/simFollowPath.htm">sim.followPath</a> <a href="apiOverview.htm">API</a> function (using the sim.followPath function, the dummy doesn't require to be parented with the path).<br>
+</li>
+
+<li><strong>Free on path</strong>: when selected, then a dummy that has a path object as direct parent is assigned to stay on the path (keep the same position and orientation as the path's Bezier points), but is free to move along the path.(i.e. it can be moved along the path through the <a href="objectMovement.htm">object manipulation mode</a>, or it can be automatically guided along the path by the <a href="inverseKinematicsModule.htm">inverse kinematics module</a>). An analogy would be a wagon on the non-tracked section of a rollercoaster.<br>
+</li>
+
+<li><strong>Fixed on path</strong>: when selected, then a dummy that has a path object as direct parent is assigned to stay on the path (keep the same position and orientation as the path's Bezier points), at the path intrinsic position. An analogy would be a wagon on the tracked section of a rollercoaster (initial section that pulls the wagon up). In that case, a distance <strong>offset</strong> from the path position can be specified.<br>
+</li>
+
+<li><strong>Offset</strong>: distance offset from the path position when the dummy is assigned to a fixed position on a path. If you wanted to create a caterpillar, the first pad (rigid element) of the caterpillar would be at offset 0, the second at offset x, the third at offset 2x, etc. Use the <strong>copy increment</strong> to automatically increment the offset when the dummy is copied. <br>
+</li>
+
+<li><strong>Copy increment</strong>: the value added to the <strong>offset</strong> (see above) of a copied dummy (e.g. when creating a caterpillar, you might need several dozens of pads, each at a different offset that can be automatically calculated).<br>
+</li>
+
+<li><strong>Object size</strong>: size of the dummy. This parameter has only a visual effect, and no functional meaning.
+</li>
+
+<li><strong>Adjust dummy color</strong>: allows adjusting a dummy's color
+</li>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="dummies.htm">Dummies</a></li>
+<li><a href="dummiesDescription.htm">Dummy functions</a></li>
+<li><a href="paths.htm">Paths</a></li>
+
+<br>
+<br>
+
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

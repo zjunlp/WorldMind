@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Dynamics callback functions</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Dynamics callback functions</h1>
+
+<p>A <a href="childScripts.htm">non-threaded child script</a>, or a <a href="customizationScripts.htm">customization script</a> can include a dynamics callback function. When present, then the physics engine will call the callback function with appropriate arguments, before and after each dynamics simulation step. The dynamics callback function might be called quite often, normally 10*2 times per simulation step (remember that the physics engine time step, by default, is 10 times smaller that the simulation time step). For that reason, keep things simple, in order to avoid slowing down the simulation.</p>
+<p>Following represents a simple dynamics  callback function:<br>
+</p>
+
+<pre class=lightRedBox>
+function <strong>sysCall_dynCallback</strong>(inData)
+    -- This function gets called often, so it might slow down the simulation
+    --     (this is called twice at each dynamic simulation step, by default 20x more often than a child script)
+    -- We have:
+    -- inData.passCnt : the current dynamics calculation pass. 1-10 by default. See next item for details.
+    -- inData.totalPasses : the number of dynamics calculation passes for each "regular" simulation pass.
+    --                      10 by default (i.e. 10*5ms=50ms which is the default simulation time step)
+    -- inData.dynStepSize : the step size used for the dynamics calculations (by default 5ms)
+    -- inData.afterStep : <strong>false</strong> when called before, and <strong>true</strong> after a dynamics step was computed.
+
+    local txt=string.format(&quot; the %ith dynamics calculation step (out of %i steps)&quot;,inData.passCnt,inData.totalPasses)
+    if inData.afterStep then
+        txt=&quot;After&quot;..txt
+    else
+        txt=&quot;Before&quot;..txt
+    end
+    print(txt)
+end
+</pre>
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="childScripts.htm">Child scripts</a></li>
+<li><a href="customizationScripts.htm">Customization scripts</a></li>
+<li><a href="jointCallbackFunctions.htm">Joint callback functions</a></li>
+<li><a href="contactCallbackFunction.htm">Contact callback function</a></li>
+
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

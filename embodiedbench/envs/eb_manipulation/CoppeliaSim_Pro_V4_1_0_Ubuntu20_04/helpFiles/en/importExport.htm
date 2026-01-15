@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Importing and exporting shapes</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Importing and exporting shapes</h1>
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="Import"></a>Importing Shapes
+</td></tr></table> 
+
+
+
+
+<p>CoppeliaSim uses triangular meshes to describe and display <a href="shapes.htm">shapes</a>. Because of this, CoppeliaSim will only import formats that describe objects as triangular meshes. If however you wish to import objects described as parametric surfaces for example (e.g. IGES, etc.), then you will first have to convert the file to an appropriate triangular mesh format. There are several conversion application that allow for this operation, and most 3D drawing applications support this quite well too. Make sure you read the sections further down to be able to obtain the best triangular mesh description possible for your 3D drawing.</p>
+<p>CoppeliaSim supports following file-formats for <a href="shapes.htm">shape</a> import ([Menu bar --&gt; File --&gt; Import --&gt; Mesh...]):<br>
+</p>
+
+<li><strong>OBJ</strong>: Wavefront Technologies file format. This is currently the only format that allows importing of textured meshes in CoppeliaSim.
+</li>
+
+<li><strong>DXF</strong>: AutoCAD file format (Autodesk). Non-3D information that might be contained in the file is ignored.<br>
+</li>
+
+<li><strong>STL (ASCII or binary)</strong>: 3D Systems file format. ASCII and binary files are supported.
+</li>
+<li><strong>COLLADA</strong>: refer also to the <a href="colladaPlugin.htm">collada plugin</a> for details.</li>
+
+<li><strong>URDF</strong>: refer to the <a href="urdfPlugin.htm">URDF plugin</a> for details.</li>
+
+<p>
+The import functionality is handled by the <a href="https://github.com/CoppeliaRobotics/simExtAssimp" target="_blank">Assimp plugin for CoppeliaSim</a>. See <a href="assimpApi.htm">here</a> for its API functions. More formats can be supported if the Assimp library (and Assimp plugin) are recompiled with the required flags.</p>
+
+
+<p>If after the import operation you can't see any shapes in the <a href="scenes.htm">scene</a>, but the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a> indicates the presence of newly added shapes, then most probably your shapes are either too big or too small to be seen. You can then proceed to a scaling operation in the <a href="commonPropertiesDialog.htm">object common properties</a>.
+Also, when exporting meshes from a CAD application, try to export them as a whole (best is to export them as a single object, later on in CoppeliaSim you can then divide the imported shape with [Menu Bar --&gt; Edit --&gt; Grouping/Merging --&gt; Divide selected shapes]); this is to avoid the CAD application repositioning/reorienting individual meshes according to their reference frame during the export operation (CoppeliaSim's reference frame is different!), which may result in a <em>broken</em> appearance.</p>
+<p>Make sure that your imported meshes do not contain too many triangles (for a robot, typically between 10000-20000 triangles in total), otherwise CoppeliaSim could be drastically slowed down (rendering, calculations, load/save operation, etc.). There are applications allowing to reduce the number of polygons in a mesh (e.g. <a href="http://www.meshlab.org/">MeshLab</a> or <a href="http://www.mootools.com/plugins/us/polygoncruncher/index.asp">polygon crunsher</a>). You can also use following CoppeliaSim functions:</p>
+<li><em><strong>[Menu bar --&gt; Edit --&gt; Morph selection into convex shapes] </strong></em>: allows to convert the selected shapes into a convex shapes.</li>
+<li><em><strong>[Menu bar --&gt; Edit --&gt; Morph selection into its convex decomposition...] </strong></em>: allows to convert the selected shapes into their convex decomposition representation.</li>
+<li><em><strong>[Menu bar --&gt; Edit --&gt; Decimate selected shape...] </strong></em>: allows to reduce the number of triangles in the selected shape.</li>
+<li><em><strong>[Menu bar --&gt; Edit --&gt; Extract inside of selected shape...] </strong></em>: allows to extract/separate the inside of a shape (i.e. the non-visible parts) from the outside of the same shape (i.e. the visible parts). This functionality is based on <a href="visionSensors.htm">vision sensors</a>, and might not always give satisfying results.</li>
+
+
+<p>When exporting shapes from an application that handles shapes as parametric surfaces (e.g. IGES,  etc.), it might be important to export the objects in several steps when the drawing consists of large and small objects; this is to avoid having large objects too precisely defined (too many triangles) and small objects too roughly defined (too little triangles): simply export large objects first (by adjusting the desired precision settings), then small objects (by adjusting up precision settings). </p>
+
+<p>Make also sure to follow the <a href="buildingAModelTutorial.htm">tutorial on how to build a clean simulation model</a>.</p> 
+<br>
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="Export"></a>Exporting Shapes
+</td></tr></table> 
+
+
+<p>CoppeliaSim supports following file-formats for shape export [Menu bar --&gt; File --&gt; Export --&gt; Selected shapes...] (note: only selected objects will be exported):<br>
+</p>
+
+<li><strong>OBJ</strong>: Wavefront Technologies file-format.
+</li>
+
+<li><strong>STL (binary)</strong>: 3D Systems file-format. Only the binary format is supported for export. This is the most compact export option in CoppeliaSim.<br>
+</li>
+
+<li><strong>COLLADA</strong>: refer to the <a href="colladaPlugin.htm">collada plugin</a> for details.</li>
+
+<p>
+The export functionality is also handled by the <a href="https://github.com/CoppeliaRobotics/simExtAssimp" target="_blank">Assimp plugin for CoppeliaSim</a>. See <a href="assimpApi.htm">here</a> for its API functions. </p>
+
+<br>
+<br>
+
+
+<table class=subsectionTable><tr class=subsectionTd><td class=subsectionTd>
+<a name="Heightfields"></a>Importing Heightfields
+</td></tr></table> 
+
+
+<p>CoppeliaSim supports following file-formats for <a href="shapes.htm">heightfield shape</a> import ([Menu bar --&gt; File --&gt; Import --&gt; Heightfield...]):<br>
+</p>
+
+<li><strong>Image file</strong>: an image file (JPEG, PNG, TGA, BMP, TIFF or GIF file) where the various height values are taken from the red-, green-, and blue-color components: height=(red+green+blue)/3. </li>
+
+<li><strong>CSV </strong>or<strong> TXT</strong>: Comma-separated values file-format. The file should contain y rows where each has x values separated by commas.<br>
+</li>
+
+<p>
+After selecting the file to import, a dialog will open:
+</p>
+
+<p align=center><img src="images/shapeImport2.jpg"></p>
+<p class=imageLabel>[Heightfield import options dialog]</p>
+<br>
+
+
+<li><strong>X-size / Y-size</strong>: specifies the x and y dimensions of the heightfield. Individual heightfield cells are always square.
+</li>
+
+<li><strong>Z-scaling</strong>: specifies the scaling to be applied to height values.
+</li>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="apiFunctionListCategory.htm#importExportFunctions">Related API functions</a></li>
+<li><a href="assimpApi.htm">Related Assimp API functions</a></li>
+<li><a href="colladaPlugin.htm">Collada plugin</a></li>
+<li><a href="shapes.htm">Shapes</a></li>
+<li><a href="shapeProperties.htm">Shape properties</a></li>
+<li><a href="commonPropertiesDialog.htm">Object common  properties</a></li>
+<li><a href="settings.htm">User settings dialog</a></li>
+<li><a href="buildingAModelTutorial.htm">Building a clean model tutorial</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

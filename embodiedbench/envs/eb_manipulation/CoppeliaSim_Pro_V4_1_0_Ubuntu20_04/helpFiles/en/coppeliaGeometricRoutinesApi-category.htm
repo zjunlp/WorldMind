@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>Coppelia Geometric Routines, API list</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body><div align="center"><table class="allEncompassingTable"><tr><td>
+<h1>Coppelia Geometric Routines<br>
+API List (by category)</h1>
+
+<h3 class=subsectionBar><a name="meshCreation"></a>Mesh creation/destruction/manipulation/info</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_createMesh">geom_createMesh</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_destroyMesh">geom_destroyMesh</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_copyMesh">geom_copyMesh</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_scaleMesh">geom_scaleMesh</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshSerializationData">geom_getMeshSerializationData</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshFromSerializationData">geom_getMeshFromSerializationData</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_createOctreeFromMesh">geom_createOctreeFromMesh</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_insertMeshIntoOctree">geom_insertMeshIntoOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_removeMeshFromOctree">geom_removeMeshFromOctree</a>
+</pre>
+
+<h3 class=subsectionBar><a name="octreeCreation"></a>OC-tree creation/destruction/manipulation/info</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_createOctreeFromPoints">geom_createOctreeFromPoints</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_createOctreeFromColorPoints">geom_createOctreeFromColorPoints</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_createOctreeFromMesh">geom_createOctreeFromMesh</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_createOctreeFromOctree">geom_createOctreeFromOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_destroyOctree">geom_destroyOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_copyOctree">geom_copyOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_scaleOctree">geom_scaleOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeSerializationData">geom_getOctreeSerializationData</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeFromSerializationData">geom_getOctreeFromSerializationData</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeVoxelData">geom_getOctreeVoxelData</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_insertPointsIntoOctree">geom_insertPointsIntoOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_insertColorPointsIntoOctree">geom_insertColorPointsIntoOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_insertMeshIntoOctree">geom_insertMeshIntoOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_insertOctreeIntoOctree">geom_insertOctreeIntoOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_removePointsFromOctree">geom_removePointsFromOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_removeMeshFromOctree">geom_removeMeshFromOctree</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_removeOctreeFromOctree">geom_removeOctreeFromOctree</a>
+</pre>
+
+<h3 class=subsectionBar><a name="ptcloudCreation"></a>Point-cloud creation/destruction/manipulation/info</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_createPtcloudFromPoints">geom_createPtcloudFromPoints</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_createPtcloudFromColorPoints">geom_createPtcloudFromColorPoints</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_destroyPtcloud">geom_destroyPtcloud</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_copyPtcloud">geom_copyPtcloud</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_scalePtcloud">geom_scalePtcloud</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudSerializationData">geom_getPtcloudSerializationData</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudFromSerializationData">geom_getPtcloudFromSerializationData</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudPoints">geom_getPtcloudPoints</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_insertPointsIntoPtcloud">geom_insertPointsIntoPtcloud</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_insertColorPointsIntoPtcloud">geom_insertColorPointsIntoPtcloud</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_removePointsFromPtcloud">geom_removePointsFromPtcloud</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_removeOctreeFromPtcloud">geom_removeOctreeFromPtcloud</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_intersectPointsWithPtcloud">geom_intersectPointsWithPtcloud</a>
+</pre>
+
+<h3 class=subsectionBar><a name="meshCollision"></a>Mesh collision detection</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshMeshCollision">geom_getMeshMeshCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshTriangleCollision">geom_getMeshTriangleCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshSegmentCollision">geom_getMeshSegmentCollision</a>
+</pre>
+
+<h3 class=subsectionBar><a name="octreeCollision"></a>OC-tree collision detection</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshOctreeCollision">geom_getMeshOctreeCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeOctreeCollision">geom_getOctreeOctreeCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreePtcloudCollision">geom_getOctreePtcloudCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreePointCollision">geom_getOctreePointCollision</a>
+</pre>
+
+<h3 class=subsectionBar><a name="ptcloudCollision"></a>Point-cloud collision detection</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreePtcloudCollision">geom_getOctreePtcloudCollision</a>
+</pre>
+
+<h3 class=subsectionBar><a name="primitiveCollision"></a>Primitives collision detection</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshTriangleCollision">geom_getMeshTriangleCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshSegmentCollision">geom_getMeshSegmentCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeTriangleCollision">geom_getOctreeTriangleCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeSegmentCollision">geom_getOctreeSegmentCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreePointCollision">geom_getOctreePointCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getBoxBoxCollision">geom_getBoxBoxCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getBoxTriangleCollision">geom_getBoxTriangleCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getBoxSegmentCollision">geom_getBoxSegmentCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getBoxPointCollision">geom_getBoxPointCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getTriangleTriangleCollision">geom_getTriangleTriangleCollision</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getTriangleSegmentCollision">geom_getTriangleSegmentCollision</a>
+</pre>
+
+<h3 class=subsectionBar><a name="meshDistance"></a>Mesh minimum distance calculation</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshMeshDistanceIfSmaller">geom_getMeshMeshDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>
+</pre>
+
+<h3 class=subsectionBar><a name="octreeDistance"></a>OC-tree minimum distance calculation</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshOctreeDistanceIfSmaller">geom_getMeshOctreeDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeOctreeDistanceIfSmaller">geom_getOctreeOctreeDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>
+</pre>
+
+<h3 class=subsectionBar><a name="ptcloudDistance"></a>Point-cloud minimum distance calculation</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshPtcloudDistanceIfSmaller">geom_getMeshPtcloudDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreePtcloudDistanceIfSmaller">geom_getOctreePtcloudDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudPtcloudDistanceIfSmaller">geom_getPtcloudPtcloudDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a>
+</pre>
+
+<h3 class=subsectionBar><a name="primitiveDistance"></a>Primitives minimum distance calculation</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshTriangleDistanceIfSmaller">geom_getMeshTriangleDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshSegmentDistanceIfSmaller">geom_getMeshSegmentDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getMeshPointDistanceIfSmaller">geom_getMeshPointDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeTriangleDistanceIfSmaller">geom_getOctreeTriangleDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreeSegmentDistanceIfSmaller">geom_getOctreeSegmentDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getOctreePointDistanceIfSmaller">geom_getOctreePointDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudTriangleDistanceIfSmaller">geom_getPtcloudTriangleDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudSegmentDistanceIfSmaller">geom_getPtcloudSegmentDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getPtcloudPointDistanceIfSmaller">geom_getPtcloudPointDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getBoxBoxDistanceIfSmaller">geom_getBoxBoxDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getApproxBoxBoxDistance">geom_getApproxBoxBoxDistance</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getBoxTriangleDistanceIfSmaller">geom_getBoxTriangleDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getBoxSegmentDistanceIfSmaller">geom_getBoxSegmentDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getBoxPointDistanceIfSmaller">geom_getBoxPointDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getTriangleTriangleDistanceIfSmaller">geom_getTriangleTriangleDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getTriangleSegmentDistanceIfSmaller">geom_getTriangleSegmentDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getTrianglePointDistanceIfSmaller">geom_getTrianglePointDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getSegmentSegmentDistanceIfSmaller">geom_getSegmentSegmentDistanceIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_getSegmentPointDistanceIfSmaller">geom_getSegmentPointDistanceIfSmaller</a>
+</pre>
+
+<h3 class=subsectionBar><a name="proximitySensor"></a>Proximity sensor simulation</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_volumeSensorDetectMeshIfSmaller">geom_volumeSensorDetectMeshIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_volumeSensorDetectOctreeIfSmaller">geom_volumeSensorDetectOctreeIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_volumeSensorDetectPtcloudIfSmaller">geom_volumeSensorDetectPtcloudIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_volumeSensorDetectTriangleIfSmaller">geom_volumeSensorDetectTriangleIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_volumeSensorDetectSegmentIfSmaller">geom_volumeSensorDetectSegmentIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_isPointInVolume">geom_isPointInVolume</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_raySensorDetectMeshIfSmaller">geom_raySensorDetectMeshIfSmaller</a>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_raySensorDetectOctreeIfSmaller">geom_raySensorDetectOctreeIfSmaller</a>
+</pre>
+
+<h3 class=subsectionBar><a name="other"></a>Other API functions</h3>
+<pre class=lightGreyBox>
+<a href="coppeliaGeometricRoutinesApi.htm#geom_isPointInVolume">geom_isPointInVolume</a>
+</pre>
+
+
+
+<br>
+
+
+
+
+
+</td></tr></table></div></body>
+</html>

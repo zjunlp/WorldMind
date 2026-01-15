@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simPackUInt16Table</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simPackUInt16Table" id="simPackUInt16Table"></a>simPackUInt16Table / sim.packUInt16Table </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>
+Packs a table of uint16 numbers into a string. See also <a href="simUnpackUInt16Table.htm">sim.unpackUInt16Table</a> and the <a href="../apiFunctionListCategory.htm#packing">other packing/unpacking functions</a>. </td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn><div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div></div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>string data=sim.packUInt16Table(table uint16Numbers,number startUint16Index=0,number uint16Count=0)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>uint16Numbers</strong>: a table containing uint16 numbers. Invalid uint16 numbers will be packed in an undefined manner.</div>
+<div><strong>startUint16Index</strong>: the zero-based index from which on data should be packed. Can be omitted in which case 0 is used</div>
+<div><strong>uint16Count</strong>: the amount of uint16s that should be packed. Can be omitted in which case 0 is used (which indicates that the maximum available uint16s should be packed from the indicated startUint16Index)</div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>data</strong>: a string (values between 0 and 255) that contains packed uint16 numbers from the table
+</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

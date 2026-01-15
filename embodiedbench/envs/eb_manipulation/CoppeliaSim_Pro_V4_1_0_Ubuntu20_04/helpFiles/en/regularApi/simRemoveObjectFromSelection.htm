@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simRemoveObjectFromSelection</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simRemoveObjectFromSelection" id="simRemoveObjectFromSelection"></a>simRemoveObjectFromSelection / sim.removeObjectFromSelection </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Removes an object from the selection. See also <a href="simAddObjectToSelection.htm">sim.addObjectToSelection</a>,  <a href="simIsObjectInSelection.htm">sim.isObjectInSelection </a>and <a href="simGetObjectSelection.htm">sim.getObjectSelection</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simRemoveObjectFromSelection(simInt what,simInt objectHandle)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>What</strong>: indicates what we wish to remove from the selection. Valid values are sim_handle_single (removes one object from the selection), sim_handle_all (removes all objects from the selection), sim_handle_tree (removes the tree with base objectHandle (inclusive) from the selection, sim_handle_chain (removes the chain with tip objectHandle (inclusive) from the selection.<br>
+</div>
+<div><strong>objectHandle</strong>: handle of the object to remove from the selection. If sim_handle_all is specifies in &quot;what&quot;, then objectHandle is ignored<br>
+</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>
+<div>(1) sim.removeObjectFromSelection(number what,number objectHandle)</div>
+<div>(2) sim.removeObjectFromSelection(table objectHandles)</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>(1) Similar to the C-function counterpart. The second argument can be omitted if &quot;what&quot; is sim.handle_all</div>
+<div>(2) objectHandles: table containing the handles of objects to remove. Can be nil, in which case nothing happens<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>none</div></td> 
+</tr> 
+
+<tr class=apiTableTr> 
+<td class=remApiTableLeftCParam>
+Remote API equiv.
+</td> 
+<td class=remApiTableRightCParam>
+<div>B0-based remote API: <a href="../b0RemoteApi-cpp.htm#simxSetObjectSelection">simxSetObjectSelection</a></div>
+<div>Legacy remote API: <a href="../remoteApiFunctions.htm#simxSetObjectSelection">simxSetObjectSelection</a></div>
+</td> 
+</tr> 
+
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

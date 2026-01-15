@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Shape edit modes</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Shape edit modes</h1>
+
+<p>The best option when specific <a href="shapes.htm">shapes</a> are needed in CoppeliaSim is to draw them in a CAD application (e.g. AutoCAD, 3D Studio Max, etc.) and then <a href="importExport.htm">import</a> them. When an external CAD application is not available, or when only simple shapes are required, the user can create <a href="primitiveShapes.htm">primitive shapes</a> and then customize the created shape in one of the 3 supported shape edit modes in CoppeliaSim:
+</p>
+
+<li><a href="triangleEditMode.htm">Triangle edit mode</a>: in this mode, individual triangles composing the shape are visible and can be manipulated or extracted. </li>
+
+<li><a href="vertexEditMode.htm">Vertex edit mode</a>: in this mode, individual vertices composing the shape are visible and can be manipulated or extracted.<br>
+</li>
+
+<li><a href="edgeEditMode.htm">Edge edit mode</a>: in this mode, individual edges composing the shape are visible and can be manipulated or extracted.<br>
+</li>
+
+<p align=center><img src="images/shapeEditMode1.jpg"></p>
+<p class=imageLabel>[Triangle, vertex and edge edit modes]</p>
+<br>
+
+
+<p><a href="shapes.htm">Pure shapes</a> are converted to regular shapes before entering one of above's edit edit modes.</p>
+<p>A compound shape cannot directly be edited. It will first have to be ungrouped. Or you can edit its composing element's visual parameters via the <a href="groupedShapeEditMode.htm">edit mode for compound shapes</a>.<br>
+</p>
+
+<p>The different edit modes are accessed  with a click on the appropriate toolbar button:</p>
+<p align=center><img src="images/shapeEditModeButton.jpg"></p>
+<p class=imageLabel>[Shape edit mode toolbar button]</p>
+<p>Make sure you have a shape object selected before entering the shape edit mode. During shape edition, <a href="objects.htm">objects</a> cannot be selected and simulation cannot be started. Once edition is finished, click on the shape edit mode toolbar button to quite the edit mode. When applying changes to a shape, CoppeliaSim will make sure the modified shape is consistent and remove unused vertices and merge vertices that are close to each other, etc. The exact behavior can be set in the <strong>Vertices/triangles verification settings</strong> in the <a href="settings.htm">user settings dialog</a>.
+</p>
+
+<p>
+You can switch from one edit mode to another, and this allows you to achieve special operations. As an example, if you want to select and remove all triangles of the upper face of a cylinder, instead of individually selecting them in the <a href="triangleEditMode.htm">triangle edit mode</a>, perform a shift-selection of all upper vertices in the <a href="vertexEditMode.htm">vertex edit mode</a>, then switch to the triangle edit mode, then press the delete-key.</p>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="shapes.htm">Shapes</a></li>
+<li><a href="importExport.htm">Importing shapes</a></li>
+<li><a href="primitiveShapes.htm">Creating primitive shapes</a></li>
+<li><a href="triangleEditMode.htm">Triangle edit mode</a></li>
+<li><a href="vertexEditMode.htm">Vertex edit mode</a></li>
+<li><a href="edgeEditMode.htm">Edge edit mode</a></li>
+<li><a href="groupedShapeEditMode.htm">Edit mode for compound shapes</a></li>
+<li><a href="settings.htm">User settings dialog</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

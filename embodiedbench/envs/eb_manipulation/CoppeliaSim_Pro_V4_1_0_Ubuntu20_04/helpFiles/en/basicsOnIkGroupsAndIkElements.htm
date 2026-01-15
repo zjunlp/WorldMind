@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Basics on IK groups and IK elements</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Basics on IK groups and IK elements</h1>
+
+<p>CoppeliaSim uses IK groups and IK elements to solve inverse and forward kinematics tasks. It is important to understand how an IK task is solved in order to take full advantage of the functionality of the module. Make sure to have a look at the various simple example scenes related to IK and FK in folder <em>scenes/ik_fk_simple_examples</em>. An IK group contains one or more IK elements:<br>
+</p>
+
+<li><strong>IK groups</strong>: IK groups group one or more IK elements. To solve the kinematics of a simple kinematic chain, one IK group containing one IK element is needed. The IK group defines the overall solving properties (like what solving algorithm to use, etc.) for one or more IK elements. <br>
+</li>
+
+<li><strong>IK elements</strong>: IK elements specify simple kinematic chains. One IK element represents one kinematic chain. A kinematic chain is a linkage containing at least one <a href="joints.htm">joint object</a>. In short, an IK element is made up by:<br>
+</li>
+
+<li class=tabTab><strong>a base</strong> (any type of <a href="objects.htm">object</a>, even a <a href="joints.htm">joint</a>. In that case however the joint is considered as rigid). It represents the start of the kinematic chain.<br>
+</li>
+
+<li class=tabTab><strong>several links</strong> (any type of object except joints). Joints which are not in <em>IK mode</em> are however also considered as links (in that case they behave as rigid joints (fixed value)). <br>
+</li>
+
+<li class=tabTab><strong>several joints</strong>. A joint which is not in <em>IK mode</em> is however not considered as a joint, but as a link (see above). Refer also to the <a href="jointProperties.htm">joint properties</a>.</li>
+
+<li class=tabTab><strong>a tip</strong>. The tip is always a <a href="dummies.htm">dummy</a> and is the last object in the considered kinematic chain (when going from the base to the tip). The tip dummy should be linked to a target dummy (see hereafter) and the link should be an <strong>IK, tip-target</strong> link type. Refer also to the <a href="dummyPropertiesDialog.htm">dummy properties</a>.<br>
+</li>
+
+<li class=tabTab><strong>a target</strong>. The target is always a dummy and represents the position and/or orientation the tip should adopt (or follow) during <a href="simulation.htm">simulation</a>. The target dummy should be linked to a tip dummy (see hereabove) and the link should be an <strong>IK, tip-target</strong> link type. Refer also to the <a href="dummyPropertiesDialog.htm">dummy properties</a>.<br>
+</li>
+
+<p>IK Elements are specified by a kinematic chain, and a target to follow. The kinematic chain itself is specified by a tooltip (or end effector, or tip in short), indicating the last object in the chain, and a base, indicating the base object (or first object) in the chain. Following figures show two kinematic chains as specified for an IK element. The IK element perceives the two chains in a similar way (the very first joint of the second example is ignored by the IK element):<br>
+</p>
+
+
+<p align=center><img src="images/ikBasics1.jpg"></p>
+<p class=imageLabel>[Two kinematic chains, each describing an IK element]</p>
+<br>
+
+
+<p>In above examples, the kinematic chains as specified by the tip/base pair, both have 3 Degrees of Freedom (DoF) because 3 1-DoF joints are involved. Should one of the joints however be a spherical joint, then the chain would have 5 DoF since a spherical joint has 3 DoF by itself.<br>
+</p>
+
+<p>Now you should tell the IK element how the specified kinematic chain should behave during simulation. Typically, you want the tip of the kinematic chain to follow a target (refer to the <a href="dummyPropertiesDialog.htm">dummy properties</a> in order to form a tip-target linkage):<br>
+</p>
+
+
+<p align=center><img src="images/ikBasics2.jpg"></p>
+<p class=imageLabel>[IK element and corresponding model of the IK solving task]</p>
+<br>
+
+<p>When the simulation is running and some additional parameters have been defined correctly (see parameter description hereafter), then the mechanism (the specified kinematic chain) should move towards the target. This is the most basic case of IK task. Two separate kinematic chains are handled in an identical fashion, however this time, two IK groups are needed (and each one of them should contain one IK element for each kinematic chain). Solving order of the two IK groups is not important:<br>
+</p>
+
+
+<p align=center><img src="images/ikBasics3.jpg"></p>
+<p class=imageLabel>[Two separate IK chains and corresponding model of the IK solving tasks]</p>
+<br>
+
+<p>In above example, should target2 be attached to a mobile part of the first kinematic chain, then the solving order becomes important and the IK group1 should be solved first (solving result will displace target2 as can be seen from following figure):<br>
+</p>
+
+
+<p align=center><img src="images/ikBasics4.jpg"></p>
+<p class=imageLabel>[Two separate IK chains, where the target of the second chain is attached to the first chain, and corresponding model of the IK solving tasks]</p>
+<br>
+
+<p>A similar case can appear when one IK element is built on top of another IK element, <strong>without</strong> sharing any common joint as can be seen from following figure: the first kinematic chain is indicated in black, the second in light blue. Base2, indicated in purple, is the common object between the two chains. Solving the IK element2 won't displace the purple link, however solving the IK element1 will displace it. For that reason the IK group1 has to be solved before the IK group2 as in above case (solving order is important):<br>
+</p>
+
+
+<p align=center><img src="images/ikBasics5.jpg"></p>
+<p class=imageLabel>[Two IK chains sharing one common link but no common joints and corresponding model of the IK solving tasks]</p>
+<br>
+
+<p>A more difficult case appears when two or more kinematic chains share common joints. In that case sequential solving doesn't work most of the time (in following example, the two IK elements tend to rotate the common joint into opposite directions) and a simultaneous solving method is needed. To simultaneously solve several IK elements, just group them into one common IK group. This case is illustrated in following figure:<br>
+</p>
+
+
+<p align=center><img src="images/ikBasics6.jpg"></p>
+<p class=imageLabel>[Two IK chains sharing one common joint and corresponding model of the IK solving task]</p>
+<br>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="inverseKinematicsModule.htm">Inverse kinematics</a></li>
+<li><a href="solvingIkAndFk.htm">Solving IK and FK for any type of mechanism</a></li>
+<li><a href="ikDialog.htm">Inverse kinematics dialog</a></li>
+<li><a href="joints.htm">Joints</a></li>
+<li><a href="dummies.htm">Dummies</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

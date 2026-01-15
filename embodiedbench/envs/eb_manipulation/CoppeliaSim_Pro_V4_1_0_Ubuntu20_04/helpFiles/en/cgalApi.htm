@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>API Functions</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body><div align="center"><table class="allEncompassingTable"><tr><td>
+<h1>SurfaceReconstruction Plugin API reference</h1>
+<p class="infoBox">API functions for surface reconstruction from point clouds</p>
+<h3 class="subsectionBar">
+<a name="reconstruct_scale_space" id="reconstruct_scale_space"></a>simSurfRec.reconstruct_scale_space</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Reconstruct a mesh from the given point cloud</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int shapeHandle=simSurfRec.reconstruct_scale_space(int pointCloudHandle, int iterations=4, int neighbors=12, int samples=300, float squared_radius=-1.0)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>pointCloudHandle</strong> (int): handle of the point cloud</div>
+<div>
+<strong>iterations</strong> (int, default: 4): number of iterations</div>
+<div>
+<strong>neighbors</strong> (int, default: 12): number of neighbors a point's neighborhood should contain on average</div>
+<div>
+<strong>samples</strong> (int, default: 300): number of points sampled to estimate the neighborhood radius</div>
+<div>
+<strong>squared_radius</strong> (float, default: -1.0): neighborhood squared radius used for principal component analysis. if this is positive, neighbors and samples will be ignored</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>shapeHandle</strong> (int): handle of the shape with the reconstructed mesh, or -1 if failed</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+</td></tr></table></div></body>
+</html>

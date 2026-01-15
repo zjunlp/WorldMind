@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Euler angles</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Euler Angles</h1>
+
+
+<p>The <a href="http://en.wikipedia.org/wiki/Euler_angles">Euler angles</a> are three angles that describe the orientation of a rigid body. There are twelve different conventions when talking about Euler angles. They can be grouped into <strong>Proper Euler angles</strong>, and <strong>Tait-Bryan angles</strong> where the latter represents rotations about three distinct axes. In CoppeliaSim, we use <strong>Tait-Bryan angles</strong> <em>alpha</em>, <em>beta</em> and <em>gamma</em> (or (a,b,g)) describing a rotation composed by three elemental rotations:</p>
+
+<p align=center><img src="images/eulerAngles.jpg"></p>
+<p class=imageLabel>[Euler angles convention in CoppeliaSim]</p>
+<br>
+
+<p>where Rz, Ry and Rx represent elemental rotations about axes Z, Y and X respectively (in that order), of the <strong>absolute</strong> reference frame.</p>
+<p>For a rigid body, or <a href="objects.htm">scene object</a>, you can obtain the same transformation if you rotate it in following order about its <strong>own</strong> reference frame: rotation of <em>alpha</em> about own x, followed by a rotation of <em>beta</em> about own y, followed by a rotation of <em>gamma</em> about own z.</p>
+<p><strong>Yaw-Pitch-Roll</strong> are also <strong>Tait-Bryan angles</strong> describing a rotation composed by three elemental rotations:</p>
+
+<p align=center><img src="images/yawPitchRollAngles.jpg"></p>
+<p class=imageLabel>[Yaw-Pitch-Roll rotations]</p>
+<br>
+
+<p>where Rx, Ry and Rz represent elemental rotations about axes X, Y and Z respectively (in that order), of the <strong>absolute</strong> reference frame.</p>
+
+<p>To convert between <em>alpha-beta-gamma</em> angles and <em>yaw-pitch-roll</em> angles, you can use <a href="regularApi/simYawPitchRollToAlphaBetaGamma.htm">sim.yawPitchRollToAlphaBetaGamma</a> or <a href="regularApi/simAlphaBetaGammaToYawPitchRoll.htm">sim.alphaBetaGammaToYawPitchRoll</a> functions.</p>
+
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

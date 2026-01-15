@@ -1,0 +1,1260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>API Functions</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body><div align="center"><table class="allEncompassingTable"><tr><td>
+<h1>OMPL Plugin API reference</h1>
+<p class="infoBox">The list of API functions below allows you to define and solve a motion planning problem with OMPL.</p>
+<h3 class="subsectionBar">
+<a name="addGoalState" id="addGoalState"></a>simOMPL.addGoalState</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Add a goal state, without clearing previously set goal state(s), if any.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.addGoalState(int taskHandle, table state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>state</strong> (table of float): a table of numbers, whose size must be consistent with the robot's state space specified in this task object</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="compute" id="compute"></a>simOMPL.compute</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Use OMPL to find a solution for this motion planning task. It is equivalent to executing:
+            
+            simOMPL.setup(task)
+            if simOMPL.solve(task, maxTime) then
+            simOMPL.simplifyPath(task, maxSimplificationTime)
+            simOMPL.interpolatePath(task, stateCnt)
+            path = simOMPL.getPath(task)
+            end
+        </td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool solved, table states=simOMPL.compute(int taskHandle, float maxTime, float maxSimplificationTime=-1.0, int stateCnt=0)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>maxTime</strong> (float): maximum time used for the path searching procedure, in seconds.</div>
+<div>
+<strong>maxSimplificationTime</strong> (float, default: -1.0): (optional) maximum time used for the path simplification procedure, in seconds. -1 for a default simplification procedure.</div>
+<div>
+<strong>stateCnt</strong> (int, default: 0): (optional) minimum number of states to be returned. 0 for a default behaviour.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">
+<div>
+<strong>solved</strong> (bool): true if a solution has been found.</div>
+<div>
+<strong>states</strong> (table of float): a table of states, representing the solution, from start to goal. States are specified linearly.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="createStateSpace" id="createStateSpace"></a>simOMPL.createStateSpace</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Create a component of the state space for the motion planning problem. In case of a dubins state space, set additional parameters with <a href="#setDubinsParams">simOMPL.setDubinsParams</a>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int stateSpaceHandle=simOMPL.createStateSpace(string name, int type, int objectHandle, table boundsLow, table boundsHigh, int useForProjection, float weight=1.0, int refObjectHandle=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>name</strong> (string): a name for this state space</div>
+<div>
+<strong>type</strong> (int): type of this state space component (see <a href="#enum:StateSpaceType">simOMPL.StateSpaceType</a>)</div>
+<div>
+<strong>objectHandle</strong> (int): the object handle (a joint object if type is simOMPL.StateSpaceType.joint_position, otherwise a shape)</div>
+<div>
+<strong>boundsLow</strong> (table of float): lower bounds (if type is pose, specify only the 3 position components)</div>
+<div>
+<strong>boundsHigh</strong> (table of float): upper bounds (if type is pose, specify only the 3 position components)</div>
+<div>
+<strong>useForProjection</strong> (int): if true, this object position or joint value will be used for computing a default projection</div>
+<div>
+<strong>weight</strong> (float, default: 1.0): (optional) the weight of this state space component, used for computing distance between states. Default value is 1.0</div>
+<div>
+<strong>refObjectHandle</strong> (int, default: -1): (optional) an object handle relative to which reference frame position/orientations will be evaluated. Default value is -1, for the absolute reference frame</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>stateSpaceHandle</strong> (int): a handle to the created state space component</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="createTask" id="createTask"></a>simOMPL.createTask</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Create a task object, used to represent the motion planning task. A task object contains informations about: <ul>
+<li>collision pairs (used by the default state validity checker)</li>
+<li>state spaces</li>
+<li>start state</li>
+<li>goal state, or goal specification (e.g. pair of dummies, Lua callback, ...)</li>
+<li>various Lua callbacks (projection evaluation, state validation, goal satisfaction)</li>
+</ul>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int taskHandle=simOMPL.createTask(string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>name</strong> (string): a name for this task object</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>taskHandle</strong> (int): a handle to the created task object</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="destroyStateSpace" id="destroyStateSpace"></a>simOMPL.destroyStateSpace</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Destroy the spacified state space component.Note: state space components created during simulation are automatically destroyed when simulation ends.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.destroyStateSpace(int stateSpaceHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>stateSpaceHandle</strong> (int): handle to state space component</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="destroyTask" id="destroyTask"></a>simOMPL.destroyTask</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Destroy the specified task object.Note: task objects created during simulation are automatically destroyed when simulation ends.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.destroyTask(int taskHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="getData" id="getData"></a>simOMPL.getData</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Get planner data for this motion planning task.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">table states=simOMPL.getData(int taskHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>states</strong> (table of float): a table of states, representing the configurations in the constructed search graph. States are specified linearly followed by minimum distance to the closest X_obs.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="getPath" id="getPath"></a>simOMPL.getPath</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Use OMPL to find a solution for this motion planning task.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">table states=simOMPL.getPath(int taskHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>states</strong> (table of float): a table of states, representing the solution, from start to goal. States are specified linearly.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="interpolatePath" id="interpolatePath"></a>simOMPL.interpolatePath</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Interpolate the path found by planner to obtain a minimum number of states.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.interpolatePath(int taskHandle, int stateCnt=0)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>stateCnt</strong> (int, default: 0): (optional) minimum number of states to be returned. 0 for a default behaviour.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="isStateValid" id="isStateValid"></a>simOMPL.isStateValid</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Check if the specified state is valid. If a state validation callback has been specified, that will be used to determine the validity of the state, otherwise the default state validation method will be used.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int valid=simOMPL.isStateValid(int taskHandle, table state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>state</strong> (table of float): state vector</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>valid</strong> (int): 1 if valid, 0 otherwise</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="printTaskInfo" id="printTaskInfo"></a>simOMPL.printTaskInfo</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Print a summary of the specified task object. Useful for debugging and submitting bug reports.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.printTaskInfo(int taskHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="readState" id="readState"></a>simOMPL.readState</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Read a state vector from current simulator state.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">table state=simOMPL.readState(int taskHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>state</strong> (table of float): state vector</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setAlgorithm" id="setAlgorithm"></a>simOMPL.setAlgorithm</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the search algorithm for the specified task. Default algorithm used is KPIECE1.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setAlgorithm(int taskHandle, int algorithm)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>algorithm</strong> (int): see <a href="#enum:Algorithm">simOMPL.Algorithm</a>
+</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setCollisionPairs" id="setCollisionPairs"></a>simOMPL.setCollisionPairs</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the collision pairs for the specified task object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setCollisionPairs(int taskHandle, table collisionPairHandles)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>collisionPairHandles</strong> (table of int): a table containing 2 entity handles for each collision pair. A collision pair is represented by a collider and a collidee, that will be tested against each other. The first pair could be used for robot self-collision testing, and a second pair could be used for robot-environment collision testing. The collider can be an object or a collection handle. The collidee can be an object or collection handle, or sim_handle_all, in which case the collider will be checked agains all other collidable objects in the scene.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setDubinsParams" id="setDubinsParams"></a>simOMPL.setDubinsParams</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set extra state space parameters of a dubins state space.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setDubinsParams(int stateSpaceHandle, float turningRadius, bool isSymmetric)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>stateSpaceHandle</strong> (int): handle to state space component</div>
+<div>
+<strong>turningRadius</strong> (float): turning radius</div>
+<div>
+<strong>isSymmetric</strong> (bool): true if it is symmetric, otherwise false</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setGoal" id="setGoal"></a>simOMPL.setGoal</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the goal for the specificed task object by a dummy pair. One of the two dummies is part of the robot. The other dummy is fixed in the environment. When the task is solved, the position or pose of the two dummies will (approximatively) be the same. Dummy-dummy distances are relative to an optional reference dummy, and are evaluated using an optional metric</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setGoal(int taskHandle, int robotDummy, int goalDummy, float tolerance=0.001f, table metric={1.0, 1.0, 1.0, 0.1}, int refDummy=-1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>robotDummy</strong> (int): a dummy attached to the robot</div>
+<div>
+<strong>goalDummy</strong> (int): a dummy fixed in the environment, representing the goal pose/position</div>
+<div>
+<strong>tolerance</strong> (float, default: 0.001f): an optional tolerated dummy-dummy distance. Defaults to 0.001</div>
+<div>
+<strong>metric</strong> (table of float, default: {1.0, 1.0, 1.0, 0.1}): an optional metric (x,y,z,angle) used to evaluate the dummy-dummy distance</div>
+<div>
+<strong>refDummy</strong> (int, default: -1): an optional reference dummy, relative to which the metric will be used</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setGoalCallback" id="setGoalCallback"></a>simOMPL.setGoalCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set a custom goal callback for the specified task. The argument passed to the callback is the state to test for goal satisfaction. The return values must be a boolean indicating wether the goal is satisfied, and a float indicating the distance to the goal, i.e.:boolean satisfied, number distance=goalSatisfied(table state)If a distance to the goal is not known, a constant value can be used, but the performance of the algorithm will be worse.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setGoalCallback(int taskHandle, string callback)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>callback</strong> (string): name of the Lua callback</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setGoalState" id="setGoalState"></a>simOMPL.setGoalState</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the goal state for the specified task object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setGoalState(int taskHandle, table state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>state</strong> (table of float): a table of numbers, whose size must be consistent with the robot's state space specified in this task object</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setProjectionEvaluationCallback" id="setProjectionEvaluationCallback"></a>simOMPL.setProjectionEvaluationCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set a custom projection evaluation. The argument of the callback will be a state, and the return value must be a table of numbers, with a size equal to the projectionSize argument, i.e.table projection=evaluateProjection(table state)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setProjectionEvaluationCallback(int taskHandle, string callback, int projectionSize)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>callback</strong> (string): name of the Lua callback</div>
+<div>
+<strong>projectionSize</strong> (int): size of the projection (usually 2 or 3)</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setStartState" id="setStartState"></a>simOMPL.setStartState</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the start state for the specified task object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setStartState(int taskHandle, table state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>state</strong> (table of float): a table of numbers, whose size must be consistent with the robot's state space specified in this task object</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setStateSpace" id="setStateSpace"></a>simOMPL.setStateSpace</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the state space of this task object.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setStateSpace(int taskHandle, table stateSpaceHandles)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>stateSpaceHandles</strong> (table of int): a table of handles to state space components, created with <a href="#createStateSpace">simOMPL.createStateSpace</a>
+</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setStateValidationCallback" id="setStateValidationCallback"></a>simOMPL.setStateValidationCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set a custom state validation. By default state validation is performed by collision checking, between robot's collision objects and environment's objects. By specifying a custom state validation, it is possible to perform any arbitrary check on a state to determine wether it is valid or not. Argument to the callback is the state to validate, and return value must be a boolean indicating the validity of the state, i.e.:boolean valid=stateValidator(table state)</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setStateValidationCallback(int taskHandle, string callback)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>callback</strong> (string): name of the Lua callback</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setStateValidityCheckingResolution" id="setStateValidityCheckingResolution"></a>simOMPL.setStateValidityCheckingResolution</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the resolution of state validity checking, expressed as fraction of state space's extent. Default resolution is 0.01 which is 1% of the state space's extent.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setStateValidityCheckingResolution(int taskHandle, float resolution)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>resolution</strong> (float): resolution of state validity checking, expressed as fraction of state space's extent</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setValidStateSamplerCallback" id="setValidStateSamplerCallback"></a>simOMPL.setValidStateSamplerCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">The valid state sampler callbacks must generate valid states. There are two callbacks to implement:<ul>
+<li>the valid state sampling callback: table sampledState=sample()</li>
+<li>the near valid state sampling callback: table sampledState=sampleNear(table state, number distance)</li>
+</ul>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setValidStateSamplerCallback(int taskHandle, string callback, string callbackNear)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>callback</strong> (string): the name of the Lua callback for sampling a state</div>
+<div>
+<strong>callbackNear</strong> (string): the name of the Lua callback for sampling near a given state within the given distance</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setVerboseLevel" id="setVerboseLevel"></a>simOMPL.setVerboseLevel</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set the verbosity level for messages printed to application console.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setVerboseLevel(int taskHandle, int verboseLevel)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>verboseLevel</strong> (int): level of verbosity (positive integer), 0 to suppress any message</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setup" id="setup"></a>simOMPL.setup</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Setup the OMPL classes with the information contained in the task.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.setup(int taskHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="simplifyPath" id="simplifyPath"></a>simOMPL.simplifyPath</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Simplify the path found by planner.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.simplifyPath(int taskHandle, float maxSimplificationTime=-1.0)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>maxSimplificationTime</strong> (float, default: -1.0): (optional) maximum time used for the path simplification procedure, in seconds. -1 for a default simplification procedure.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="solve" id="solve"></a>simOMPL.solve</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Run the planning algorithm to search for a solution.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool solved=simOMPL.solve(int taskHandle, float maxTime)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>maxTime</strong> (float): maximum time used for the path searching procedure, in seconds.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>solved</strong> (bool): true if a solution is found.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="writeState" id="writeState"></a>simOMPL.writeState</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Write the specified state to simulator</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simOMPL.writeState(int taskHandle, table state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>taskHandle</strong> (int): a handle to a task object created with <a href="#createTask">simOMPL.createTask</a>
+</div>
+<div>
+<strong>state</strong> (table of float): state vector</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><br><br><h1>Constants</h1>
+<p>Constants used in the various functions. Refer to each constant using <i>enumName.constantName</i>, i.e. <b>simUI.curve_type.xy</b> for <b>xy</b> constant in <b>simUI.curve_type</b> enum.</p>
+<h3 class="subsectionBar">
+<a name="enum:Algorithm" id="enum:Algorithm"></a>simOMPL.Algorithm</h3>
+<table class="apiConstantsTable"><tbody><tr><td>
+<div><strong>BiTRRT</strong></div>
+<div><strong>BITstar</strong></div>
+<div><strong>BKPIECE1</strong></div>
+<div><strong>CForest</strong></div>
+<div><strong>EST</strong></div>
+<div><strong>FMT</strong></div>
+<div><strong>KPIECE1</strong></div>
+<div><strong>LazyPRM</strong></div>
+<div><strong>LazyPRMstar</strong></div>
+<div><strong>LazyRRT</strong></div>
+<div><strong>LBKPIECE1</strong></div>
+<div><strong>LBTRRT</strong></div>
+<div><strong>PDST</strong></div>
+<div><strong>PRM</strong></div>
+<div><strong>PRMstar</strong></div>
+<div><strong>pRRT</strong></div>
+<div><strong>pSBL</strong></div>
+<div><strong>RRT</strong></div>
+<div><strong>RRTConnect</strong></div>
+<div><strong>RRTstar</strong></div>
+<div><strong>SBL</strong></div>
+<div><strong>SPARS</strong></div>
+<div><strong>SPARStwo</strong></div>
+<div><strong>STRIDE</strong></div>
+<div><strong>TRRT</strong></div>
+</td></tr></tbody></table>
+<h3 class="subsectionBar">
+<a name="enum:StateSpaceType" id="enum:StateSpaceType"></a>simOMPL.StateSpaceType</h3>
+<table class="apiConstantsTable"><tbody><tr><td>
+<div><strong>position2d</strong></div>
+<div><strong>pose2d</strong></div>
+<div><strong>position3d</strong></div>
+<div><strong>pose3d</strong></div>
+<div><strong>joint_position</strong></div>
+<div><strong>dubins</strong></div>
+</td></tr></tbody></table>
+<br><br><h1>Script functions</h1>
+<p>Script functions are used to call some lua code from the plugin side (tipically used for event handlers).</p>
+<h3 class="subsectionBar">
+<a name="scriptfun:goalCallback" id="scriptfun:goalCallback"></a>goalCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Callback for checking if the goal is satisfied.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool satisfied, float distance=simOMPL.goalCallback(table state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>state</strong> (table of float): the state to test for goal satisfaction</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">
+<div>
+<strong>satisfied</strong> (bool): true if satisfied, false otherwise</div>
+<div>
+<strong>distance</strong> (float): distance to goal, if it is known. A constant value can be returned otherwise, but the performance of the algorithm will be worse.</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="scriptfun:projectionEvaluationCallback" id="scriptfun:projectionEvaluationCallback"></a>projectionEvaluationCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Callback for computing a (euclidean) projection of states.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">table projection=simOMPL.projectionEvaluationCallback(table state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>state</strong> (table of float): the state to compute the projection for</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>projection</strong> (table of float): projected state, usualy of size 2 or 3, representing a point in plane or space.</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="scriptfun:stateValidationCallback" id="scriptfun:stateValidationCallback"></a>stateValidationCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Callback for checking the validity of states.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool valid=simOMPL.stateValidationCallback(table state)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>state</strong> (table of float): the state to compute the projection for</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>valid</strong> (bool): true if valid, false otherwise</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="scriptfun:validStateSamplerCallback" id="scriptfun:validStateSamplerCallback"></a>validStateSamplerCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Callback for sampling valid states from the state space.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">table sampledState=simOMPL.validStateSamplerCallback()<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>sampledState</strong> (table of float): a valid state</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="scriptfun:validStateSamplerCallbackNear" id="scriptfun:validStateSamplerCallbackNear"></a>validStateSamplerCallbackNear</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Callback for sampling valid states in the proximity of a given state, within a certain distance.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">table sampledState=simOMPL.validStateSamplerCallbackNear(table state, float distance)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>state</strong> (table of float): the center state</div>
+<div>
+<strong>distance</strong> (float): distance bound</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>sampledState</strong> (table of float): a valid state</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+</td></tr></table></div></body>
+</html>

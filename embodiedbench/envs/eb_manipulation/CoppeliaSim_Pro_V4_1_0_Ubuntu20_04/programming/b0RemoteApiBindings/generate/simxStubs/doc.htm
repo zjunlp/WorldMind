@@ -1,0 +1,452 @@
+#py from parse import parse
+#py import model
+#py import os
+#py import collections
+#py import re
+#py plugin = parse(pycpp.params['xml_file'])
+#py def generateLinks(arg):
+#py     arg=re.sub('\[L\[#([^,\[\]]+)\]\]',r'<a href="#\1">\1</a>',arg) #e.g. [L[#simxGetObjectPosition]] --> <a href="#simxSetObjectPosition">simxSetObjectPosition</a>
+#py     arg=re.sub('\[L\[([^,\[\]]+)\]\]',r'<a href="\1">\1</a>',arg) #e.g. [L[simxGetObjectPosition.html]] --> <a href="simxSetObjectPosition.html">simxSetObjectPosition.html</a>
+#py     arg=re.sub('\[L\[([^,\[\]]+),([^,\[\]]+)\]\]',r'<a href="\1">\2</a>',arg) #e.g. [L[#simxGetObjectPosition,Click me]] --> <a href="#simxSetObjectPosition">Click me</a>
+#py     arg=re.sub('\[B\[([^\[\]]+)\]\]',r'<b>\1</b>',arg) #e.g. [B[text in bold]]
+#py     arg=re.sub('\[I\[([^\[\]]+)\]\]',r'<i>\1</i>',arg) #e.g. [I[text in italic]]
+#py     arg=re.sub('\['+lang+'\[([^\[\]]+)\]\]',r'\1',arg)
+#py     arg=re.sub('\[cpp\[([^\[\]]+)\]\]',r'',arg)
+#py     arg=re.sub('\[java\[([^\[\]]+)\]\]',r'',arg)
+#py     arg=re.sub('\[lua\[([^\[\]]+)\]\]',r'',arg)
+#py     arg=re.sub('\[matlab\[([^\[\]]+)\]\]',r'',arg)
+#py     arg=re.sub('\[python\[([^\[\]]+)\]\]',r'',arg)
+#py     return arg
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>B0-based remote API functions</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body>
+<div align="center"><table class="allEncompassingTable"><tr><td>
+#py lang=os.getenv('remoteApiDocLang')
+#py if lang=='cpp':
+<h1>B0-based remote API, C++</h1>
+#py elif lang=='java':
+<h1>B0-based remote API, Java</h1>
+#py elif lang=='lua':
+<h1>B0-based remote API, Lua</h1>
+#py elif lang=='matlab':
+<h1>B0-based remote API, Matlab</h1>
+#py elif lang=='python':
+<h1>B0-based remote API, Python</h1>
+#py endif
+<!--
+<p class="infoBox">B0-based remote API functions.</p>
+-->
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py allCmds={}
+#py for cmd in plugin.commands:
+#py cmdHtmlStr='<h3 class="subsectionBar">\n'
+#py cmdHtmlStr+='<a name="'+cmd.name+'" id="'+cmd.name+'"></a>'+cmd.name+'</h3>\n'
+#py cmdHtmlStr+='<table class="apiTable">\n'
+#py cmdHtmlStr+='<tr class="apiTableTr">\n'
+#py cmdHtmlStr+='<td class="apiTableLeftDescr">Description</td>\n'
+#py cmdHtmlStr+='<td class="apiTableRightDescr">'+generateLinks(cmd.description)+'</td>\n'
+#py cmdHtmlStr+='</tr>\n'
+#py cmdHtmlStr+='<tr class="apiTableTr">\n'
+#py cmdHtmlStr+='<td class="remApiTableLeftCSyn">synopsis</td>\n'
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py if lang=='cpp':
+#py if cmd.generic:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">std::vector&#60;msgpack::object&#62;* '+cmd.name+'('
+#py else:
+#py if len(cmd.returns)>0:
+#py p = cmd.returns[0]
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">'+p.htype()+' '+cmd.name+'('
+#py else:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">void '+cmd.name+'('
+#py endif
+#py endif
+#py itemCnt=len(cmd.params)
+#py itemIndex=-1
+#py for p in cmd.params:
+#py itemIndex=itemIndex+1
+#py if p.ctype()=='string':
+#py cmdHtmlStr+='const char* '+p.name
+#py if p.default:
+#py cmdHtmlStr+=' = "'+p.default+'"'
+#py endif
+#py elif p.ctype()=='byte[]':
+#py cmdHtmlStr+='const char* '+p.name+'_data,size_t '+p.name+'_charCnt'
+#py elif p.ctype()=='int[]':
+#py cmdHtmlStr+='const int* '+p.name+'_data,size_t '+p.name+'_intCnt'
+#py elif p.ctype()=='packed_unpacked':
+#py cmdHtmlStr+='const char* '+p.name+'_data,size_t '+p.name+'_charCnt'
+#py elif p.ctype()=='int[2]':
+#py cmdHtmlStr+='const int '+p.name+'[2]'
+#py elif p.ctype()=='float[]':
+#py cmdHtmlStr+='const float* '+p.name+'_data,size_t '+p.name+'_floatCnt'
+#py elif p.ctype()=='float[2]':
+#py cmdHtmlStr+='const float '+p.name+'[2]'
+#py elif p.ctype()=='float[3]':
+#py cmdHtmlStr+='const float '+p.name+'[3]'
+#py elif p.ctype()=='float[7]':
+#py cmdHtmlStr+='const float '+p.name+'[7]'
+#py elif p.ctype()=='float[12]':
+#py cmdHtmlStr+='const float '+p.name+'[12]'
+#py elif p.ctype()=='double[]':
+#py cmdHtmlStr+='const double* '+p.name+'_data,size_t '+p.name+'_doubleCnt'
+#py elif p.ctype()=='double[2]':
+#py cmdHtmlStr+='const double '+p.name+'[2]'
+#py elif p.ctype()=='double[3]':
+#py cmdHtmlStr+='const double '+p.name+'[3]'
+#py elif p.ctype()=='double[7]':
+#py cmdHtmlStr+='const double '+p.name+'[7]'
+#py elif p.ctype()=='double[12]':
+#py cmdHtmlStr+='const double '+p.name+'[12]'
+#py elif p.ctype()=='int_eval':
+#py cmdHtmlStr+='int/(const char*) '+p.name
+#py else:
+#py cmdHtmlStr+=p.htype()+' '+p.name
+#py if p.default:
+#py cmdHtmlStr+=' = '+p.default
+#py endif
+#py endif
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py cmdHtmlStr+=', '
+#py endif
+#py endfor
+#py cmdHtmlStr+=')<br>'
+#py #-----------------------------------------------------------------------------------------------
+#py elif lang=='java':
+#py if cmd.generic:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">public MessageUnpacker '+cmd.name+'('
+#py else:
+#py if len(cmd.returns)>0:
+#py p = cmd.returns[0]
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">'+p.htype()+' '+cmd.name+'('
+#py else:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">void '+cmd.name+'('
+#py endif
+#py endif
+#py itemCnt=len(cmd.params)
+#py itemIndex=-1
+#py for p in cmd.params:
+#py itemIndex=itemIndex+1
+#py cmdHtmlStr+=p.htype()+' '+p.name
+#py if p.default:
+#py if p.ctype()=='string':
+#py cmdHtmlStr+=' = "'+p.default+'"'
+#py else:
+#py cmdHtmlStr+=' = '+p.default
+#py endif
+#py endif
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py cmdHtmlStr+=', '
+#py endif
+#py endfor
+#py #cmdHtmlStr+=') throws IOException<br>'
+#py cmdHtmlStr+=')<br>'
+#py #-----------------------------------------------------------------------------------------------
+#py elif lang=='lua':
+#py if cmd.generic:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">table '+cmd.name+'('
+#py else:
+#py if len(cmd.returns)>0:
+#py p = cmd.returns[0]
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">'+p.htype()+' '+cmd.name+'('
+#py else:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">'+cmd.name+'('
+#py endif
+#py endif
+#py itemCnt=len(cmd.params)
+#py itemIndex=-1
+#py for p in cmd.params:
+#py itemIndex=itemIndex+1
+#py cmdHtmlStr+=p.htype()+' '+p.name
+#py if p.default:
+#py if p.ctype()=='string':
+#py cmdHtmlStr+=' = "'+p.default+'"'
+#py else:
+#py cmdHtmlStr+=' = '+p.default
+#py endif
+#py endif
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py cmdHtmlStr+=', '
+#py endif
+#py endfor
+#py cmdHtmlStr+=')<br>'
+#py #-----------------------------------------------------------------------------------------------
+#py elif lang=='matlab':
+#py if cmd.generic:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">array '+cmd.name+'('
+#py else:
+#py if len(cmd.returns)>0:
+#py p = cmd.returns[0]
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">'+p.htype()+' '+cmd.name+'('
+#py else:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">'+cmd.name+'('
+#py endif
+#py endif
+#py itemCnt=len(cmd.params)
+#py itemIndex=-1
+#py for p in cmd.params:
+#py itemIndex=itemIndex+1
+#py cmdHtmlStr+=p.htype()+' '+p.name
+#py if p.default:
+#py if p.ctype()=='string':
+#py cmdHtmlStr+=" = '"+p.default+"'"
+#py else:
+#py cmdHtmlStr+=' = '+p.default
+#py endif
+#py endif
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py cmdHtmlStr+=', '
+#py endif
+#py endfor
+#py cmdHtmlStr+=')<br>'
+#py #-----------------------------------------------------------------------------------------------
+#py elif lang=='python':
+#py if cmd.generic:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">list '+cmd.name+'('
+#py else:
+#py if len(cmd.returns)>0:
+#py p = cmd.returns[0]
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">'+p.htype()+' '+cmd.name+'('
+#py else:
+#py cmdHtmlStr+='<td class="remApiTableRightCSyn">'+cmd.name+'('
+#py endif
+#py endif
+#py itemCnt=len(cmd.params)
+#py itemIndex=-1
+#py for p in cmd.params:
+#py itemIndex=itemIndex+1
+#py cmdHtmlStr+=p.htype()+' '+p.name
+#py if p.default:
+#py if p.ctype()=='string':
+#py cmdHtmlStr+=" = '"+p.default+"'"
+#py elif p.ctype()=='bool':
+#py if p.default=='true':
+#py cmdHtmlStr+=" = True"
+#py else:
+#py cmdHtmlStr+=" = False"
+#py endif
+#py else:
+#py cmdHtmlStr+=' = '+p.default
+#py endif
+#py endif
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py cmdHtmlStr+=', '
+#py endif
+#py endfor
+#py cmdHtmlStr+=')<br>'
+#py endif
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py cmdHtmlStr+='</td>\n</tr>\n<tr class="apiTableTr">\n<td class="remApiTableLeftCParam">Parameters</td>\n<td class="remApiTableRightCParam">\n'
+#py for p in cmd.params:
+#py cmdHtmlStr+='<div><strong>'+p.name+'</strong>: '+generateLinks(p.description)+'</div>\n'
+#py endfor
+#py cmdHtmlStr+='</td>\n'
+#py cmdHtmlStr+='</tr>\n'
+#py cmdHtmlStr+='<tr class="apiTableTr">\n'
+#py cmdHtmlStr+='<td class="remApiTableLeftCRet">return</td>\n'
+#py cmdHtmlStr+='<td class="remApiTableRightCRet">\n'
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py if lang=='cpp':
+#py if cmd.generic:
+#py cmdHtmlStr+='<div>A vector containing messagePack objects. The returned pointer remains valid until another remote API function is called. For convenience, you can use the <a href="#helperFunctions">helper functions</a> to read its values. The vector contains:</div>'
+#py for p in cmd.returns:
+#py cmdHtmlStr+='<div><strong>'+p.name+'</strong> ('+p.ctype()+'): '+generateLinks(p.description)+'</div>\n'
+#py endfor
+#py else:
+#py if len(cmd.returns)>0:
+#py p = cmd.returns[0]
+#py cmdHtmlStr+='<div>'+p.description+'</div>\n'
+#py endif
+#py endif
+#py #-----------------------------------------------------------------------------------------------
+#py elif lang=='java':
+#py if cmd.generic:
+#py cmdHtmlStr+='<div>A MessageUnpacker. For convenience, you can use the <a href="#helperFunctions">helper functions</a> to read its values. The MessageUnpacker contains:</div>'
+#py for p in cmd.returns:
+#py cmdHtmlStr+='<div><strong>'+p.name+'</strong> ('+p.ctype()+'): '+generateLinks(p.description)+'</div>\n'
+#py endfor
+#py else:
+#py if len(cmd.returns)>0:
+#py p = cmd.returns[0]
+#py cmdHtmlStr+='<div>'+generateLinks(p.description)+'</div>\n'
+#py endif
+#py endif
+#py #-----------------------------------------------------------------------------------------------
+#py else:
+#py if cmd.generic:
+#py if lang=='lua':
+#py cmdHtmlStr+='<div>A table that contains:</div>'
+#py elif lang=='matlab':
+#py cmdHtmlStr+='<div>An array that contains:</div>'
+#py else:
+#py cmdHtmlStr+='<div>A list that contains:</div>'
+#py endif
+#py for p in cmd.returns:
+#py cmdHtmlStr+='<div><strong>'+p.name+'</strong> ('+p.htype()+'): '+generateLinks(p.description)+'</div>\n'
+#py endfor
+#py else:
+#py if len(cmd.returns)>0:
+#py p = cmd.returns[0]
+#py cmdHtmlStr+='<div>'+generateLinks(p.description)+'</div>\n'
+#py endif
+#py endif
+#py endif
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py cmdHtmlStr+='</td>\n'
+#py cmdHtmlStr+='</tr>\n'
+#py #-----------------------------------------------------------------------------------------------
+#py if len(cmd.checkAlso)>0:
+#py cmdHtmlStr+='<tr class="apiTableTr">\n'
+#py cmdHtmlStr+='<td class="remApiTableLeftCParam">See also</td>\n'
+#py cmdHtmlStr+='<td class="remApiTableRightCParam">\n'
+#py cmdHtmlStr+='<div>\n'
+#py itemCnt=len(cmd.checkAlso)
+#py itemIndex=-1
+#py for p in cmd.checkAlso:
+#py itemIndex=itemIndex+1
+#py cmdHtmlStr+=generateLinks(p['name'])
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py cmdHtmlStr+='<br>'
+#py endif
+#py endfor
+#py cmdHtmlStr+='</div>\n'
+#py cmdHtmlStr+='</td>\n'
+#py cmdHtmlStr+='</tr>\n'
+#py endif
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py cmdHtmlStr+='<tr class="apiTableTr">\n'
+#py cmdHtmlStr+='<td class="remApiTableLeftCParam">Other languages</td>\n'
+#py cmdHtmlStr+='<td class="remApiTableRightCParam">\n'
+#py cmdHtmlStr+='<div>'
+#py l=[]
+#py #-----------------------------------------------------------------------------------------------
+#py if lang=='cpp':
+#py l=[['Python','b0RemoteApi-python.htm'],['Java','b0RemoteApi-java.htm'],['Matlab','b0RemoteApi-matlab.htm'],['Lua','b0RemoteApi-lua.htm']]
+#py #-----------------------------------------------------------------------------------------------
+#py elif lang=='java':
+#py l=[['C++','b0RemoteApi-cpp.htm'],['Python','b0RemoteApi-python.htm'],['Matlab','b0RemoteApi-matlab.htm'],['Lua','b0RemoteApi-lua.htm']]
+#py #-----------------------------------------------------------------------------------------------
+#py elif lang=='lua':
+#py l=[['C++','b0RemoteApi-cpp.htm'],['Python','b0RemoteApi-python.htm'],['Java','b0RemoteApi-java.htm'],['Matlab','b0RemoteApi-matlab.htm']]
+#py #-----------------------------------------------------------------------------------------------
+#py elif lang=='matlab':
+#py l=[['C++','b0RemoteApi-cpp.htm'],['Python','b0RemoteApi-python.htm'],['Java','b0RemoteApi-java.htm'],['Lua','b0RemoteApi-lua.htm']]
+#py #-----------------------------------------------------------------------------------------------
+#py else:
+#py l=[['C++','b0RemoteApi-cpp.htm'],['Java','b0RemoteApi-java.htm'],['Matlab','b0RemoteApi-matlab.htm'],['Lua','b0RemoteApi-lua.htm']]
+#py endif
+#py #-----------------------------------------------------------------------------------------------
+#py itemCnt=len(l)
+#py itemIndex=-1
+#py for p in l:
+#py itemIndex=itemIndex+1
+#py cmdHtmlStr+='<a href="'+p[1]+'#'+cmd.name+'">'+p[0]+'</a>'
+#py if (itemCnt>1) and itemIndex<itemCnt-1:
+#py cmdHtmlStr+=', '
+#py endif
+#py endfor
+#py cmdHtmlStr+='</div>'
+#py cmdHtmlStr+='</td>\n'
+#py cmdHtmlStr+='</tr>\n'
+#py #-----------------------------------------------------------------------------------------------
+#py cmdHtmlStr+='</table>\n'
+#py cmdHtmlStr+='<br>\n'
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py allCmds[cmd.name]=cmdHtmlStr
+#py endfor
+#py od=collections.OrderedDict(sorted(allCmds.items()))
+#py for k, v in od.items(): 
+    `v`
+#py endfor
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+<h3 class="subsectionBar">
+<a name="topics" id="topics"></a>Topics / Communication channels</h3>
+<pre class=lightGreyBox>
+<a href="#simxServiceCall">simxServiceCall</a>
+<a href="#simxDefaultPublisher">simxDefaultPublisher</a>
+<a href="#simxDefaultSubscriber">simxDefaultSubscriber</a>
+<a href="#simxCreatePublisher">simxCreatePublisher</a>
+<a href="#simxCreateSubscriber">simxCreateSubscriber</a>
+</pre>
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py if (lang=='cpp') or (lang=='java'):
+<h3 class="subsectionBar">
+<a name="helperFunctions" id="helperFunctions"></a>Helper functions</h3>
+<pre class=lightGreyBox>
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py if lang=='cpp':
+static void <strong>b0RemoteApi::print</strong>(const std::vector<msgpack::object>* msg)
+static bool <strong>b0RemoteApi::hasValue</strong>(const std::vector<msgpack::object>* msg)
+static bool <strong>b0RemoteApi::readBool</strong>(std::vector<msgpack::object>* msg,
+    int pos,bool* success=nullptr)
+static int <strong>b0RemoteApi::readInt</strong>(std::vector<msgpack::object>* msg,
+    int pos,bool* success=nullptr)
+static float <strong>b0RemoteApi::readFloat</strong>(std::vector<msgpack::object>* msg,
+    int pos,bool* success=nullptr)
+static double <strong>b0RemoteApi::readDouble</strong>(std::vector<msgpack::object>* msg,
+    int pos,bool* success=nullptr)
+static std::string <strong>b0RemoteApi::readString</strong>(std::vector<msgpack::object>* msg,
+    int pos,bool* success=nullptr)
+static std::string <strong>b0RemoteApi::readByteArray</strong>(std::vector<msgpack::object>* msg,
+    int pos,bool* success=nullptr)
+static bool <strong>b0RemoteApi::readIntArray</strong>(std::vector<msgpack::object>* msg,
+    std::vector<int>& array,int pos)
+static bool <strong>b0RemoteApi::readFloatArray</strong>(std::vector<msgpack::object>* msg,
+    std::vector<float>& array,int pos)
+static bool <strong>b0RemoteApi::readDoubleArray</strong>(std::vector<msgpack::object>* msg,
+    std::vector<double>& array,int pos)
+static bool <strong>b0RemoteApi::readStringArray</strong>(std::vector<msgpack::object>* msg,
+    std::vector<std::string>& array,int pos)
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py elif lang=='java':
+static void <strong>b0RemoteApi::print</strong>(final MessageUnpacker msg) 
+static boolean <strong>b0RemoteApi::hasValue</strong>(final MessageUnpacker msg)
+static Value <strong>b0RemoteApi::readValue</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static boolean <strong>b0RemoteApi::readBool</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static int <strong>b0RemoteApi::readInt</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static float <strong>b0RemoteApi::readFloat</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static double <strong>b0RemoteApi::readDouble</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static String <strong>b0RemoteApi::readString</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static byte[] <strong>b0RemoteApi::readByteArray</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static int[] <strong>b0RemoteApi::readIntArray</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static float[] <strong>b0RemoteApi::readFloatArray</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static double[] <strong>b0RemoteApi::readDoubleArray</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+static String[] <strong>b0RemoteApi::readStringArray</strong>(final MessageUnpacker msg,
+    int valuesToDiscard = 0)
+#py endif
+</pre>
+#py endif
+#py #-----------------------------------------------------------------------------------------------
+#py #-----------------------------------------------------------------------------------------------
+#py # following 2 lines so that jumping to the helper functions brings them to the top, otherwise confusing:
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</td></tr></table></div></body>
+</html>

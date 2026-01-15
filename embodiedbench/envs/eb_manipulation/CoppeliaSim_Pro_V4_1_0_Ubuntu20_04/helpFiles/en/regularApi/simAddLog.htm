@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simAddLog</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simAddLog" id="simAddLog"></a>simAddLog / sim.addLog </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Adds a log message that will be output in the console or status bar.</td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simAddLog(const simChar* pluginName,simInt verbosity,const simChar* message)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>pluginName</strong>: the name of the plugin that outputs the message. e.g. <em>MyPlugin</em> with <em>simExtMyPlugin.dll</em>.</div>
+<div><strong>verbosity</strong>: the <a href="../apiConstants.htm#verbosity">verbosity level</a>. Most appropriate values are sim_verbosity_errors (for errors), sim_verbosity_warnings (for warning) and sim_verbosity_infos.</div>
+<div><strong>message</strong>: the message.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.addLog(number verbosity,string message)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>verbosity</strong>: the <a href="../apiConstants.htm#verbosity">verbosity level</a>. Most appropriate values are sim.verbosity_scripterrors (for errors), sim.verbosity_scriptwarnings (for warning) and sim.verbosity_scriptinfos. Combine with sim.verbosity_undecorated if you wish to output the naked message. sim.verbosity_scripterrors will additionaly raise an error.</div>
+<div><strong>message</strong>: the message. nil clears the status bar.</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>-</div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

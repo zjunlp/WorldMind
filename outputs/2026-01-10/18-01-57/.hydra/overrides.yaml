@@ -1,0 +1,4 @@
+- env=eb-hab
+- model_name=gpt-4o-mini
+- exp_name=test
+- enable_worldmind=True

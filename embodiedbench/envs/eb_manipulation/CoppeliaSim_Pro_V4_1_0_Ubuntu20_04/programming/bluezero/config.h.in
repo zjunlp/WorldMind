@@ -1,0 +1,7 @@
+#cmakedefine HAVE_POSIX_SIGNALS
+#cmakedefine HAVE_BOOST_PROCESS
+#cmakedefine HAVE_PTHREAD_SETNAME_1
+#cmakedefine HAVE_PTHREAD_SETNAME_2
+#cmakedefine HAVE_PTHREAD_SETNAME_3
+#cmakedefine ZLIB_FOUND
+#cmakedefine LZ4_FOUND

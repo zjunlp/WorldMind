@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>models</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+<h1>Models <img src="images/models0.jpg"></h1>
+
+<p>A model is a sub-element of a <a href="scenes.htm">scene</a>. A model by itself cannot exist, except in a file (&quot;*.ttm&quot;-file type), nor can it be simulated by itself. A model has to be contained in a scene in order to be operational.
+</p>
+
+<p>Models are defined by a selection of <a href="objects.htm">scene objects</a> built on a same hierarchy tree, where the base of the tree has to be an object flagged as <strong>object is model base</strong>. They can be loaded with [Menu bar --&gt; File --&gt; Load model...]. It is however much easier and convenient to load a model with a drag-and-drop operation between the<a href="userInterface.htm#ModelBrowser"> model browser</a> and a <a href="pagesAndViews.htm">scene view</a>. Models can be saved with [Menu bar --&gt; File --&gt; Save model as...], just  make sure one single object flagged as <strong>object is model base</strong> is selected, otherwise the <strong>Save model as...</strong>-menu item will not be enabled. Make also sure to follow the <a href="buildingAModelTutorial.htm">tutorial on how to build a clean simulation model</a>.</p>
+
+<p>
+A model is defined in following steps:
+</p>
+
+
+<li>
+  attach all objects that logically belong to the model to a base object, so that the base object is the base of the model tree.</li>
+<li>check the <strong>object is model base</strong>-item in the <a href="commonPropertiesDialog.htm">object common properties</a>.</li>
+<li>in the same dialog as above, check the <strong>object/model can transfer or accept DNA</strong>-item. This will simplify model re-instanciation if you modify it at a later stage.</li>
+
+<li>in the same dialog as above, clicking <strong>Edit model properties</strong>, you can define special overriding properties (e.g. make the whole model invisible, non-collidable, etc.). That allows to quickly disable some properties for all objects defined in the model.</li>
+
+<li>
+  for all objects in the model, except for the base object, check the <strong>select base of model instead</strong>-item in the <a href="commonPropertiesDialog.htm">object common properties</a>. This will protect your model: you won't be able to directly select individual objects in your model, and you will be able to manipulate your model almost as a single object.</li>
+
+<li>for all objects that are normally not visible, check the <strong>Don't show as inside model selection</strong>-item. This will make the model bounding box appear in the right size around the model.</li>  
+
+<li>think about the role of the model: will you be able to attach it to some other object? (e.g. your model is a gripper that you could attach to a manipulator wrist). Or will you be able to attach some other model to it? (e.g. your model is a manipulator that could accept a gripper model). Once the role is decided, define the model's <a href="commonPropertiesDialog.htm#assembling">assembling behaviour</a>. Refer also to this <a href="designingDynamicSimulations.htm#modelBaseSelection">dynamics design consideration</a>.</li>
+
+<p>Now, individual objects build on the model base cannot be selected anymore in the scene (selecting them will select the base of the model instead), however they can still be individually selected by holding down the ctrl- and shift-key during selection, or by selecting them in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>. In addition to that, when the base object is selected, a stippled bounding box encompassing the whole model is displayed as can be seen in following figure:
+</p>
+
+<p align=center><img src="images/models1.jpg"></p>
+<p class=imageLabel>[Scene view and corresponding scene hierarchy view. The selected dummy is flagged as <strong>object is model base</strong>]</p>
+<br>
+
+<p>Notice the model tag on the left-hand side of the icon of the object flagged as model base:</p>
+
+<p align=center><img src="images/models0.jpg"></p>
+<p class=imageLabel>[Model tag]</p>
+<br>
+
+
+<p>A double-click on a model tag opens the <a href="modelDialog.htm">model dialog</a>, where model properties can be adjusted. It is also good practice to collapse a model's hierarchy once the model was edited in order to easily identify the number of logically grouped elements/models:<br>
+</p>
+<p align=center><img src="images/models2.jpg"></p>
+<p class=imageLabel>[Scene hierarchy view displaying 5 collapsed models]</p>
+<br>
+
+<p>Grouping several objects as a model is also important when a <a href="childScripts.htm">child script</a> accesses the objects programmatically; remember that in CoppeliaSim, objects/models can be duplicated at any time, also during a simulation. In order for the duplicated child script to be able to access the correct objects (not the original objects but the duplicated objects), the child script should always be duplicated at the same time as the objects it accesses. One way to guaranty that is to create a model (as described above) and to make sure the child scripts that access objects in the model are associated with objects that are contained in the model. Best is to associate one child script (there might be secondary child scripts too) with the the base of the model. Refer to the <a href="accessingGeneralObjects.htm">accessing objects programmatically section</a> for more information.<br>
+</p>
+
+<p>In order for models to be easily combined (i.e. built on top of each other) without any additional modification, it is important to consider what role the model will be playing: will it be dynamically simulated? Will it be attached to other models, or will it accept other models attached to it? The answer to those questions will allow you to select the best object type to work as a model base.  Refer to the <a href="designingDynamicSimulations.htm#modelBaseSelection">section on designing dynamic simulations</a> for more information.</p>
+
+<p>Copy and pasting a model behaves exactly like saving the model, then loading it (using however a memory buffer instead of the disk space). Models can be copied from one scene to another like any other object. Model files (&quot;*.ttm&quot;-files) also support drag-and-drop operations between the explorer window and the application window. Model files can also be double-clicked, in which case they will launch the CoppeliaSim application and be loaded into a default scene.</p>
+<p>The properties of a model can be individually adjusted in the <a href="modelDialog.htm">model dialog</a>.</p>
+<br>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+
+<li><a href="apiFunctionListCategory.htm#modelFunctionality">Related API functions</a></li>
+<li><a href="scenes.htm">Scenes</a></li>
+<li><a href="commonPropertiesDialog.htm">Object common properties</a></li>
+<li><a href="modelDialog.htm">Model dialog</a></li>
+<li><a href="buildingAModelTutorial.htm">Building a clean model tutorial</a></li>
+<li><a href="childScripts.htm">Child scripts</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

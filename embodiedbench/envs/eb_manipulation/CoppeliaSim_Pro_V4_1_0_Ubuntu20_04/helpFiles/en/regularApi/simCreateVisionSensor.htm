@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simCreateVisionSensor</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simCreateVisionSensor" id="simCreateVisionSensor"></a>simCreateVisionSensor / sim.createVisionSensor </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Creates a <a href="../visionSensors.htm">vision sensor</a>. <br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simCreateVisionSensor(simInt options,const simInt* intParams,const simFloat* floatParams,const simFloat* color)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>options</strong>: bit-coded options:</div>
+<div class=tab>bit 0 set (1): the sensor will be explicitely handled</div>
+<div class=tab>bit 1 set (2): the sensor will be in perspective operation mode</div>
+<div class=tab>bit 2 set (4): the sensor volume will not be shown when not detecting anything</div>
+<div class=tab>bit 3 set (8): the sensor volume will not be shown when detecting something</div>
+<div class=tab>bit 4 set (16): the sensor will be passive (use an external image)</div>
+<div class=tab>bit 5 set (32): the sensor will use local lights</div>
+<div class=tab>bit 6 set (64): the sensor will not render any fog</div>
+<div class=tab>bit 7 set (128): the sensor will use a specific color for default background (i.e. "null" pixels)</div>
+<div><strong>intParams (input)</strong>: 4 integer parameters:</div>
+<div class=tab>intParams[0]: sensor resolution x</div>
+<div class=tab>intParams[1]: sensor resolution y</div>
+<div class=tab>intParams[2]: reserved. Set to 0</div>
+<div class=tab>intParams[3]: reserved. Set to 0</div>
+<div><strong>floatParams (input)</strong>: 11 floating point parameters:</div>
+<div class=tab>floatParams[0]: near clipping plane</div>
+<div class=tab>floatParams[1]: far clipping plane</div>
+<div class=tab>floatParams[2]: view angle / ortho view size</div>
+<div class=tab>floatParams[3]: sensor size x</div>
+<div class=tab>floatParams[4]: sensor size y</div>
+<div class=tab>floatParams[5]: sensor size z</div>
+<div class=tab>floatParams[6]: "null" pixel red-value</div>
+<div class=tab>floatParams[7]: "null" pixel green-value</div>
+<div class=tab>floatParams[8]: "null" pixel blue-value</div>
+<div class=tab>floatParams[9]: reserved. Set to 0.0</div>
+<div class=tab>floatParams[10]: reserved. Set to 0.0</div>
+<div><strong>color</strong>: pointer to 4x4x3 values representing the various colors of the sensor ((sensor passive, sensor active) x (ambient_diffuse rgb, 3 reserved values (set to zero), specular rgb and emission rgb)). Set the last 24 values to zero. Can be nullptr for default values<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful, otherwise the handle of the force sensor</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number sensorHandle=sim.createVisionSensor(number options,table_4 intParams,table_11 floatParams,table_48 color=nil)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>Similar to the C-function counterpart</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>Similar to the C-function counterpart</div>
+<div></div>
+</td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

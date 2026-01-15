@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simSetShapeMassAndInertia</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simSetShapeMassAndInertia" id="simSetShapeMassAndInertia"></a>simSetShapeMassAndInertia / sim.setShapeMassAndInertia </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Applies mass and inertia information to a shape. If simulation is running, the shape will be dynamically reset (similar to calling <a href="simResetDynamicObject.htm">sim.resetDynamicObject</a> right after). See also <a href="simGetShapeMassAndInertia.htm">sim.getShapeMassAndInertia</a>, <a href="simGetObjectMatrix.htm">sim.getObjectMatrix</a> and <a href="simBuildMatrix.htm">sim.buildMatrix</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simSetShapeMassAndInertia(simInt shapeHandle,simFloat mass,const simFloat* inertiaMatrix,const simFloat* centerOfMass,const simFloat* transformation)</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>shapeHandle</strong>: handle of the <a href="../shapes.htm">shape object</a></div>
+<div><strong>mass</strong>: the new mass of the object</div>
+<div><strong>inertia matrix</strong>: the new inertia matrix or tensor (9 values), expressed relative to the center of mass. The matrix should be relative to the orientational frame of <strong>transformation</strong> (see further below). </div>
+<div><strong>centerOfMass</strong>: the new position of the center of mass, relative to the specified <strong>transformation</strong> (see next item).</div>
+<div><strong>transformation</strong>: the transformation matrix (12 values) relative to which we specify the data. Can be nullptr, in which case the data is relative to the absolute reference frame. See <a href="simGetObjectMatrix.htm">here</a> to see how matrix transformations are specified in CoppeliaSim.</div>
+<div></div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 in case of an error<a href="simReleaseBuffer.htm"></a><br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>sim.setShapeMassAndInertia(number shapeHandle,number mass,table_9 inertiaMatrix,table_3 centerOfMass,table_12 transformation=nil)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div>See the C-function for details</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div>none</div></td> 
+</tr> 
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

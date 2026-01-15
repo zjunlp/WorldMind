@@ -1,0 +1,1223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN"><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>API Functions</title>
+<link rel="stylesheet" type="text/css" href="../../helpFiles/style.css">
+</head>
+<body><div align="center"><table class="allEncompassingTable"><tr><td>
+<h1>ROSInterface Plugin API reference</h1>
+<p class="infoBox">This plugin provides an interface with the ROS API</p>
+<h3 class="subsectionBar">
+<a name="advertise" id="advertise"></a>simROS.advertise</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Advertise a topic and create a topic publisher.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int publisherHandle=simROS.advertise(string topicName, string topicType, int queueSize=1, bool latch=false)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>topicName</strong> (string): topic name, e.g.: '/cmd_vel'</div>
+<div>
+<strong>topicType</strong> (string): topic type, e.g.: 'geometry_msgs::Twist'</div>
+<div>
+<strong>queueSize</strong> (int, default: 1): (optional) queue size</div>
+<div>
+<strong>latch</strong> (bool, default: false): (optional) latch topic</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>publisherHandle</strong> (int): a handle to the ROS publisher</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="advertiseService" id="advertiseService"></a>simROS.advertiseService</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Advertise a service and create a service server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int serviceServerHandle=simROS.advertiseService(string serviceName, string serviceType, string serviceCallback)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>serviceName</strong> (string): topic name, e.g.: '/cmd_vel'</div>
+<div>
+<strong>serviceType</strong> (string): topic type, e.g.: 'geometry_msgs::Twist'</div>
+<div>
+<strong>serviceCallback</strong> (string): name of the callback function, which will be called with a single argument of type table containing the service request payload; it must return another table containing the response</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>serviceServerHandle</strong> (int): a handle to the ROS service server</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#call">simROS.call</a> <a href="#serviceClient">simROS.serviceClient</a> <a href="#serviceClientTreatUInt8ArrayAsString">simROS.serviceClientTreatUInt8ArrayAsString</a> <a href="#serviceServerTreatUInt8ArrayAsString">simROS.serviceServerTreatUInt8ArrayAsString</a> <a href="#shutdownServiceClient">simROS.shutdownServiceClient</a> <a href="#shutdownServiceServer">simROS.shutdownServiceServer</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="call" id="call"></a>simROS.call</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Call the service associated with this service client.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">table result=simROS.call(int serviceClientHandle, table request)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>serviceClientHandle</strong> (int): the service client handle</div>
+<div>
+<strong>request</strong> (table of ): the message to publish</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>result</strong> (table of ): the response message, if the call succeeded</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertiseService">simROS.advertiseService</a> <a href="#serviceClient">simROS.serviceClient</a> <a href="#serviceClientTreatUInt8ArrayAsString">simROS.serviceClientTreatUInt8ArrayAsString</a> <a href="#serviceServerTreatUInt8ArrayAsString">simROS.serviceServerTreatUInt8ArrayAsString</a> <a href="#shutdownServiceClient">simROS.shutdownServiceClient</a> <a href="#shutdownServiceServer">simROS.shutdownServiceServer</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="deleteParam" id="deleteParam"></a>simROS.deleteParam</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Delete a parameter in the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.deleteParam(string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>name</strong> (string): name of the parameter</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#getParamString">simROS.getParamString</a> <a href="#hasParam">simROS.hasParam</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamInt">simROS.setParamInt</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="getParamBool" id="getParamBool"></a>simROS.getParamBool</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Retrieve a boolean parameter from the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool exists, bool value=simROS.getParamBool(string name, bool defaultValue=false)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>name</strong> (string): name of the parameter</div>
+<div>
+<strong>defaultValue</strong> (bool, default: false): default value returned when parameter does not exist</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">
+<div>
+<strong>exists</strong> (bool): true if the param exists otherwise false</div>
+<div>
+<strong>value</strong> (bool): the value of the requested parameter</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#getParamString">simROS.getParamString</a> <a href="#hasParam">simROS.hasParam</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamInt">simROS.setParamInt</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="getParamDouble" id="getParamDouble"></a>simROS.getParamDouble</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Retrieve a double parameter from the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool exists, double value=simROS.getParamDouble(string name, double defaultValue=0.0)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>name</strong> (string): name of the parameter</div>
+<div>
+<strong>defaultValue</strong> (double, default: 0.0): default value returned when parameter does not exist</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">
+<div>
+<strong>exists</strong> (bool): true if the param exists otherwise false</div>
+<div>
+<strong>value</strong> (double): the value of the requested parameter</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#getParamString">simROS.getParamString</a> <a href="#hasParam">simROS.hasParam</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamInt">simROS.setParamInt</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="getParamInt" id="getParamInt"></a>simROS.getParamInt</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Retrieve an integer parameter from the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool exists, int value=simROS.getParamInt(string name, int defaultValue=0)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>name</strong> (string): name of the parameter</div>
+<div>
+<strong>defaultValue</strong> (int, default: 0): default value returned when parameter does not exist</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">
+<div>
+<strong>exists</strong> (bool): true if the param exists otherwise false</div>
+<div>
+<strong>value</strong> (int): the value of the requested parameter</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamString">simROS.getParamString</a> <a href="#hasParam">simROS.hasParam</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamInt">simROS.setParamInt</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="getParamString" id="getParamString"></a>simROS.getParamString</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Retrieve a string parameter from the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool exists, string value=simROS.getParamString(string name, string defaultValue=)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>name</strong> (string): name of the parameter</div>
+<div>
+<strong>defaultValue</strong> (string, default: ): default value returned when parameter does not exist</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">
+<div>
+<strong>exists</strong> (bool): true if the param exists otherwise false</div>
+<div>
+<strong>value</strong> (string): the value of the requested parameter</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#hasParam">simROS.hasParam</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamInt">simROS.setParamInt</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="getTime" id="getTime"></a>simROS.getTime</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Return the current ROS time (i.e. the time returned by ros::Time::now()).</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">double time=simROS.getTime(int flag=0)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>flag</strong> (int, default: 0): unused: set to zero</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>time</strong> (double): ROS time expressed in seconds</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="hasParam" id="hasParam"></a>simROS.hasParam</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Check wether a parameter exists in the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool exists=simROS.hasParam(string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>name</strong> (string): name of the parameter</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>exists</strong> (bool): true if the parameter exists, false otherwise</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#getParamString">simROS.getParamString</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamInt">simROS.setParamInt</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="imageTransportAdvertise" id="imageTransportAdvertise"></a>simROS.imageTransportAdvertise</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Advertise a topic and create a topic publisher using ImageTransport.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int publisherHandle=simROS.imageTransportAdvertise(string topicName, int queueSize=1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>topicName</strong> (string): topic name, e.g.: '/cmd_vel'</div>
+<div>
+<strong>queueSize</strong> (int, default: 1): (optional) queue size</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>publisherHandle</strong> (int): a handle to the ROS publisher</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="imageTransportPublish" id="imageTransportPublish"></a>simROS.imageTransportPublish</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Publish a message on the topic associated with this publisher using ImageTransport.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.imageTransportPublish(int publisherHandle, string data, int width, int height, string frame_id)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>publisherHandle</strong> (int): the publisher handle</div>
+<div>
+<strong>data</strong> (string): the image data</div>
+<div>
+<strong>width</strong> (int): image width</div>
+<div>
+<strong>height</strong> (int): image height</div>
+<div>
+<strong>frame_id</strong> (string): frame id</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="imageTransportShutdownPublisher" id="imageTransportShutdownPublisher"></a>simROS.imageTransportShutdownPublisher</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Shutdown the advertisement associated with this publisher using ImageTransport.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.imageTransportShutdownPublisher(int publisherHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>publisherHandle</strong> (int): the publisher handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="imageTransportShutdownSubscriber" id="imageTransportShutdownSubscriber"></a>simROS.imageTransportShutdownSubscriber</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Unsubscribe the callback associated with this subscriber using ImageTransport.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.imageTransportShutdownSubscriber(int subscriberHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>subscriberHandle</strong> (int): the subscriber handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="imageTransportSubscribe" id="imageTransportSubscribe"></a>simROS.imageTransportSubscribe</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Subscribe to a topic using ImageTransport.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int subscriberHandle=simROS.imageTransportSubscribe(string topicName, string topicCallback, int queueSize=1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>topicName</strong> (string): topic name, e.g.: '/cmd_vel'</div>
+<div>
+<strong>topicCallback</strong> (string): name of the callback function, which will be called as: topicCallback(string data, number width, number height)</div>
+<div>
+<strong>queueSize</strong> (int, default: 1): (optional) queue size</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>subscriberHandle</strong> (int): a handle to the ROS subscriber</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="publish" id="publish"></a>simROS.publish</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Publish a message on the topic associated with this publisher.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.publish(int publisherHandle, table message)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>publisherHandle</strong> (int): the publisher handle</div>
+<div>
+<strong>message</strong> (table of ): the message to publish</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="publisherTreatUInt8ArrayAsString" id="publisherTreatUInt8ArrayAsString"></a>simROS.publisherTreatUInt8ArrayAsString</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">After calling this function, this publisher will treat uint8 arrays as string. Using strings should be in general much faster that using int arrays in Lua.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.publisherTreatUInt8ArrayAsString(int publisherHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>publisherHandle</strong> (int): the publisher handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="searchParam" id="searchParam"></a>simROS.searchParam</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Search a parameter in the ROS Parameter Server, looking in the closest namespace.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">bool found, string name=simROS.searchParam(string name)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>name</strong> (string): name of the parameter</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">
+<div>
+<strong>found</strong> (bool): true if the parameter has been found</div>
+<div>
+<strong>name</strong> (string): name of the parameter which has been found</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#getParamString">simROS.getParamString</a> <a href="#hasParam">simROS.hasParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamInt">simROS.setParamInt</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="sendTransform" id="sendTransform"></a>simROS.sendTransform</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Publish a TF transformation between frames.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.sendTransform(table transform)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>transform</strong> (table of ): the transformation expressed as a geometry_msgs/TransformStamped message, i.e. {header={stamp=timeStamp, frame_id='...'}, child_frame_id='...', transform={translation={x=..., y=..., z=...}, rotation={x=..., y=..., z=..., w=...}}}</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a> <a href="#sendTransforms">simROS.sendTransforms</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="sendTransforms" id="sendTransforms"></a>simROS.sendTransforms</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Publish several TF transformations between frames.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.sendTransforms(table transforms)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>transforms</strong> (table of ): an array of geometry_msgs/TransformStamped messages</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="serviceClient" id="serviceClient"></a>simROS.serviceClient</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Create a service client.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int serviceClientHandle=simROS.serviceClient(string serviceName, string serviceType)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>serviceName</strong> (string): topic name, e.g.: '/cmd_vel'</div>
+<div>
+<strong>serviceType</strong> (string): topic type, e.g.: 'geometry_msgs::Twist'</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>serviceClientHandle</strong> (int): a handle to the ROS service client</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertiseService">simROS.advertiseService</a> <a href="#call">simROS.call</a> <a href="#serviceClientTreatUInt8ArrayAsString">simROS.serviceClientTreatUInt8ArrayAsString</a> <a href="#serviceServerTreatUInt8ArrayAsString">simROS.serviceServerTreatUInt8ArrayAsString</a> <a href="#shutdownServiceClient">simROS.shutdownServiceClient</a> <a href="#shutdownServiceServer">simROS.shutdownServiceServer</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="serviceClientTreatUInt8ArrayAsString" id="serviceClientTreatUInt8ArrayAsString"></a>simROS.serviceClientTreatUInt8ArrayAsString</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">After calling this function, this service client will treat uint8 arrays as string. Using strings should be in general much faster that using int arrays in Lua.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.serviceClientTreatUInt8ArrayAsString(int serviceClientHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>serviceClientHandle</strong> (int): the service client handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertiseService">simROS.advertiseService</a> <a href="#call">simROS.call</a> <a href="#serviceClient">simROS.serviceClient</a> <a href="#serviceServerTreatUInt8ArrayAsString">simROS.serviceServerTreatUInt8ArrayAsString</a> <a href="#shutdownServiceClient">simROS.shutdownServiceClient</a> <a href="#shutdownServiceServer">simROS.shutdownServiceServer</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="serviceServerTreatUInt8ArrayAsString" id="serviceServerTreatUInt8ArrayAsString"></a>simROS.serviceServerTreatUInt8ArrayAsString</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">After calling this function, this service server will treat uint8 arrays as string. Using strings should be in general much faster that using int arrays in Lua.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.serviceServerTreatUInt8ArrayAsString(int serviceServerHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>serviceServerHandle</strong> (int): the service server handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertiseService">simROS.advertiseService</a> <a href="#call">simROS.call</a> <a href="#serviceClient">simROS.serviceClient</a> <a href="#serviceClientTreatUInt8ArrayAsString">simROS.serviceClientTreatUInt8ArrayAsString</a> <a href="#shutdownServiceClient">simROS.shutdownServiceClient</a> <a href="#shutdownServiceServer">simROS.shutdownServiceServer</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setParamBool" id="setParamBool"></a>simROS.setParamBool</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set a boolean parameter in the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.setParamBool(string name, bool value)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>name</strong> (string): name of the parameter</div>
+<div>
+<strong>value</strong> (bool): value of the parameter</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#getParamString">simROS.getParamString</a> <a href="#hasParam">simROS.hasParam</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamInt">simROS.setParamInt</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setParamDouble" id="setParamDouble"></a>simROS.setParamDouble</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set a double parameter in the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.setParamDouble(string name, double value)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>name</strong> (string): name of the parameter</div>
+<div>
+<strong>value</strong> (double): value of the parameter</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#getParamString">simROS.getParamString</a> <a href="#hasParam">simROS.hasParam</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamInt">simROS.setParamInt</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setParamInt" id="setParamInt"></a>simROS.setParamInt</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set a integer parameter in the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.setParamInt(string name, int value)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>name</strong> (string): name of the parameter</div>
+<div>
+<strong>value</strong> (int): value of the parameter</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#getParamString">simROS.getParamString</a> <a href="#hasParam">simROS.hasParam</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamString">simROS.setParamString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="setParamString" id="setParamString"></a>simROS.setParamString</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Set a string parameter in the ROS Parameter Server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.setParamString(string name, string value)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>name</strong> (string): name of the parameter</div>
+<div>
+<strong>value</strong> (string): value of the parameter</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#deleteParam">simROS.deleteParam</a> <a href="#getParamBool">simROS.getParamBool</a> <a href="#getParamDouble">simROS.getParamDouble</a> <a href="#getParamInt">simROS.getParamInt</a> <a href="#getParamString">simROS.getParamString</a> <a href="#hasParam">simROS.hasParam</a> <a href="#searchParam">simROS.searchParam</a> <a href="#setParamBool">simROS.setParamBool</a> <a href="#setParamDouble">simROS.setParamDouble</a> <a href="#setParamInt">simROS.setParamInt</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="shutdownPublisher" id="shutdownPublisher"></a>simROS.shutdownPublisher</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Shutdown the advertisement associated with this publisher.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.shutdownPublisher(int publisherHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>publisherHandle</strong> (int): the publisher handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="shutdownServiceClient" id="shutdownServiceClient"></a>simROS.shutdownServiceClient</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Shutdown the service client.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.shutdownServiceClient(int serviceClientHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>serviceClientHandle</strong> (int): the service client handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertiseService">simROS.advertiseService</a> <a href="#call">simROS.call</a> <a href="#serviceClient">simROS.serviceClient</a> <a href="#serviceClientTreatUInt8ArrayAsString">simROS.serviceClientTreatUInt8ArrayAsString</a> <a href="#serviceServerTreatUInt8ArrayAsString">simROS.serviceServerTreatUInt8ArrayAsString</a> <a href="#shutdownServiceServer">simROS.shutdownServiceServer</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="shutdownServiceServer" id="shutdownServiceServer"></a>simROS.shutdownServiceServer</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Shutdown the service server.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.shutdownServiceServer(int serviceServerHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>serviceServerHandle</strong> (int): the service server handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertiseService">simROS.advertiseService</a> <a href="#call">simROS.call</a> <a href="#serviceClient">simROS.serviceClient</a> <a href="#serviceClientTreatUInt8ArrayAsString">simROS.serviceClientTreatUInt8ArrayAsString</a> <a href="#serviceServerTreatUInt8ArrayAsString">simROS.serviceServerTreatUInt8ArrayAsString</a> <a href="#shutdownServiceClient">simROS.shutdownServiceClient</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="shutdownSubscriber" id="shutdownSubscriber"></a>simROS.shutdownSubscriber</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Unsubscribe the callback associated with this subscriber.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.shutdownSubscriber(int subscriberHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>subscriberHandle</strong> (int): the subscriber handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#subscribe">simROS.subscribe</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="subscribe" id="subscribe"></a>simROS.subscribe</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Subscribe to a topic.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">int subscriberHandle=simROS.subscribe(string topicName, string topicType, string topicCallback, int queueSize=1)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>topicName</strong> (string): topic name, e.g.: '/cmd_vel'</div>
+<div>
+<strong>topicType</strong> (string): topic type, e.g.: 'geometry_msgs::Twist'</div>
+<div>
+<strong>topicCallback</strong> (string): name of the callback function, which will be called with a single argument of type table containing the message payload, e.g.: {linear={x=1.5, y=0.0, z=0.0}, angular={x=0.0, y=0.0, z=-2.3}}</div>
+<div>
+<strong>queueSize</strong> (int, default: 1): (optional) queue size</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet"><div>
+<strong>subscriberHandle</strong> (int): a handle to the ROS subscriber</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscriberTreatUInt8ArrayAsString">simROS.subscriberTreatUInt8ArrayAsString</a>
+</td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="subscriberTreatUInt8ArrayAsString" id="subscriberTreatUInt8ArrayAsString"></a>simROS.subscriberTreatUInt8ArrayAsString</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">After calling this function, this subscriber will treat uint8 arrays as string. Using strings should be in general much faster that using int arrays in Lua.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.subscriberTreatUInt8ArrayAsString(int subscriberHandle)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>subscriberHandle</strong> (int): the subscriber handle</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"> <a href="#advertise">simROS.advertise</a> <a href="#imageTransportAdvertise">simROS.imageTransportAdvertise</a> <a href="#imageTransportPublish">simROS.imageTransportPublish</a> <a href="#imageTransportShutdownPublisher">simROS.imageTransportShutdownPublisher</a> <a href="#imageTransportShutdownSubscriber">simROS.imageTransportShutdownSubscriber</a> <a href="#imageTransportSubscribe">simROS.imageTransportSubscribe</a> <a href="#publish">simROS.publish</a> <a href="#publisherTreatUInt8ArrayAsString">simROS.publisherTreatUInt8ArrayAsString</a> <a href="#sendTransform">simROS.sendTransform</a> <a href="#sendTransforms">simROS.sendTransforms</a> <a href="#shutdownPublisher">simROS.shutdownPublisher</a> <a href="#shutdownSubscriber">simROS.shutdownSubscriber</a> <a href="#subscribe">simROS.subscribe</a>
+</td>
+</tr>
+</table>
+<br><br><br><h1>Script functions</h1>
+<p>Script functions are used to call some lua code from the plugin side (tipically used for event handlers).</p>
+<h3 class="subsectionBar">
+<a name="scriptfun:subscriberCallback" id="scriptfun:subscriberCallback"></a>subscriberCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Callback for ROS subscriber.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.subscriberCallback(table message)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam"><div>
+<strong>message</strong> (table of ): the topic payload (i.e. the message)</div></td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br><h3 class="subsectionBar">
+<a name="scriptfun:imageTransportCallback" id="scriptfun:imageTransportCallback"></a>imageTransportCallback</h3>
+<table class="apiTable">
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    Description
+                                                </td>
+<td class="apiTableRightDescr">Callback for ROS ImageTransport subscriber.</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLSyn">Lua synopsis</td>
+<td class="apiTableRightLSyn">simROS.imageTransportCallback(string data, int width, int height)<br>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLParam">Lua parameters</td>
+<td class="apiTableRightLParam">
+<div>
+<strong>data</strong> (string): the image data</div>
+<div>
+<strong>width</strong> (int): image width</div>
+<div>
+<strong>height</strong> (int): image height</div>
+</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftLRet">Lua return values</td>
+<td class="apiTableRightLRet">-</td>
+</tr>
+<tr class="apiTableTr">
+<td class="apiTableLeftDescr">
+                                                    See also
+                                                </td>
+<td class="apiTableRightDescr"></td>
+</tr>
+</table>
+<br>
+</td></tr></table></div></body>
+</html>

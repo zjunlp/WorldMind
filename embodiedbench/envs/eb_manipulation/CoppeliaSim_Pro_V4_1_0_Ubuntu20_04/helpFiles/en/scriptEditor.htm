@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Script editor</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Script editor</h1>
+
+
+<p>The script editor allows editing the various scripts in CoppeliaSim. It is opened by double-clicking a script in the <a href="scriptProperties.htm">script dialog</a>, or by double-clicking a script icon in the <a href="userInterface.htm#SceneHierarchy">scene hierarchy</a>.<br>
+</p>
+
+<p align=center><img src="images/scriptEditor1.jpg"></p>
+<p class=imageLabel>[Script editor]</p>
+<br>
+
+<p>The script editor has following features that make the code edition easier:</p>
+<li>auto-completion</li>
+<li>call tips</li>
+<li>syntax highlighting</li>
+<li>Highlighting of all occurrences of the selected word</li>
+<li>source folding/unfolding</li>
+<li>search and replace function</li>
+<li>no need for explicit saving</li>
+<li>jump to specific function</li>
+<li>undo/redo</li>
+<li>inspection/edition of included files</li>
+<li>open of the documentation for the API function/constant under the mouse pointer, via the context menu</li>
+
+<p>The API functions can easily be accessed by typing the first 3 letters (usually &quot;sim&quot;). When a script was modified, there is no need to explicitly save the changes: closing the script editor, saving the scene or starting a <a href="simulation.htm">simulation</a> will automatically apply the changes to the script. When a simulation is running, modifications to a given script will only have an effect once a new simulation run is started, except for <a href="customizationScripts.htm">customization scripts</a> that will always apply changes once the editor was closed. The user can also explicitely restart/reset a given script, for changes to take immediately effect.</p>
+
+<p>If you have recurring functions you wish to access from a given script, or if you simply wish to run code from an external file, you can do this with following:</p>
+
+<pre class=lightRedBox>
+require "myExternalLuaFile"
+</pre>
+
+<p>In that case, make sure the file is named <em>myExternalLuaFile.lua</em>, and do not forget to distribute it together with your scene or model, since that code will not be part of a CoppeliaSim file anymore. Searched path are usually following:</p>
+<li><em>&lt;CoppeliaSim executable&gt;/</em></li>
+<li><em>&lt;CoppeliaSim executable&gt;/lua/</em></li>
+<li><em>&lt;current scene path&gt;/</em></li>
+<li><em>&lt;additional search path&gt;/</em> (this path can be specified with variable <em>additionalLuaPath</em> in file <em>system/usrset.txt</em>)</li>
+<p>Files included via the <em>require</em> directive can be opened in the same script editor by opening the popup menu over the file name.</p>
+<br>
+<br>
+
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="scriptProperties.htm">Script properties</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+# configs/eb-hab.yaml
+model_name: gpt-4o-mini
+down_sample_ratio: 1
+model_type: remote
+language_only: False
+eval_sets: []
+chat_history: False
+n_shots: 10
+multistep: False
+resolution: 500
+exp_name: baseline
+env_feedback: True
+tp: 1
+
+# WorldMind specific settings
+enable_worldmind: False
+
+use_vision_discriminator: false
+use_experience_trajectory: true
+detailed_output: true
+use_separate_summarization: false
+
+eval_sets: ['base', 'common_sense', 'complex_instruction', 'spatial_relationship', 'visual_appearance']
+
+# Goal Experience Settings (from successful trajectories)
+enable_goal_experience: false
+goal_experience_top_k: 1
+
+# Process Experience Settings (from prediction errors)
+enable_process_experience: true
+process_experience_top_k: 1
+
+# Experience Refine Settings
+enable_experience_refine: false
+
+use_worldmind_template: true
+
+resume: true

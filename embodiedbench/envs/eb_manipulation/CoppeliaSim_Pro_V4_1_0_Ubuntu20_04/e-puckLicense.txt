@@ -1,0 +1,75 @@
+Following is the e-puck reference paper:
+****************************************
+
+Mondada, F., Bonani, M., Raemy, X., Pugh, J., Cianci, C., Klaptocz, A., Magnenat, S., Zufferey, J.-C., Floreano, D. and Martinoli, A. (2009) The e-puck, a Robot Designed for Education in Engineering. Proceedings of the 9th Conference on Autonomous Robot Systems and Competitions, 1(1) pp. 59-65. 
+
+Following is the e-puck Robot Open Source Hardware License:
+***********************************************************
+
+e-puck Robot Open Source Hardware LicenseVersion 1.0
+
+August 2005
+Copyright © Ecole Polytechnique Fédérale de Lausanne (EPFL), Switzerland
+
+Preamble
+
+This Open Source Hardware License aims at the dissemination of the specifications necessary to build the e-puck robot, a mobile robot developed by the Ecole Polytechnique Fédérale de Lausanne ( "EPFL"), Switzerland.
+1. Definitions
+
+"License" shall mean this Open Source Hardware License.
+"Specifications" shall mean the hardware specifications, printed circuit board designs, drawings, CAO files, list of components and other artwork for building an e-puck mobile robot as released by EPFL and published on its web site (www.e-puck.org), from time to time.
+"Robot" or "Robots" shall mean the e-puck mobile robot(s) built using the Specifications or any modification or derivation thereof.
+"You" shall mean each licensee under this License.
+2. Using the Specifications and Building Robots
+
+You are hereby authorized to use the Specifications for any purpose.
+
+You are further authorized to build Robot(s) based on the Specifications and distribute them, provided that you give to each purchaser of Robot(s) a copy of this License along with a copy of the Specifications under the conditions specified in Section 3.1 herein.
+
+You may design and develop a Robot based on modification you make to the Specifications. If you decide to distribute such a Robot, you shall only do so provided that you give to each purchaser of such a Robot a copy of this License along with a copy of the modified Specifications under the conditions specified in Sections 3.1 and 3.2 herein.
+
+When referring to the Robot in any scientific publication, you shall make a clear reference to the e-puck Robot pages on EPFL's Web site : www.e-puck.org.
+
+You will not be charged any royalties by EPFL for such use of the Specifications and/or building and distributing the Robot(s) or the Specifications.
+3. Copying, Distributing and Modifying the Specifications
+
+3.1 You may copy and distribute verbatim copies of the Specifications as you receive them, in any medium. If you choose to do so (or if you choose to distribute Robot(s) based on the Specifications), you shall only do so under the following conditions :
+
+i) conspicuously and appropriately publish on each copy of the Specifications the following copyright notice and disclaimer of warranty :
+
+"Copyright © Ecole Polytechnique Fédérale de Lausanne (EPFL), Switzerland.
+
+The specifications of the e-puck mobile robot are "open source hardware". You can redistribute them and/or modify them under the terms of the e-puck Robot Open Source Hardware License as published by EPFL. You should have received a copy of the EPFL e-puck Robot Open Source Hardware License along with these specifications; if not, write to the Ecole Polytechnique Fédérale de Lausanne (EPFL), Industrial Relations Office, Station 10, 1015 Lausanne, Switzerland.
+
+These specifications are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For more details, see the EPFL e-puck Robot Open Source Hardware License. "
+
+and
+
+ii) give any other recipients of the Specification a copy of this License along with the Specifications
+
+3.2 You may modify your copy of the Specifications or any portion thereof. You are not required under the terms of this License, to distribute any of the modifications that you make to the Specifications. However, if you choose to distribute modified Specifications (or to distribute Robot(s) based on modified Specifications), you shall only do so under the terms of Section 3.1 above and subject to all of the following conditions :
+
+i) you must cause the modified Specifications to carry prominent notices stating that you have changed the Specifications as well as the date and details of such change;
+
+and
+
+ii) you must allow any modified Specifications that you distribute or publish, that in whole or in part contains or is derived from the Specifications or any part, modification or derivation thereof, to be licensed as a whole at no charge by any third party under the terms of this License.
+
+The requirements of this Section 3.2 do not apply to works that are not derivatives of the Specifications (in the sense of the applicable copyright law).
+4. General
+
+4.1 Save for the fair use or similar right granted under the applicable copyright law, you may not use copy, modify, sublicense, or distribute the Specifications or Robots except as expressly provided under this License. Any attempt otherwise to use, copy, modify, sublicense or distribute the Specifications is void, and will automatically terminate your rights under this License. However, parties who have received copies, or rights, from you under this License will not have their licenses terminated so long as such parties remain in full compliance.
+
+4.2 You are not required to accept this License. However, nothing else grants you permission to use, copy, modify or distribute the Specifications or its derivative works or Robots and save for the fair use or similar right granted under the applicable copyright law, these actions are prohibited by law if you do not accept this License. Therefore, by using, copying, modifying or distributing the Specifications (or any work based on the Specifications) or any Robots, you indicate your acceptance of this License to do so, and all its terms and conditions for using, copying, distributing or modifying the Specifications or works based on it.
+
+4.3 Each time you redistribute the Specifications, distributes any modifications of the Specifications, or distribute any Robot, the recipient or purchaser automatically receives a license form EPFL to use, copy, distribute or modify the Specifications subject to the terms and conditions of this Licensee. You may not impose any further restrictions on the recipients' exercise of the rights granted herein.
+
+4.4 EPFL may publish revised and/or new versions of the e-puck Robot Open Source Hardware License from time to time. Such new versions will be similar in spirit to the present version, but may differ in detail to address new problems or concerns.
+
+Each version is given a distinguishing version number. If the Specifications specify a version number of this License which applies to it and "any later version", you have the option of following the terms and conditions either of that version or of any later version published by EPFL. If the Specifications do not specify a version number of this License, you may choose any version ever published by EPFL.
+5. Disclaimer of Warranty
+
+THE SPECIFICATIONS ARE PROVIDED "AS IS". EPFL DOES NOT MAKE ANY WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING WITHOUT LIMITATION WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, ABSENCE OF DEFECT AND NON-INFRINGEMENT OF THIRD PARTIES' RIGHTS IN RESPECT OF THE SPECIFICATIONS OR MODIFIED SPECIFICATIONS OR ANY ROBOT(S) THAT MAY BE BUILD OR MANUFACTURED BASED ON THE SPECIFICATIONS OR ON MODIFIED SPECIFICATIONS. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF ROBOTS BUILT OR MANUFACTURED BASED ON THE SPECIFICATIONS OR ON MODIFIED SPECIFICATIONS SHALL BE WITH YOU. SHOULD THE SPECIFICATIONS OR MODIFIED SPECIFICATIONS PROVE TO BE DEFECTIVE, YOU SHALL ASSUME THE COST OF ALL NECESSARY REPAIR OR CORRECTIONS TO THE ROBOT(S).
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL EPFL OR ANY PARTY WHO MAY MODIFY AND/OR REDISTRIBUTE THE SPECIFICATIONS AS PERMITTED HEREIN, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE SPECIFICATIONS AND/OR THE ROBOT(S), EVEN IF EPFL OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+END OF LICENSE 

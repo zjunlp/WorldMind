@@ -1,0 +1,8 @@
+msc {
+    hscale = "2";
+
+    n [ label="node" ], r [ label="resolver" ];
+
+    n->r [ label="b0::message::resolv::AnnounceNodeRequest" ];
+    r->n [ label="b0::message::resolv::AnnounceNodeResponse" ];
+}

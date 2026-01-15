@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>compiling CoppeliaSim</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>
+Compiling CoppeliaSim and related items
+</h1>
+
+<p>
+The full source code of CoppeliaSim (including most plugin source codes and others) can be found <a href="https://github.com/CoppeliaRobotics" target="_blank">here</a>.  While the CoppeliaSim library (<a href="https://github.com/CoppeliaRobotics/coppeliaSimLib" target="_blank">coppeliaSimLib</a>) is GNU GPL licensed, the geometric plugin (<a href="https://github.com/CoppeliaRobotics/simExtGeometric" target="_blank">simExtGeometric</a>) has a specific license attached. In short, only educational entities (students, teachers, professors, schools or Universities) may download and use that plugin without explicit permission. Make sure you understand and comply with the <a href="licensing.htm">licensing conditions</a> before doing so.</p>
+<p>Other source code items (e.g. various projects, plugins, interfaces, etc.)  are not discussed here.</p>
+<p>CoppeliaSimLib and the geometric plugin are <a href="http://qt-project.org/">Qt</a> projects, and will require you to have Qt installed on your computer.  Try to comply with following list of requirements in order to encounter least problems during compilation:</p>
+
+<li>if possible, try using the same Qt version as the one that was used to compile the binary CoppeliaSim Edu (click [Help --&gt; About About CoppeliaSim Edu...] to display the Qt version)</li>
+<li>for Qt projects, make sure to use the same compiler as the one that was used to compile the binary CoppeliaSim Edu.</li>
+<li>Ubuntu is the preferred Linux distribution.</li>
+<li>you will need to download and compile <a href="http://www.riverbankcomputing.com/software/qscintilla/intro">QScintilla2</a> (C++ editor control). </li>
+<li>you will need to download and install the <a href="http://www.boost.org/">Boost C++ library</a>. </li>
+<li>you will need to download the <a href="http://www.lua.org/">Lua5.1</a> binaries and headers. </li>
+
+<p>Download and install CoppeliaSim Edu. Then download the CoppeliaSimLib library source code (and optionally the plugin source codes) into the CoppeliaSim Edu installation folder. You should have following folder structure:</p>
+
+<p align=center><img src="images/folderStructure.jpg"></p>
+
+
+<p>&nbsp;</p>
+<p>When using CoppeliaSim in conjunction with a plugin, make sure to use the source code / binaries that come from the same release, in order to avoid incompatibilities. Finally, before being able to compile the CoppeliaSim project, you will have to adjust various paths in the  <em>config.pri</em> file.</p>
+
+  <p>CoppeliaSimLib compiles to a shared library. The default client application that loads and runs the library is <em>coppeliaSim</em> or <em>coppeliaSim.exe</em>. You can use the precompiled one, or recompile it yourself (refer to following project file: <a href="https://github.com/CoppeliaRobotics/coppeliaSimClientApplication" target="_blank">coppeliaSimClientApplication</a>). The load operation of the library is successfull only if:</p>
+  <li>the client application could find all needed functions in the shared library</li>
+  <li>the shared library could find all shared libraries that itself relies on (e.g. the Lua shared library, etc.) </li>
+  
+  <p>The easiest for you to do is to copy the compiled libraries into the CoppeliaSim  folder, then you will be sure that CoppeliaSim should start and won't complain about missing dependencies.</p>
+  
+  <p>It is very important that you do not mix various Qt versions, or binaries from various compilers. If your main CoppeliaSimLib library was compiled with Qt X and compiler Y, then all plugins related to CoppeliaSim should also have been compiled with Qt X and compiler Y, otherwise, you will experience strange behaviours (library that cannot load, sudden crashes, etc.). This requirement can be relaxed if your plugin is not making use of any Qt function.</p>
+  
+  
+
+
+ 
+<br>
+<br>
+
+
+  
+  </td>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

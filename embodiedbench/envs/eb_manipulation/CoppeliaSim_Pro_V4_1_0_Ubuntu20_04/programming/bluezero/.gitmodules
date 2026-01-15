@@ -1,0 +1,11 @@
+[submodule "include/cppzmq"]
+	path = include/cppzmq
+	url = https://github.com/zeromq/cppzmq
+[submodule "include/spotify-json"]
+	path = include/spotify-json
+	url = https://github.com/spotify/spotify-json
+	branch = master
+[submodule "include/double-conversion"]
+	path = include/double-conversion
+	url = https://github.com/google/double-conversion
+	branch = master

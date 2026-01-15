@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Force sensors</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Force sensors <img src="images/forceSensors1.jpg"></h1>
+
+<p>Force sensors are initially rigid links between two <a href="shapes.htm">shapes</a> that are able to measure transmitted forces and torques. The rigidity of force sensors is conditional, in the sense that force sensors can be <em>broken</em> if a certain condition arises (e.g. if a force or torque threshold is overshot). Following figure illustrates an application using a force sensor:<br>
+  <br>
+</p>
+
+<p align=center><img src="images/forceSensors2.jpg"></p>
+<p class=imageLabel>[Force sensor object (green) measuring the force and torque exerted by a beam (blue) anchored in a wall (red)]</p>
+<br>
+
+<p>A force sensor measures a pair of 3 values representing the force on the sensor along the x-, y- and z-axis, and the torque on the sensor about the x-, y- and z-axis:<br>
+</p>
+
+<p align=center><img src="images/forceSensors3.jpg"></p>
+<p class=imageLabel>[Forces and torques measured by a force sensor]</p>
+<br>
+
+<p>Initially, a force sensor acts as a rigid link. During <a href="simulation.htm">simulation</a>, a force sensor can however be <em>broken</em> when a specified force/torque threshold is overshot or when some other user-defined conditions are met. Following figures illustrate the <em>broken</em> state of a force sensor:<br>
+</p>
+
+<p align=center><img src="images/forceSensors4.jpg"></p>
+<p class=imageLabel>[Broken force sensor]</p>
+<br>
+
+<p>A force sensor is only operational during simulation if it is dynamically enabled. For more information on dynamically enabled force sensors, refer also to the section on <a href="designingDynamicSimulations.htm">designing dynamic simulations</a>. <a href="joints.htm">Joints</a> are also able to measure a force or a torque, however only along/about their z-axis. </p>
+
+
+<p>Force sensors are added to the <a href="scenes.htm">scene</a> with [Menu bar --&gt; Add --&gt; Force sensor].<br>
+</p>
+
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+
+<li><a href="apiFunctionListCategory.htm#forceSensor">Related API functions</a></li>
+<li><a href="forceSensorPropertiesDialog.htm">Force sensor properties</a></li>
+<li><a href="designingDynamicSimulations.htm">Designing dynamic simulations</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

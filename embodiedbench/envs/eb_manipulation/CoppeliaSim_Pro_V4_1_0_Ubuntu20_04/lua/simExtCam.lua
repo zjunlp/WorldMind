@@ -1,0 +1,2 @@
+local cam={}
+return cam

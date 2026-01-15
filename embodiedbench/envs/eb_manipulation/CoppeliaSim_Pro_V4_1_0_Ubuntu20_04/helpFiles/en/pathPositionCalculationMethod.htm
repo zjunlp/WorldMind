@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Path position and length calculation method</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Path position and length calculation method</h1>
+
+
+<p>Along a <a href="paths.htm">path object</a>, an intrinsic position can be defined. That position, also referred to as <em>path position</em>, is different from the <em>position of a path object</em>. While the position of a path object is the position of the path object origin point (which is shown as a white wireframe cube when the path is selected), the <em>path position</em> or rather <em>intrinsic path position</em> is a position value along the path as can be seen in following figure:<br>
+</p>
+
+<p align=center><img src="images/pathPos1.jpg"></p>
+<p class=imageLabel>[The current path position is indicated as a red sphere]</p>
+<br>
+
+<p>The <a href="pathsControlPointsAndBezierPoints.htm">Bezier points of a path</a> can be distinct or coincident: imagine a welding robot whose end-effector is the tip of the welding device; between two consecutive Bezier points, the end-effector can:
+</p>
+
+<li>Perform a translation (i.e. follow a straight line) WITHOUT changing orientation (the two Bezier points are distinct but have the same orientation).
+</li>
+<li>Perform a translation AND change orientation (the two Bezier points are distinct and have a different orientation).<br>
+</li>
+<li>Perform a rotation (i.e. change orientation) WITHOUT changing position (the two Bezier points are coincident but have a different orientation).<br>
+</li>
+
+<p>Additionally, there are some situations where we want the welding torch to follow a predefined path, pause at some specific position (e.g. to handle a bigger welding spot), then continue along the path. In order to properly handle above 3 cases and the special <em>pause</em> case, it is important to be able to uniquely identify any position* (position taken in the wider sense) along the path (i.e. path position*), as well as the path length* (length taken in the wider sense). For this, the user can select between several position calculation methods:
+</p>
+
+<li>The path position* is described as the cumulative linear variation along the path.
+The path length* is given by: <img src="images/pathPos2.jpg"></li>
+
+<li>The path position* is described as the cumulative angular** variation along the path.
+The path length* is given by: <img src="images/pathPos3.jpg"></li>
+
+<li>The path position* is described as the cumulative (linear variation + angular** variation) along the path.
+The path length* is given by: <img src="images/pathPos4.jpg"></li>
+
+<li>The path position* is described as the cumulative maximum (linear variation , angular** variation) along the path.
+The path length* is given by: <img src="images/pathPos5.jpg"></li>
+
+<li>The path position* is described as the cumulative (linear variation if not zero, angular** variation otherwise) along the path. The path length* is given by: <img src="images/pathPos6.jpg"></li>
+
+<li>The path position* is described as the cumulative (angular** variation if not zero, linear variation otherwise) along the path.
+The path length* is given by: <img src="images/pathPos7.jpg"></li>
+
+<li>The path position* is described as the cumulative Euclidean distance of (linear variation , angular** variation) along the path.
+The path length* is given by: <img src="images/pathPos8.jpg"></li>
+
+
+<p>Where <em>&#916;l</em> and <em>&#916;&#945;</em> is the linear and angular variation respectively, between two consecutive Bezier points. Angular** variation is the regular angular variation multiplied with an angular coefficient <em>c</em>. <em>c</em> is called the angular to linear conversion coefficient, and allows to combine an angular value with a linear value. This means that the position* along the path or the path length* is always given in a linear unit (e.g. meter), irrespective of the selected position calculation method here above.
+</p>
+
+<p>The term marked in red is zero by default. The term can be seen as a <em>virtual distance</em> or a forth coordinate of a Bezier point (or path control point) (i.e. each Bezier point would then be defined by an orientation and a position (x,y,z,w), where w is the forth coordinate). This is useful to archive a <em>pause</em> point along a path. <img src="images/pathPos9.jpg"> is the <em>virtual distance</em> variation between two consecutive Bezier points. <em>d</em> is a scaling factor for the <em>virtual distance</em> variation (e.g. if <em>d</em> is doubled, then all pause points will perform a pause duration twice as long). For simplification, we will not mention this term anymore in what follows and assume it to be zero.<br>
+</p>
+
+<p>Following example clarifies the position and length calculation concept:<br>
+</p>
+
+
+
+<p align=center><img src="images/pathPos10.jpg"></p>
+<p class=imageLabel>[Path example, (a) overview, (b) Bezier points with orientation, (c) cumulative linear and angular values]</p>
+<br>
+
+<p align=center><img src="images/pathPos11.jpg"></p>
+<p class=imageLabel>[Path example, various path position/length calculation methods that can present discontinuities]</p>
+<br>
+
+<p align=center><img src="images/pathPos12.jpg"></p>
+<p class=imageLabel>[Path example, various path position/length calculation methods]</p>
+<br>
+
+<p align=center><img src="images/pathPos13.jpg"></p>
+<p class=imageLabel>[Path example, various path position/length calculation methods]</p>
+<br>
+
+<p>To archive a movement pause at a specific point along a path, proceed as following: create 3 identical path control points (perfectly coincident position and orientation) and specify a virtual distance value different from zero for the middle control point. In following example, the virtual distance at the 3 coincident points is 2 (1 between the first and the middle coincident control points, and 1 between the middle and the third coincident control points). If an object travels along the path at a velocity of 1 meter per second, then it would archive a 2 seconds pause at the coincident control points:<br>
+</p>
+
+<p align=center><img src="images/pathPos14.jpg"></p>
+<p class=imageLabel>[Path example, movement pause]</p>
+<br>
+
+<p>One should carefully select the path position/length calculation method depending on the application. <br>
+</p>
+
+
+<br>
+
+
+
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="paths.htm">Paths</a></li>
+<li><a href="pathsControlPointsAndBezierPoints.htm">Path control points and Bezier points</a></li>
+<li><a href="pathMovementAlongAPath.htm">Movement along a path</a></li>
+<li><a href="pathPropertiesDialog.htm">Path properties</a></li>
+<li><a href="pathImportExport.htm">Path import/export operations</a></li>
+<li><a href="pathEditMode.htm">Path edit mode</a></li>
+<br>
+<br>
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

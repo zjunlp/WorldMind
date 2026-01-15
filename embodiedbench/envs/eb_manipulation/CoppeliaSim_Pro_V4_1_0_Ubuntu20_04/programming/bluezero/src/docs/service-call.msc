@@ -1,0 +1,8 @@
+msc {
+    hscale = "2";
+
+    n [ label="node" ], m [ label="server-node" ];
+
+    n->m [ label="b0::message::MessageEnvelope" ];
+    m->n [ label="b0::message::MessageEnvelope" ];
+}

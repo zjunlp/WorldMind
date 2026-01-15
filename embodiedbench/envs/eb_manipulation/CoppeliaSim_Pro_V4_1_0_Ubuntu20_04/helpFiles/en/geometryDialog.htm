@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Shape geometry dialog</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../index.html" TARGET="_top"><img src="images/homeImg.png"></a></p>
+
+
+
+<h1>Shape geometry dialog</h1>
+
+<p>The shape geometry dialog is part of the <a href="shapeProperties.htm">shape properties</a>. The dialog allows you to view a geometry associated with a <a href="shapes.htm">shape</a>, and to modify it to a certain extent. It displays the number of vertices and triangles, and the size of the <a href="shapeReferenceFrames.htm">shape's bounding box</a>. The number of vertices and triangles of a mesh is directly linked to the rendering and calculation times (e.g. during <a href="collisionDetection.htm">collision detection</a> or <a href="distanceCalculation.htm">distance calculation</a>), and the more vertices/triangles a mesh has, the slower the simulation or scene display will be. While the <a href="commonPropertiesDialog.htm">object common properties</a> allows to scale <a href="objects.htm">objects</a> (including shapes), it however keeps proportions same at all times (the scaling along an object's x-, y- or z-axis is same). This restriction doesn't apply in the geometry dialog, and you can even flip a mesh along one of its axes by specifying a negative scaling factor. Remember however that some <a href="shapes.htm">pure simple shapes</a> and <a href="shapes.htm">pure compound shapes</a> have restrictions regarding non-uniform scaling. On top of that, pure shapes cannot be flipped. </p>
+
+<p>Additionally, the shape geometry dialog lets you modify a <a href="shapeReferenceFrames.htm">shape's bounding box orientation</a>. This should only be used in very special cases. A preferred method to modify a shape's bounding box orientation is to select [Menu bar --&gt; Edit --&gt; Bounding box alignment --&gt; Align selected shape's coordinate frame with main axis] or [Menu bar --&gt; Edit --&gt; Bounding box alignment --&gt; Align selected shape's coordinate frame with world] while a shape is selected.<br>
+</p>
+
+<p align=center><img src="images/geometryDialog.jpg"></p>
+<p class=imageLabel>[Shape geometry dialog]</p>
+
+<br>
+<h3 class=recommendedTopics>Recommended topics</h3>
+<li><a href="shapes.htm">Shapes</a></li>
+<li><a href="shapeProperties.htm">Shape properties</a></li>
+<li><a href="shapeReferenceFrames.htm">Shape reference frame</a></li>
+<li><a href="commonPropertiesDialog.htm">Object common properties</a></li>
+
+<br>
+<br>
+
+ </tr>
+</table> 
+</div>  
+  
+  
+</body>
+
+</html>

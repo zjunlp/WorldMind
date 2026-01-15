@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>simCheckVisionSensor</title>
+<link rel="stylesheet" type="text/css" href="../../style.css">
+</head>
+
+<body>
+
+<div align="center">
+<table class=allEncompassingTable >
+ <tr>
+  <td >
+<p><a href="../../index.html" TARGET="_top"><img src="../images/homeImg.png"></a></p>
+
+<h1><a href="../apiOverview.htm">Regular API</a> function</h1>
+<h3 class=subsectionBar><a name="simCheckVisionSensor" id="simCheckVisionSensor"></a>simCheckVisionSensor / sim.checkVisionSensor </h3>
+<table class=apiTable>
+<tr class=apiTableTr> 
+<td class=apiTableLeftDescr>
+Description 
+</td> 
+<td class=apiTableRightDescr>Checks whether the vision sensor detects the indicated entity. Detection is silent (no visual feedback) compared to <a href="simHandleVisionSensor.htm">sim.handleVisionSensor</a>. The <a href="../visionCallbackFunctions.htm">vision callback functions</a> will be called on the acquired image. Also, the renderable flag of the entity is overridden if the entity is an object. See also <a href="simReadVisionSensor.htm">sim.readVisionSensor</a> and <a href="simCheckVisionSensorEx.htm">sim.checkVisionSensorEx</a>.<br></td>
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCSyn>
+C synopsis
+</td> 
+<td class=apiTableRightCSyn>simInt simCheckVisionSensor(simInt sensorHandle,simInt entityHandle,simFloat** auxValues,simInt** auxValuesCount)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCParam>C parameters</td> 
+<td class=apiTableRightCParam>
+<div><strong>sensorHandle</strong>: handle of the vision sensor object</div>
+<div><strong>entityHandle</strong>: handle of entity to detect (object or collection), or sim_handle_all to detect all detectable objects<br>
+</div>
+<div><strong>auxValues</strong>: by default CoppeliaSim returns one packet of 15 auxiliary values:the minimum of intensity, red, green, blue, depth value, the maximum of intensity, red, green, blue, depth value, and the average of intensity, red, green, blue, depth value. Additional packets can be appended in the <a href="../visionCallbackFunctions.htm">vision callback functions</a>. AuxValues can be nullptr. The user is in charge of releasing the auxValues buffer with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>(*auxValues).<br>
+</div>
+<div><strong>auxValuesCount</strong>: contains information about the number of auxiliary value packets and packet sizes returned in auxValues. The first value is the number of packets, the second is the size of packet1, the third is the size of packet2, etc. Can be nullptr if auxValues is also nullptr. The user is in charge of releasing the auxValuesCount buffer with <a href="simReleaseBuffer.htm">simReleaseBuffer</a>(*auxValuesCount).<br>
+</div>
+<br>
+<div>Usage example:</div>
+<pre class=lightBlueBoxNoMarginAndSmall>
+float* auxValues=nullptr;
+int* auxValuesCount=nullptr;
+float averageColor[3]={0.0f,0.0f,0.0f};
+if (simCheckVisionSensor(sensorHandle,entityHandle,&auxValues,&auxValuesCount)>=0)
+{
+    if ((auxValuesCount[0]>0)||(auxValuesCount[1]>=15))
+    {
+        averageColor[0]=auxValues[11];
+        averageColor[1]=auxValues[12];
+        averageColor[2]=auxValues[13];
+    }
+    simReleaseBuffer((char*)auxValues);
+    simReleaseBuffer((char*)auxValuesCount);
+}</pre>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftCRet>
+C return value
+</td> 
+<td class=apiTableRightCRet>
+<div>-1 if operation was not successful, otherwise 0 (no detection) or 1 (detection)<br>
+</div>
+</td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLSyn>
+Lua synopsis
+</td> 
+<td class=apiTableRightLSyn>number result,table auxiliaryValuePacket1,table auxiliaryValuePacket2, etc.=sim.checkVisionSensor(number sensorHandle,number entityHandle)<br></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLParam>Lua parameters</td> 
+<td class=apiTableRightLParam>
+<div><strong>sensorHandle</strong>: handle of the vision sensor object</div>
+<div><strong>entityHandle</strong>: handle of entity to detect (object or collection), or sim.handle_all to detect all detectable objects
+</div></td> 
+</tr> 
+<tr class=apiTableTr> 
+<td class=apiTableLeftLRet>
+Lua return values
+</td> 
+<td class=apiTableRightLRet>
+<div><strong>result</strong>: 0 (no detection) or 1 (detection)</div>
+<div><strong>auxiliaryValuePacket1</strong>: default auxiliary value packet (same as for the C-function) (table values in Lua are indexed from 1, not 0!)</div>
+<div><strong>auxiliaryValuePacket2</strong>: additional auxiliary value packet (e.g. from an image processing component)</div>
+<div><strong>auxiliaryValuePacket3</strong>: etc. (the function returns as many tables as there are auxiliary value packets)</div>
+</td> 
+</tr> 
+
+<tr class=apiTableTr> 
+<td class=remApiTableLeftCParam>
+Remote API equiv.
+</td> 
+<td class=remApiTableRightCParam>
+<div>B0-based remote API: <a href="../b0RemoteApi-cpp.htm#simxCheckVisionSensor">simxCheckVisionSensor</a></div>
+<div>Legacy remote API: -</div>
+</td> 
+</tr> 
+
+</table> 
+
+<br>
+<p><a href="../apiFunctions.htm">All regular API functions on one page</a></p>
+<br>
+<br>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

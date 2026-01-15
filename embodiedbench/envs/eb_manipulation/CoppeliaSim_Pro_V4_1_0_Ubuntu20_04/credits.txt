@@ -1,0 +1,773 @@
+CoppeliaSim / V-REP was developed over several years, however, without the contributions, help, support, advice, or generosity of many people, it wouldn’t have become what it is today. I wish to thank and acknowledge the contributions in various forms of the following people, group of people and organizations:
+
+-    Nobuto Matsuhira (Toshiba Corporate R&D center), for the enormous support, belief in me, and kindness he always showed me
+-    Fumio Ozaki (Toshiba Corporate R&D center), for the patience, trust and freedom he gave me
+-    Hoimin Jeong (Cubictek Co. Ltd), for his support and belief in me even in difficult situations
+-    The Lua development team (PUC-Rio, www.lua.org), for the free Lua interpreter they provide. See below.
+-    Nokia corporation, the Qt GUI Toolkit development team and all other contributors, for the Qt GUI Toolkit library they provide. See below.
+-    Digia Plc and/or its subsidiary(-ies), and all other contributors, for the Qt Property Browser they provide. See below.
+-    Antonio Escano Scuri and Mark Stroetzel Glasberg for the free WebBook framework they provide. See below.
+-    Diego Nehab (http://w3.impa.br/~diego/software/luasocket/home.html), for the free LuaSocket extension library. See below.
+-    Erwin Coumans (http://www.bulletphysics.com), for the free physics library he provides. See below.
+-    Russel L. Smith (http://www.ode.org), for the free physics library he provides. See below.
+-    Daniel Fiser for his collision routines (libccd, used with ODE). See below.
+-    Pierre Terdiman for his collision routines (OPCODE, used with ODE).
+-    Francisco Leon Najera for his collision routines (GIMPACT, used with Bullet). See below.
+-    The people and community behind the Open Motion Planning Library (OMPL, http://ompl.kavrakilab.org). <a href="#ompl">See the license</a>.</li>
+-    Khaled Mamou, for the excellent convex decomposition routines he provides. See below.
+-    Brad Barber, for the efficient Qhull routines he provides. See below.
+-    François Conti, for the CHAI3D library he provides. See below.
+-    The Scintilla development team (www.scintilla.org), for the free source code editing component they provide. The Scintilla library is used via commercial QScintilla (www.riverbankcomputing.com).
+-    Lee Thomason, for his nice and compact tinyxml routines. See below.
+-    The developers of the lib3ds library (www.lib3ds.org) for the free 3DS importer they provide. See below.
+-    Marcus Geelnard for the Basic Compression Library he provides (http://bcl.comli.eu/home-en.html). See below.
+-    Martin Courchesne and SimWat for the initial Vortex plugin for CoppeliaSim they provided.
+-    CM Labs for the free version of their Vortex physics engine (Vortex Studio), used in CoppeliaSim's Vortex plugin.
+-    Sean Barrett for his image loading routines he provides.
+-    Jari Komppa for the ESCAPI library that is wrapped in the webcam plugin for CoppeliaSim.
+-    Julio Jerez and Alain Suero, for the Newton plugin for CoppeliaSim they provide. See below.
+-    René Nyffenegger, for the base64 source code he provides. See below.
+-    The programming community on www.gamedev.net and www.codeproject.com for the many invaluable advices, tips and code snippets.
+-     The developers of the FFmpeg library (http://www.ffmpeg.org) and Andrew Voznytsa who wrote a library for CoppeliaSim that offers video compression functionality based on FFmpeg. See below.
+-    The Computer Graphics Group at RWTH Aachen, who developed the OpenMesh library (http://www.openmesh.org). The library is used in the CoppeliaSim plugin located in folder programming/simExtOpenMesh. See below.
+-    The team behind the Assimp library (http://www.assimp.org). The library is used in the CoppeliaSim plugin simExtAssimp. See below.
+-    Torsten Kroeger and Reflexxes GmbH, for providing their Reflexxes Motion Library type IV as a CoppeliaSim plugin. See below.
+-    Chris Hecker for his mass properties calculation algorithm. See below.
+-    Christian Dippel, my cousin, who helped me in many ways (CAD models, flyer preparation, etc.)
+-    Lyall Randell who not only gave me permission to use his CAD models, but also created many additional ones especially for CoppeliaSim.
+-    Eric Rohmer who is a thorough CoppeliaSim tester and an “idea machine”. He is also the creator of several models and plugins for CoppeliaSim (e.g. simExtWii or simExtJoystick).
+-    Svetlin Penkov for creating a first ROS plugin, and for being always available for ROS-related questions.
+-    Ignacio Tartavull for creating a first URDF plugin, and for being extremely helpful at the right time. 
+-    Maciej Szymanski, Ibrahim Abd Elkader, Mahendra Koteshwar and Asanka Wickramasinghe for various tasks in relation with CoppeliaSim porting and remote Api bindings
+-    Julien Tharin for various tasks in relation with CoppeliaSim porting
+-    Preben Hjornet for creating precise simulation models of extremely complex robots
+-    "gl.tter" for the WiiYourself! wiimote code (http://gl.tter.org).
+-    The developers behind the various elements around the kinect (OpenNI, NITE, etc.). The application that allows CoppeliaSim to access skeleton data from a kinect device is courtesy of Eric Rohmer, and based on an OpenNI code. See below.
+-    Alex Doumanoglou for writing the Collada importer/exporter plugin.
+-    Cedric Pradalier for extending the ROS interface with useful publisher/subscriber types.
+-    Diego Daniel Santiago for writing a shared memory communication plugin, and the plugin for Simulink-CoppeliaSim communication: https://github.com/santdiego/simExtSimulink
+-    The developers of the POV-Ray raytracer, Persistence of Vision Raytracer Pty. Ltd. POV-Ray uses the GNU AFFERO GENERAL PUBLIC LICENSE, a copy of which is included in the software package.
+-    The developers of CGAL library (http://www.cgal.org/), which is used by the simExtSurfaceReconstruction plugin. See below.
+-    All the developers behind the OpenCV library, which is used by the simExtImage plugin. See below.
+-    Mike Pall for his LuaJIT (Lua Just-in-Time Compiler). See below.
+-    David Heiko Kolf, for his JSON module for Lua. See below.
+-    Francois Perrad, for his MessagePack module for Lua (https://github.com/fperrad/lua-MessagePack). See below.
+-    Takatoshi Kondo and several other contributors, for their MessagePack code for C/C++ (https://github.com/msgpack/msgpack-c). See below.
+-    The people behind the MessagePack code for Java (https://github.com/msgpack/msgpack-java). See below.
+-    Bastian Bechtold, for his MessagePack code for Matlab (https://github.com/bastibe/matlab-msgpack). See below.
+-    Kim Alvefur, for his CBOR code for Lua (https://www.zash.se/lua-cbor.html). See below.
+-    Federico Ferri for creating a whole series of plugins for CoppeliaSim.
+-    Stephen James (Imperial College London) for his PyRep toolkit for robot learning research (https://github.com/stepjam/PyRep), and his OpenGL3 external renderer plugin (https://github.com/stepjam/simExtOpenGL3Renderer)
+-    Emanuel Eichhammer, for his QCustomPlot used in the custom UI plugin. See below.
+-    Benjamin Navarro, for his code in the remote API, which enables shared memory communication instead of socket communication.
+-    Following people for noticing bugs, reporting problems, suggesting solutions or new ideas, providing patches, code improvements, or simply helping out: Guillermo Presti, Matthias Fueller, Paul Fudal, Matthieu Lapeyre, Alberto Fanjul, Laurens Philippo, Vadim Liventsev, Kirill Makukhin, Patrick Bouffard, Pouya Mohammadi, Luca Marchionni, Barrett Ames, Arnaud Leleve, Geerten Doornenbal, Nikolaus Wittenstein, Ayberk Ozgur, Qi Wang, Giordano, Karl Robillard, Brian Yeomans, Kiyoshi Irie, Ulrich Schwesinger, Peter Macicka, Inkyu Sa, David Butterworth, Marco Cognetti, Xinyu Zhang, Jaqueline Gallardo, Serkan ÇIÇEK, Taehoon Koo, He Tao, Yusuke Ishizawa, Billy Newman, Rüdiger Dehmel, Roberto Marino, Renaud Detry, Roband, Hendrik Wiese, Matthias Schindler, George Moustris, Marco Bellaccini, Klaus Raizer, Paulo Gurgel, Stéphane Magnenat, Philipp Krüsi, Pascal Gohl, Gianpaolo Gonnelli, Felix Herrmann, Edgar Virga, Josep Tormo Costa, Gaël Ecorchard, Massimo Cefalo, Marc Durvaux, Robert Lang, Alexander Rietzler, Matt Derry, Arne Hitzmann, Sergi Foix, Daniel Morberg, Andreas Kuhner, Gerold Huber, Danilo Vasconcellos Vargas, Spencer Krause, Daniel Kuhner, Filip Jares, Luigi Ferri, Michaela Richter, Daniel Lechner, Sven Knüppel, Steve Nguyen, Jonas Sperling, Roberto Guzman, James Besancon, Andrew Vardy, Bipeen Acharya, Fred Gisa, Simon D. Levy, Leopoldo Armesto, Rodrigo Moreno Garcia, Hanna Kurniawati, Dimitri Klimenko, Joshua Mun Song, Vinay Yadav, Thomas Estier, Matthias Imle, José Rosado, Soner Ulun, Reza Mahjourian, Ben Allan, Riccardo Spica, Giovanni Claudio, Guenter Schreiber, Antoine Rennuit, Francois Conti, Sébastien Granges, Patrick Helmer, Eva Alves Costa, Lucian Cucu, Sigurd Villumsen, Andrea Censi, Pierre Rouanet, Leander Hille, Christoph Hügle, William Harrison, Scott Drew Pendleton, Jan Dentler, Raimund Krenmüller, Anuraj Rajendraprakash, Ilya Nemihin, Ángel Luis Jiménez García, Leander Hille, Pierre Rouanet, Kenichi Hara, Ilya Nemihin, Federico Ferri, Michael Michalik, Martin Pecka, Nicola Piccinelli, Kshitij Tiwari, Victor Gomez, Parker Owan, Yuki Suga, Muhammad Umer Huzaifa, Marshall Floyd, Augusto Gandia, Pierre Jacquot, Gurvan Le Bleis, Andreu Vidal, Nicola Di Pol, Tobias Groll, Wu Xiaojun, Karol Mocniak, Ana Lucia, Ricardo Azambuja, Anto Ronson, Graeme Neff Wilson, Minson Lee, Tiago Malheiro, Andrew Hundt, Ahmed Yacine, Matthias Ploner, Indranil Sur, Sung Kyun Kim, Rik Timmers, Matthew Veres, Korolyov Alexei, Daniel Angelov, Mohammed Talha, Bartolomeo Della Corte, Scott Hissam, Mark Fink, Hao Wang, Matias Nitsche, Ndivhuwo Makondo, Yu Zhang, DeKita G. Moon, Paul Santiago Tumbaco Casa, Tobias Benz, Rodrigo Moreno Garcia, Arjun Narayanan, Sven Schweigler, Nicola Battilani, Mark Edmonds, Benno Timmermann, Cándido Otero Moreira, Justin Yim, Allen Zhu, Leo Koppel, Ravi Prakash Joshi, Sina Radmard, Sai Vemprala, Waleed El-Badry, James Barger, Gonzalo Casas, Metehan Doyran, Arif Rahman, Jason Cachrane, Steffen Hemer, Fangyi Zhang, Filipe Rocha, virgile Daugé, Riccardo Spica, Florian Golemo, Kevin M. Lynch, Frank C. Park, Jacob Huesman, Matthew Veres, Cándido Otero, Leon Masopust, Michael Tong, Zhengxing Yang, Lenka Pitonakova, Thomas Gurriet, Hervé Frezza-Buet, Justus Rijke, Stefan Müller, Julien Lechalupe, Tristan Gahler, Robert Peck, William Jones, Benjamin Erdemann, Boris Bogaerts, Ulrich Viereck, Andrei Florea, Catalin Buiu, Joachim Haensel, Julian Mayer, Jacob Smith, Mohsen Moradi Dalvand, Simon Birrell, Mathias Thor, Jedrzej Orbik, Liu Dong, Mark Hartenstein, Alexander Oliva, Claudio Gaz, Simon Birrell, Sahil Sharma, Adrian Schoisengeier, Rémi Lux, Kilian Freitag, Maël Hörz, Jakub Turaj, Rieky Barady, Jian Ye, Jaime Boal, Pável Axel Mc Campos Peña, Patrick Gruener, Thomas Wilmotte, Lorenzo Romanini, Johan Relefors, Pablo Bustos, Sonny Tarbouriech, Aleksander Sil, Arturs Paugurs, Wei Wei, David Page, Leopoldo Armesto, Ayush Patel, Cameron Kabacinski. We know we forgot many many people, also significant ones... please let us know!
+
+I also wish to thank following people for the inspiration they provided in various fields through their publications, books or other means:
+
+-    J. J. Kuffner Jr., S.M. LaValle, L. Sciavicco, B. Siciliano, S. Gottschalk, M. C. Lin, D. Manocha, T. Akenin-Moeller
+
+Finally I am really grateful to all the people and organizations who/that were kind enough to let me use their created CAD designs and models:
+
+-    ABB. There is however no link between ABB and CoppeliaSim.
+-    KUKA Laboratories GmbH
+-    SICK AG
+-    Hibot
+-    K-Team
+-    Cubictek
+-    Neuronics
+-    Aldebaran
+-    IniLabs
+-    Robotiq
+-    Kinova Robotics
+-    Rethink Robotics
+-    Trossen Robotics
+-    Adept Technology
+-    Force Dimension
+-    On Robot ApS
+-    EVOL
+-    Bejade Choy, Farkas Gergo, Barry van de Laar, Lucia Teglas, Casper Christensen, Andrew Alexander, Kazuyuki Shigeto, Joost a.k.a. J-m@n, Bjorn Kilen, Andres San Millan Rodriguez, Mey Lean Kronemann, Marco Cognetti, Tesuno Tokisin.
+
+
+
+Marc Andreas Freese
+
+
+
+
+
+
+License of the Lua script interpreter (V5.1.4) (CoppeliaSim is linking dynamically to the unmodified “lua5.1.dll”-file):
+************************************************************************************************************
+License for Lua 5.0 and later versions
+Copyright © 1994-2008 Lua.org, PUC-Rio.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+License of the WebBook framework:
+************************************************************************************************************
+Copyright 1994-2009 Tecgraf / PUC-Rio.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+License of the LuaSocket extension library (V2.0.2) (the unmodified library is used):
+************************************************************************************************************
+License for LuaSocket 2.0.2
+Copyright © 2004-2007 Diego Nehab. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+License of the Bullet Physics Library (V2.78) (the modified source code is compiled together with CoppeliaSim):
+*********************************************************************************************************
+Bullet Continuous Collision Detection and Physics Library
+Copyright (c) 2003-2006 Erwin Coumans http://continuousphysics.com/Bullet/
+
+This software is provided 'as-is', without any express or implied warranty.
+In no event will the authors be held liable for any damages arising from the use of this software.
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it freely,
+subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
+ 
+
+
+License of the Open Dynamics Engine (V0.12) (the unmodified source code is compiled together with CoppeliaSim):
+*********************************************************************************************************
+Open Dynamics Engine
+Copyright (c) 2001-2004, Russell L. Smith.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+Neither the names of ODE's copyright owner nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+
+
+
+
+License of the Libccd routines (used in conjunction with ODE):
+*********************************************************************************************************
+ * Copyright (c)2010 Daniel Fiser <danfis at danfis dot cz>
+ *
+ *
+ *  This file is part of libccd.
+ *
+ *  Distributed under the OSI-approved BSD License (the "License");
+ *  see accompanying file BDS-LICENSE for details or see
+ *  <http://www.opensource.org/licenses/bsd-license.php>.
+ *
+ *  This software is distributed WITHOUT ANY WARRANTY; without even the
+ *  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *  See the License for more information.
+
+
+
+License of the Libccd routines (used in conjunction with ODE):
+*********************************************************************************************************
+Copyright (c) 2006 Francisco Leon Najera. C.C. 80087371.
+email: projectileman at yahoo dot com
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of EITHER:
+   (1) The GNU Lesser General Public License as published by the Free
+       Software Foundation; either version 2.1 of the License, or (at
+       your option) any later version. The text of the GNU Lesser
+       General Public License is included with this library in the
+       file GIMPACT-LICENSE-LGPL.TXT.
+   (2) The BSD-style license that is included with this library in
+       the file GIMPACT-LICENSE-BSD.TXT.
+   (3) The zlib/libpng license that is included with this library in
+       the file GIMPACT-LICENSE-ZLIB.TXT.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the files
+ GIMPACT-LICENSE-LGPL.TXT, GIMPACT-LICENSE-ZLIB.TXT and GIMPACT-LICENSE-BSD.TXT for more details.
+
+
+ 
+License of the convex decomposition routines (the unmodified source code is compiled together with CoppeliaSim):
+*********************************************************************************************************
+Copyright (c) 2011 Khaled Mamou (kmamou at gmail dot com)
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ 
+ 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ 
+ 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ 
+ 3. The names of the contributors may not be used to endorse or promote products derived from this software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+ 
+License of the Qhull routines (the unmodified source code is compiled together with CoppeliaSim):
+*********************************************************************************************************
+Qhull, Copyright (c) 1993-2012
+                    
+                            C.B. Barber
+                           Arlington, MA 
+                          
+                               and
+
+       The National Science and Technology Research Center for
+        Computation and Visualization of Geometric Structures
+                        (The Geometry Center)
+                       University of Minnesota
+
+                       email: qhull at qhull dot org
+
+This software includes Qhull from C.B. Barber and The Geometry Center.  
+Qhull is copyrighted as noted above.  Qhull is free software and may 
+be obtained via http from www.qhull.org.  It may be freely copied, modified, 
+and redistributed under the following conditions:
+
+1. All copyright notices must remain intact in all files.
+
+2. A copy of this text file must be distributed along with any copies 
+   of Qhull that you redistribute; this includes copies that you have 
+   modified, or copies of programs or other software products that 
+   include Qhull.
+
+3. If you modify Qhull, you must include a notice giving the
+   name of the person performing the modification, the date of
+   modification, and the reason for such modification.
+
+4. When distributing modified versions of Qhull, or other software 
+   products that include Qhull, you must provide notice that the original 
+   source code may be obtained as noted above.
+
+5. There is no warranty or other guarantee of fitness for Qhull, it is 
+   provided solely "as is".  Bug reports or fixes may be sent to 
+   qhull_bug at qhull dot org; the authors may or may not act on them as 
+   they desire.
+
+ 
+
+License of the tinyxml routines (the unmodified source code is compiled together with various items):
+*********************************************************************************************************
+Original code by Lee Thomason (www.grinninglizard.com)
+
+This software is provided 'as-is', without any express or implied
+warranty. In no event will the authors be held liable for any
+damages arising from the use of this software.
+
+Permission is granted to anyone to use this software for any
+purpose, including commercial applications, and to alter it and
+redistribute it freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must
+not claim that you wrote the original software. If you use this
+software in a product, an acknowledgment in the product documentation
+would be appreciated but is not required.
+
+2. Altered source versions must be plainly marked as such, and
+must not be misrepresented as being the original software.
+
+3. This notice may not be removed or altered from any source
+distribution.
+ 
+ 
+
+
+License of the lib3ds library (CoppeliaSim is linking dynamically to the unmodified “lib3ds-2_0.dll”-file):
+(See the installation folders content of CoppeliaSim for the complete GNU LGPL and GNU GPL license texts)
+***************************************************************************************************
+Copyright (C) 1996-2008 by Jan Eric Kyprianidis <www.kyprianidis.com>.
+All rights reserved.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+See the installation folders content of CoppeliaSim for the complete GNU LGPL and GNU GPL license texts.
+
+
+
+License of the FFmpeg library (CoppeliaSim is linking dynamically to a library that itself links to the unmodified FFmpeg library files) (See the installation folders content of CoppeliaSim for the complete GNU LGPL license texts). The unmodified FFmpeg library, source and binaries (as distributed with CoppeliaSim), is available for download from http://www.ffmpeg.org
+***************************************************************************************************
+FFmpeg is licensed under the GNU Lesser General Public License (LGPL) version 2.1 or later. However, FFmpeg incorporates several optional parts and optimizations that are covered by the GNU General Public License (GPL) version 2 or later. If those parts get used the GPL applies to all of FFmpeg. 
+
+
+
+License of the OpenMesh library (the CoppeliaSim plugin simExtOpenMesh, located in programming/simExtOpenMesh, uses the unmodified OpenMesh library files) (See the installation folders content of CoppeliaSim for the complete GNU LGPL license texts).
+***************************************************************************************************
+OpenMesh makes use of the LGPL v3 with the following exception:
+
+As a special exception to the GNU Lesser General Public License, you may use any file of this software library without restriction. Specifically, if other files instantiate templates or use macros or inline functions from this file, or you compile this file and link it with other files to produce an executable, this file does not by itself cause the resulting executable to be covered by the GNU Lesser General Public License. This exception does not however invalidate any other reasons why the executable file might be covered by the GNU Lesser General Public License.
+
+
+
+License of the Assimp library (the CoppeliaSim plugin simExtAssimp uses the unmodified Assimp library files)
+***************************************************************************************************
+Assimp makes use of a 3-clauses BSD license:
+
+Copyright (C) 2006-2015 assimp team, All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+- Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+- Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+- Neither the name of the assimp team nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+
+License of the Qt GUI Toolkit library (CoppeliaSim is linking dynamically to the unmodified Qt library):
+(See the installation folders content of CoppeliaSim for the complete GNU LGPL and GNU GPL license texts)
+***************************************************************************************************
+The Qt GUI Toolkit is Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+Contact: Nokia Corporation (qt-info at nokia dot com)
+
+Qt is available under the LGPL version 2.1 (GNU Lesser General Public License version 2.1).
+
+
+
+License of the Qt Property Browser:
+***************************************************************************************************
+Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies). 
+Contact: http://www.qt-project.org/legal
+
+This file is part of the Qt Solutions component.
+
+You may use this file under the terms of the BSD license as follows:
+
+"Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+  * Neither the name of Digia Plc and its Subsidiary(-ies) nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+
+
+
+License of the Basic Compression Library (the unmodified source code is compiled together with CoppeliaSim):
+******************************************************************************************************
+Copyright © 2003-2006 Marcus Geelnard
+
+This software is provided ’as-is’, without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions:
+
+1.    The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
+2.    Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
+3.    This notice may not be removed or altered from any source distribution.
+ 
+
+ 
+License of the OpenNI ("kinectServer.exe" is based on code part of OpenNI. See the installation folders content of CoppeliaSim for the complete GNU LGPL and GNU GPL license texts, and the source code related to "kinectServer.exe"):
+******************************************************************************************** 
+OpenNI 1.0 Alpha
+Copyright (C) 2010 PrimeSense Ltd.
+
+OpenNI is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+OpenNI is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+
+ 
+License of the CHAI3D Library (the library is used in the plugin that allows to connect to a haptic device):
+******************************************************************************************** 
+Software License Agreement (BSD License)
+Copyright (c) 2003-2014, CHAI3D.
+(www.chai3d.org)
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+* Neither the name of CHAI3D nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+
+
+
+License of the mass properties calculation algorithm (the modified source code is compiled together with CoppeliaSim):
+******************************************************************************************** 
+This code computes volume integrals needed for determining mass properties of polyhedral bodies.
+
+For more information, see the accompanying README file, and the paper
+
+Brian Mirtich, "Fast and Accurate Computation of Polyhedral Mass Properties," journal of graphics tools, volume 1, number 1, 1996.
+
+This source code is public domain, and may be used in any way, shape or form, free of charge.
+
+Copyright 1995 by Brian Mirtich
+
+mirtich at cs dot berkeley dot edu
+http://www.cs.berkeley.edu/~mirtich
+
+
+
+License of Newton Dynamics (the unmodified source code is used in the Newton plugin for CoppeliaSim):
+******************************************************************************************** 
+Newton is licensed under the liberal zlib open source license, with little if any practical difference between them.
+
+Copyright (c) <2003-2011>
+
+This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be
+appreciated but is not required.
+
+2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
+
+3. This notice may not be removed or altered from any source distribution.
+
+Julio Jerez and Alain Suero
+
+
+
+License of the LuaJIT (the unmodified library is linked against the simLua library for CoppeliaSim):
+******************************************************************************************** 
+LuaJIT is Copyright (c) 2005-2015 Mike Pall, released under the MIT open source license:
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Mike Pall
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+
+License of the CGAL library (the unmodified CGAL shared library is used by the simExtSurfaceReconstruction plugin)
+******************************************************************************************** 
+
+Some parts of CGAL are available under the LGPL, other parts are under the GPL. 
+For details see http://www.cgal.org/license.html and also refer to the LICENSE file
+from the CGAL source code distribution.
+
+
+
+License of the dkjson module for Lua
+******************************************************************************************** 
+
+Copyright (C) 2010-2014 David Heiko Kolf
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+License of the MessagePack module for Lua
+******************************************************************************************** 
+
+Copyright (c) 2012-2018 Francois Perrad
+
+This library is licensed under the terms of the MIT/X11 license, like Lua itself:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+License of the MessagePack code for C/C++
+******************************************************************************************** 
+
+Boost Software License - Version 1.0 - August 17th, 2003
+
+Permission is hereby granted, free of charge, to any person or organization
+obtaining a copy of the software and accompanying documentation covered by
+this license (the "Software") to use, reproduce, display, distribute,
+execute, and transmit the Software, and to prepare derivative works of the
+Software, and to permit third-parties to whom the Software is furnished to
+do so, all subject to the following:
+
+The copyright notices in the Software and this entire statement, including
+the above license grant, this restriction and the following disclaimer,
+must be included in all copies of the Software, in whole or in part, and
+all derivative works of the Software, unless such copies or derivative
+works are solely in the form of machine-executable object code generated by
+a source language processor.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
+FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+
+
+License of the MessagePack code for Matlab
+******************************************************************************************** 
+
+Copyright (c) 2014 Bastian Bechtold
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the
+   distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived
+   from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+
+License of the MessagePack module for Java
+******************************************************************************************** 
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+
+License of Lua-CBOR
+******************************************************************************************** 
+
+Copyright (c) 2014-2015 Kim Alvefur
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+License of QCustomPlot (Coppelia Robotics GmbH uses a commercial license of QCustomPlot)
+******************************************************************************************** 
+
+QCustomPlot is licensed under the GNU General Public License (GPL). See also GPL.txt located in the project files of the custom UI plugin (programming/simExtCustomUI).
+
+
+
+License of LibICP (the unmodified source code is used in the CoppeliaSim plugin simExtICP)
+************************************************************************************** 
+
+Copyright 2011. All rights reserved.
+Institute of Measurement and Control Systems
+Karlsruhe Institute of Technology, Germany
+
+Authors: Andreas Geiger
+
+libicp is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 3 of the License, or any later version.
+
+libicp is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+libicp; if not, write to the Free Software Foundation, Inc., 51 Franklin
+Street, Fifth Floor, Boston, MA 02110-1301, USA
+
+
+
+License of base64 source code (the unmodified source code is compiled together with CoppeliaSim):
+******************************************************************************************** 
+
+base64.cpp and base64.h
+
+base64 encoding and decoding with C++.
+
+Version: 1.01.00
+
+Copyright (C) 2004-2017 René Nyffenegger
+
+This source code is provided 'as-is', without any express or implied
+warranty. In no event will the author be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+1. The origin of this source code must not be misrepresented; you must not
+   claim that you wrote the original source code. If you use this source code
+   in a product, an acknowledgment in the product documentation would be
+   appreciated but is not required.
+
+2. Altered source versions must be plainly marked as such, and must not be
+   misrepresented as being the original source code.
+
+3. This notice may not be removed or altered from any source distribution.
+
+René Nyffenegger rene.nyffenegger@adp-gmbh.ch
+
+
+
+License of OpenCV (the unmodified library is dyn. linked to the CoppeliaSim plugin simExtImage)
+******************************************************************************************* 
+
+License Agreement
+For Open Source Computer Vision Library
+(3-clause BSD License)
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the names of the copyright holders nor the names of the contributors
+   may be used to endorse or promote products derived from this software without
+   specific prior written permission.
+
+This software is provided by the copyright holders and contributors “as is” and
+any express or implied warranties, including, but not limited to, the implied
+warranties of merchantability and fitness for a particular purpose are disclaimed.
+In no event shall copyright holders or contributors be liable for any direct,
+indirect, incidental, special, exemplary, or consequential damages (including,
+but not limited to, procurement of substitute goods or services; loss of use, data,
+or profits; or business interruption) however caused and on any theory of liability,
+whether in contract, strict liability, or tort (including negligence or otherwise)
+arising in any way out of the use of this software, even if advised of the
+possibility of such damage.
+
+
+
+License of BlueZero
+******************* 
+
+Copyright 2017 Blue Workforce
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+
+
+License of the Open Motion Planning Library
+(the unmodified source code is used in the CoppeliaSim plugin simExtOmpl)
+*********************************************************************
+
+BSD License
+
+Copyright (c) 2010–2018, Rice University. All rights reserved.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list
+of conditions and the following disclaimer. Redistributions in binary form must
+reproduce the above copyright notice, this list of conditions and the following
+disclaimer in the documentation and/or other materials provided with the
+distribution. Neither the name of the Rice University nor the names of its
+contributors may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+
+License of the Reflexxes Motion Library (RML) Type II
+(the unmodified source code of the RML Type II is used in the CoppeliaSim plugin simExtRmlType2)
+*******************************************************************************************
+
+The Reflexxes Motion Library Type II is licensed under LGPL V3.0:
+https://www.gnu.org/licenses/lgpl-3.0.en.html
+
