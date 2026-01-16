@@ -30,9 +30,6 @@ During inference, relevant experiences are retrieved based on semantic similarit
 - Task-relevant action patterns from goal experiences
 - Error-corrective knowledge from process experiences
 
-<p align="center">
-  <img src="assets/experience_flow.png" alt="Experience Flow" width="80%"/>
-</p>
 
 ## 📁 Project Structure
 
