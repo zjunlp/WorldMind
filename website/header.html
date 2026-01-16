@@ -1,1 +1,85 @@
+<!-- 包裹 Abstract 之前的内容为 Home -->
+<div id="home">
+    <div class="header-container">
+        <h1>
+            <span class="title-main">WorldMind</span>
+            <span class="title-sub">Aligning Agentic World Models via Knowledgeable Experience Learning</span>
+        </h1>
 
+        <div class="authors">
+            Baochang Ren<sup>♠</sup>, 
+            Yunzhi Yao<sup>♠</sup>, 
+            Rui Sun<sup>♦</sup>, 
+            Shuofei Qiao<sup>♠</sup>, <br>
+            Ningyu Zhang<sup>♠</sup>,
+            Huajun Chen<sup>♠</sup>*
+        </div>
+
+        <div class="affiliations">
+            <span><sup>♠</sup> Zhejiang University</span> &nbsp;&nbsp;&nbsp;
+            <span><sup>♦</sup> University of California, Los Angeles</span>
+        </div>
+
+        <div class="email">
+            {baochang.ren, zhangningyu}@zju.edu.cn
+        </div>
+        <div style="font-size: 0.85rem; color: #999; margin-top: 5px;">* Corresponding author</div>
+
+        <div class="link-block">
+            <a href="#" class="btn">
+                <i class="fas fa-file-pdf"></i> arXiv
+            </a>
+            <a href="#" class="btn">
+                <i class="fab fa-github"></i> Code
+            </a>
+            <a href="#" class="btn">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="white" style="margin-right: 6px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                X
+            </a>
+        </div>
+    </div>
+
+    <div class="carousel-section">
+        <div class="carousel-wrapper">
+            <div class="slide active">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/Habitat.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-label">Habitat Environment</div>
+            </div>
+            <div class="slide">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/ALFRED.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-label">ALFRED Environment</div>
+            </div>
+            <button class="prev" onclick="plusSlides(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button class="next" onclick="plusSlides(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Visualization -->
+    <section class="paper-section interactive-card" id="visualization">
+        <h2>Visualizing the Physical Hallucination Problem</h2>
+        <p>
+            Current LLM agents often understand the "why" but fail at the "how", leading to plans that are logically sound but physically impossible.
+        </p>
+        
+        <div class="comparison-grid">
+            <div class="sub-card failure">
+                <h3 style="color:#e74c3c;"><i class="fas fa-times"></i> Without WorldMind</h3>
+                <p><strong>Goal:</strong> "Slice bread."</p>
+                <p><strong>Action:</strong> Tries to slice without holding a knife.</p>
+                <p><strong>Result:</strong> <span style="color:#e74c3c; font-weight:bold">Physical Hallucination.</span></p>
+            </div>
+            <div class="sub-card success">
+                <h3 style="color:#27ae60;"><i class="fas fa-check"></i> With WorldMind</h3>
+                <p><strong>Goal:</strong> "Slice bread."</p>
+                <p><strong>Simulation:</strong> <em>"Error: Need tool."</em> ➜ Pick up knife.</p>
+                <p><strong>Result:</strong> <span style="color:#27ae60; font-weight:bold">Success via Experience.</span></p>
+            </div>
+        </div>
+    </section>
+</div>

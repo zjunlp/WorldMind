@@ -1,0 +1,381 @@
+<section class="paper-section interactive-card" id="results">
+    <h2>Experimental Results</h2>
+    
+    <div class="env-section-inner">
+        <div class="env-header">
+            <div class="env-title-icon"><i class="fas fa-map-marked-alt"></i></div>
+            <h3 style="margin: 0; font-size: 1.3rem;">Task Environments</h3>
+        </div>
+        
+        <p style="margin-bottom: 20px; font-size: 0.95rem; color: #666;">
+            We utilize three diverse environments to evaluate the agent's alignment with reality, ranging from high-level planning to precise low-level control.
+        </p>
+
+        <div class="env-grid">
+            <div class="env-card">
+                <div class="env-card-icon" style="background-color: #ff9f43;">
+                    <i class="fas fa-laptop-house"></i>
+                </div>
+                <h4>EB-ALFRED</h4>
+                <p>
+                    <strong>Household Planning</strong><br>
+                    Long-horizon task decomposition (e.g., "Slice & heat tomato") based on AI2-THOR.
+                </p>
+            </div>
+
+            <div class="env-card">
+                <div class="env-card-icon" style="background-color: #54a0ff;">
+                    <i class="fas fa-couch"></i>
+                </div>
+                <h4>EB-Habitat</h4>
+                <p>
+                    <strong>Rearrangement</strong><br>
+                    Object logistics tasks (e.g., "Move pear to sofa") built upon Habitat 2.0.
+                </p>
+            </div>
+
+            <div class="env-card">
+                <div class="env-card-icon" style="background-color: #1dd1a1;">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <h4>EB-Navigation</h4>
+                <p>
+                    <strong>Low-Level Control</strong><br>
+                    Precise atomic actions (e.g., "Move 0.25m") requiring strict spatial reasoning.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+
+    <p style="margin-bottom: 30px;">
+        Below are the detailed performance comparisons on the <strong>EB-ALFRED</strong> and <strong>EB-Habitat</strong> environments, along with ablation studies. Click the tabs to explore.
+    </p>
+
+    <div class="results-container">
+        
+        <div class="results-sidebar">
+            <button class="result-tab-btn active" onclick="openResult(event, 'tab-alfred')">
+                <i class="fas fa-robot"></i> EB-ALFRED
+            </button>
+            <button class="result-tab-btn" onclick="openResult(event, 'tab-habitat')">
+                <i class="fas fa-home"></i> EB-Habitat
+            </button>
+            <button class="result-tab-btn" onclick="openResult(event, 'tab-ablation')">
+                <i class="fas fa-layer-group"></i> Ablation Study
+            </button>
+            <button class="result-tab-btn" onclick="openResult(event, 'tab-nav')">
+                <i class="fas fa-map-marker-alt"></i> Navigation
+            </button>
+        </div>
+
+        <div class="results-display-area">
+            
+            <div id="tab-alfred" class="result-content active">
+                <div class="result-header">
+                    <i class="fas fa-robot" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                    <h3>Performance on EB-ALFRED</h3>
+                </div>
+                
+                <img src="assets/table1.png" alt="Table 1: ALFRED Results" class="result-img">
+                
+                <div class="table-caption">
+                    <span class="label">Table 1:</span> 
+                    <strong>Main Results on the EB-ALFRED Environment.</strong>
+                    Comparison of Success Rate (SR) and Goal Condition (GC). WorldMind achieves superior performance in tasks requiring long-horizon planning.
+                </div>
+
+                <div class="analysis-box">
+                    <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                    <ul>
+                        <li><strong>Superior Success Rate:</strong> With GPT-4.1-mini, WorldMind achieves an SR of <strong>50.0%</strong>, significantly outperforming ReAct (41.6%).</li>
+                        <li><strong>Improved Process Adherence:</strong> The Goal Condition (GC) score improves to <strong>50.8%</strong>, indicating better sub-goal completion.</li>
+                        <li><strong>Visual Robustness:</strong> Shows remarkable stability in the "Visual Appearance" subset.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="tab-habitat" class="result-content">
+                <div class="result-header">
+                    <i class="fas fa-home" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                    <h3>Performance on EB-Habitat</h3>
+                </div>
+                
+                <img src="assets/table2.png" alt="Table 2: Habitat Results" class="result-img">
+                
+                <div class="table-caption">
+                    <span class="label">Table 2:</span> 
+                    <strong>Main Results on the EB-Habitat Environment.</strong>
+                    Evaluation on five subsets: Base, Common, Complex, Visual, and Spatial.
+                </div>
+
+                <div class="analysis-box">
+                    <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                    <ul>
+                        <li><strong>Consistent Gains:</strong> WorldMind outperforms the ReAct baseline by <strong>+9.2%</strong> SR on GPT-4.1-mini.</li>
+                        <li><strong>Safety & Feasibility:</strong> Significant improvement in Spatial Awareness demonstrates effective physical filtering.</li>
+                        <li><strong>Error Reduction:</strong> Drastic reduction in "Invalid Action" errors compared to baselines.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="tab-ablation" class="result-content">
+                <div class="result-header">
+                    <i class="fas fa-layer-group" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                    <h3>Ablation Study</h3>
+                </div>
+                
+                <img src="assets/table3.png" alt="Table 3: Ablation Study" class="result-img">
+                
+                <div class="table-caption">
+                    <span class="label">Table 3:</span> 
+                    <strong>Impact of Goal Guidance and Process Supervision.</strong>
+                    Isolating the contributions of Goal Experience and Process Experience.
+                </div>
+
+                <div class="analysis-box">
+                    <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                    <ul>
+                        <li><strong>Goal Experience:</strong> Primarily enhances the Goal Condition (GC) metric, preventing navigational drift.</li>
+                        <li><strong>Process Experience:</strong> Drives improvements in Success Rate (SR) by acting as a physical safeguard.</li>
+                        <li><strong>Synergy:</strong> The full model performs best, confirming the need for both heuristic guidance and physical verification.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="tab-nav" class="result-content">
+                <div class="result-header">
+                    <i class="fas fa-map-marker-alt" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                    <h3>Low-Level Navigation Tasks</h3>
+                </div>
+                
+                <img src="assets/table4.png" alt="Table 4: Navigation Results" class="result-img">
+                
+                <div class="table-caption">
+                    <span class="label">Table 4:</span> 
+                    <strong>Generalization to Low-Level Control (EB-Navigation).</strong>
+                    Evaluating control of atomic actions (e.g., "Rotate 90 degrees").
+                </div>
+
+                <div class="analysis-box">
+                    <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                    <ul>
+                        <li><strong>Granularity Generalization:</strong> WorldMind effectively bridges high-level reasoning and low-level execution (+10.0% for GPT-3.5).</li>
+                        <li><strong>Oscillation Reduction:</strong> Retrieving successful trajectories helps maintain consistent behavior.</li>
+                        <li><strong>Model Agnostic:</strong> Improvements observed across both GPT-3.5 and GPT-4.1 backbones.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        /* --- Environment Section Styles --- */
+        .env-section-inner {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #eaeaea;
+            margin-bottom: 30px;
+        }
+
+        .env-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .env-title-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary-dark);
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .env-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .env-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .env-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-color: var(--accent-blue);
+        }
+
+        .env-card-icon {
+            width: 50px;
+            height: 50px;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px auto;
+            font-size: 1.3rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+
+        .env-card h4 {
+            margin: 0 0 8px 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .env-card p {
+            font-size: 0.85rem !important;
+            color: #666;
+            line-height: 1.4;
+            margin: 0;
+            text-align: center !important;
+        }
+
+        /* --- Results Tabs Styles --- */
+        .results-container {
+            display: flex;
+            gap: 25px;
+            margin-top: 20px;
+            min-height: 500px;
+        }
+
+        .results-sidebar {
+            width: 240px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .result-tab-btn {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 15px 20px;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #555;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-color: #d0d0d0;
+        }
+
+        .result-tab-btn.active {
+            background-color: var(--accent-blue);
+            color: #fff;
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+        }
+
+        .result-tab-btn.active i { color: #fff; }
+        .result-tab-btn i { width: 20px; text-align: center; color: #888; }
+
+        .results-display-area {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #eee;
+            border-top: 4px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .result-content { display: none; animation: fadeIn 0.4s ease; }
+        .result-content.active { display: block; }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+        .result-header h3 { margin: 0; font-size: 1.4rem; color: #333; font-weight: 700; }
+
+        .result-img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid #f0f0f0;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .table-caption {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            color: #444;
+            line-height: 1.5;
+            text-align: justify;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #ff9f43;
+            margin-bottom: 25px;
+        }
+        .table-caption .label { font-weight: 700; color: #e67e22; margin-right: 5px; }
+
+        .analysis-box {
+            background-color: #f8faff;
+            border: 1px solid #e1e8f5;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .analysis-box h4 { margin-top: 0; margin-bottom: 10px; color: var(--accent-blue); font-size: 1rem; }
+        .analysis-box ul { margin: 0; padding-left: 20px; }
+        .analysis-box li { margin-bottom: 8px; color: #555; font-size: 0.9rem; }
+
+        @media (max-width: 900px) {
+            .env-grid { grid-template-columns: 1fr; }
+            .results-container { flex-direction: column; }
+            .results-sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding-bottom: 10px; }
+            .result-tab-btn { white-space: nowrap; }
+        }
+    </style>
+
+    <script>
+        function openResult(evt, tabName) {
+            var i, content, tablinks;
+            content = document.getElementsByClassName("result-content");
+            for (i = 0; i < content.length; i++) {
+                content[i].style.display = "none";
+                content[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("result-tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</section>
