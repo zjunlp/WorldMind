@@ -68,45 +68,34 @@ WorldMind/
 ```bash
 git clone [https://github.com/zjunlp/WorldMind.git](https://github.com/zjunlp/WorldMind.git)
 cd WorldMind
-
-# Initialize Git LFS for large datasets
-git lfs install
-git lfs pull
-
 ```
 
 ### 2. Set up Environments
 
-**Option 1: Environment for `Alfred and Habitat**`
+Option 1: Environment for `Alfred and Habitat`
 This environment is used for high-level planning tasks.
 
 ```bash
-# Create environment named 'worldmind' (forcing name with -n)
+# Create environment named 'worldmind' 
 conda env create -f conda_envs/environment.yaml -n worldmind
 conda activate worldmind
 
 # Install the package
 pip install -e .
-
-# Install dependencies for Semantic Retrieval
-pip install sentence-transformers
-
 ```
 
-**Option 2: Environment for `Navigation**`
+Option 2: Environment for `Navigation`
 This environment is used for low-level navigation tasks.
 
 ```bash
-# Create environment named 'worldmind_nav' (forcing name with -n)
+# Create environment named 'worldmind_nav'
 conda env create -f conda_envs/environment_eb-nav.yaml -n worldmind_nav
 conda activate worldmind_nav
 
 # Install the package
 pip install -e .
-
 ```
 
----
 
 ### 3. Start Headless Server
 
@@ -118,8 +107,6 @@ conda activate worldmind
 python -m embodiedbench.envs.eb_alfred.scripts.startx 1
 
 ```
-
----
 
 ### 4. Task-Specific Setup
 
