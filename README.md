@@ -59,19 +59,144 @@ WorldMind/
 
 ## 🚀 Quick Start
 
-### Installation
+## 🖥️ Installation
+
+**Note: We need to set up two conda environments: `worldmind` (for EB-ALFRED and EB-Habitat) and `worldmind_nav` (for EB-Navigation). Please use ssh download instead of HTTP download to avoid errors during git lfs pull.**
+
+### 1. Clone Repository & Git LFS
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-repo/WorldMind.git
+git clone [https://github.com/zjunlp/WorldMind.git](https://github.com/zjunlp/WorldMind.git)
 cd WorldMind
 
-# Install dependencies
-pip install -r requirements.txt
+# Initialize Git LFS for large datasets
+git lfs install
+git lfs pull
 
-# For semantic retrieval support
-pip install sentence-transformers
 ```
+
+### 2. Set up Environments
+
+**Option 1: Environment for `Alfred and Habitat**`
+This environment is used for high-level planning tasks.
+
+```bash
+# Create environment named 'worldmind' (forcing name with -n)
+conda env create -f conda_envs/environment.yaml -n worldmind
+conda activate worldmind
+
+# Install the package
+pip install -e .
+
+# Install dependencies for Semantic Retrieval
+pip install sentence-transformers
+
+```
+
+**Option 2: Environment for `Navigation**`
+This environment is used for low-level navigation tasks.
+
+```bash
+# Create environment named 'worldmind_nav' (forcing name with -n)
+conda env create -f conda_envs/environment_eb-nav.yaml -n worldmind_nav
+conda activate worldmind_nav
+
+# Install the package
+pip install -e .
+
+```
+
+---
+
+### 3. Start Headless Server
+
+Please run the `startx.py` script before running experiments on headless servers. The server should be started in a separate `tmux` window. We use `X_DISPLAY id=1` by default.
+
+```bash
+# Ensure you are in the worldmind environment
+conda activate worldmind
+python -m embodiedbench.envs.eb_alfred.scripts.startx 1
+
+```
+
+---
+
+### 4. Task-Specific Setup
+
+#### 🏠 EB-ALFRED (Household Tasks)
+
+Download the dataset from Hugging Face.
+
+```bash
+conda activate worldmind
+git clone [https://huggingface.co/datasets/EmbodiedBench/EB-ALFRED](https://huggingface.co/datasets/EmbodiedBench/EB-ALFRED)
+mv EB-ALFRED embodiedbench/envs/eb_alfred/data/json_2.1.0
+
+```
+
+Run the following code to verify the EB-ALFRED environment is working correctly (**remember to start the headless server first**):
+
+```bash
+conda activate worldmind
+python -m embodiedbench.envs.eb_alfred.EBAlfEnv
+
+```
+
+#### 🛋️ EB-Habitat (Rearrangement Tasks)
+
+1. **Install Habitat Sim & Lab:**
+
+```bash
+conda activate worldmind
+
+# Install Habitat-Sim with Bullet physics support
+conda install -y habitat-sim==0.3.0 withbullet headless -c conda-forge -c aihabitat
+
+# Install Habitat-Lab
+git clone -b 'v0.3.0' --depth 1 [https://github.com/facebookresearch/habitat-lab.git](https://github.com/facebookresearch/habitat-lab.git) ./habitat-lab
+cd ./habitat-lab
+pip install -e habitat-lab
+cd ..
+
+```
+
+2. **Download YCB and ReplicaCAD datasets:**
+
+```bash
+conda install -y -c conda-forge git-lfs
+python -m habitat_sim.utils.datasets_download --uids rearrange_task_assets
+mv data embodiedbench/envs/eb_habitat
+
+```
+
+*Note: After this step, there should be a `data` folder under `embodiedbench/envs/eb_habitat`.*
+
+3. **Verify Installation:**
+
+```bash
+conda activate worldmind
+python -m embodiedbench.envs.eb_habitat.EBHabEnv
+
+```
+
+#### 🧭 EB-Navigation (Vision-and-Language Navigation)
+
+Run the following code to ensure the EB-Navigation environment is working correctly:
+
+```bash
+conda activate worldmind_nav
+python -m embodiedbench.envs.eb_navigation.EBNavEnv
+
+```
+
+```
+
+
+
+
+
+
+
 
 ### Running Experiments
 
