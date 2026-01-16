@@ -63,10 +63,10 @@ WorldMind/
 
 **Note: We need to set up two conda environments: `worldmind` (for EB-ALFRED and EB-Habitat) and `worldmind_nav` (for EB-Navigation). Please use ssh download instead of HTTP download to avoid errors during git lfs pull.**
 
-### 1. Clone Repository & Git LFS
+### 1. Clone Repository
 
 ```bash
-git clone [https://github.com/zjunlp/WorldMind.git](https://github.com/zjunlp/WorldMind.git)
+git clone https://github.com/zjunlp/WorldMind.git
 cd WorldMind
 ```
 
@@ -105,7 +105,6 @@ Please run the `startx.py` script before running experiments on headless servers
 # Ensure you are in the worldmind environment
 conda activate worldmind
 python -m embodiedbench.envs.eb_alfred.scripts.startx 1
-
 ```
 
 ### 4. Task-Specific Setup
