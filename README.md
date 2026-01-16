@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/worldmind_logo.png" width="60" alt="WorldMind Logo" style="vertical-align: bottom; margin-right: 10px;" />
   <span style="font-size: 50px; font-weight: bold; vertical-align: bottom;">
-    <span style="color: #333333;">World</span><span style="color: #7c3aed;">Mind</span>
+    <span style="color: #333333;">World</span><span style="color: #2563eb;">Mind</span>
   </span>
 </div>
 
