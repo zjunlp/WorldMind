@@ -1,4 +1,13 @@
-# WorldMind: Aligning Agentic World Models via Knowledgeable Experience Learning
+<div align="center">
+  <img src="assets/worldmind_logo.png" width="50" alt="WorldMind Logo" style="vertical-align: middle; margin-right: 10px;" />
+  <span style="font-size: 42px; font-weight: bold; vertical-align: middle;">
+    <span style="color: #000000;">World</span><span style="color: #4285F4;">Mind</span>
+  </span>
+</div>
+
+<br/>
+
+# Aligning Agentic World Models via Knowledgeable Experience Learning
 
 <p align="center">
   <img src="assets/framework.jpg" alt="WorldMind Framework" width="100%"/>
