@@ -402,7 +402,6 @@ WorldMind/
 │       ├── habitat/                # Habitat integration
 │       └── navigation/             # Navigation integration
 ├── 📂 Plugin/                      # Standalone WorldMind Plugin
-├── 📂 configs/                     # Configuration files
 ├── 📂 assets/                      # Images and resources
 └── 📄 README.md
 ```
@@ -426,7 +425,7 @@ WorldMind/
 </tr>
 </thead>
 <tbody>
-<tr><td colspan="13"><b>Proprietary Models</b></td></tr>
+<tr><td colspan="13"><b>Open-source and Proprietary Models</b></td></tr>
 <tr><td>GPT-4o</td><td>56.8</td><td>64.0</td><td>54.0</td><td>68.0</td><td>46.0</td><td>52.0</td><td>65.1</td><td>74.0</td><td>60.3</td><td>74.0</td><td>58.3</td><td>61.3</td></tr>
 <tr><td>GPT-4o-mini</td><td>28.8</td><td>34.0</td><td>28.0</td><td>36.0</td><td>24.0</td><td>22.0</td><td>34.3</td><td>47.8</td><td>35.3</td><td>43.5</td><td>33.3</td><td>29.0</td></tr>
 <tr><td>Claude-3.7-Sonnet</td><td>67.2</td><td>68.0</td><td>68.0</td><td>70.0</td><td>68.0</td><td>62.0</td><td>65.3</td><td>72.0</td><td>66.0</td><td>76.7</td><td>63.0</td><td>59.7</td></tr>
@@ -467,7 +466,7 @@ WorldMind/
 </tr>
 </thead>
 <tbody>
-<tr><td colspan="13"><b>Proprietary Models</b></td></tr>
+<tr><td colspan="13"><b>Open-source and Proprietary Models</b></td></tr>
 <tr><td>GPT-4o</td><td>56.8</td><td>64.0</td><td>54.0</td><td>68.0</td><td>46.0</td><td>52.0</td><td>65.1</td><td>74.0</td><td>60.3</td><td>74.0</td><td>58.3</td><td>61.3</td></tr>
 <tr><td>GPT-4o-mini</td><td>28.8</td><td>34.0</td><td>28.0</td><td>36.0</td><td>24.0</td><td>22.0</td><td>34.3</td><td>47.8</td><td>35.3</td><td>43.5</td><td>33.3</td><td>29.0</td></tr>
 <tr><td>Claude-3.7-Sonnet</td><td>67.2</td><td>68.0</td><td>68.0</td><td>70.0</td><td>68.0</td><td>62.0</td><td>65.3</td><td>72.0</td><td>66.0</td><td>76.7</td><td>63.0</td><td>59.7</td></tr>
@@ -502,12 +501,7 @@ WorldMind/
 If you find this work useful, please cite:
 
 ```bibtex
-@article{worldmind2024,
-  title={Aligning Agentic World Models via Knowledgeable Experience Learning},
-  author={...},
-  journal={arXiv preprint arXiv:2024.XXXXX},
-  year={2024}
-}
+
 ```
 
 ---
