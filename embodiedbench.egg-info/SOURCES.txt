@@ -1,6 +1,0 @@
-README.md
-setup.py
-embodiedbench.egg-info/PKG-INFO
-embodiedbench.egg-info/SOURCES.txt
-embodiedbench.egg-info/dependency_links.txt
-embodiedbench.egg-info/top_level.txt
