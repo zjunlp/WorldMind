@@ -1,4 +1,4 @@
-name: embench
+name: worldmind
 channels:
   - defaults
   - conda-forge
