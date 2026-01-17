@@ -1,28 +1,58 @@
-# WorldMind Plugin
+<div align="center">
 
-A modular experience learning framework for intelligent agents.
+# 🔌 WorldMind Plugin
 
-## Overview
+### A Modular Experience Learning Framework for Intelligent Agents
 
-WorldMind Plugin provides three independent modules for experience-based learning:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-1. **ProcessExperienceModule**: Extracts process experience from prediction errors
-2. **GoalExperienceModule**: Extracts goal experience from successful trajectories  
-3. **ExperienceRetrievalModule**: Retrieves and optionally refines experiences
+</div>
 
-Each module can be used independently, making it easy to integrate into various agent systems.
+---
 
-## Installation
+## 📋 Table of Contents
+
+- [Overview](#-overview)
+- [Installation](#-installation)
+- [Quick Start](#-quick-start)
+- [Modules](#-modules)
+  - [ProcessExperienceModule](#module-1-processexperiencemodule)
+  - [GoalExperienceModule](#module-2-goalexperiencemodule)
+  - [ExperienceRetrievalModule](#module-3-experienceretrievalmodule)
+- [Configuration](#-configuration)
+- [Complete Integration Example](#-complete-integration-example)
+- [API Reference](#-api-reference)
+
+---
+
+## 📖 Overview
+
+**WorldMind Plugin** provides three independent modules for experience-based learning that can be easily integrated into various agent systems:
+
+| Module | Purpose | When to Use |
+|--------|---------|-------------|
+| 🔄 **ProcessExperienceModule** | Extracts process experience from prediction errors | During task execution when errors occur |
+| 🎯 **GoalExperienceModule** | Extracts goal experience from successful trajectories | After successful task completion |
+| 🔍 **ExperienceRetrievalModule** | Retrieves and optionally refines experiences | Before starting a new task |
+
+Each module operates independently, allowing flexible integration into your existing agent architecture.
+
+---
+
+## 📦 Installation
 
 ```bash
-# Install dependencies
+# Install core dependencies
 pip install openai
 
-# Optional: For semantic similarity (recommended)
+# Optional: For semantic similarity-based retrieval (recommended)
 pip install sentence-transformers
 ```
 
-## Quick Start
+---
+
+## 🚀 Quick Start
 
 ```python
 from worldmind_plugin import (
@@ -48,31 +78,32 @@ retrieval_module = ExperienceRetrievalModule(config)
 
 ---
 
-## Module 1: ProcessExperienceModule
+## 📚 Modules
 
-Extracts process experience from prediction errors during task execution.
+### Module 1: ProcessExperienceModule
 
-### Input
+Extracts process experience from prediction errors during task execution. When the agent's predicted state differs from the actual environment feedback, this module generates corrective knowledge.
+
+#### Input/Output
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| task_instruction | str | The task instruction being executed |
-| trajectory | List[ProcessTrajectoryStep] | List of trajectory steps |
+| `task_instruction` | `str` | The task instruction being executed |
+| `trajectory` | `List[ProcessTrajectoryStep]` | List of trajectory steps |
+| **Returns** | `List[str]` | Extracted experience entries |
 
-#### ProcessTrajectoryStep
+#### ProcessTrajectoryStep Schema
 
-| Field | Type | Description |
-|-------|------|-------------|
-| observation | str | Current state/observation (text description) |
-| action | str | Action executed (name or description) |
-| predicted_state | str | Agent's predicted state after action |
-| env_feedback | str | Environment's feedback after action |
+```python
+ProcessTrajectoryStep(
+    observation: str,      # Current state/observation (text description)
+    action: str,           # Action executed (name or description)
+    predicted_state: str,  # Agent's predicted state after action
+    env_feedback: str      # Environment's actual feedback after action
+)
+```
 
-### Output
-
-- List[str]: Extracted experience entries
-
-### Storage Format
+#### Storage Format
 
 ```json
 {
@@ -84,7 +115,7 @@ Extracts process experience from prediction errors during task execution.
 }
 ```
 
-### Usage
+#### Usage Example
 
 ```python
 from worldmind_plugin import ProcessExperienceModule, ProcessTrajectoryStep
@@ -101,7 +132,7 @@ trajectory = [
     )
 ]
 
-# Process trajectory
+# Process entire trajectory
 experiences = process_module.process_trajectory(
     task_instruction="Complete the registration form",
     trajectory=trajectory
@@ -117,34 +148,29 @@ has_error, experiences = process_module.process_single_step(
 
 ---
 
-## Module 2: GoalExperienceModule
+### Module 2: GoalExperienceModule
 
-Extracts goal experience from successful task trajectories.
+Extracts goal experience from successful task trajectories. Call this module when a task completes successfully to capture the effective workflow.
 
-### Input
+#### Input/Output
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| task_instruction | str | The completed task instruction |
-| trajectory | List[GoalTrajectoryStep] | List of trajectory steps |
+| `task_instruction` | `str` | The completed task instruction |
+| `trajectory` | `List[GoalTrajectoryStep]` | List of trajectory steps |
+| **Returns** | `str` | Extracted goal experience text |
 
-#### GoalTrajectoryStep
+#### GoalTrajectoryStep Schema
 
-| Field | Type | Description |
-|-------|------|-------------|
-| action | str | Action executed |
-| env_feedback | str | Environment's feedback (can be empty) |
-| observation | str | Optional observation (included if configured) |
+```python
+GoalTrajectoryStep(
+    action: str,          # Action executed
+    env_feedback: str,    # Environment's feedback (can be empty)
+    observation: str      # Optional observation (included if configured)
+)
+```
 
-### Configuration
-
-- goal_trajectory_include_observation: Whether to include observation in trajectory (default: True)
-
-### Output
-
-- str: Extracted goal experience text
-
-### Storage Format
+#### Storage Format
 
 ```json
 {
@@ -153,7 +179,7 @@ Extracts goal experience from successful task trajectories.
 }
 ```
 
-### Usage
+#### Usage Example
 
 ```python
 from worldmind_plugin import GoalExperienceModule, GoalTrajectoryStep
@@ -186,27 +212,25 @@ experience = goal_module.extract_experience(
 
 ---
 
-## Module 3: ExperienceRetrievalModule
+### Module 3: ExperienceRetrievalModule
 
-Retrieves and optionally refines experiences for injection into agent prompts.
+Retrieves and optionally refines experiences for injection into agent prompts. Use this before starting a new task to augment the agent's context.
 
-### Input
+#### Input/Output
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| task_instruction | str | Current task instruction |
-| enable_refine | bool | Override config to enable/disable refinement |
+| `task_instruction` | `str` | Current task instruction |
+| `enable_refine` | `bool` | Override config to enable/disable refinement |
 
-### Output
+| Output Field | Type | Description |
+|--------------|------|-------------|
+| `goal_experiences` | `List[Dict]` | Retrieved goal experiences |
+| `process_experiences` | `List[Dict]` | Retrieved process experiences |
+| `refined_experience` | `Dict` | Consolidated experience (if refine enabled) |
+| `formatted_prompt` | `str` | Ready-to-inject prompt text |
 
-| Field | Type | Description |
-|-------|------|-------------|
-| goal_experiences | List[Dict] | Retrieved goal experiences |
-| process_experiences | List[Dict] | Retrieved process experiences |
-| refined_experience | Dict | Consolidated experience (if refine enabled) |
-| formatted_prompt | str | Ready-to-inject prompt text |
-
-### Usage
+#### Usage Example
 
 ```python
 from worldmind_plugin import ExperienceRetrievalModule
@@ -233,46 +257,60 @@ retrieval_module.reload_experiences()
 
 ---
 
-## Configuration Reference
+## ⚙️ Configuration
 
 ```python
 from worldmind_plugin import WorldMindConfig
 
 config = WorldMindConfig(
+    # ═══════════════════════════════════════════
     # API Configuration
-    api_key="your-api-key",              # Required
+    # ═══════════════════════════════════════════
+    api_key="your-api-key",               # Required
     api_base="https://api.openai.com/v1", # Optional: custom endpoint
     
-    # Multimodal Configuration
-    is_multimodal=False,                  # Use vision for state summarization
-    
+    # ═══════════════════════════════════════════
     # Model Configuration
+    # ═══════════════════════════════════════════
     discriminator_model="gpt-4o-mini",    # For prediction comparison
     reflector_model="gpt-4o-mini",        # For error analysis
     summarizer_model="gpt-4o",            # Vision model for multimodal
     extractor_model="gpt-4o-mini",        # For goal experience extraction
     refiner_model="gpt-4o-mini",          # For experience consolidation
     
-    # Experience Configuration
+    # ═══════════════════════════════════════════
+    # Multimodal Configuration
+    # ═══════════════════════════════════════════
+    is_multimodal=False,                  # Use vision for state summarization
+    
+    # ═══════════════════════════════════════════
+    # Experience Retrieval Configuration
+    # ═══════════════════════════════════════════
     enable_experience_refine=True,        # Consolidate retrieved experiences
     goal_experience_top_k=3,              # Number of goal experiences to retrieve
     process_experience_top_k=5,           # Number of process experiences to retrieve
-    goal_trajectory_include_observation=True,  # Include observation in goal trajectory
     
-    # Feedback Configuration
+    # ═══════════════════════════════════════════
+    # Trajectory Configuration
+    # ═══════════════════════════════════════════
+    goal_trajectory_include_observation=True,  # Include observation in goal trajectory
     use_env_feedback=True,                # Use env feedback in reflection
     
+    # ═══════════════════════════════════════════
     # Save Configuration
+    # ═══════════════════════════════════════════
     save_path="./worldmind_output",       # Base path for all saves
     
+    # ═══════════════════════════════════════════
     # Output Configuration
+    # ═══════════════════════════════════════════
     detailed_output=True                  # Verbose logging
 )
 ```
 
 ---
 
-## Complete Integration Example
+## 🔧 Complete Integration Example
 
 ```python
 from worldmind_plugin import (
@@ -286,18 +324,21 @@ from worldmind_plugin import (
     EXPLORATION_PHASE_MARKER
 )
 
+# ═══════════════════════════════════════════════════════════════════
+# Initialization
+# ═══════════════════════════════════════════════════════════════════
+
 config = WorldMindConfig(api_key="your-key", save_path="./output")
 
-# Initialize modules
 process_module = ProcessExperienceModule(config)
 goal_module = GoalExperienceModule(config)
 retrieval_module = ExperienceRetrievalModule(config)
 
 task_instruction = "Complete the checkout process"
 
-# ============================================
+# ═══════════════════════════════════════════════════════════════════
 # Phase 1: Before Task - Retrieve Experiences
-# ============================================
+# ═══════════════════════════════════════════════════════════════════
 
 experiences = retrieval_module.retrieve(task_instruction)
 
@@ -308,9 +349,9 @@ agent_system_prompt = f"""You are a helpful assistant.
 {experiences['formatted_prompt']}
 """
 
-# ============================================
+# ═══════════════════════════════════════════════════════════════════
 # Phase 2: During Task - Process Each Step
-# ============================================
+# ═══════════════════════════════════════════════════════════════════
 
 goal_trajectory = []
 action_history = []
@@ -341,9 +382,9 @@ for step in agent_steps:  # Your agent's execution loop
     
     action_history.append(f"Action: {agent_action}, Feedback: {env_response}")
 
-# ============================================
+# ═══════════════════════════════════════════════════════════════════
 # Phase 3: After Success - Extract Experience
-# ============================================
+# ═══════════════════════════════════════════════════════════════════
 
 if task_success:
     goal_module.extract_experience(
@@ -357,9 +398,11 @@ if task_success:
 
 ---
 
-## Exploration Phase Skip
+## 💡 Tips & Best Practices
 
-When the agent cannot observe the target of an action, it should output the exploration marker:
+### Exploration Phase Handling
+
+When the agent cannot observe the target of an action, output the exploration marker to skip discrimination:
 
 ```python
 from worldmind_plugin import EXPLORATION_PHASE_MARKER
@@ -369,66 +412,63 @@ predicted_state = EXPLORATION_PHASE_MARKER
 # Value: "Exploration phase: target not visible, prediction skipped."
 ```
 
-When this marker is detected, the ProcessExperienceModule skips discrimination and reflection.
-
----
-
-## Directory Structure
+### Directory Structure
 
 After running, the following structure is created:
 
 ```
 worldmind_output/
-├── goal_experience/
+├── 📂 goal_experience/
 │   └── goal_experiences.json       # All goal experiences
-└── process_experience/
+└── 📂 process_experience/
     └── process_experiences.json    # All process experiences
 ```
 
----
+### Customizing Prompts
 
-## Customizing Prompts
-
-All prompts can be customized by modifying worldmind_plugin/prompts.py:
+All prompts can be customized by modifying `worldmind_plugin/prompts.py`:
 
 ```python
 from worldmind_plugin.prompts import (
-    DISCRIMINATOR_SYSTEM_PROMPT,  # Customize comparison logic
-    REFLECTOR_SYSTEM_PROMPT,      # Customize error analysis
-    GOAL_EXPERIENCE_EXTRACTION_PROMPT  # Customize experience extraction
+    DISCRIMINATOR_SYSTEM_PROMPT,      # Customize comparison logic
+    REFLECTOR_SYSTEM_PROMPT,          # Customize error analysis
+    GOAL_EXPERIENCE_EXTRACTION_PROMPT # Customize experience extraction
 )
 ```
 
 ---
 
-## API Reference
+## 📖 API Reference
 
 ### ProcessExperienceModule
 
-| Method | Description |
-|--------|-------------|
-| process_trajectory(task_instruction, trajectory, before_images, after_images) | Process entire trajectory |
-| process_single_step(task_instruction, step, action_history, state_before, before_image, after_image) | Process single step |
-| reset() | Reset module state |
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `process_trajectory` | `task_instruction`, `trajectory`, `before_images`, `after_images` | `List[str]` | Process entire trajectory |
+| `process_single_step` | `task_instruction`, `step`, `action_history`, `state_before`, `before_image`, `after_image` | `Tuple[bool, List[str]]` | Process single step |
+| `reset` | - | - | Reset module state |
 
 ### GoalExperienceModule
 
-| Method | Description |
-|--------|-------------|
-| extract_experience(task_instruction, trajectory) | Extract experience from trajectory |
-| set_include_observation(include) | Set whether to include observation |
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `extract_experience` | `task_instruction`, `trajectory` | `str` | Extract experience from trajectory |
+| `set_include_observation` | `include: bool` | - | Set whether to include observation |
 
 ### ExperienceRetrievalModule
 
-| Method | Description |
-|--------|-------------|
-| retrieve(task_instruction, enable_refine) | Retrieve relevant experiences |
-| reload_experiences() | Reload experiences from files |
-| get_goal_experience_count() | Get number of stored goal experiences |
-| get_process_experience_count() | Get number of stored process experiences |
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `retrieve` | `task_instruction`, `enable_refine` | `Dict` | Retrieve relevant experiences |
+| `reload_experiences` | - | - | Reload experiences from files |
+| `get_goal_experience_count` | - | `int` | Get number of stored goal experiences |
+| `get_process_experience_count` | - | `int` | Get number of stored process experiences |
 
 ---
 
-## License
 
-MIT License
+<div align="center">
+
+**Part of the [WorldMind](https://github.com/zjunlp/WorldMind) Framework**
+
+</div>
