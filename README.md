@@ -256,7 +256,10 @@ bash run.sh
 
 ### Configuration
 
-WorldMind uses YAML configuration files for experiment settings:
+WorldMind uses YAML configuration files for experiment settings. You can find and customize these files in the **[`WorldMind/embodiedbench/configs`](embodiedbench/configs)** directory.
+
+<details>
+<summary><b>📄 Click to view example configuration (`configs/eb-nav.yaml`)</b></summary>
 
 ```yaml
 # configs/eb-nav.yaml
@@ -282,6 +285,7 @@ process_experience_top_k: 2
 enable_experience_refine: true
 use_worldmind_template: true
 ```
+</details>
 
 #### Key Configuration Options
 
