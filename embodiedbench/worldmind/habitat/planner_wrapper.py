@@ -537,8 +537,8 @@ class WorldMindPlannerWrapper:
         if self.enable_experience_refine and self.experience_refiner and (relevant_experiences or relevant_knowledge):
             refine_result = self.experience_refiner.refine_for_task(
                 current_instruction=user_instruction,
-                goal_experiences=relevant_experiences,
-                process_experiences=relevant_knowledge
+                success_experiences=relevant_experiences,
+                world_knowledge=relevant_knowledge
             )
             
             refined_prompt = self.experience_refiner.format_for_prompt(refine_result)
@@ -867,3 +867,4 @@ class WorldMindPlannerWrapper:
     @property
     def language_only(self):
         return self.base_planner.language_only
+
