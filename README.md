@@ -50,7 +50,7 @@ WorldMind introduces a two-stage approach for world model alignment:
 
 ```
 ╔══════════════════════════════════════════╗
-║       EXPERIENCE ACQUISITION             ║
+║        EXPERIENCE ACQUISITION            ║
 ╠═══════════════════╦══════════════════════╣
 ║  �� Goal          ║  ⚙️ Process          ║
 ║  Experience       ║  Experience          ║
@@ -71,21 +71,21 @@ WorldMind introduces a two-stage approach for world model alignment:
 
 ```
 ╔══════════════════════════════════════════╗
-║    EXPERIENCE-GUIDED INFERENCE           ║
+║      EXPERIENCE-GUIDED INFERENCE         ║
 ╠══════════════════════════════════════════╣
 ║         📝 Task Instruction              ║
 ║                  ⬇                       ║
 ║         🔍 Semantic Search               ║
-║           ╱         ╲                    ║
-║    ┌─────────┐ ┌─────────┐              ║
-║    │  Goal   │ │ Process │              ║
-║    │   Exp   │ │   Exp   │              ║
-║    └────┬────┘ └────┬────┘              ║
-║         ╲         ╱                      ║
-║          ⬇       ⬇                       ║
-║    ✨ Experience Refinement              ║
+║              ╱    ╲                      ║
+║      ┌─────────┐ ┌─────────┐            ║
+║      │  Goal   │ │ Process │            ║
+║      │   Exp   │ │   Exp   │            ║
+║      └────┬────┘ └────┬────┘            ║
+║           ╲          ╱                   ║
+║            ⬇        ⬇                    ║
+║      ✨ Experience Refinement            ║
 ║                  ⬇                       ║
-║    📤 Augmented World Model              ║
+║      📤 Augmented World Model            ║
 ╚══════════════════════════════════════════╝
 ```
 
@@ -228,23 +228,83 @@ python -m embodiedbench.envs.eb_navigation.EBNavEnv
 
 ### Running Experiments
 
-#### Basic Usage
+We provide a universal run script `run.sh` for easy experiment execution. Simply configure the script and run:
 
 ```bash
+#!/bin/bash
+# WorldMind Universal Run Script
+# Supports all three environments: Alfred (eb-alf), Habitat (eb-hab), Navigation (eb-nav)
+
+set -e
+
+# ============================================================
+# ENVIRONMENT VARIABLES (Export Section)
+# ============================================================
+
+# Display settings (for headless environments)
+export DISPLAY=":1"
+
+# GPU configuration
+export CUDA_VISIBLE_DEVICES="0"
+
+# API configuration (required - set these before running)
+export OPENAI_API_KEY=""
+export OPENAI_BASE_URL="https://api.openai.com/v1"
+
+# ============================================================
+# CONFIGURATION PARAMETERS
+# ============================================================
+
+# Model configuration
+MODEL_NAME="gpt-4o-mini"
+
+# Experiment parameters
+ENV="${1}"               # Options: eb-alf, eb-hab, eb-nav
+EXP_NAME="${2}"          # Your experiment name
+ENABLE_WORLDMIND="${3}"  # True or False
+
+# Set defaults if not provided
+if [ -z "$ENV" ]; then
+    ENV="eb-hab"
+fi
+
+if [ -z "$EXP_NAME" ]; then
+    EXP_NAME="baseline"
+fi
+
+if [ -z "$ENABLE_WORLDMIND" ]; then
+    ENABLE_WORLDMIND="True"
+fi
+
+# WorldMind component models (fixed to MODEL_NAME)
+export WORLDMIND_DISCRIMINATOR_MODEL="$MODEL_NAME"
+export WORLDMIND_SUMMARIZER_MODEL="$MODEL_NAME"
+export WORLDMIND_REFLECTOR_MODEL="$MODEL_NAME"
+export WORLDMIND_REFINER_MODEL="$MODEL_NAME"
+
+# ============================================================
+# RUN EXPERIMENT
+# ============================================================
+
 python -m embodiedbench.main \
-    --agent worldmind \
-    --env <environment> \
-    --model <model_name> \
-    --eval_set <eval_set>
+    env="$ENV" \
+    model_name="$MODEL_NAME" \
+    exp_name="$EXP_NAME" \
+    enable_worldmind="$ENABLE_WORLDMIND"
 ```
 
-#### Environment-Specific Commands
+**Usage Examples:**
 
-| Environment | Command |
-|-------------|---------|
-| **ALFRED** | `python -m embodiedbench.main --agent worldmind --env alfred --model gpt-4o --eval_set valid_seen` |
-| **Habitat** | `python -m embodiedbench.main --agent worldmind --env habitat --model gpt-4o --eval_set val` |
-| **Navigation** | `python -m embodiedbench.main --agent worldmind_nav --env navigation --model gpt-4o --eval_set test` |
+```bash
+# Run Habitat environment with WorldMind enabled
+./run.sh eb-hab my_experiment True
+
+# Run ALFRED environment without WorldMind
+./run.sh eb-alf baseline False
+
+# Run Navigation environment
+./run.sh eb-nav nav_test True
+```
 
 ### Configuration
 
