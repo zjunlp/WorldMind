@@ -866,3 +866,4 @@ class WorldMindPlannerWrapper:
     @property
     def language_only(self):
         return self.base_planner.language_only
+
