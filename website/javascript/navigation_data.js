@@ -1,6 +1,3 @@
-// website/javascript/navigation_data.js
-// Navigation 表格数据和渲染
-
 window.renderNavigationTable = function() {
     
     // Navigation Data
@@ -15,7 +12,6 @@ window.renderNavigationTable = function() {
     var container = document.getElementById("navigation-table");
     if (!container) return;
 
-    // 计算每行两个模型之间的最大值
     var getRowMaxForGroup = function(row, fields) {
         var max = -Infinity;
         for (var i = 0; i < fields.length; i++) {
@@ -26,7 +22,6 @@ window.renderNavigationTable = function() {
         return max;
     };
 
-    // 创建格式化函数 - 高亮同一行内GPT35组或GPT41组的最大值
     var createFormatter = function(field, groupFields) {
         return function(cell) {
             var value = cell.getValue();
