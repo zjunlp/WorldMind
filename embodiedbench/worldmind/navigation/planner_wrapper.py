@@ -324,10 +324,16 @@ class WorldMindNavigationPlannerWrapper:
         # If experience refinement is enabled, use refiner to consolidate
         if self.enable_experience_refine and self.experience_refiner and relevant_experiences:
             try:
+                # Also retrieve process experiences for refinement
+                process_experiences = []
+                if self.enable_process_experience and self.process_experience_manager:
+                    process_exp = self.process_experience_manager.retrieve_experience(user_instruction)
+                    process_experiences = process_exp if process_exp else []
+                
                 refine_result = self.experience_refiner.refine_for_task(
                     current_instruction=user_instruction,
-                    success_experiences=relevant_experiences,
-                    world_knowledge=[]
+                    goal_experiences=relevant_experiences,
+                    process_experiences=process_experiences
                 )
                 
                 refined_prompt = self.experience_refiner.format_for_prompt(refine_result)
@@ -909,3 +915,4 @@ class WorldMindNavigationPlannerWrapper:
     @property
     def actions(self):
         return self.base_planner.actions
+
