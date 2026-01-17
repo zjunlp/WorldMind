@@ -1,4 +1,4 @@
-name: embench_nav
+name: worldmind_nav
 channels:
   - defaults
   - https://repo.anaconda.com/pkgs/main
