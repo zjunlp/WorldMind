@@ -17,25 +17,29 @@ Save path structure:
 import os
 import json
 import re
+import numpy as np
 from typing import Dict, List, Optional, Any
-
 
 from embodiedbench.main import logger
 
-# Lazy load sentence transformer to avoid import errors when not needed
+# Import SentenceTransformer - required dependency
+try:
+    from sentence_transformers import SentenceTransformer
+except ImportError:
+    raise ImportError(
+        "sentence-transformers is required for WorldMind. "
+        "Please install it with: pip install sentence-transformers"
+    )
+
+# Global sentence model instance
 _sentence_model = None
 
 def _get_sentence_model():
-    """Lazy load SentenceTransformer model for semantic similarity."""
+    """Get or initialize SentenceTransformer model for semantic similarity."""
     global _sentence_model
     if _sentence_model is None:
-        try:
-            from sentence_transformers import SentenceTransformer
-            _sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
-            logger.info("SentenceTransformer model loaded for semantic retrieval")
-        except ImportError:
-            logger.warning("sentence-transformers not installed, falling back to basic similarity")
-            _sentence_model = False
+        _sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
+        logger.info("SentenceTransformer model loaded for semantic retrieval")
     return _sentence_model
 
 
@@ -270,19 +274,8 @@ class GoalExperienceManager:
     def _compute_semantic_similarity(self, text1: str, text2: str) -> float:
         """Compute semantic similarity using SentenceTransformer."""
         model = _get_sentence_model()
-        if model is False or model is None:
-            # Fallback to basic word overlap
-            words1 = set(text1.lower().split())
-            words2 = set(text2.lower().split())
-            if not words1 or not words2:
-                return 0.0
-            intersection = words1 & words2
-            union = words1 | words2
-            return len(intersection) / len(union) if union else 0.0
         
         try:
-            import numpy as np
-            
             # Cache embeddings for efficiency
             if text1 not in self._embeddings_cache:
                 self._embeddings_cache[text1] = model.encode(text1, convert_to_numpy=True)
@@ -296,8 +289,8 @@ class GoalExperienceManager:
             similarity = np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
             return float(similarity)
         except Exception as e:
-            logger.warning(f"Semantic similarity computation failed: {e}")
-            return 0.0
+            logger.error(f"Semantic similarity computation failed: {e}")
+            raise
     
     def retrieve_experiences(self, instruction: str) -> List[Dict]:
         """Retrieve top-k most relevant goal experiences based on instruction similarity."""
@@ -612,19 +605,8 @@ class ProcessExperienceManager:
     def _compute_semantic_similarity(self, text1: str, text2: str) -> float:
         """Compute semantic similarity using SentenceTransformer."""
         model = _get_sentence_model()
-        if model is False or model is None:
-            # Fallback to basic word overlap
-            words1 = set(text1.lower().split())
-            words2 = set(text2.lower().split())
-            if not words1 or not words2:
-                return 0.0
-            intersection = words1 & words2
-            union = words1 | words2
-            return len(intersection) / len(union) if union else 0.0
         
         try:
-            import numpy as np
-            
             # Cache embeddings for efficiency
             if text1 not in self._embeddings_cache:
                 self._embeddings_cache[text1] = model.encode(text1, convert_to_numpy=True)
@@ -638,8 +620,8 @@ class ProcessExperienceManager:
             similarity = np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
             return float(similarity)
         except Exception as e:
-            logger.warning(f"Semantic similarity computation failed: {e}")
-            return 0.0
+            logger.error(f"Semantic similarity computation failed: {e}")
+            raise
     
     def retrieve_experience(self, instruction: str) -> List[Dict]:
         """Retrieve top-k most relevant process experience based on instruction similarity."""
@@ -765,3 +747,4 @@ def create_process_experience_manager(
         eval_set=eval_set,
         top_k=top_k
     )
+
