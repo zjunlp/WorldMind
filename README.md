@@ -24,34 +24,33 @@
 
 ## 📖 Overview
 
-**WorldMind** introduces a paradigm shift in how embodied AI agents learn and adapt. Unlike traditional approaches that rely on extensive environment interaction or domain-specific fine-tuning, WorldMind enables agents to:
+**WorldMind** introduces a paradigm shift in how embodied AI agents learn and adapt. Unlike traditional approaches that rely on extensive environment interaction or domain-specific fine-tuning, WorldMind operates as a **training-free** framework that enables agents to:
 
-- **Learn from Experience**: Extract reusable knowledge from both successful task completions and prediction errors
-- **Generalize Across Tasks**: Apply learned patterns to novel situations through semantic similarity-based retrieval
-- **Continuously Improve**: Accumulate and refine knowledge throughout deployment
+- **Learn from Experience**: Extract reusable symbolic knowledge from both successful task completions and prediction errors without gradient updates.
+- **Generalize Across Tasks**: Apply learned causal rules and heuristics to novel situations through semantic similarity-based retrieval.
+- **Continuously Improve**: Accumulate and refine the World Knowledge Repository (WKR) throughout deployment.
 
 ### Key Features
 
 | Feature | Description |
 |---------|-------------|
-| �  **Experience Learning** | Combines *Goal Experience* from successful trajectories with *Process Experience* from prediction errors |
-| 🔄 **Experience-Driven Alignment** | Uses discriminator and reflector components to align world model predictions with actual environment dynamics |
-| 🔍 **Semantic Retrieval** | Employs SentenceTransformer-based semantic similarity for efficient experience retrieval during task execution |
-| 🌐 **Environment Agnostic** | Designed to work across different embodied AI environments (ALFRED, Habitat, Navigation) |
+| 🧠 **Experience Learning** | Combines *Goal Experience* (heuristics) from successful trajectories with *Process Experience* (causal boundaries) from prediction errors |
+| 🔄 **Experience-Driven Alignment** | Uses **State Abstraction** and **Verifier** components to align world model predictions with actual environment dynamics |
+| 🌐 **Universal Adaptability** | Seamlessly generalizes across diverse embodied environments (ALFRED, Habitat, Navigation) and tasks without specific fine-tuning |
 | 🔌 **Modular Plugin** | Standalone plugin for easy integration into existing agent systems |
 
 ### Method
 
 WorldMind introduces a two-stage approach for world model alignment:
 
-**Stage 1** extracts knowledge during task execution:
-- **Goal Experience**: From successful trajectories, extract high-level action-outcome patterns
-- **Process Experience**: When predictions fail, use discriminator to identify conflicts and reflector to generate corrections
+**Stage 1** extracts knowledge during task execution (World Knowledge Building):
+- **Goal Experience**: From successful trajectories, distill procedural heuristics to guide task optimality.
+- **Process Experience**: Employ a **Predict-Act-Verify** loop. When a **Verifier** detects a semantic discrepancy between the predicted and actual abstract states, a **Self-Reflexion** mechanism synthesizes corrective causal rules.
 
-**Stage 2** applies learned knowledge to new tasks:
-- Retrieve relevant experiences via semantic similarity
-- Optionally refine and merge experiences
-- Augment world model prompts with learned patterns
+**Stage 2** applies learned knowledge to new tasks (Inference via Constrained Simulation):
+- Retrieve relevant *Process* and *Goal* experiences via semantic similarity.
+- **Gated Simulation**: Selectively simulate outcomes only when target objects are grounded, enhancing inference efficiency.
+- Augment world model prompts with retrieved knowledge to constrain planning within physical feasibility.
 
 ---
 
