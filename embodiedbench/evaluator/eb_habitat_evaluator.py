@@ -552,6 +552,16 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                                 reflection_result = None
                                 logger.debug(f"Skipping WorldMind cycle for action {idx} (first_action_only=True)")
                             
+                            # Update trajectory info for goal experience extraction
+                            if hasattr(self.planner, 'update_trajectory_info'):
+                                action_id_for_trajectory = action_single if isinstance(action_single, int) else -1
+                                self.planner.update_trajectory_info({
+                                    'action_id': action_id_for_trajectory,
+                                    'env_feedback': info.get('env_feedback', ''),
+                                    'last_action_success': info.get('last_action_success', 1),
+                                    'task_progress': info.get('task_progress', 0.0)
+                                })
+                            
                             self.planner.update_info(info, discrimination_result, reflection_result)
                             
                             before_img_path = after_img_path
@@ -586,6 +596,16 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                                 action_id=action if isinstance(action, int) else None,
                                 human_instruction=user_instruction
                             )
+                        
+                        # Update trajectory info for goal experience extraction
+                        if hasattr(self.planner, 'update_trajectory_info'):
+                            action_id_for_trajectory = action if isinstance(action, int) else -1
+                            self.planner.update_trajectory_info({
+                                'action_id': action_id_for_trajectory,
+                                'env_feedback': info.get('env_feedback', ''),
+                                'last_action_success': info.get('last_action_success', 1),
+                                'task_progress': info.get('task_progress', 0.0)
+                            })
                         
                         self.planner.update_info(info, discrimination_result, reflection_result)
                         
