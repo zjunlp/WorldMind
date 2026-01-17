@@ -510,11 +510,10 @@ If you find this work useful, please cite:
 
 ## 🙏 Acknowledgments
 
-## 🙏 Acknowledgments
 
 We thank the following projects and teams for their open-source contributions:
 
-- [EmbodiedBench](https://github.com/embodiedbench) for the evaluation framework
+- [EmbodiedBench](https://github.com/embodiedbench) for the evaluation tasks
 - [ALFRED](https://github.com/askforalfred/alfred) and [AI2-THOR](https://github.com/allenai/ai2thor) for the household task benchmark and simulation environment
 - [Habitat](https://github.com/facebookresearch/habitat-lab) for the rearrangement simulation platform
 - [vLLM](https://github.com/vllm-project/vllm) for efficient LLM inference and serving
@@ -522,9 +521,4 @@ We thank the following projects and teams for their open-source contributions:
 
 ---
 
-<div align="center">
-
-**Made with ❤️ by [ZJUNLP](https://github.com/zjunlp)**
-
-</div>
 
