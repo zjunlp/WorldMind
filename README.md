@@ -1,6 +1,6 @@
 <div align="center">
 
-# <img src="https://em-content.zobj.net/source/twitter/376/globe-with-meridians_1f310.png" width="35"/> WorldMind
+# <img src="https://em-content.zobj.net/source/twitter/376/globe-with-meridians_1f310.png" width="35"/> **WorldMind**
 
 ### Aligning Agentic World Models via Knowledgeable Experience Learning
 
@@ -32,7 +32,7 @@
 
 | Feature | Description |
 |---------|-------------|
-| �� **Dual Experience Learning** | Combines *Goal Experience* from successful trajectories with *Process Experience* from prediction errors |
+| �  **Experience Learning** | Combines *Goal Experience* from successful trajectories with *Process Experience* from prediction errors |
 | 🔄 **Experience-Driven Alignment** | Uses discriminator and reflector components to align world model predictions with actual environment dynamics |
 | 🔍 **Semantic Retrieval** | Employs SentenceTransformer-based semantic similarity for efficient experience retrieval during task execution |
 | 🌐 **Environment Agnostic** | Designed to work across different embodied AI environments (ALFRED, Habitat, Navigation) |
@@ -41,57 +41,6 @@
 ### Method
 
 WorldMind introduces a two-stage approach for world model alignment:
-
-<table>
-<tr>
-<td width="50%">
-
-#### 🔬 Stage 1: Experience Acquisition
-
-```
-╔══════════════════════════════════════════╗
-║        EXPERIENCE ACQUISITION            ║
-╠═══════════════════╦══════════════════════╣
-║  �� Goal          ║  ⚙️ Process          ║
-║  Experience       ║  Experience          ║
-╠═══════════════════╬══════════════════════╣
-║ ✓ Extract action  ║ ✓ Discriminator      ║
-║   patterns        ║   identifies errors  ║
-║ ✓ Capture task    ║ ✓ Reflector creates  ║
-║   workflows       ║   corrections        ║
-║ ✓ Generalize      ║ ✓ Build knowledge    ║
-║   strategies      ║   base               ║
-╚═══════════════════╩══════════════════════╝
-```
-
-</td>
-<td width="50%">
-
-#### 🚀 Stage 2: Experience-Guided Inference
-
-```
-╔══════════════════════════════════════════╗
-║      EXPERIENCE-GUIDED INFERENCE         ║
-╠══════════════════════════════════════════╣
-║         📝 Task Instruction              ║
-║                  ⬇                       ║
-║         🔍 Semantic Search               ║
-║              ╱    ╲                      ║
-║      ┌─────────┐ ┌─────────┐            ║
-║      │  Goal   │ │ Process │            ║
-║      │   Exp   │ │   Exp   │            ║
-║      └────┬────┘ └────┬────┘            ║
-║           ╲          ╱                   ║
-║            ⬇        ⬇                    ║
-║      ✨ Experience Refinement            ║
-║                  ⬇                       ║
-║      📤 Augmented World Model            ║
-╚══════════════════════════════════════════╝
-```
-
-</td>
-</tr>
-</table>
 
 **Stage 1** extracts knowledge during task execution:
 - **Goal Experience**: From successful trajectories, extract high-level action-outcome patterns
@@ -123,8 +72,8 @@ cd WorldMind
 
 #### 2. Create Conda Environments
 
-<details>
-<summary><b>Option 1: Environment for ALFRED and Habitat (High-Level Planning)</b></summary>
+
+<summary><b>1️⃣ Environment for ALFRED and Habitat (High-Level Planning)</b></summary>
 
 ```bash
 # Create environment named 'worldmind' 
@@ -135,10 +84,8 @@ conda activate worldmind
 pip install -e .
 ```
 
-</details>
 
-<details>
-<summary><b>Option 2: Environment for Navigation (Low-Level Navigation)</b></summary>
+<summary><b>2️⃣ Environment for Navigation (Low-Level Navigation)</b></summary>
 
 ```bash
 # Create environment named 'worldmind_nav'
@@ -149,7 +96,6 @@ conda activate worldmind_nav
 pip install -e .
 ```
 
-</details>
 
 #### 3. Start Headless Server
 
@@ -164,13 +110,6 @@ python -m embodiedbench.envs.eb_alfred.scripts.startx 1
 
 <details>
 <summary><b>🏠 EB-ALFRED (Household Tasks)</b></summary>
-
-**Download Dataset:**
-```bash
-conda activate worldmind
-git clone https://huggingface.co/datasets/EmbodiedBench/EB-ALFRED
-mv EB-ALFRED embodiedbench/envs/eb_alfred/data/json_2.1.0
-```
 
 **Verify Installation:**
 ```bash
@@ -191,20 +130,12 @@ conda activate worldmind
 conda install -y habitat-sim==0.3.0 withbullet headless -c conda-forge -c aihabitat
 
 # Install Habitat-Lab
-git clone -b 'v0.3.0' --depth 1 https://github.com/facebookresearch/habitat-lab.git ./habitat-lab
 cd ./habitat-lab
 pip install -e habitat-lab
 cd ..
 ```
 
-**2. Download Datasets:**
-```bash
-conda install -y -c conda-forge git-lfs
-python -m habitat_sim.utils.datasets_download --uids rearrange_task_assets
-mv data embodiedbench/envs/eb_habitat
-```
-
-**3. Verify Installation:**
+**2. Verify Installation:**
 ```bash
 python -m embodiedbench.envs.eb_habitat.EBHabEnv
 ```
@@ -241,46 +172,68 @@ set -e
 # ENVIRONMENT VARIABLES (Export Section)
 # ============================================================
 
-# Display settings (for headless environments)
 export DISPLAY=":1"
-
-# GPU configuration
 export CUDA_VISIBLE_DEVICES="0"
-
-# API configuration (required - set these before running)
-export OPENAI_API_KEY=""
-export OPENAI_BASE_URL="https://api.openai.com/v1"
+export OPENAI_API_KEY="your-openai-api-key"
+export OPENAI_BASE_URL="your-openai-base-url"
 
 # ============================================================
-# CONFIGURATION PARAMETERS
+# CONFIGURATION PARAMETERS (Edit here)
 # ============================================================
 
-# Model configuration
-MODEL_NAME="gpt-4o-mini"
-
-# Experiment parameters
-ENV="${1}"               # Options: eb-alf, eb-hab, eb-nav
-EXP_NAME="${2}"          # Your experiment name
-ENABLE_WORLDMIND="${3}"  # True or False
-
-# Set defaults if not provided
-if [ -z "$ENV" ]; then
-    ENV="eb-hab"
-fi
-
-if [ -z "$EXP_NAME" ]; then
-    EXP_NAME="baseline"
-fi
-
-if [ -z "$ENABLE_WORLDMIND" ]; then
-    ENABLE_WORLDMIND="True"
-fi
+MODEL_NAME="gpt-3.5-turbo"   # Choose your model
+ENV="eb-hab"              # Options: eb-alf, eb-hab, eb-nav
+EXP_NAME="test"       # Your experiment name
+ENABLE_WORLDMIND="True"   # True or False
 
 # WorldMind component models (fixed to MODEL_NAME)
 export WORLDMIND_DISCRIMINATOR_MODEL="$MODEL_NAME"
 export WORLDMIND_SUMMARIZER_MODEL="$MODEL_NAME"
 export WORLDMIND_REFLECTOR_MODEL="$MODEL_NAME"
 export WORLDMIND_REFINER_MODEL="$MODEL_NAME"
+
+# ============================================================
+# VALIDATION
+# ============================================================
+
+if [ -z "$OPENAI_API_KEY" ]; then
+    echo "=========================================="
+    echo "ERROR: OPENAI_API_KEY not set!"
+    echo "=========================================="
+    exit 1
+fi
+
+case "$ENV" in
+    eb-alf|eb-hab|eb-nav)
+        echo "✓ Valid environment: $ENV"
+        ;;
+    *)
+        echo "=========================================="
+        echo "ERROR: Invalid environment '$ENV'"
+        echo "=========================================="
+        echo "Valid options: eb-alf, eb-hab, eb-nav"
+        exit 1
+        ;;
+esac
+
+# ============================================================
+# DISPLAY CONFIGURATION
+# ============================================================
+
+echo ""
+echo "=========================================="
+echo "WorldMind Experiment Configuration"
+echo "=========================================="
+echo "Environment:     $ENV"
+echo "Model:           $MODEL_NAME"
+echo "Experiment:      $EXP_NAME"
+echo "WorldMind:       $ENABLE_WORLDMIND"
+echo "----------------------------------------"
+echo "GPU Device:      $CUDA_VISIBLE_DEVICES"
+echo "Display:         $DISPLAY"
+echo "API Base URL:    $OPENAI_BASE_URL"
+echo "=========================================="
+echo ""
 
 # ============================================================
 # RUN EXPERIMENT
@@ -296,14 +249,7 @@ python -m embodiedbench.main \
 **Usage Examples:**
 
 ```bash
-# Run Habitat environment with WorldMind enabled
-./run.sh eb-hab my_experiment True
-
-# Run ALFRED environment without WorldMind
-./run.sh eb-alf baseline False
-
-# Run Navigation environment
-./run.sh eb-nav nav_test True
+bash run.sh
 ```
 
 ### Configuration
