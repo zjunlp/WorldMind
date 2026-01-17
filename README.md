@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 WorldMind
+# <img src="https://em-content.zobj.net/source/twitter/376/globe-with-meridians_1f310.png" width="35"/> WorldMind
 
 ### Aligning Agentic World Models via Knowledgeable Experience Learning
 
@@ -14,33 +14,9 @@
 
 **WorldMind** is a novel framework for aligning agentic world models through knowledgeable experience learning, enabling agents to learn from both successful trajectories and prediction errors.
 
-[Overview](#-overview) • [Installation](#-installation) • [Quick Start](#-quick-start) • [Environments](#-environments) • [Plugin](#-worldmind-plugin) • [Citation](#-citation)
+[📖 Overview](#-overview) • [🖥️ Installation](#️-installation) • [🚀 Quick Start](#-quick-start) • [🌍 Environments](#-environments) • [🔌 Plugin](#-worldmind-plugin) • [📊 Results](#-results) • [📝 Citation](#-citation)
 
 </div>
-
----
-
-## 📋 Table of Contents
-
-- [Overview](#-overview)
-  - [Key Features](#key-features)
-  - [Method](#method)
-- [Installation](#-installation)
-  - [Environment Setup](#environment-setup)
-  - [Task-Specific Setup](#task-specific-setup)
-- [Quick Start](#-quick-start)
-  - [Running Experiments](#running-experiments)
-  - [Configuration](#configuration)
-- [Environments](#-environments)
-  - [EB-ALFRED](#-eb-alfred-household-tasks)
-  - [EB-Habitat](#-eb-habitat-rearrangement-tasks)
-  - [EB-Navigation](#-eb-navigation-vision-and-language-navigation)
-- [WorldMind Plugin](#-worldmind-plugin)
-- [Project Structure](#-project-structure)
-- [Results](#-results)
-- [Citation](#-citation)
-- [License](#-license)
-- [Acknowledgments](#-acknowledgments)
 
 ---
 
@@ -56,7 +32,7 @@
 
 | Feature | Description |
 |---------|-------------|
-| 🎯 **Dual Experience Learning** | Combines *Goal Experience* from successful trajectories with *Process Experience* from prediction errors |
+| �� **Dual Experience Learning** | Combines *Goal Experience* from successful trajectories with *Process Experience* from prediction errors |
 | 🔄 **Experience-Driven Alignment** | Uses discriminator and reflector components to align world model predictions with actual environment dynamics |
 | 🔍 **Semantic Retrieval** | Employs SentenceTransformer-based semantic similarity for efficient experience retrieval during task execution |
 | 🌐 **Environment Agnostic** | Designed to work across different embodied AI environments (ALFRED, Habitat, Navigation) |
@@ -66,51 +42,65 @@
 
 WorldMind introduces a two-stage approach for world model alignment:
 
-#### Stage 1: Experience Acquisition
+<table>
+<tr>
+<td width="50%">
+
+#### 🔬 Stage 1: Experience Acquisition
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Experience Acquisition                        │
-├─────────────────────────────┬───────────────────────────────────┤
-│     Goal Experience         │      Process Experience           │
-│  (Successful Trajectories)  │    (Prediction Errors)            │
-├─────────────────────────────┼───────────────────────────────────┤
-│  • Extract action patterns  │  • Discriminator identifies       │
-│  • Capture task workflows   │    prediction conflicts           │
-│  • Generalize strategies    │  • Reflector generates            │
-│                             │    corrective knowledge           │
-└─────────────────────────────┴───────────────────────────────────┘
+╔══════════════════════════════════════════╗
+║       EXPERIENCE ACQUISITION             ║
+╠═══════════════════╦══════════════════════╣
+║  �� Goal          ║  ⚙️ Process          ║
+║  Experience       ║  Experience          ║
+╠═══════════════════╬══════════════════════╣
+║ ✓ Extract action  ║ ✓ Discriminator      ║
+║   patterns        ║   identifies errors  ║
+║ ✓ Capture task    ║ ✓ Reflector creates  ║
+║   workflows       ║   corrections        ║
+║ ✓ Generalize      ║ ✓ Build knowledge    ║
+║   strategies      ║   base               ║
+╚═══════════════════╩══════════════════════╝
 ```
 
-1. **Goal Experience Extraction**: From successful task trajectories, extract high-level action-outcome patterns and task-specific workflows
-2. **Process Experience Extraction**: During task execution, when the world model makes incorrect predictions, use a discriminator to identify conflicts and a reflector to generate corrective knowledge
+</td>
+<td width="50%">
 
-#### Stage 2: Experience-Guided Inference
+#### 🚀 Stage 2: Experience-Guided Inference
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                 Experience-Guided Inference                      │
-├─────────────────────────────────────────────────────────────────┤
-│  Current Task Instruction                                        │
-│           ↓                                                      │
-│  Semantic Similarity Search                                      │
-│           ↓                                                      │
-│  ┌─────────────────┐    ┌─────────────────┐                     │
-│  │ Goal Experiences│    │Process Knowledge│                     │
-│  └────────┬────────┘    └────────┬────────┘                     │
-│           └──────────┬───────────┘                              │
-│                      ↓                                           │
-│           Experience Refinement (Optional)                       │
-│                      ↓                                           │
-│              Augmented Prompt                                    │
-│                      ↓                                           │
-│            World Model Prediction                                │
-└─────────────────────────────────────────────────────────────────┘
+╔══════════════════════════════════════════╗
+║    EXPERIENCE-GUIDED INFERENCE           ║
+╠══════════════════════════════════════════╣
+║         📝 Task Instruction              ║
+║                  ⬇                       ║
+║         🔍 Semantic Search               ║
+║           ╱         ╲                    ║
+║    ┌─────────┐ ┌─────────┐              ║
+║    │  Goal   │ │ Process │              ║
+║    │   Exp   │ │   Exp   │              ║
+║    └────┬────┘ └────┬────┘              ║
+║         ╲         ╱                      ║
+║          ⬇       ⬇                       ║
+║    ✨ Experience Refinement              ║
+║                  ⬇                       ║
+║    📤 Augmented World Model              ║
+╚══════════════════════════════════════════╝
 ```
 
-During inference, relevant experiences are retrieved based on semantic similarity with the current task instruction, providing the world model with:
-- Task-relevant action patterns from goal experiences
-- Error-corrective knowledge from process experiences
+</td>
+</tr>
+</table>
+
+**Stage 1** extracts knowledge during task execution:
+- **Goal Experience**: From successful trajectories, extract high-level action-outcome patterns
+- **Process Experience**: When predictions fail, use discriminator to identify conflicts and reflector to generate corrections
+
+**Stage 2** applies learned knowledge to new tasks:
+- Retrieve relevant experiences via semantic similarity
+- Optionally refine and merge experiences
+- Augment world model prompts with learned patterns
 
 ---
 
@@ -305,11 +295,7 @@ use_worldmind_template: true
 
 A benchmark for grounded language learning in 3D household environments. Tasks require agents to execute multi-step instructions involving object manipulation.
 
-**Task Types:**
-- Pick & Place
-- Examine Objects
-- Clean & Heat Objects
-- Toggle Appliances
+**Task Types:** Pick & Place, Examine Objects, Clean & Heat Objects, Toggle Appliances
 
 **Evaluation Sets:** `base`, `valid_seen`, `valid_unseen`, `long_horizon`
 
@@ -317,10 +303,7 @@ A benchmark for grounded language learning in 3D household environments. Tasks r
 
 A simulation platform for embodied AI research focusing on object rearrangement tasks in realistic indoor environments.
 
-**Task Types:**
-- Object Goal Navigation
-- Rearrangement Planning
-- Multi-Object Manipulation
+**Task Types:** Object Goal Navigation, Rearrangement Planning, Multi-Object Manipulation
 
 **Evaluation Sets:** `val`, `test`
 
@@ -328,10 +311,7 @@ A simulation platform for embodied AI research focusing on object rearrangement 
 
 A discrete navigation environment where agents must reach target locations through natural language instructions.
 
-**Task Types:**
-- Point Goal Navigation
-- Object Goal Navigation
-- Vision-Language Navigation
+**Task Types:** Point Goal Navigation, Object Goal Navigation, Vision-Language Navigation
 
 **Evaluation Sets:** `base`, `test`
 
@@ -406,40 +386,13 @@ WorldMind/
 │   │   ├── eb_habitat/             # Habitat environment
 │   │   └── eb_navigation/          # Navigation environment
 │   ├── 📂 evaluator/               # Evaluation scripts
-│   │   ├── eb_alfred_evaluator.py
-│   │   ├── eb_habitat_evaluator.py
-│   │   └── eb_navigation_evaluator.py
-│   ├── 📂 planner/                 # Base planner implementations
 │   └── 📂 worldmind/               # WorldMind core modules
 │       ├── alfred/                 # ALFRED integration
-│       │   ├── discriminator.py
-│       │   ├── reflector.py
-│       │   ├── knowledge_manager.py
-│       │   └── planner_wrapper.py
 │       ├── habitat/                # Habitat integration
-│       │   ├── discriminator.py
-│       │   ├── reflector.py
-│       │   ├── knowledge_manager.py
-│       │   └── planner_wrapper.py
 │       └── navigation/             # Navigation integration
-│           ├── discriminator.py
-│           ├── reflector.py
-│           ├── knowledge_manager.py
-│           ├── experience_refiner.py
-│           └── planner_wrapper.py
 ├── 📂 Plugin/                      # Standalone WorldMind Plugin
-│   ├── worldmind_plugin/
-│   │   ├── core.py
-│   │   ├── config.py
-│   │   └── prompts.py
-│   ├── example.py
-│   └── README.md
 ├── 📂 configs/                     # Configuration files
-│   ├── eb-nav.yaml
-│   ├── eb-alfred.yaml
-│   └── eb-habitat.yaml
 ├── 📂 assets/                      # Images and resources
-│   └── framework.jpg
 └── 📄 README.md
 ```
 
@@ -447,12 +400,87 @@ WorldMind/
 
 ## 📊 Results
 
-| Environment | Baseline | + WorldMind | Improvement |
-|-------------|----------|-------------|-------------|
-| **ALFRED (valid_seen)** | XX.X% | **XX.X%** | +X.X% |
-| **ALFRED (valid_unseen)** | XX.X% | **XX.X%** | +X.X% |
-| **Habitat (val)** | XX.X% | **XX.X%** | +X.X% |
-| **Navigation (test)** | XX.X% | **XX.X%** | +X.X% |
+### EB-ALFRED Results
+
+<table>
+<thead>
+<tr>
+<th rowspan="2">Model</th>
+<th colspan="6">Success Rate (SR) %</th>
+<th colspan="6">Goal Condition (GC) %</th>
+</tr>
+<tr>
+<th>Avg</th><th>Base</th><th>Common</th><th>Complex</th><th>Visual</th><th>Spatial</th>
+<th>Avg</th><th>Base</th><th>Common</th><th>Complex</th><th>Visual</th><th>Spatial</th>
+</tr>
+</thead>
+<tbody>
+<tr><td colspan="13"><b>Proprietary Models</b></td></tr>
+<tr><td>GPT-4o</td><td>56.8</td><td>64.0</td><td>54.0</td><td>68.0</td><td>46.0</td><td>52.0</td><td>65.1</td><td>74.0</td><td>60.3</td><td>74.0</td><td>58.3</td><td>61.3</td></tr>
+<tr><td>GPT-4o-mini</td><td>28.8</td><td>34.0</td><td>28.0</td><td>36.0</td><td>24.0</td><td>22.0</td><td>34.3</td><td>47.8</td><td>35.3</td><td>43.5</td><td>33.3</td><td>29.0</td></tr>
+<tr><td>Claude-3.7-Sonnet</td><td>67.2</td><td>68.0</td><td>68.0</td><td>70.0</td><td>68.0</td><td>62.0</td><td>65.3</td><td>72.0</td><td>66.0</td><td>76.7</td><td>63.0</td><td>59.7</td></tr>
+<tr><td>Gemini-1.5-Pro</td><td>63.2</td><td>70.0</td><td>64.0</td><td>72.0</td><td>58.0</td><td>52.0</td><td>67.4</td><td>74.3</td><td>66.7</td><td>76.5</td><td>62.8</td><td>59.0</td></tr>
+<tr><td>Llama-3.2-90B-Vis</td><td>35.2</td><td>38.0</td><td>34.0</td><td>44.0</td><td>28.0</td><td>32.0</td><td>37.6</td><td>43.7</td><td>37.3</td><td>49.2</td><td>35.3</td><td>36.0</td></tr>
+<tr><td>InternVL2.5-78B</td><td>37.0</td><td>41.0</td><td>40.0</td><td>39.0</td><td>16.0</td><td>49.0</td><td>41.0</td><td>42.3</td><td>35.3</td><td>43.3</td><td>35.7</td><td>40.3</td></tr>
+<tr><td colspan="13"><b>GPT-3.5 Based Methods</b></td></tr>
+<tr><td>ReAct</td><td>44.4</td><td>52.0</td><td>48.0</td><td>52.0</td><td>32.0</td><td>38.0</td><td>50.4</td><td>55.3</td><td>53.5</td><td>55.3</td><td>42.7</td><td>45.0</td></tr>
+<tr><td>BoN</td><td>42.8</td><td>46.0</td><td>42.0</td><td>50.0</td><td>42.0</td><td>34.0</td><td>50.4</td><td>54.2</td><td>46.5</td><td>56.5</td><td>52.0</td><td>42.8</td></tr>
+<tr><td>SimuRA</td><td>45.2</td><td>50.0</td><td>42.0</td><td>54.0</td><td>38.0</td><td>42.0</td><td>53.6</td><td>57.8</td><td>47.8</td><td>59.7</td><td>48.5</td><td>54.3</td></tr>
+<tr><td>ReasoningBank</td><td>41.6</td><td>50.0</td><td>36.0</td><td>44.0</td><td>36.0</td><td>42.0</td><td>47.6</td><td>57.5</td><td>41.5</td><td>47.0</td><td>44.2</td><td>48.0</td></tr>
+<tr><td>Synapse</td><td>38.8</td><td>38.0</td><td>46.0</td><td>40.0</td><td>36.0</td><td>34.0</td><td>43.6</td><td>42.5</td><td>51.3</td><td>42.7</td><td>42.0</td><td>39.7</td></tr>
+<tr><td>AWM</td><td>40.0</td><td>46.0</td><td>32.0</td><td>48.0</td><td>40.0</td><td>34.0</td><td>46.2</td><td>53.2</td><td>39.2</td><td>50.7</td><td>47.0</td><td>41.0</td></tr>
+<tr><td><b>WorldMind</b></td><td><b>48.0</b></td><td><b>58.0</b></td><td><b>48.0</b></td><td><b>56.0</b></td><td>34.0</td><td><b>44.0</b></td><td><b>54.1</b></td><td><b>63.0</b></td><td>52.7</td><td><b>61.0</b></td><td>41.7</td><td><b>52.0</b></td></tr>
+<tr><td colspan="13"><b>GPT-4.1 Based Methods</b></td></tr>
+<tr><td>ReAct</td><td>41.2</td><td>50.0</td><td>40.0</td><td>46.0</td><td>38.0</td><td>32.0</td><td>47.5</td><td>55.3</td><td>42.8</td><td>52.2</td><td>47.2</td><td>39.8</td></tr>
+<tr><td>BoN</td><td>44.4</td><td>46.0</td><td>44.0</td><td>50.0</td><td>42.0</td><td>40.0</td><td>49.5</td><td>50.8</td><td>48.3</td><td>54.7</td><td>48.7</td><td>45.0</td></tr>
+<tr><td>SimuRA</td><td>45.6</td><td>52.0</td><td>44.0</td><td>54.0</td><td>38.0</td><td>40.0</td><td>52.2</td><td>61.0</td><td>50.3</td><td>58.2</td><td>45.3</td><td>46.3</td></tr>
+<tr><td>ReasoningBank</td><td>38.0</td><td>42.0</td><td>36.0</td><td>42.0</td><td>34.0</td><td>36.0</td><td>42.6</td><td>46.7</td><td>38.8</td><td>45.8</td><td>41.5</td><td>40.3</td></tr>
+<tr><td>Synapse</td><td>37.2</td><td>40.0</td><td>32.0</td><td>44.0</td><td>36.0</td><td>34.0</td><td>42.2</td><td>41.2</td><td>37.5</td><td>49.5</td><td>41.3</td><td>41.7</td></tr>
+<tr><td>AWM</td><td>41.2</td><td>44.0</td><td>36.0</td><td>48.0</td><td>38.0</td><td>40.0</td><td>46.0</td><td>48.3</td><td>42.0</td><td>52.5</td><td>44.3</td><td>42.7</td></tr>
+<tr><td><b>WorldMind</b></td><td><b>49.2</b></td><td>50.0</td><td><b>58.0</b></td><td><b>54.0</b></td><td><b>42.0</b></td><td><b>42.0</b></td><td><b>55.7</b></td><td><b>61.0</b></td><td><b>61.0</b></td><td><b>58.8</b></td><td><b>48.0</b></td><td><b>49.7</b></td></tr>
+</tbody>
+</table>
+
+### EB-Habitat Results
+
+<table>
+<thead>
+<tr>
+<th rowspan="2">Model</th>
+<th colspan="6">Success Rate (SR) %</th>
+<th colspan="6">Goal Condition (GC) %</th>
+</tr>
+<tr>
+<th>Avg</th><th>Base</th><th>Common</th><th>Complex</th><th>Visual</th><th>Spatial</th>
+<th>Avg</th><th>Base</th><th>Common</th><th>Complex</th><th>Visual</th><th>Spatial</th>
+</tr>
+</thead>
+<tbody>
+<tr><td colspan="13"><b>Proprietary Models</b></td></tr>
+<tr><td>GPT-4o</td><td>56.8</td><td>64.0</td><td>54.0</td><td>68.0</td><td>46.0</td><td>52.0</td><td>65.1</td><td>74.0</td><td>60.3</td><td>74.0</td><td>58.3</td><td>61.3</td></tr>
+<tr><td>GPT-4o-mini</td><td>28.8</td><td>34.0</td><td>28.0</td><td>36.0</td><td>24.0</td><td>22.0</td><td>34.3</td><td>47.8</td><td>35.3</td><td>43.5</td><td>33.3</td><td>29.0</td></tr>
+<tr><td>Claude-3.7-Sonnet</td><td>67.2</td><td>68.0</td><td>68.0</td><td>70.0</td><td>68.0</td><td>62.0</td><td>65.3</td><td>72.0</td><td>66.0</td><td>76.7</td><td>63.0</td><td>59.7</td></tr>
+<tr><td>Gemini-1.5-Pro</td><td>63.2</td><td>70.0</td><td>64.0</td><td>72.0</td><td>58.0</td><td>52.0</td><td>67.4</td><td>74.3</td><td>66.7</td><td>76.5</td><td>62.8</td><td>59.0</td></tr>
+<tr><td>Llama-3.2-90B-Vis</td><td>35.2</td><td>38.0</td><td>34.0</td><td>44.0</td><td>28.0</td><td>32.0</td><td>37.6</td><td>43.7</td><td>37.3</td><td>49.2</td><td>35.3</td><td>36.0</td></tr>
+<tr><td>InternVL2.5-78B</td><td>37.0</td><td>41.0</td><td>40.0</td><td>39.0</td><td>16.0</td><td>49.0</td><td>41.0</td><td>42.3</td><td>35.3</td><td>43.3</td><td>35.7</td><td>40.3</td></tr>
+<tr><td colspan="13"><b>GPT-3.5 Based Methods</b></td></tr>
+<tr><td>ReAct</td><td>44.4</td><td>52.0</td><td>48.0</td><td>52.0</td><td>32.0</td><td>38.0</td><td>50.4</td><td>55.3</td><td>53.5</td><td>55.3</td><td>42.7</td><td>45.0</td></tr>
+<tr><td>BoN</td><td>42.8</td><td>46.0</td><td>42.0</td><td>50.0</td><td>42.0</td><td>34.0</td><td>50.4</td><td>54.2</td><td>46.5</td><td>56.5</td><td>52.0</td><td>42.8</td></tr>
+<tr><td>SimuRA</td><td>45.2</td><td>50.0</td><td>42.0</td><td>54.0</td><td>38.0</td><td>42.0</td><td>53.6</td><td>57.8</td><td>47.8</td><td>59.7</td><td>48.5</td><td>54.3</td></tr>
+<tr><td>ReasoningBank</td><td>41.6</td><td>50.0</td><td>36.0</td><td>44.0</td><td>36.0</td><td>42.0</td><td>47.6</td><td>57.5</td><td>41.5</td><td>47.0</td><td>44.2</td><td>48.0</td></tr>
+<tr><td>Synapse</td><td>38.8</td><td>38.0</td><td>46.0</td><td>40.0</td><td>36.0</td><td>34.0</td><td>43.6</td><td>42.5</td><td>51.3</td><td>42.7</td><td>42.0</td><td>39.7</td></tr>
+<tr><td>AWM</td><td>40.0</td><td>46.0</td><td>32.0</td><td>48.0</td><td>40.0</td><td>34.0</td><td>46.2</td><td>53.2</td><td>39.2</td><td>50.7</td><td>47.0</td><td>41.0</td></tr>
+<tr><td><b>WorldMind</b></td><td><b>48.0</b></td><td><b>58.0</b></td><td><b>48.0</b></td><td><b>56.0</b></td><td>34.0</td><td><b>44.0</b></td><td><b>54.1</b></td><td><b>63.0</b></td><td>52.7</td><td><b>61.0</b></td><td>41.7</td><td><b>52.0</b></td></tr>
+<tr><td colspan="13"><b>GPT-4.1 Based Methods</b></td></tr>
+<tr><td>ReAct</td><td>41.2</td><td>50.0</td><td>40.0</td><td>46.0</td><td>38.0</td><td>32.0</td><td>47.5</td><td>55.3</td><td>42.8</td><td>52.2</td><td>47.2</td><td>39.8</td></tr>
+<tr><td>BoN</td><td>44.4</td><td>46.0</td><td>44.0</td><td>50.0</td><td>42.0</td><td>40.0</td><td>49.5</td><td>50.8</td><td>48.3</td><td>54.7</td><td>48.7</td><td>45.0</td></tr>
+<tr><td>SimuRA</td><td>45.6</td><td>52.0</td><td>44.0</td><td>54.0</td><td>38.0</td><td>40.0</td><td>52.2</td><td>61.0</td><td>50.3</td><td>58.2</td><td>45.3</td><td>46.3</td></tr>
+<tr><td>ReasoningBank</td><td>38.0</td><td>42.0</td><td>36.0</td><td>42.0</td><td>34.0</td><td>36.0</td><td>42.6</td><td>46.7</td><td>38.8</td><td>45.8</td><td>41.5</td><td>40.3</td></tr>
+<tr><td>Synapse</td><td>37.2</td><td>40.0</td><td>32.0</td><td>44.0</td><td>36.0</td><td>34.0</td><td>42.2</td><td>41.2</td><td>37.5</td><td>49.5</td><td>41.3</td><td>41.7</td></tr>
+<tr><td>AWM</td><td>41.2</td><td>44.0</td><td>36.0</td><td>48.0</td><td>38.0</td><td>40.0</td><td>46.0</td><td>48.3</td><td>42.0</td><td>52.5</td><td>44.3</td><td>42.7</td></tr>
+<tr><td><b>WorldMind</b></td><td><b>49.2</b></td><td>50.0</td><td><b>58.0</b></td><td><b>54.0</b></td><td><b>42.0</b></td><td><b>42.0</b></td><td><b>55.7</b></td><td><b>61.0</b></td><td><b>61.0</b></td><td><b>58.8</b></td><td><b>48.0</b></td><td><b>49.7</b></td></tr>
+</tbody>
+</table>
 
 > Detailed results and ablation studies available in our paper.
 
@@ -473,12 +501,6 @@ If you find this work useful, please cite:
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
 ## 🙏 Acknowledgments
 
 We thank the following projects and teams:
@@ -486,7 +508,6 @@ We thank the following projects and teams:
 - [EmbodiedBench](https://github.com/embodiedbench) for the evaluation framework
 - [ALFRED](https://askforalfred.com/) for the household task benchmark
 - [Habitat](https://aihabitat.org/) for the simulation platform
-- [SentenceTransformers](https://www.sbert.net/) for semantic similarity
 
 ---
 
