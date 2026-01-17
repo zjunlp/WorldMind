@@ -77,7 +77,7 @@ cd WorldMind
 
 ```bash
 # Create environment named 'worldmind' 
-conda env create -f conda_envs/environment.yaml -n worldmind
+conda env create -f conda_envs/environment.yaml 
 conda activate worldmind
 
 # Install the package
@@ -89,7 +89,7 @@ pip install -e .
 
 ```bash
 # Create environment named 'worldmind_nav'
-conda env create -f conda_envs/environment_eb-nav.yaml -n worldmind_nav
+conda env create -f conda_envs/environment_eb-nav.yaml 
 conda activate worldmind_nav
 
 # Install the package
@@ -293,7 +293,6 @@ use_worldmind_template: true
 | `enable_process_experience` | Enable process experience retrieval | `True` |
 | `process_experience_top_k` | Number of process experiences to retrieve | `2` |
 | `enable_experience_refine` | Enable LLM-based experience refinement | `True` |
-| `use_vision_discriminator` | Use vision-based discrimination | `False` |
 
 ---
 
