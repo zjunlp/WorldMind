@@ -1,6 +1,3 @@
-// website/javascript/habitat_data.js
-// EB-Habitat 表格数据和渲染
-
 window.renderHabitatTable = function() {
     
     // ==========================================
@@ -63,7 +60,6 @@ window.renderHabitatTable = function() {
         { model: "WorldMind",     avg: 54.0, base: 59.0, common: 58.0, complex: 56.5, visual: 46.0, spatial: 50.5 }
     ];
 
-    // 创建表格函数（复用 alfred_data.js 中的格式化函数）
     var createTable = function(containerId, data) {
         var container = document.getElementById(containerId);
         if (!container) return;
@@ -116,12 +112,10 @@ window.renderHabitatTable = function() {
         });
     };
 
-    // SR 表格
     createTable("habitat-sr-proprietary", proprietaryDataSR);
     createTable("habitat-sr-gpt35", gpt35DataSR);
     createTable("habitat-sr-gpt41", gpt41DataSR);
 
-    // GC 表格
     createTable("habitat-gc-proprietary", proprietaryDataGC);
     createTable("habitat-gc-gpt35", gpt35DataGC);
     createTable("habitat-gc-gpt41", gpt41DataGC);
