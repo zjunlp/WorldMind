@@ -36,4 +36,4 @@ enable_experience_refine: true
 
 use_worldmind_template: true
 
-resume: true
+resume: false
