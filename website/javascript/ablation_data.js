@@ -1,6 +1,3 @@
-// website/javascript/ablation_data.js
-// Ablation Study 表格数据和渲染
-
 window.renderAblationTable = function() {
     
     // GPT-3.5-turbo Ablation Data
@@ -19,7 +16,6 @@ window.renderAblationTable = function() {
         { goal: "✓", process: "✓", alfred_sr: 49.2, alfred_gc: 55.7, habitat_sr: 50.8, habitat_gc: 57.2, isWorldMind: true }
     ];
 
-    // 计算每列最大值
     var getColumnMax = function(data, field) {
         var max = -Infinity;
         for (var i = 0; i < data.length; i++) {
@@ -30,7 +26,7 @@ window.renderAblationTable = function() {
         return max;
     };
 
-    // 创建格式化函数
+
     var createValueFormatter = function(data, field) {
         var maxVal = getColumnMax(data, field);
         return function(cell) {
@@ -41,7 +37,7 @@ window.renderAblationTable = function() {
         };
     };
 
-    // 复选框格式化
+
     var checkFormatter = function(cell) {
         var value = cell.getValue();
         if (value === "✓") {
@@ -51,7 +47,7 @@ window.renderAblationTable = function() {
         }
     };
 
-    // 创建表格函数
+
     var createAblationTable = function(containerId, data) {
         var container = document.getElementById(containerId);
         if (!container) return;
@@ -87,7 +83,7 @@ window.renderAblationTable = function() {
         });
     };
 
-    // 创建两个表格
+
     createAblationTable("ablation-table-gpt35", gpt35Data);
     createAblationTable("ablation-table-gpt41", gpt41Data);
 };
