@@ -23,7 +23,7 @@ use_separate_summarization: false
 eval_sets: ['base', 'common_sense', 'complex_instruction', 'spatial_relationship', 'visual_appearance']
 
 # Goal Experience Settings (from successful trajectories)
-enable_goal_experience: false
+enable_goal_experience: true
 goal_experience_top_k: 1
 
 # Process Experience Settings (from prediction errors)
@@ -31,7 +31,7 @@ enable_process_experience: true
 process_experience_top_k: 1
 
 # Experience Refine Settings
-enable_experience_refine: false
+enable_experience_refine: true
 
 use_worldmind_template: true
 
