@@ -113,6 +113,8 @@ python -m embodiedbench.envs.eb_alfred.scripts.startx 1
 
 **Verify Installation:**
 ```bash
+conda activate worldmind
+
 # Remember to start the headless server first!
 python -m embodiedbench.envs.eb_alfred.EBAlfEnv
 ```
