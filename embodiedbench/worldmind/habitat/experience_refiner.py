@@ -1,94 +1,389 @@
 """
-Experience Refiner for WorldMind Habitat.
-Processes and refines experiences based on reflection results.
+WorldMind Experience Refiner Module for Habitat Environment
+
+This module provides an LLM-based experience refinement mechanism that:
+1. Receives retrieved success experiences and world knowledge along with current task instruction
+2. Uses LLM to remove duplicates and merge experiences
+3. Outputs two keys: merged_experience (refined experiences) and initial_plan (suggested plan for current task)
+4. The refined content is added to the system prompt for the next task
 """
 
+import os
 import json
-from typing import Any
+import re
+from typing import Dict, Optional, List, Tuple
 from openai import OpenAI
+
+from embodiedbench.main import logger
+
+EXPERIENCE_REFINER_SYSTEM_PROMPT = """You are an intelligent experience consolidation agent. Your goal is to distill specific past interactions into **Universal Rules** and **Actionable Facts**.
+
+## Your Task
+1. **Generalize Logic**: Convert specific past actions (e.g., "I opened the microwave to put the apple in") into **Universal Workflows** (e.g., "Placing items in enclosed receptacles like Microwaves requires Opening them first").
+2. **Filter Facts**: Extract valid object locations, removing any conflicting or duplicate data.
+3. **Plan Strategy**: Apply these universal rules to the current specific instruction.
+4. !!!**Filter Irrelevant Experiences**!!!: Discard any retrieved experiences or knowledge that are clearly unrelated to the Current Task Instruction. Only consider relevant experiences when generating `merged_experience` and `initial_plan`.
+
+## 1. Merged Experience Guidelines
+The `merged_experience` field must consist of two distinct parts:
+* **Part A: Universal Workflows & Rules**: Abstracted logic applicable to *any* similar object. DO NOT refer to the specific target object of the current task here. Use terms like "an object", "a container", "enclosed receptacles".
+* **Part B: Valid Location Facts**: A clean list of verified object locations.
+* **Conflict Resolution**: If Location A and Location B conflict for the same object, **OMIT** that object's location entirely.
+
+## 2. Initial Plan Guidelines
+* **Format**: `[Instruction Understanding]: [Simple Workflow Sequence]`
+* **Logic**: Apply the **Universal Workflows** to the **Current Target**.
+
+## 3. Few-Shot Demonstrations (Input -> Output)
+
+### Example 1: Generalization & Conflict Resolution
+**[Input]**
+* **Instruction**: "Heat the egg and put it in the sink."
+* **Success Experiences**: "To heat the egg, I had to pick it, find microwave, open it, put egg in..."
+* **World Knowledge**: 
+    1. "Location Knowledge: Egg is at Fridge."
+    2. "Location Knowledge: Egg is at DiningTable." (CONFLICT! Discard.)
+    3. "Environmental Logic: Failed because I didn't open microwave."
+
+**[Output]**
+{
+    "merged_experience": "Heating workflow requires navigating to a Microwave, Opening it, Placing the object inside, Closing, and Turning on. Moving items requires Picking them up and navigating to the destination. \nLocation Facts: (Conflicting data for 'Egg' omitted).",
+    "initial_plan": "Instruction Understanding: The user wants me to heat an egg and move it to the sink. Workflow: Find Egg (Explore) -> Pick Egg -> Find Microwave -> Open -> Put down Egg -> Close -> Turn on -> Open -> Pick Egg -> Find Sink -> Put down Egg"
+}
+
+### Example 2: Abstraction of Precision Rules
+**[Input]**
+* **Instruction**: "Pick up the ladle."
+* **World Knowledge**: 
+    1. "Environmental Logic: Generic 'Find CounterTop' failed. Feedback states Ladle is at CounterTop_2. Must navigate to exact index."
+    2. "Location Knowledge: Ladle is at CounterTop_2."
+
+**[Output]**
+{
+    "merged_experience": "Navigation must be precise. If the environment or feedback specifies an indexed receptacle (e.g., CounterTop_2), generic navigation will fail to make the object visible. You must navigate to the specific instance.\nLocation Facts: Ladle is at CounterTop_2.",
+    "initial_plan": "Instruction Understanding: The user wants to pick up a ladle located at a specific counter instance. Workflow: Find CounterTop_2 -> Pick Ladle"
+}
+
+### Example 3: Generalizing Complex Workflows (Clean & Store)
+**[Input]**
+* **Instruction**: "Put a clean pan in the refrigerator."
+* **Success Experiences**: "I cleaned the pan by putting it in sink, turning faucet on/off. Then I opened fridge to put pan in."
+* **World Knowledge**: 
+    1. "Location Knowledge: Pan is at StoveBurner."
+    2. "Environmental Logic: Cannot place item in Fridge because it is closed."
+
+**[Output]**
+{
+    "merged_experience": "The standard cleaning workflow involves placing an object in a Sink, Turning the Faucet On, and then Turning it Off. Storing items in enclosed receptacles (like Fridges or Cabinets) requires the 'Open' action before placement.\nLocation Facts: Pan is at StoveBurner.",
+    "initial_plan": "Instruction Understanding: The goal is to clean a dirty pan and store it inside the fridge. Workflow: Find StoveBurner -> Pick Pan -> Find Sink -> Put down Pan -> Turn on Faucet -> Turn off Faucet -> Pick Pan -> Find Fridge -> Open -> Put down Pan -> Close"
+}
+
+## Output Format
+Output ONLY a JSON object with exactly two keys. Do not include markdown formatting or ```json ``` blocks.
+{
+    "merged_experience": "[Abstracted logic]... \nLocation Facts: [List of locations]...",
+    "initial_plan": "[Instruction Understanding]: [Simple Workflow Sequence]"
+}
+
+!!! Please output only the raw JSON.
+"""
+
+EXPERIENCE_REFINER_USER_PROMPT = """## Experience Consolidation Task
+
+### Current Task Instruction
+{current_instruction}
+
+### Retrieved Success Experiences
+{success_experiences}
+
+### Retrieved World Knowledge
+{world_knowledge}
+
+Consolidate the knowledge by generalizing specific actions into universal rules and filtering location facts. Then generate the initial plan.
+
+Output only the JSON.
+"""
 
 
 class ExperienceRefiner:
     """
-    Refines experiences by extracting key patterns from reflection results.
-    Converts raw reflection data into structured goal and process experiences.
+    LLM-based experience refinement module for consolidating experiences at retrieval time.
     """
     
-    def __init__(self, config: dict):
-        """Initialize the refiner with configuration."""
-        self.config = config
-        api_key = config.get("api_key", "")
-        base_url = config.get("base_url", "")
-        self.model = config.get("model", "gpt-4")
-        
-        self.client = OpenAI(api_key=api_key, base_url=base_url)
-    
-    def refine_goal_experience(self, reflection_result: dict, task_info: dict) -> dict:
+    def __init__(self, model_name: str = None, model_type: str = 'remote'):
         """
-        Refine reflection result into goal experience format.
+        Initialize the refiner.
         
         Args:
-            reflection_result: Raw reflection output from Reflector
-            task_info: Context about the current task
-            
-        Returns:
-            Structured goal experience entry
+            model_name: LLM model name for refinement (uses agent's model if not specified)
+            model_type: Model type ('remote' or 'custom')
         """
-        experience = {
-            "task_type": task_info.get("task_type", ""),
-            "pattern": reflection_result.get("pattern", ""),
-            "insight": reflection_result.get("insight", ""),
-            "action_sequence": reflection_result.get("action_sequence", []),
-            "success_indicators": reflection_result.get("success_indicators", [])
-        }
-        return experience
-    
-    def refine_process_experience(self, reflection_result: dict, context: dict) -> dict:
-        """
-        Refine reflection result into process experience format.
+        self.model_name = model_name
+        self.model_type = model_type
         
-        Args:
-            reflection_result: Raw reflection output from Reflector
-            context: Environmental and task context
-            
-        Returns:
-            Structured process experience entry
-        """
-        experience = {
-            "situation": context.get("situation", ""),
-            "action": reflection_result.get("action", ""),
-            "outcome": reflection_result.get("outcome", ""),
-            "lesson": reflection_result.get("lesson", ""),
-            "applicability": reflection_result.get("applicability", [])
-        }
-        return experience
-    
-    def batch_refine(self, reflections: list, experience_type: str = "goal") -> list:
-        """
-        Refine multiple reflection results in batch.
+        self.api_key = os.environ.get('OPENAI_API_KEY')
+        self.api_base = os.environ.get('OPENAI_API_BASE', None)
         
-        Args:
-            reflections: List of reflection results
-            experience_type: Either "goal" or "process"
-            
-        Returns:
-            List of refined experiences
-        """
-        refined = []
-        for reflection in reflections:
-            if experience_type == "goal":
-                refined.append(self.refine_goal_experience(
-                    reflection.get("result", {}),
-                    reflection.get("task_info", {})
-                ))
+        if not self.api_key:
+            logger.warning("OPENAI_API_KEY not set, ExperienceRefiner may not work")
+            self.client = None
+        else:
+            if self.api_base:
+                self.client = OpenAI(api_key=self.api_key, base_url=self.api_base)
             else:
-                refined.append(self.refine_process_experience(
-                    reflection.get("result", {}),
-                    reflection.get("context", {})
-                ))
-        return refined
+                self.client = OpenAI(api_key=self.api_key)
+        
+        self.total_refinements = 0
+        self.refinement_history: List[Dict] = []
+        
+        logger.info(f"Experience Refiner initialized with model: {self.model_name}")
+    
+    def set_model(self, model_name: str, model_type: str = None):
+        """
+        Args:
+            model_name: Model name to use
+            model_type: Model type (optional)
+        """
+        self.model_name = model_name
+        if model_type:
+            self.model_type = model_type
+        logger.info(f"Experience Refiner model updated to: {self.model_name}")
+    
+    def refine_for_task(
+        self,
+        current_instruction: str,
+        success_experiences: List[Dict],
+        world_knowledge: List[Dict]
+    ) -> Dict:
+        """
+        Refine retrieved experiences and generate initial plan for the current task.
+        
+        Args:
+            current_instruction: Current task's human instruction
+            success_experiences: List of retrieved success experiences 
+                                [{instruction: str, success_experience: str}, ...]
+            world_knowledge: List of retrieved world knowledge
+                            [{instruction: str, knowledge: str}, ...]
+        
+        Returns:
+            Dict with keys:
+                - merged_experience: Consolidated experience summary
+                - initial_plan: Preliminary plan for current task
+                - success: Whether refinement succeeded
+        """
+        if not success_experiences and not world_knowledge:
+            return {
+                "merged_experience": "",
+                "initial_plan": "",
+                "success": True,
+                "reason": "No experiences or knowledge to refine"
+            }
+        
+        if not self.client or not self.model_name:
+            return self._fallback_refine(current_instruction, success_experiences, world_knowledge)
+        
+        try:
+            success_exp_text = self._format_success_experiences(success_experiences)
+            
+            world_knowledge_text = self._format_world_knowledge(world_knowledge)
+            
+            user_prompt = EXPERIENCE_REFINER_USER_PROMPT.format(
+                current_instruction=current_instruction,
+                success_experiences=success_exp_text if success_exp_text else "No success experiences retrieved.",
+                world_knowledge=world_knowledge_text if world_knowledge_text else "No world knowledge retrieved."
+            )
+            
+            messages = [
+                {"role": "system", "content": EXPERIENCE_REFINER_SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt}
+            ]
+            
+            response = self.client.chat.completions.create(
+                model=self.model_name,
+                messages=messages,
+                temperature=0,
+                max_tokens=1024
+            )
+            
+            result_text = response.choices[0].message.content
+            result = self._parse_result(result_text)
+            
+            self.total_refinements += 1
+            self.refinement_history.append({
+                "instruction": current_instruction,
+                "success_exp_count": len(success_experiences),
+                "world_knowledge_count": len(world_knowledge),
+                "result": result
+            })
+            
+            logger.info(f"Experience refinement completed for task: {current_instruction[:50]}...")
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"Experience refinement failed: {e}")
+            return self._fallback_refine(current_instruction, success_experiences, world_knowledge)
+    
+    def _format_success_experiences(self, experiences: List[Dict]) -> str:
+        """Format success experiences for the prompt."""
+        if not experiences:
+            return ""
+        
+        formatted = []
+        for i, exp in enumerate(experiences):
+            instruction = exp.get('instruction', 'Unknown task')
+            experience = exp.get('success_experience', exp.get('goal_experience', 'No experience available'))
+            formatted.append(f"{i+1}. [From task: {instruction}]\n   {experience}")
+        
+        return "\n\n".join(formatted)
+    
+    def _format_world_knowledge(self, knowledge_list: List[Dict]) -> str:
+        """Format world knowledge for the prompt."""
+        if not knowledge_list:
+            return ""
+        
+        formatted = []
+        for i, entry in enumerate(knowledge_list):
+            instruction = entry.get('instruction', 'Unknown task')
+            knowledge = entry.get('knowledge', 'No knowledge available')
+            formatted.append(f"{i+1}. [From task: {instruction}]\n   {knowledge}")
+        
+        return "\n\n".join(formatted)
+    
+    def _parse_result(self, result_text: str) -> Dict:
+        """Parse LLM output and extract merged_experience and initial_plan."""
+        try:
+            json_text = result_text
+            if "```json" in result_text:
+                json_text = result_text.split("```json")[1].split("```")[0]
+            elif "```" in result_text:
+                json_text = result_text.split("```")[1].split("```")[0]
+            
+            first_brace = json_text.find('{')
+            if first_brace == -1:
+                raise ValueError("No JSON object found")
+            
+            brace_count = 0
+            last_brace = -1
+            for i in range(first_brace, len(json_text)):
+                if json_text[i] == '{':
+                    brace_count += 1
+                elif json_text[i] == '}':
+                    brace_count -= 1
+                    if brace_count == 0:
+                        last_brace = i
+                        break
+            
+            if last_brace == -1:
+                raise ValueError("No matching closing brace")
+            
+            json_str = json_text[first_brace:last_brace+1]
+            result = json.loads(json_str)
+            
+            merged_experience = result.get("merged_experience", "")
+            initial_plan = result.get("initial_plan", "")
+            
+            return {
+                "merged_experience": merged_experience,
+                "initial_plan": initial_plan,
+                "success": True,
+                "reason": ""
+            }
+            
+        except Exception as e:
+            logger.warning(f"Failed to parse refiner result: {e}")
+            return {
+                "merged_experience": "",
+                "initial_plan": "",
+                "success": False,
+                "reason": f"Parse failed: {e}"
+            }
+    
+    def _fallback_refine(
+        self,
+        current_instruction: str,
+        success_experiences: List[Dict],
+        world_knowledge: List[Dict]
+    ) -> Dict:
+        """
+        Fallback refinement when LLM is not available.
+        Simply concatenate experiences without LLM processing.
+        """
+        exp_parts = []
+        for exp in success_experiences:
+            experience = exp.get('success_experience', exp.get('goal_experience', ''))
+            if experience:
+                exp_parts.append(experience)
+        
+        knowledge_parts = []
+        for entry in world_knowledge:
+            knowledge = entry.get('knowledge', '')
+            if knowledge:
+                knowledge_parts.append(knowledge)
+        
+        merged = ""
+        if exp_parts:
+            merged += "Success Patterns: " + " | ".join(exp_parts[:3])
+        if knowledge_parts:
+            if merged:
+                merged += " | "
+            merged += "World Rules: " + " | ".join(knowledge_parts[:3])
+        
+        return {
+            "merged_experience": merged,
+            "initial_plan": f"Apply the learned patterns to: {current_instruction}",
+            "success": True,
+            "reason": "Fallback mode - simple concatenation"
+        }
+    
+    def format_for_prompt(self, refine_result: Dict) -> str:
+        """
+        Format the refinement result for inclusion in system prompt.
+        
+        Args:
+            refine_result: Result from refine_for_task()
+            
+        Returns:
+            Formatted string to add to system prompt
+        """
+        merged_exp = refine_result.get("merged_experience", "")
+        initial_plan = refine_result.get("initial_plan", "")
+        
+        if not merged_exp and not initial_plan:
+            return ""
+        
+        parts = []
+        
+        if merged_exp:
+            parts.append("## Consolidated Experience from Similar Tasks")
+            parts.append(merged_exp)
+        
+        if initial_plan:
+            parts.append("\n## Preliminary Thinking")
+            parts.append(initial_plan)
+        
+        return "\n".join(parts)
+    
+    def get_statistics(self) -> Dict:
+        """Get refinement statistics."""
+        return {
+            "total_refinements": self.total_refinements,
+            "refinement_history": self.refinement_history[-10:]  
+        }
+    
+    def reset_statistics(self):
+        """Reset statistics counters."""
+        self.total_refinements = 0
+        self.refinement_history = []
 
 
-def create_experience_refiner(config: dict) -> ExperienceRefiner:
-    """Factory function to create an ExperienceRefiner instance."""
-    return ExperienceRefiner(config)
+def create_experience_refiner(model_name: str = None, model_type: str = 'remote') -> ExperienceRefiner:
+    """
+    Args:
+        model_name: LLM model name for refinement
+        model_type: Model type ('remote' or 'custom')
+        
+    Returns:
+        ExperienceRefiner instance
+    """
+    return ExperienceRefiner(model_name=model_name, model_type=model_type)
