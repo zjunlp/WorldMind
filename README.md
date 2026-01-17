@@ -246,7 +246,7 @@ python -m embodiedbench.main \
     enable_worldmind="$ENABLE_WORLDMIND"
 ```
 
-**Usage Examples:**
+**Usage:**
 
 ```bash
 bash run.sh
@@ -287,10 +287,10 @@ use_worldmind_template: true
 |-----------|-------------|---------|
 | `enable_worldmind` | Enable WorldMind components | `True` |
 | `enable_goal_experience` | Enable goal experience retrieval | `True` |
-| `goal_experience_top_k` | Number of goal experiences to retrieve | `3` |
+| `goal_experience_top_k` | Number of goal experiences to retrieve | `2` |
 | `enable_process_experience` | Enable process experience retrieval | `True` |
-| `process_experience_top_k` | Number of process experiences to retrieve | `3` |
-| `enable_experience_refine` | Enable LLM-based experience refinement | `False` |
+| `process_experience_top_k` | Number of process experiences to retrieve | `2` |
+| `enable_experience_refine` | Enable LLM-based experience refinement | `True` |
 | `use_vision_discriminator` | Use vision-based discrimination | `False` |
 
 ---
@@ -301,25 +301,25 @@ use_worldmind_template: true
 
 A benchmark for grounded language learning in 3D household environments. Tasks require agents to execute multi-step instructions involving object manipulation.
 
-**Task Types:** Pick & Place, Examine Objects, Clean & Heat Objects, Toggle Appliances
+**Evaluation Metrics:** Success Rate (SR) and Goal Condition (GC)
 
-**Evaluation Sets:** `base`, `valid_seen`, `valid_unseen`, `long_horizon`
+**Evaluation Sets:** `Base`, `Common`, `Complex`, `Visual`, `Spatial`
 
 ### 🛋️ EB-Habitat (Rearrangement Tasks)
 
 A simulation platform for embodied AI research focusing on object rearrangement tasks in realistic indoor environments.
 
-**Task Types:** Object Goal Navigation, Rearrangement Planning, Multi-Object Manipulation
+**Evaluation Metrics:** Success Rate (SR) and Goal Condition (GC)
 
-**Evaluation Sets:** `val`, `test`
+**Evaluation Sets:** `Base`, `Common`, `Complex`, `Visual`, `Spatial`
 
 ### 🧭 EB-Navigation (Vision-and-Language Navigation)
 
 A discrete navigation environment where agents must reach target locations through natural language instructions.
 
-**Task Types:** Point Goal Navigation, Object Goal Navigation, Vision-Language Navigation
+**Evaluation Metrics:** Success Rate (SR)
 
-**Evaluation Sets:** `base`, `test`
+**Evaluation Sets:** `Base`, `Common`, `Complex`, `Visual`
 
 ---
 
