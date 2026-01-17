@@ -3,7 +3,6 @@
 # 🔌 WorldMind Plugin
 
 </div>
----
 
 ## 📋 Table of Contents
 
