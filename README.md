@@ -1,18 +1,20 @@
 <div align="center">
 
-# <img src="https://em-content.zobj.net/source/twitter/376/globe-with-meridians_1f310.png" width="35"/> **WorldMind**
 
-### Aligning Agentic World Models via Knowledgeable Experience Learning
+<h1 align="center"> <img src="https://em-content.zobj.net/source/twitter/376/globe-with-meridians_1f310.png" width="35"/> **WorldMind** </h1>
+<h3 align="center"> Aligning Agentic World Models via Knowledgeable Experience Learning </h3>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![arXiv](https://img.shields.io/badge/arXiv-2024.XXXXX-b31b1b.svg)](https://arxiv.org/abs/2024.XXXXX)
+
+[![Awesome](https://awesome.re/badge.svg)](https://github.com/zjunlp/KnowRL)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+![](https://img.shields.io/github/last-commit/zjunlp/WorldMind?color=green)
+
 
 <p align="center">
   <img src="assets/framework.jpg" alt="WorldMind Framework" width="90%"/>
 </p>
 
-**WorldMind** is a novel framework for aligning agentic world models through knowledgeable experience learning, enabling agents to learn from both successful trajectories and prediction errors.
+**WorldMind** is a framework for aligning agentic world models through knowledgeable experience learning, enabling agents to learn from both successful trajectories and prediction errors.
 
 [📖 Overview](#-overview) • [🖥️ Installation](#️-installation) • [🚀 Quick Start](#-quick-start) • [🌍 Environments](#-environments) • [🔌 Plugin](#-worldmind-plugin) • [📊 Results](#-results) • [📝 Citation](#-citation)
 
@@ -432,7 +434,7 @@ WorldMind/
 <tr><td>Gemini-1.5-Pro</td><td>63.2</td><td>70.0</td><td>64.0</td><td>72.0</td><td>58.0</td><td>52.0</td><td>67.4</td><td>74.3</td><td>66.7</td><td>76.5</td><td>62.8</td><td>59.0</td></tr>
 <tr><td>Llama-3.2-90B-Vis</td><td>35.2</td><td>38.0</td><td>34.0</td><td>44.0</td><td>28.0</td><td>32.0</td><td>37.6</td><td>43.7</td><td>37.3</td><td>49.2</td><td>35.3</td><td>36.0</td></tr>
 <tr><td>InternVL2.5-78B</td><td>37.0</td><td>41.0</td><td>40.0</td><td>39.0</td><td>16.0</td><td>49.0</td><td>41.0</td><td>42.3</td><td>35.3</td><td>43.3</td><td>35.7</td><td>40.3</td></tr>
-<tr><td colspan="13"><b>GPT-3.5 Based Methods</b></td></tr>
+<tr><td colspan="13"><b>GPT-3.5-turbo Based Methods</b></td></tr>
 <tr><td>ReAct</td><td>44.4</td><td>52.0</td><td>48.0</td><td>52.0</td><td>32.0</td><td>38.0</td><td>50.4</td><td>55.3</td><td>53.5</td><td>55.3</td><td>42.7</td><td>45.0</td></tr>
 <tr><td>BoN</td><td>42.8</td><td>46.0</td><td>42.0</td><td>50.0</td><td>42.0</td><td>34.0</td><td>50.4</td><td>54.2</td><td>46.5</td><td>56.5</td><td>52.0</td><td>42.8</td></tr>
 <tr><td>SimuRA</td><td>45.2</td><td>50.0</td><td>42.0</td><td>54.0</td><td>38.0</td><td>42.0</td><td>53.6</td><td>57.8</td><td>47.8</td><td>59.7</td><td>48.5</td><td>54.3</td></tr>
@@ -440,7 +442,7 @@ WorldMind/
 <tr><td>Synapse</td><td>38.8</td><td>38.0</td><td>46.0</td><td>40.0</td><td>36.0</td><td>34.0</td><td>43.6</td><td>42.5</td><td>51.3</td><td>42.7</td><td>42.0</td><td>39.7</td></tr>
 <tr><td>AWM</td><td>40.0</td><td>46.0</td><td>32.0</td><td>48.0</td><td>40.0</td><td>34.0</td><td>46.2</td><td>53.2</td><td>39.2</td><td>50.7</td><td>47.0</td><td>41.0</td></tr>
 <tr><td><b>WorldMind</b></td><td><b>48.0</b></td><td><b>58.0</b></td><td><b>48.0</b></td><td><b>56.0</b></td><td>34.0</td><td><b>44.0</b></td><td><b>54.1</b></td><td><b>63.0</b></td><td>52.7</td><td><b>61.0</b></td><td>41.7</td><td><b>52.0</b></td></tr>
-<tr><td colspan="13"><b>GPT-4.1 Based Methods</b></td></tr>
+<tr><td colspan="13"><b>GPT-4.1-mini Based Methods</b></td></tr>
 <tr><td>ReAct</td><td>41.2</td><td>50.0</td><td>40.0</td><td>46.0</td><td>38.0</td><td>32.0</td><td>47.5</td><td>55.3</td><td>42.8</td><td>52.2</td><td>47.2</td><td>39.8</td></tr>
 <tr><td>BoN</td><td>44.4</td><td>46.0</td><td>44.0</td><td>50.0</td><td>42.0</td><td>40.0</td><td>49.5</td><td>50.8</td><td>48.3</td><td>54.7</td><td>48.7</td><td>45.0</td></tr>
 <tr><td>SimuRA</td><td>45.6</td><td>52.0</td><td>44.0</td><td>54.0</td><td>38.0</td><td>40.0</td><td>52.2</td><td>61.0</td><td>50.3</td><td>58.2</td><td>45.3</td><td>46.3</td></tr>
@@ -473,7 +475,7 @@ WorldMind/
 <tr><td>Gemini-1.5-Pro</td><td>63.2</td><td>70.0</td><td>64.0</td><td>72.0</td><td>58.0</td><td>52.0</td><td>67.4</td><td>74.3</td><td>66.7</td><td>76.5</td><td>62.8</td><td>59.0</td></tr>
 <tr><td>Llama-3.2-90B-Vis</td><td>35.2</td><td>38.0</td><td>34.0</td><td>44.0</td><td>28.0</td><td>32.0</td><td>37.6</td><td>43.7</td><td>37.3</td><td>49.2</td><td>35.3</td><td>36.0</td></tr>
 <tr><td>InternVL2.5-78B</td><td>37.0</td><td>41.0</td><td>40.0</td><td>39.0</td><td>16.0</td><td>49.0</td><td>41.0</td><td>42.3</td><td>35.3</td><td>43.3</td><td>35.7</td><td>40.3</td></tr>
-<tr><td colspan="13"><b>GPT-3.5 Based Methods</b></td></tr>
+<tr><td colspan="13"><b>GPT-3.5-turbo Based Methods</b></td></tr>
 <tr><td>ReAct</td><td>44.4</td><td>52.0</td><td>48.0</td><td>52.0</td><td>32.0</td><td>38.0</td><td>50.4</td><td>55.3</td><td>53.5</td><td>55.3</td><td>42.7</td><td>45.0</td></tr>
 <tr><td>BoN</td><td>42.8</td><td>46.0</td><td>42.0</td><td>50.0</td><td>42.0</td><td>34.0</td><td>50.4</td><td>54.2</td><td>46.5</td><td>56.5</td><td>52.0</td><td>42.8</td></tr>
 <tr><td>SimuRA</td><td>45.2</td><td>50.0</td><td>42.0</td><td>54.0</td><td>38.0</td><td>42.0</td><td>53.6</td><td>57.8</td><td>47.8</td><td>59.7</td><td>48.5</td><td>54.3</td></tr>
@@ -481,7 +483,7 @@ WorldMind/
 <tr><td>Synapse</td><td>38.8</td><td>38.0</td><td>46.0</td><td>40.0</td><td>36.0</td><td>34.0</td><td>43.6</td><td>42.5</td><td>51.3</td><td>42.7</td><td>42.0</td><td>39.7</td></tr>
 <tr><td>AWM</td><td>40.0</td><td>46.0</td><td>32.0</td><td>48.0</td><td>40.0</td><td>34.0</td><td>46.2</td><td>53.2</td><td>39.2</td><td>50.7</td><td>47.0</td><td>41.0</td></tr>
 <tr><td><b>WorldMind</b></td><td><b>48.0</b></td><td><b>58.0</b></td><td><b>48.0</b></td><td><b>56.0</b></td><td>34.0</td><td><b>44.0</b></td><td><b>54.1</b></td><td><b>63.0</b></td><td>52.7</td><td><b>61.0</b></td><td>41.7</td><td><b>52.0</b></td></tr>
-<tr><td colspan="13"><b>GPT-4.1 Based Methods</b></td></tr>
+<tr><td colspan="13"><b>GPT-4.1-mini Based Methods</b></td></tr>
 <tr><td>ReAct</td><td>41.2</td><td>50.0</td><td>40.0</td><td>46.0</td><td>38.0</td><td>32.0</td><td>47.5</td><td>55.3</td><td>42.8</td><td>52.2</td><td>47.2</td><td>39.8</td></tr>
 <tr><td>BoN</td><td>44.4</td><td>46.0</td><td>44.0</td><td>50.0</td><td>42.0</td><td>40.0</td><td>49.5</td><td>50.8</td><td>48.3</td><td>54.7</td><td>48.7</td><td>45.0</td></tr>
 <tr><td>SimuRA</td><td>45.6</td><td>52.0</td><td>44.0</td><td>54.0</td><td>38.0</td><td>40.0</td><td>52.2</td><td>61.0</td><td>50.3</td><td>58.2</td><td>45.3</td><td>46.3</td></tr>
@@ -508,11 +510,15 @@ If you find this work useful, please cite:
 
 ## 🙏 Acknowledgments
 
-We thank the following projects and teams:
+## 🙏 Acknowledgments
+
+We thank the following projects and teams for their open-source contributions:
 
 - [EmbodiedBench](https://github.com/embodiedbench) for the evaluation framework
-- [ALFRED](https://askforalfred.com/) for the household task benchmark
-- [Habitat](https://aihabitat.org/) for the simulation platform
+- [ALFRED](https://github.com/askforalfred/alfred) and [AI2-THOR](https://github.com/allenai/ai2thor) for the household task benchmark and simulation environment
+- [Habitat](https://github.com/facebookresearch/habitat-lab) for the rearrangement simulation platform
+- [vLLM](https://github.com/vllm-project/vllm) for efficient LLM inference and serving
+
 
 ---
 
