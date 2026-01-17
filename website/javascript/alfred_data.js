@@ -1,7 +1,3 @@
-// website/javascript/alfred_data.js
-// EB-ALFRED 表格数据和渲染
-
-// --- 颜色格式化函数 ---
 var colorFormatterSubgoal = function (cell, formatterParams) {
     var value = cell.getValue();
     if (value === "-") { return value; }
@@ -85,7 +81,7 @@ var getColumnMinMax = function(data, field) {
     return { min: Math.min.apply(null, values), max: Math.max.apply(null, values) };
 };
 
-// 主函数：渲染 ALFRED 表格
+
 window.renderAlfredTable = function() {
     
     // ==========================================
@@ -148,7 +144,6 @@ window.renderAlfredTable = function() {
         { model: "WorldMind",         avg: 55.7, base: 61.0, common: 61.0, complex: 58.8, visual: 48.0, spatial: 49.7 }
     ];
 
-    // 创建表格函数
     var createTable = function(containerId, data) {
         var container = document.getElementById(containerId);
         if (!container) return;
@@ -201,12 +196,10 @@ window.renderAlfredTable = function() {
         });
     };
 
-    // SR 表格
     createTable("alfred-sr-proprietary", proprietaryDataSR);
     createTable("alfred-sr-gpt35", gpt35DataSR);
     createTable("alfred-sr-gpt41", gpt41DataSR);
 
-    // GC 表格
     createTable("alfred-gc-proprietary", proprietaryDataGC);
     createTable("alfred-gc-gpt35", gpt35DataGC);
     createTable("alfred-gc-gpt41", gpt41DataGC);
