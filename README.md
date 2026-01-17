@@ -16,7 +16,7 @@
 
 **WorldMind** is a framework for aligning agentic world models through knowledgeable experience learning, enabling agents to learn from both successful trajectories and prediction errors.
 
-[📖 Overview](#-overview) • [🖥️ Installation](#️-installation) • [🚀 Quick Start](#-quick-start) • [🌍 Environments](#-environments) • [🔌 Plugin](#-worldmind-plugin) • [📊 Results](#-results) • [📝 Citation](#-citation)
+[📖 Overview](#-overview) • [🖥️ Installation](#️-installation) • [🚀 Quick Start](#-quick-start) • [🌍 Environments](#-environments) • [🔌 Plugin](#-worldmind-plugin) • [📁 Project Structure](#-project-structure) • [📊 Results](#-results) • [📝 Citation](#-citation) • [🙏 Acknowledgments](#-acknowledgments)
 
 </div>
 
