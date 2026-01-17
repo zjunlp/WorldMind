@@ -8,28 +8,32 @@ Provides management for two types of learned knowledge:
 import os
 import json
 import re
+import numpy as np
 from typing import Dict, List, Optional, Tuple, Any
 
 from embodiedbench.planner.remote_model import RemoteModel
 from embodiedbench.planner.planner_utils import fix_json
 from embodiedbench.main import logger
 
-# Lazy load sentence transformer to avoid import errors when not needed
+# Import SentenceTransformer - required dependency
+try:
+    from sentence_transformers import SentenceTransformer
+except ImportError:
+    raise ImportError(
+        "sentence-transformers is required for WorldMind. "
+        "Please install it with: pip install sentence-transformers"
+    )
+
+# Global sentence model instance
 _sentence_model = None
 
 def _get_sentence_model():
-    """Lazy load SentenceTransformer model for semantic similarity."""
+    """Get or initialize SentenceTransformer model for semantic similarity."""
     global _sentence_model
     if _sentence_model is None:
-        try:
-            from sentence_transformers import SentenceTransformer
-            _sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
-            logger.info("SentenceTransformer model loaded for semantic retrieval")
-        except ImportError:
-            logger.warning("sentence-transformers not installed, falling back to basic similarity")
-            _sentence_model = False
+        _sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
+        logger.info("SentenceTransformer model loaded for semantic retrieval")
     return _sentence_model
-
 
 
 # Goal Experience Prompts
@@ -185,6 +189,7 @@ class GoalExperienceManager:
             try:
                 with open(experience_path, 'r', encoding='utf-8') as f:
                     self.experiences = json.load(f)
+                self._embeddings_cache.clear()
                 logger.info(f"Loaded {len(self.experiences)} goal experiences from {experience_path}")
             except Exception as e:
                 logger.warning(f"Failed to load goal experiences: {e}")
@@ -244,16 +249,6 @@ class GoalExperienceManager:
         """Compute semantic similarity between two text strings using sentence embeddings."""
         model = _get_sentence_model()
         
-        if model is False:
-            # Fallback to basic word overlap similarity
-            words1 = set(text1.lower().split())
-            words2 = set(text2.lower().split())
-            if not words1 or not words2:
-                return 0.0
-            intersection = words1 & words2
-            union = words1 | words2
-            return len(intersection) / len(union) if union else 0.0
-        
         try:
             # Use cache for embeddings
             if text1 not in self._embeddings_cache:
@@ -265,19 +260,11 @@ class GoalExperienceManager:
             emb2 = self._embeddings_cache[text2]
             
             # Compute cosine similarity
-            import numpy as np
             similarity = np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
             return float(similarity)
         except Exception as e:
-            logger.warning(f"Error computing semantic similarity: {e}")
-            # Fallback to word overlap
-            words1 = set(text1.lower().split())
-            words2 = set(text2.lower().split())
-            if not words1 or not words2:
-                return 0.0
-            intersection = words1 & words2
-            union = words1 | words2
-            return len(intersection) / len(union) if union else 0.0
+            logger.error(f"Error computing semantic similarity: {e}")
+            raise
     
     def retrieve_experiences(self, instruction: str) -> List[Dict]:
         """Retrieve top-k most relevant goal experiences based on instruction similarity."""
@@ -477,6 +464,7 @@ class ProcessExperienceManager:
                     loaded_data = json.load(f)
                 
                 self.knowledge_entries = self._normalize_knowledge_format(loaded_data)
+                self._embeddings_cache.clear()
                 
                 total_knowledge = sum(len(entry.get('knowledge', [])) for entry in self.knowledge_entries)
                 logger.info(f"Loaded {len(self.knowledge_entries)} process experience entries ({total_knowledge} total items)")
@@ -619,16 +607,6 @@ class ProcessExperienceManager:
         """Compute semantic similarity between two text strings using sentence embeddings."""
         model = _get_sentence_model()
         
-        if model is False:
-            # Fallback to basic word overlap similarity
-            words1 = set(text1.lower().split())
-            words2 = set(text2.lower().split())
-            if not words1 or not words2:
-                return 0.0
-            intersection = words1 & words2
-            union = words1 | words2
-            return len(intersection) / len(union) if union else 0.0
-        
         try:
             # Use cache for embeddings
             if text1 not in self._embeddings_cache:
@@ -640,19 +618,11 @@ class ProcessExperienceManager:
             emb2 = self._embeddings_cache[text2]
             
             # Compute cosine similarity
-            import numpy as np
             similarity = np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
             return float(similarity)
         except Exception as e:
-            logger.warning(f"Error computing semantic similarity: {e}")
-            # Fallback to word overlap
-            words1 = set(text1.lower().split())
-            words2 = set(text2.lower().split())
-            if not words1 or not words2:
-                return 0.0
-            intersection = words1 & words2
-            union = words1 | words2
-            return len(intersection) / len(union) if union else 0.0
+            logger.error(f"Error computing semantic similarity: {e}")
+            raise
     
     def retrieve_knowledge(self, instruction: str) -> List[Dict]:
         """Retrieve top-k most relevant process experiences based on instruction similarity."""
@@ -732,3 +702,4 @@ def create_process_experience_manager(
         eval_set=eval_set,
         top_k=top_k
     )
+
