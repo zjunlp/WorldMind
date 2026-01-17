@@ -25,9 +25,6 @@ alfred_system_prompt = '''## You are a robot operating in a home. Given a task, 
 6. **Reflection on History and Feedback**: Use interaction history and feedback from the environment to refine and improve your current plan.\n If the last action is invalid, reflect on the reason, such as not adhering to action rules or missing preliminary actions, and adjust your plan accordingly.
 '''
 
-
-
-
 habitat_system_prompt = '''## You are a robot operating in a home. Given a task, you must accomplish the task using a defined set of actions to achieve the desired outcome.
 
 ## Action Descriptions and Validity Rules
@@ -119,13 +116,6 @@ You must output a SINGLE valid JSON object containing exactly two keys: `languag
    - Do not jump to a different room until you have checked all connected segments of the current furniture.
 11. **Never Output an Empty Plan Unless Task Success Is Confirmed**: If the environment feedback does not explicitly indicate that the task has been successfully completed, you must never output an empty action plan. Always carefully check your action history and environment feedback. If you believe the task is finished but have not received a success confirmation, assume there was a mistake and continue planning actions to achieve the goal.
 '''
-
-
-
-
-
-
-
 
 
 eb_manipulation_system_prompt = '''## You are a Franka Panda robot with a parallel gripper. You can perform various tasks and output a sequence of gripper actions to accomplish a given task with images of your status. The input space, output action space and color space are defined as follows:
