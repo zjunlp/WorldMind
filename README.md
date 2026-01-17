@@ -1,11 +1,11 @@
 <div align="center">
 
 
-<h1 align="center"> <img src="https://em-content.zobj.net/source/twitter/376/globe-with-meridians_1f310.png" width="35"/> **WorldMind** </h1>
+<h1 align="center"> <img src="https://em-content.zobj.net/source/twitter/376/globe-with-meridians_1f310.png" width="35"/> WorldMind </h1>
 <h3 align="center"> Aligning Agentic World Models via Knowledgeable Experience Learning </h3>
 
 
-[![Awesome](https://awesome.re/badge.svg)](https://github.com/zjunlp/KnowRL)
+[![Awesome](https://awesome.re/badge.svg)](https://github.com/zjunlp/WorldMind)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 ![](https://img.shields.io/github/last-commit/zjunlp/WorldMind?color=green)
 
