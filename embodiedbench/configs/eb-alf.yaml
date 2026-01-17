@@ -28,11 +28,11 @@ enable_goal_experience: true
 goal_experience_top_k: 2
 
 # Process Experience Settings
-enable_process_experience: false
+enable_process_experience: true
 process_experience_top_k: 2
 
 # Experience Refine Settings
-enable_experience_refine: false
+enable_experience_refine: true
 
 use_worldmind_template: true
 
