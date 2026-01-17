@@ -20,7 +20,7 @@
   - [ProcessExperienceModule](#module-1-processexperiencemodule)
   - [GoalExperienceModule](#module-2-goalexperiencemodule)
   - [ExperienceRetrievalModule](#module-3-experienceretrievalmodule)
-- [Configuration](#-configuration)
+- [Configuration](#configuration)
 - [Complete Integration Example](#-complete-integration-example)
 - [API Reference](#-api-reference)
 
@@ -257,7 +257,7 @@ retrieval_module.reload_experiences()
 
 ---
 
-## ⚙️ Configuration
+## <a id="configuration"></a>⚙️ Configuration
 
 ```python
 from worldmind_plugin import WorldMindConfig
