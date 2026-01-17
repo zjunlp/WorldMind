@@ -131,7 +131,7 @@ dependencies:
       - proto-plus==1.25.0
       - protobuf==5.29.3
       - psutil==6.1.1
- 
+      - sentence_transformers==5.1.2
       - pyarrow==19.0.0
       - pyasn1==0.6.1
       - pyasn1-modules==0.4.1
