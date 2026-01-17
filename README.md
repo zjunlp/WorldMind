@@ -81,8 +81,6 @@ cd WorldMind
 # Create environment named 'worldmind' 
 conda env create -f conda_envs/environment.yaml 
 conda activate worldmind
-
-# Install the package
 pip install -e .
 ```
 
@@ -93,8 +91,6 @@ pip install -e .
 # Create environment named 'worldmind_nav'
 conda env create -f conda_envs/environment_eb-nav.yaml 
 conda activate worldmind_nav
-
-# Install the package
 pip install -e .
 ```
 
