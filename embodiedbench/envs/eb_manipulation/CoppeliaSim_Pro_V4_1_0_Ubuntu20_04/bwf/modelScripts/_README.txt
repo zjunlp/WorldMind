@@ -1,1 +1,0 @@
-Those scripts are for Blue Reality version 0 (early alpha) and are deprecated

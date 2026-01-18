@@ -1,2 +1,0 @@
-local vision={}
-return vision

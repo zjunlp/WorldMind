@@ -1,3 +1,0 @@
-local simIK={}
-
-return simIK

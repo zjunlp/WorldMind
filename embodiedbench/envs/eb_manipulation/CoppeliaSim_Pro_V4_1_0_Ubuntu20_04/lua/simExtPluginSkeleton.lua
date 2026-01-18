@@ -1,2 +1,0 @@
-local skeleton={}
-return skeleton

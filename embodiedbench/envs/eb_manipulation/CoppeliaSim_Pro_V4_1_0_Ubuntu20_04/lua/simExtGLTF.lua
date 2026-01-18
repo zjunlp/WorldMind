@@ -1,3 +1,0 @@
-local simGLTF={}
-
-return simGLTF

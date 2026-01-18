@@ -1,3 +1,0 @@
-local simOMPL={}
-
-return simOMPL

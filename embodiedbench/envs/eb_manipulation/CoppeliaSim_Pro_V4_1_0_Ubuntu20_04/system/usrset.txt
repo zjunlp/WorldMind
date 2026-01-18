@@ -1,2 +1,0 @@
-
-allowOldEduRelease=7501

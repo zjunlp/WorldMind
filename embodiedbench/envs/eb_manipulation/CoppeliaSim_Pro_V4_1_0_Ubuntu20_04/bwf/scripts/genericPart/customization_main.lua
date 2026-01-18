@@ -1,2 +1,0 @@
-function sysCall_cleanup_specific()
-end

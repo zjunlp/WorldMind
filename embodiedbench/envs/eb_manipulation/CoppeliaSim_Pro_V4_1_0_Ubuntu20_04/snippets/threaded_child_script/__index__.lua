@@ -1,1 +1,0 @@
---@name Threaded Child Script

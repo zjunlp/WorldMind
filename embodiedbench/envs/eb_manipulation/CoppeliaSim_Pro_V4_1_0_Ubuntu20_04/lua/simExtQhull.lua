@@ -1,2 +1,0 @@
-local qhull={}
-return qhull

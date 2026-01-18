@@ -1,2 +1,0 @@
-local urdf={}
-return urdf

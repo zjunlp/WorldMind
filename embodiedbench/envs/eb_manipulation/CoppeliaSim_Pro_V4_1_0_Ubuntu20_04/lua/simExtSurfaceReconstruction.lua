@@ -1,3 +1,0 @@
-local simSurfRec={}
-
-return simSurfRec

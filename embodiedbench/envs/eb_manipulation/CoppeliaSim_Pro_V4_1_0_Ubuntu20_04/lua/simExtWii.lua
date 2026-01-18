@@ -1,2 +1,0 @@
-local wii={}
-return wii

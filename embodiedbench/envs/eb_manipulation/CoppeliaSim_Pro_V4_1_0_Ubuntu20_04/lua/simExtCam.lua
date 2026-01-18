@@ -1,2 +1,0 @@
-local cam={}
-return cam
