@@ -1,21 +1,56 @@
 <div align="center">
 
-
-<h1 align="center"> <img src="https://em-content.zobj.net/source/twitter/376/globe-with-meridians_1f310.png" width="35"/> WorldMind </h1>
+<h1 align="center"> 🌐 WorldMind </h1>
 <h3 align="center"> Aligning Agentic World Models via Knowledgeable Experience Learning </h3>
 
+</div>
 
-[![Awesome](https://awesome.re/badge.svg)](https://github.com/zjunlp/WorldMind)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-![](https://img.shields.io/github/last-commit/zjunlp/WorldMind?color=green)
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=24&duration=3000&pause=1000&color=00D9FF&center=true&vCenter=true&width=600&lines=Welcome+to+WorldMind;Aligning+Agentic+World+Models;Knowledgeable+Experience+Learning" alt="Typing Animation" />
+</div>
 
+<div align="center">
+  <img src="./demo/lightagent_demo.gif" width="800" alt="演示动画">
+</div>
+
+
+
+<div align="center">
+
+  <a href='https://github.com/zjunlp/WorldMind'>
+    <img src='https://img.shields.io/badge/🦄_Awesome-List-fc60a8?style=for-the-badge&logo=awesome-lists&logoColor=white&labelColor=1a1a2e'>
+  </a>
+
+  <a href='https://zjunlp.github.io/WorldMind/'>
+    <img src='https://img.shields.io/badge/🔥_Project-Page-00d9ff?style=for-the-badge&logo=github&logoColor=white&labelColor=1a1a2e'>
+  </a>
+
+  <a href='https://arxiv.org/abs/2026.xxxxx'>
+    <img src='https://img.shields.io/badge/📄_arXiv-Paper-ff6b6b?style=for-the-badge&logo=arxiv&logoColor=white&labelColor=1a1a2e'>
+  </a>
+
+  <a href="https://github.com/zjunlp/WorldMind/stargazers">
+    <img src='https://img.shields.io/github/stars/zjunlp/WorldMind?color=00d9ff&style=for-the-badge&logo=star&logoColor=white&labelColor=1a1a2e' />
+  </a>
+
+  <a href="https://github.com/zjunlp/WorldMind/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-4ecdc4?style=for-the-badge&logo=open-source-initiative&logoColor=white&labelColor=1a1a2e">
+  </a>
+
+</div>
+
+<div align="center">
+  <div style="width: 100%; height: 2px; margin: 20px 0; background: linear-gradient(90deg, transparent, #00d9ff, transparent);"></div>
+</div>
 
 <p align="center">
   <img src="assets/framework.jpg" alt="WorldMind Framework" width="90%"/>
 </p>
 
-**WorldMind** is a framework for aligning agentic world models through knowledgeable experience learning, enabling agents to learn directly from the environment.
 
+**WorldMind** is a framework for aligning agentic world models through knowledgeable experience learning, enabling agents to learn directly from the environment.
+<div align="center">
+  
 [📖 Overview](#-overview) • [🖥️ Installation](#️-installation) • [🚀 Quick Start](#-quick-start) • [🌍 Environments](#-environments) • [🔌 Plugin](#-worldmind-plugin) • [📁 Project Structure](#-project-structure) • [📊 Results](#-results) • [📝 Citation](#-citation) • [🙏 Acknowledgments](#-acknowledgments)
 
 </div>
