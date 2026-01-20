@@ -21,7 +21,7 @@
     <img src='https://img.shields.io/badge/🦄_Awesome-List-fc60a8?style=for-the-badge&logo=awesome-lists&logoColor=white&labelColor=1a1a2e'>
   </a>
 
-  <a href='https://zjunlp.github.io/WorldMind/'>
+  <a href='https://zjunlp.github.io/project/WorldMind/'>
     <img src='https://img.shields.io/badge/🔥_Project-Page-00d9ff?style=for-the-badge&logo=github&logoColor=white&labelColor=1a1a2e'>
   </a>
 
