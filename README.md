@@ -26,7 +26,7 @@
   </a>
 
   <a href='https://arxiv.org/abs/2601.13247'>
-    <img src='https://img.shields.io/badge/📄_arXiv-Paper-ff6b6b?style=for-the-badge&logo=arxiv&logoColor=white&labelColor=1a1a2e'>
+    <img src='https://img.shields.io/badge/📄_arXiv-2601.13247-ff6b6b?style=for-the-badge&logo=arxiv&logoColor=white&labelColor=1a1a2e'>
   </a>
 
   <a href="https://github.com/zjunlp/WorldMind/stargazers">
