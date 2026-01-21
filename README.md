@@ -142,8 +142,15 @@ python -m embodiedbench.envs.eb_alfred.scripts.startx 1
 
 <details>
 <summary><b>🏠 EB-ALFRED (Household Tasks)</b></summary>
-
-**Verify Installation:**
+  
+**1.Download Data:**
+```bash
+conda activate embench
+git clone https://huggingface.co/datasets/EmbodiedBench/EB-ALFRED
+mv EB-ALFRED embodiedbench/envs/eb_alfred/data/json_2.1.0
+```
+  
+**2.Verify Installation:**
 ```bash
 conda activate worldmind
 
@@ -168,8 +175,17 @@ cd ./habitat-lab
 pip install -e habitat-lab
 cd ..
 ```
+**2.Download Data:**
+Download YCB and ReplicaCAD dataset for the Language Rearrangement task.
+```bash
+conda install -y -c conda-forge git-lfs
+python -m habitat_sim.utils.datasets_download --uids rearrange_task_assets
+mv data embodiedbench/envs/eb_habitat
+```
+> **Note:** After the above step, there should be a `data` folder under `embodiedbench/envs/eb_habitat`.
 
 **2. Verify Installation:**
+Run the following code to ensure the EB-Habitat environment is working correctly.
 ```bash
 python -m embodiedbench.envs.eb_habitat.EBHabEnv
 ```
@@ -180,6 +196,7 @@ python -m embodiedbench.envs.eb_habitat.EBHabEnv
 <summary><b>🧭 EB-Navigation (Vision-and-Language Navigation)</b></summary>
 
 **Verify Installation:**
+Run the following code to ensure the EB-Navigation environment is working correctly.
 ```bash
 conda activate worldmind_nav
 python -m embodiedbench.envs.eb_navigation.EBNavEnv
