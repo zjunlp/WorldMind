@@ -533,7 +533,12 @@ WorldMind/
 If you find this work useful, please cite:
 
 ```bibtex
-
+@article{ren2026aligning,
+  title={Aligning Agentic World Models via Knowledgeable Experience Learning},
+  author={Ren, Baochang and Yao, Yunzhi and Sun, Rui and Qiao, Shuofei and Zhang, Ningyu and Chen, Huajun},
+  journal={arXiv preprint arXiv:2601.13247},
+  year={2026}
+}
 ```
 
 ---
