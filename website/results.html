@@ -1,0 +1,639 @@
+<section class="paper-section interactive-card" id="results">
+    <h2>4. Experimental Results</h2>
+    
+    <div class="env-section-inner">
+        <div class="env-header">
+            <div class="env-title-icon"><i class="fas fa-flask"></i></div>
+            <h3 style="margin: 0; font-size: 1.3rem;">Task Environments</h3>
+        </div>
+        
+        <p style="margin-bottom: 25px; font-size: 0.95rem; color: #666;">
+            We utilize three diverse environments to evaluate the agent's alignment with reality, ranging from high-level planning to precise low-level control.
+        </p>
+
+        <div class="env-grid">
+            <div class="env-card env-card-alfred">
+                <div class="env-card-icon-wrapper">
+                    <div class="env-card-icon-bg alfred-bg"></div>
+                    <svg class="env-svg-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- House with Robot -->
+                        <rect x="12" y="28" width="40" height="28" rx="3" fill="#fff" stroke="#ff9f43" stroke-width="2"/>
+                        <polygon points="32,10 8,30 56,30" fill="#fff" stroke="#ff9f43" stroke-width="2" stroke-linejoin="round"/>
+                        <rect x="26" y="40" width="12" height="16" fill="#ffe0b2" stroke="#ff9f43" stroke-width="1.5"/>
+                        <circle cx="32" cy="22" r="5" fill="#ff9f43"/>
+                        <circle cx="30" cy="21" r="1.2" fill="#fff"/>
+                        <circle cx="34" cy="21" r="1.2" fill="#fff"/>
+                    </svg>
+                </div>
+                <h4>EB-ALFRED</h4>
+                <div class="env-card-tag">Household Planning</div>
+                <p>Long-horizon task decomposition based on AI2-THOR simulator.</p>
+            </div>
+
+            <div class="env-card env-card-habitat">
+                <div class="env-card-icon-wrapper">
+                    <div class="env-card-icon-bg habitat-bg"></div>
+                    <svg class="env-svg-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Furniture rearrangement -->
+                        <rect x="8" y="36" width="20" height="16" rx="2" fill="#fff" stroke="#54a0ff" stroke-width="2"/>
+                        <rect x="10" y="38" width="7" height="5" fill="#bbdefb"/>
+                        <rect x="19" y="38" width="7" height="5" fill="#bbdefb"/>
+                        <rect x="36" y="30" width="20" height="22" rx="2" fill="#fff" stroke="#54a0ff" stroke-width="2"/>
+                        <line x1="36" y1="40" x2="56" y2="40" stroke="#54a0ff" stroke-width="1.5"/>
+                        <line x1="36" y1="46" x2="56" y2="46" stroke="#54a0ff" stroke-width="1.5"/>
+                        <path d="M25 28 L32 16 L48 22" stroke="#54a0ff" stroke-width="2" stroke-dasharray="4 2" fill="none"/>
+                        <circle cx="32" cy="16" r="4" fill="#54a0ff"/>
+                        <path d="M30 15 L33 18 L35 14" stroke="#fff" stroke-width="1.5" fill="none"/>
+                    </svg>
+                </div>
+                <h4>EB-Habitat</h4>
+                <div class="env-card-tag">Rearrangement</div>
+                <p>Object logistics tasks built upon Habitat 2.0 platform.</p>
+            </div>
+
+            <div class="env-card env-card-nav">
+                <div class="env-card-icon-wrapper">
+                    <div class="env-card-icon-bg nav-bg"></div>
+                    <svg class="env-svg-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Navigation grid -->
+                        <rect x="10" y="10" width="44" height="44" rx="4" fill="#fff" stroke="#1dd1a1" stroke-width="2"/>
+                        <line x1="10" y1="24" x2="54" y2="24" stroke="#b2dfdb" stroke-width="1"/>
+                        <line x1="10" y1="38" x2="54" y2="38" stroke="#b2dfdb" stroke-width="1"/>
+                        <line x1="24" y1="10" x2="24" y2="54" stroke="#b2dfdb" stroke-width="1"/>
+                        <line x1="39" y1="10" x2="39" y2="54" stroke="#b2dfdb" stroke-width="1"/>
+                        <circle cx="17" cy="17" r="4" fill="#1dd1a1"/>
+                        <circle cx="46" cy="46" r="5" fill="#ff6b6b" stroke="#fff" stroke-width="2"/>
+                        <path d="M17 17 L17 31 L32 31 L32 46 L41 46" stroke="#1dd1a1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"/>
+                    </svg>
+                </div>
+                <h4>EB-Navigation</h4>
+                <div class="env-card-tag">Low-Level Control</div>
+                <p>Precise atomic actions requiring strict spatial reasoning.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+
+    <p style="margin-bottom: 30px;">
+        Below are the detailed performance comparisons. Click the tabs to explore different environments and analyses.
+    </p>
+
+    <div class="results-container">
+        
+        <div class="results-sidebar">
+            <button class="result-tab-btn active" onclick="openResult(event, 'tab-alfred')">
+                <i class="fas fa-robot"></i> EB-ALFRED
+            </button>
+            <button class="result-tab-btn" onclick="openResult(event, 'tab-habitat')">
+                <i class="fas fa-home"></i> EB-Habitat
+            </button>
+            <button class="result-tab-btn" onclick="openResult(event, 'tab-ablation')">
+                <i class="fas fa-layer-group"></i> Ablation
+            </button>
+            <button class="result-tab-btn" onclick="openResult(event, 'tab-nav')">
+                <i class="fas fa-map-marker-alt"></i> Navigation
+            </button>
+        </div>
+
+        <div class="results-display-area">
+            
+            <!-- ==================== EB-ALFRED Tab ==================== -->
+            <div id="tab-alfred" class="result-content active">
+                <div class="result-header">
+                    <i class="fas fa-robot" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                    <h3>Performance on EB-ALFRED</h3>
+                </div>
+                
+                <!-- SR Section -->
+                <div class="metric-section">
+                    <div class="metric-header sr-header" onclick="toggleMetric(this)">
+                        <div class="metric-header-title">
+                            <i class="fas fa-check-circle"></i> Success Rate (SR)
+                        </div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="sub-tab-container" id="alfred-sr-container">
+                            <ul class="nav-tabs-sub">
+                                <li class="nav-item">
+                                    <button class="nav-link tab-proprietary active" onclick="openSubTab(event, 'alfred-sr-pane-proprietary', 'alfred-sr-container')">Open-source & Proprietary</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link tab-gpt35" onclick="openSubTab(event, 'alfred-sr-pane-gpt35', 'alfred-sr-container')">GPT-3.5-turbo</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link tab-gpt41" onclick="openSubTab(event, 'alfred-sr-pane-gpt41', 'alfred-sr-container')">GPT-4.1-mini</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content-sub">
+                                <div class="tab-pane-sub active" id="alfred-sr-pane-proprietary">
+                                    <div id="alfred-sr-proprietary"></div>
+                                </div>
+                                <div class="tab-pane-sub" id="alfred-sr-pane-gpt35">
+                                    <div id="alfred-sr-gpt35"></div>
+                                </div>
+                                <div class="tab-pane-sub" id="alfred-sr-pane-gpt41">
+                                    <div id="alfred-sr-gpt41"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GC Section -->
+                <div class="metric-section">
+                    <div class="metric-header gc-header" onclick="toggleMetric(this)">
+                        <div class="metric-header-title">
+                            <i class="fas fa-bullseye"></i> Goal Condition (GC)
+                        </div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="sub-tab-container" id="alfred-gc-container">
+                            <ul class="nav-tabs-sub">
+                                <li class="nav-item">
+                                    <button class="nav-link tab-proprietary active" onclick="openSubTab(event, 'alfred-gc-pane-proprietary', 'alfred-gc-container')">Open-source & Proprietary</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link tab-gpt35" onclick="openSubTab(event, 'alfred-gc-pane-gpt35', 'alfred-gc-container')">GPT-3.5-turbo</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link tab-gpt41" onclick="openSubTab(event, 'alfred-gc-pane-gpt41', 'alfred-gc-container')">GPT-4.1-mini</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content-sub">
+                                <div class="tab-pane-sub active" id="alfred-gc-pane-proprietary">
+                                    <div id="alfred-gc-proprietary"></div>
+                                </div>
+                                <div class="tab-pane-sub" id="alfred-gc-pane-gpt35">
+                                    <div id="alfred-gc-gpt35"></div>
+                                </div>
+                                <div class="tab-pane-sub" id="alfred-gc-pane-gpt41">
+                                    <div id="alfred-gc-gpt41"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-caption" style="margin-top: 20px;">
+                    <span class="label">Table 1:</span> 
+                    <strong>Main Results on EB-ALFRED.</strong>
+                    Evaluation on five subsets: Base, Common, Complex, Visual, and Spatial.
+                </div>
+
+                <div class="analysis-box">
+                    <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                    <ul>
+                        <li><strong>Superior Performance:</strong> WorldMind significantly boosts procedural correctness (GC) in complex long-horizon tasks, ensuring precise execution of state-changing actions like slicing and heating.</li>
+                        <li><strong>Robustness:</strong> The framework demonstrates exceptional robustness across diverse capability subsets, effectively filtering physical hallucinations to maintain high performance even in challenging scenarios like spatial awareness.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ==================== EB-Habitat Tab ==================== -->
+            <div id="tab-habitat" class="result-content">
+                <div class="result-header">
+                    <i class="fas fa-home" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                    <h3>Performance on EB-Habitat</h3>
+                </div>
+                
+                <!-- SR Section -->
+                <div class="metric-section">
+                    <div class="metric-header sr-header" onclick="toggleMetric(this)">
+                        <div class="metric-header-title">
+                            <i class="fas fa-check-circle"></i> Success Rate (SR)
+                        </div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="sub-tab-container" id="habitat-sr-container">
+                            <ul class="nav-tabs-sub">
+                                <li class="nav-item">
+                                    <button class="nav-link tab-proprietary active" onclick="openSubTab(event, 'habitat-sr-pane-proprietary', 'habitat-sr-container')">Open-source & Proprietary</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link tab-gpt35" onclick="openSubTab(event, 'habitat-sr-pane-gpt35', 'habitat-sr-container')">GPT-3.5-turbo</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link tab-gpt41" onclick="openSubTab(event, 'habitat-sr-pane-gpt41', 'habitat-sr-container')">GPT-4.1-mini</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content-sub">
+                                <div class="tab-pane-sub active" id="habitat-sr-pane-proprietary">
+                                    <div id="habitat-sr-proprietary"></div>
+                                </div>
+                                <div class="tab-pane-sub" id="habitat-sr-pane-gpt35">
+                                    <div id="habitat-sr-gpt35"></div>
+                                </div>
+                                <div class="tab-pane-sub" id="habitat-sr-pane-gpt41">
+                                    <div id="habitat-sr-gpt41"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GC Section -->
+                <div class="metric-section">
+                    <div class="metric-header gc-header" onclick="toggleMetric(this)">
+                        <div class="metric-header-title">
+                            <i class="fas fa-bullseye"></i> Goal Condition (GC)
+                        </div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="sub-tab-container" id="habitat-gc-container">
+                            <ul class="nav-tabs-sub">
+                                <li class="nav-item">
+                                    <button class="nav-link tab-proprietary active" onclick="openSubTab(event, 'habitat-gc-pane-proprietary', 'habitat-gc-container')">Open-source & Proprietary</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link tab-gpt35" onclick="openSubTab(event, 'habitat-gc-pane-gpt35', 'habitat-gc-container')">GPT-3.5-turbo</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link tab-gpt41" onclick="openSubTab(event, 'habitat-gc-pane-gpt41', 'habitat-gc-container')">GPT-4.1-mini</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content-sub">
+                                <div class="tab-pane-sub active" id="habitat-gc-pane-proprietary">
+                                    <div id="habitat-gc-proprietary"></div>
+                                </div>
+                                <div class="tab-pane-sub" id="habitat-gc-pane-gpt35">
+                                    <div id="habitat-gc-gpt35"></div>
+                                </div>
+                                <div class="tab-pane-sub" id="habitat-gc-pane-gpt41">
+                                    <div id="habitat-gc-gpt41"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-caption">
+                    <span class="label">Table 2:</span> 
+                    <strong>Main Results on EB-Habitat.</strong>
+                    Evaluation on five subsets: Base, Common, Complex, Visual, and Spatial.
+                </div>
+
+                <div class="analysis-box">
+                    <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                    <ul>
+                        <li><strong>Superior Performance:</strong> The framework achieves superior task completion (SR) by strictly enforcing physical constraints to overcome navigation dead-ends and manipulation failures inherent in spatial rearrangement.</li>
+                        <li><strong>Robustness:</strong> The framework demonstrates exceptional robustness across diverse capability subsets, effectively filtering physical hallucinations to maintain high performance even in challenging scenarios like spatial awareness.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ==================== Ablation Tab ==================== -->
+            <div id="tab-ablation" class="result-content">
+                <div class="result-header">
+                    <i class="fas fa-layer-group" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                    <h3>Ablation Study</h3>
+                </div>
+                
+                <!-- GPT-3.5-turbo Section -->
+                <div class="ablation-section">
+                    <div class="ablation-header gpt35">
+                        <i class="fas fa-microchip"></i>
+                        <div class="ablation-header-title">GPT-3.5-turbo</div>
+                    </div>
+                    <div class="ablation-content">
+                        <div id="ablation-table-gpt35"></div>
+                    </div>
+                </div>
+
+                <!-- GPT-4.1-mini Section -->
+                <div class="ablation-section">
+                    <div class="ablation-header gpt41">
+                        <i class="fas fa-microchip"></i>
+                        <div class="ablation-header-title">GPT-4.1-mini</div>
+                    </div>
+                    <div class="ablation-content">
+                        <div id="ablation-table-gpt41"></div>
+                    </div>
+                </div>
+                
+                <div class="table-caption" style="margin-top: 20px;">
+                    <span class="label">Table 3:</span> 
+                    <strong>Impact of Goal Guidance and Process Supervision.</strong>
+                    Isolating contributions of Goal Experience and Process Experience.
+                </div>
+
+                <div class="analysis-box">
+                    <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                    <ul>
+                        <li>The superior performance of the full model confirms the synergy between these components: <strong></strong>effective alignment necessitates combining goal-based heuristics with physical verification.</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ==================== Navigation Tab ==================== -->
+            <div id="tab-nav" class="result-content">
+                <div class="result-header">
+                    <i class="fas fa-map-marker-alt" style="color: var(--accent-blue); margin-right: 10px;"></i>
+                    <h3>Low-Level Navigation Tasks</h3>
+                </div>
+                
+                <div id="navigation-table"></div>
+                
+                <div class="table-caption" style="margin-top: 20px;">
+                    <span class="label">Table 4:</span> 
+                    <strong>Generalization to Low-Level Control (EB-Navigation).</strong>
+                    Evaluating control of atomic actions.
+                </div>
+
+                <div class="analysis-box">
+                    <h4><i class="fas fa-search-plus"></i> Key Analysis:</h4>
+                    <ul>
+                        <li><strong>Granularity Generalization:</strong> WorldMind bridges high-level reasoning and low-level execution.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        /* --- Environment Section Styles --- */
+        .env-section-inner {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #eaeaea;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .env-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .env-title-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .env-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .env-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .env-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--card-color-start), var(--card-color-end));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .env-card:hover::before {
+            opacity: 1;
+        }
+
+        .env-card-alfred { --card-color-start: #ff9f43; --card-color-end: #ff6b35; }
+        .env-card-habitat { --card-color-start: #54a0ff; --card-color-end: #5f27cd; }
+        .env-card-nav { --card-color-start: #1dd1a1; --card-color-end: #10ac84; }
+
+        .env-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+
+        .env-card-icon-wrapper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 18px auto;
+        }
+
+        .env-card-icon-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            opacity: 0.15;
+            transition: all 0.3s ease;
+        }
+
+        .alfred-bg { background: linear-gradient(135deg, #ff9f43, #ff6b35); }
+        .habitat-bg { background: linear-gradient(135deg, #54a0ff, #5f27cd); }
+        .nav-bg { background: linear-gradient(135deg, #1dd1a1, #10ac84); }
+
+        .env-card:hover .env-card-icon-bg {
+            opacity: 0.25;
+            transform: scale(1.1);
+        }
+
+        .env-svg-icon {
+            position: relative;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            z-index: 1;
+        }
+
+        .env-card h4 {
+            margin: 0 0 8px 0;
+            color: #333;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .env-card-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .env-card-alfred .env-card-tag {
+            background: rgba(255, 159, 67, 0.15);
+            color: #e17055;
+        }
+
+        .env-card-habitat .env-card-tag {
+            background: rgba(84, 160, 255, 0.15);
+            color: #4a90d9;
+        }
+
+        .env-card-nav .env-card-tag {
+            background: rgba(29, 209, 161, 0.15);
+            color: #00b894;
+        }
+
+        .env-card p {
+            font-size: 0.88rem !important;
+            color: #666;
+            line-height: 1.5;
+            margin: 0;
+            text-align: center !important;
+        }
+
+        /* --- Results Tabs Styles --- */
+        .results-container {
+            display: flex;
+            gap: 25px;
+            margin-top: 20px;
+            min-height: 500px;
+        }
+
+        .results-sidebar {
+            width: 160px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .result-tab-btn {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 14px 14px;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #555;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-tab-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            z-index: 0;
+            border-radius: 12px;
+        }
+
+        .result-tab-btn:hover::before {
+            width: 4px;
+        }
+
+        .result-tab-btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            border-color: #d0d0d0;
+        }
+
+        .result-tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.35);
+            transform: translateX(5px);
+        }
+
+        .result-tab-btn.active::before {
+            width: 0;
+        }
+
+        .result-tab-btn.active i { color: #fff; }
+        .result-tab-btn i { width: 18px; text-align: center; color: #888; position: relative; z-index: 1; }
+        .result-tab-btn span { position: relative; z-index: 1; }
+
+        .results-display-area {
+            flex: 1;
+            min-width: 0;
+            background: #fff;
+            border: 1px solid #eee;
+            border-top: 4px solid;
+            border-image: linear-gradient(90deg, #667eea, #764ba2) 1;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        .result-content { display: none; animation: fadeIn 0.4s ease; }
+        .result-content.active { display: block; }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 12px;
+        }
+        .result-header h3 { margin: 0; font-size: 1.25rem; color: #333; font-weight: 700; }
+        
+        .table-caption {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+            text-align: justify;
+            background: linear-gradient(135deg, #fff9f0 0%, #fff5eb 100%);
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-left: 4px solid #ff9f43;
+            margin-bottom: 20px;
+        }
+        .table-caption .label { font-weight: 700; color: #e67e22; margin-right: 5px; }
+
+        .analysis-box {
+            background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 100%);
+            border: 1px solid #e1e8f5;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .analysis-box h4 { margin-top: 0; margin-bottom: 12px; color: #667eea; font-size: 0.98rem; }
+        .analysis-box ul { margin: 0; padding-left: 20px; }
+        .analysis-box li { margin-bottom: 8px; color: #555; font-size: 0.88rem; line-height: 1.6; }
+
+        @media (max-width: 900px) {
+            .env-grid { grid-template-columns: 1fr; }
+            .results-container { flex-direction: column; }
+            .results-sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding-bottom: 10px; }
+            .result-tab-btn { white-space: nowrap; }
+        }
+    </style>
+
+</section>

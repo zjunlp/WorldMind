@@ -1,0 +1,85 @@
+<!-- Method -->
+<section class="paper-section interactive-card" id="method">
+    <h2>3. Method: The WorldMind Framework</h2>
+    <p>
+        WorldMind establishes a training-free framework for bridging the gap between semantic planning and physical reality through autonomous Knowledgeable Experience Learning. Rather than relying on resource-intensive parameter updates, the system aligns the agent's internal world model by constructing a symbolic <strong>World Knowledge Repository (WKR)</strong> derived directly from environmental interaction. This mechanism synthesizes Process Experience via a <strong>Predict-Act-Verify</strong> loop to rectify physical hallucinations through prediction errors, while simultaneously distilling Goal Experience from successful trajectories to optimize procedural efficiency. By leveraging this accumulated knowledge for constrained simulation during inference, WorldMind ensures agent actions are both physically feasible and task-oriented without requiring gradient-based fine-tuning.
+    </p>
+    
+        <!-- Framework Figure - Direct Display -->
+    <div class="method-figure-container">
+        <img src="assets/framework.jpg" 
+             alt="WorldMind Framework" 
+             class="method-figure-img">
+        
+        <div class="figure-caption method-caption">
+            <strong>Figure 2: Overview of the WorldMind Framework.</strong> 
+            The agent autonomously constructs a World Knowledge Repository (WKR) by unifying 
+            <span class="highlight-process">Process Experience</span> (from prediction errors) and 
+            <span class="highlight-goal">Goal Experience</span> (from successful trajectories) to guide grounded simulation.
+        </div>
+    </div>
+
+    <style>
+        /* Method Figure Styles - Direct Display */
+        .method-figure-container {
+            display: inline-block;
+            max-width: 100%;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .method-figure-img {
+            display: block;
+            max-width: 900px;
+            width: auto;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid #e8e8e8;
+            background-color: #fff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .method-figure-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .method-caption {
+            margin-top: 16px;
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.6;
+            text-align: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
+            padding: 14px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4a90b8;
+            max-width: 900px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .highlight-process {
+            color: #d35400;
+            font-weight: 600;
+        }
+
+        .highlight-goal {
+            color: #2980b9;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .method-figure-img {
+                max-width: 100%;
+            }
+            
+            .method-caption {
+                max-width: 100%;
+            }
+        }
+    </style>
+</section>

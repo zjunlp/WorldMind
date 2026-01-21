@@ -1,0 +1,208 @@
+<div id="home">
+    <div class="header-container">
+        <!-- Logo and Title -->
+        <div class="title-wrapper">
+            <h1>
+                <span class="title-main">
+                    <svg class="worldmind-logo-inline" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Brain outline -->
+                        <defs>
+                            <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="orbGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Globe with grid -->
+                        <circle cx="50" cy="50" r="35" fill="none" stroke="url(#brainGradient)" stroke-width="3"/>
+                        <ellipse cx="50" cy="50" rx="35" ry="15" fill="none" stroke="url(#brainGradient)" stroke-width="2"/>
+                        <ellipse cx="50" cy="50" rx="15" ry="35" fill="none" stroke="url(#brainGradient)" stroke-width="2"/>
+                        <!-- Neural nodes -->
+                        <circle cx="50" cy="15" r="5" fill="url(#orbGradient)"/>
+                        <circle cx="50" cy="85" r="5" fill="url(#orbGradient)"/>
+                        <circle cx="15" cy="50" r="5" fill="url(#orbGradient)"/>
+                        <circle cx="85" cy="50" r="5" fill="url(#orbGradient)"/>
+                        <circle cx="50" cy="50" r="8" fill="url(#orbGradient)"/>
+                        <!-- Connection lines -->
+                        <line x1="50" y1="20" x2="50" y2="42" stroke="url(#orbGradient)" stroke-width="2"/>
+                        <line x1="50" y1="58" x2="50" y2="80" stroke="url(#orbGradient)" stroke-width="2"/>
+                        <line x1="20" y1="50" x2="42" y2="50" stroke="url(#orbGradient)" stroke-width="2"/>
+                        <line x1="58" y1="50" x2="80" y2="50" stroke="url(#orbGradient)" stroke-width="2"/>
+                    </svg>
+                    <span class="title-world">World</span><span class="title-mind">Mind</span>
+                </span>
+                <span class="title-sub">Aligning Agentic World Models via Knowledgeable Experience Learning</span>
+            </h1>
+        </div>
+
+        <div class="authors">
+            Baochang Ren<sup>♠</sup>, 
+            Yunzhi Yao<sup>♠</sup>, 
+            Rui Sun<sup>♦</sup>, 
+            Shuofei Qiao<sup>♠</sup>, <br>
+            Ningyu Zhang<sup>♠</sup>,
+            Huajun Chen<sup>♠</sup>*
+        </div>
+
+        <div class="affiliations">
+            <span><sup>♠</sup> Zhejiang University</span> &nbsp;&nbsp;&nbsp;
+            <span><sup>♦</sup> University of California, Los Angeles</span>
+        </div>
+
+        <div class="email">
+            {baochang.ren, zhangningyu}@zju.edu.cn
+        </div>
+        <div style="font-size: 0.85rem; color: #999; margin-top: 5px;">* Corresponding author</div>
+
+        <div class="link-block" style="--size: 20px; --gap: 6px;">
+    
+            <a href="https://arxiv.org/abs/2601.13247" class="btn btn-arxiv" style="background-color: #333; display: inline-flex; align-items: center; gap: var(--gap);">
+                <i class="ai ai-arxiv" style="font-size: var(--size); width: var(--size); height: var(--size); line-height: 1; display: inline-flex; justify-content: center; align-items: center;"></i> 
+                arXiv
+            </a>
+            
+            <a href="https://huggingface.co/papers/2601.11969" class="btn btn-hf" style="display: inline-flex; align-items: center; gap: var(--gap);">
+                <span style="font-size: var(--size); width: var(--size); height: var(--size); line-height: 1; display: inline-flex; justify-content: center; align-items: center;">🤗</span> 
+                HF Paper
+            </a>
+
+            <a href="https://github.com/zjunlp/WorldMind" class="btn btn-github" style="background-color: #333; display: inline-flex; align-items: center; gap: var(--gap);">
+                <i class="fab fa-github" style="font-size: var(--size ); width: var(--size); height: var(--size); line-height: 1; display: inline-flex; justify-content: center; align-items: center;"></i> 
+                Code
+            </a>
+            
+            <a href="#" class="btn btn-x" style="background-color: #000; display: inline-flex; align-items: center; gap: var(--gap);">
+                <svg viewBox="0 0 24 24" fill="white" style="width: var(--size); height: var(--size); display: inline-flex;">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+                X (Twitter)
+            </a>
+
+        </div>
+    </div>
+
+    <div class="carousel-section">
+        <div class="carousel-wrapper">
+            <div class="slide active">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/Habitat.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-label">Habitat Environment</div>
+            </div>
+            <div class="slide">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/ALFRED.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-label">ALFRED Environment</div>
+            </div>
+            <button class="prev" onclick="plusSlides(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button class="next" onclick="plusSlides(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="carousel-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </div>
+
+    <style>
+        /* Title Wrapper */
+        .title-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Title Styling */
+        .title-main {
+            font-size: 3.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0px;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        /* Logo inline with title */
+        .worldmind-logo-inline {
+            width: 100px;
+            height: 100px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .title-world {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-mind {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Button Enhancements */
+        .btn-arxiv {
+            background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+        }
+        
+        .btn-github {
+            background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+        }
+
+        .btn-x {
+            background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Carousel Dots */
+        .carousel-dots {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 4px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: #667eea;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .title-main {
+                font-size: 2.5rem;
+                gap: 10px;
+            }
+            .worldmind-logo-inline {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</div>

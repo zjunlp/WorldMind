@@ -1,0 +1,425 @@
+<!-- Analysis -->
+<section class="paper-section interactive-card" id="analysis">
+    <h2>5. Analysis</h2>
+    <p style="margin-bottom: 30px;">
+        We conducted in-depth analysis to understand the mechanism of WorldMind. Our findings reveal that the constructed World Knowledge Repository (WKR) captures universal physical laws, enabling robust generalization across models and environments.
+    </p>
+
+    <div class="analysis-container">
+        
+        <div class="analysis-sidebar">
+            <button class="analysis-tab-btn tab-btn-1 active" onclick="openAnalysis(event, 'ana-transfer')">
+                <span class="tab-icon"><i class="fas fa-exchange-alt"></i></span>
+                <span class="tab-text">Cross-Model Experience Transfer</span>
+            </button>
+            <button class="analysis-tab-btn tab-btn-2" onclick="openAnalysis(event, 'ana-env')">
+                <span class="tab-icon"><i class="fas fa-globe"></i></span>
+                <span class="tab-text">Cross-Environment Analysis</span>
+            </button>
+            <button class="analysis-tab-btn tab-btn-3" onclick="openAnalysis(event, 'ana-error')">
+                <span class="tab-icon"><i class="fas fa-bug"></i></span>
+                <span class="tab-text">Error Analysis</span>
+            </button>
+        </div>
+
+        <div class="analysis-display-area">
+            
+            <div id="ana-transfer" class="analysis-content active">
+                <div class="analysis-header">
+                    <h3 style="border-bottom-color: #9b59b6; color: #8e44ad;">
+                        <i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>
+                        Cross-Model Experience Transfer Analysis
+                    </h3>
+                </div>
+                
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="assets/analysis1.png" alt="Cross-Model Transfer" class="analysis-img-small">
+                    <div class="figure-caption-text">
+                        <strong>Figure 3: Performance of Cross-Model Experience Transfer.</strong><br>
+                        Comparison of success rates when exchanging the WKR between GPT-3.5 and GPT-4.1.
+                    </div>
+                </div>
+
+                <div class="insight-box insight-box-purple">
+                    <h4 class="insight-header" style="color: #8e44ad;">
+                        <i class="fas fa-lightbulb" style="margin-right: 8px;"></i> Key Insights
+                    </h4>
+                    
+                    <div class="insight-row">
+                        <div class="insight-number" style="background: linear-gradient(135deg, #8e44ad, #9b59b6);">1</div>
+                        <div class="insight-text">
+                            <strong>Bidirectional Gains:</strong> Sharing experience yields significant gains. For instance, GPT-3.5-turbo using the repository from GPT-4.1-mini improves SR by <strong>4.4%</strong> on EB-ALFRED, confirming that the learned physical laws are model-agnostic.
+                        </div>
+                    </div>
+
+                    <div class="insight-row">
+                        <div class="insight-number" style="background: linear-gradient(135deg, #8e44ad, #9b59b6);">2</div>
+                        <div class="insight-text">
+                            <strong>Shared World Models:</strong> These results validate the transferability of WorldMind's knowledge, offering a foundational possibility for constructing <strong>shared world models</strong> to facilitate multi-agent collaboration in broader settings.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ana-env" class="analysis-content">
+                <div class="analysis-header">
+                    <h3 style="border-bottom-color: #1abc9c; color: #16a085;">
+                        <i class="fas fa-globe" style="margin-right: 10px;"></i>
+                        Cross-Environment Analysis
+                    </h3>
+                </div>
+                
+                <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px; text-align: center;">
+                        <img src="assets/analysis2-1.png" alt="Web Agent Accuracy" class="analysis-img-small">
+                        <div class="figure-caption-text">
+                            <strong>Figure 4(a): Accuracy Analysis on Embodied Web Agent Benchmark.</strong>
+                        </div>
+                    </div>
+                    <div style="flex: 1; min-width: 250px; text-align: center;">
+                        <img src="assets/analysis2-2.png" alt="Web Agent Error" class="analysis-img-small">
+                        <div class="figure-caption-text">
+                            <strong>Figure 4(b): Error Analysis on Embodied Web Agent Benchmark.</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-box insight-box-teal">
+                    <h4 class="insight-header" style="color: #16a085;">
+                        <i class="fas fa-lightbulb" style="margin-right: 8px;"></i> Key Insights
+                    </h4>
+                    
+                    <div class="insight-row">
+                        <div class="insight-number" style="background: linear-gradient(135deg, #16a085, #1abc9c);">1</div>
+                        <div class="insight-text">
+                            <strong>Context Switching:</strong> WorldMind effectively manages dynamic switching between web interfaces (information seeking) and embodied environments (physical execution).
+                        </div>
+                    </div>
+
+                    <div class="insight-row">
+                        <div class="insight-number" style="background: linear-gradient(135deg, #16a085, #1abc9c);">2</div>
+                        <div class="insight-text">
+                            <strong>Overall Accuracy Boost:</strong> Beyond basic completion, WorldMind significantly improves <strong>Overall Accuracy</strong> (success across both domains), demonstrating robustness in complex, multi-modal workflows where baselines often fail.
+                        </div>
+                    </div>
+
+                    <div class="insight-row">
+                        <div class="insight-number" style="background: linear-gradient(135deg, #16a085, #1abc9c);">3</div>
+                        <div class="insight-text">
+                            <strong>Mitigating Hallucination:</strong> The error analysis reveals that WorldMind drastically reduces execution errors, ensuring the agent navigates transitions without premature termination due to physical hallucinations.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ana-error" class="analysis-content">
+                <div class="analysis-header">
+                    <h3 style="border-bottom-color: #e74c3c; color: #c0392b;">
+                        <i class="fas fa-bug" style="margin-right: 10px;"></i>
+                        Error Analysis
+                    </h3>
+                </div>
+                
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="assets/analysis3.png" alt="Error Analysis Chart" class="analysis-img-small">
+                    <div class="figure-caption-text">
+                        <strong>Figure 5: Error Analysis in EB-ALFRED and EB-Habitat. 
+    Comparison of error distributions between the ReAct baseline and WorldMind. 
+    Failures are categorized into three types: Invalid Actions, Timeout, and Wrong Termination.</strong>
+                    </div>
+                </div>
+
+                <div class="insight-box insight-box-red">
+                    <h4 class="insight-header" style="color: #c0392b;">
+                        <i class="fas fa-lightbulb" style="margin-right: 8px;"></i> Key Insights
+                    </h4>
+                    
+                    <div class="insight-row">
+                        <div class="insight-number" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">1</div>
+                        <div class="insight-text">
+                            <strong>Physical Filter:</strong> In EB-Habitat, WorldMind reduces "Invalid Actions" for GPT-3.5-turbo from 105 to 67, confirming that Process Experience acts as an effective physical filter.
+                        </div>
+                    </div>
+
+                    <div class="insight-row">
+                        <div class="insight-number" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">2</div>
+                        <div class="insight-text">
+                            <strong>Safe Exploration:</strong> Consequently, "Timeouts" rise from 4 to 30, indicating that by avoiding immediate fatal errors, the agent is able to explore the environment for longer periods safely.
+                        </div>
+                    </div>
+
+                    <div class="insight-row">
+                        <div class="insight-number" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">3</div>
+                        <div class="insight-text">
+                            <strong>Logical Alignment:</strong> In EB-ALFRED, "Wrong Terminations" drop significantly (46 to 19), demonstrating that Goal Experience provides meta-level guidance to prevent premature quitting.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        /* --- Analysis Container --- */
+        .analysis-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            min-height: 520px;
+        }
+
+        .analysis-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 10px;
+        }
+
+        /* --- Sidebar Buttons with Enhanced Hover Effect --- */
+        .analysis-tab-btn {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-left: 4px solid #e0e0e0;
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #666;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tab-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+
+        .tab-text {
+            flex: 1;
+        }
+
+        /* Hover Effect */
+        .analysis-tab-btn:hover {
+            transform: translateX(8px);
+            background-color: #fafafa;
+            border-color: #ddd;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .analysis-tab-btn:hover .tab-icon {
+            background: #eee;
+        }
+
+        /* Active States - Specific Colors */
+        .analysis-tab-btn.tab-btn-1.active { 
+            color: #8e44ad; 
+            border-left-color: #8e44ad; 
+            font-weight: 700; 
+            background: linear-gradient(90deg, #faf5ff 0%, #fff 100%);
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(142, 68, 173, 0.15);
+        }
+        .analysis-tab-btn.tab-btn-1.active .tab-icon {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+        }
+
+        .analysis-tab-btn.tab-btn-2.active { 
+            color: #16a085; 
+            border-left-color: #16a085; 
+            font-weight: 700; 
+            background: linear-gradient(90deg, #f0fcf9 0%, #fff 100%);
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(22, 160, 133, 0.15);
+        }
+        .analysis-tab-btn.tab-btn-2.active .tab-icon {
+            background: linear-gradient(135deg, #16a085, #1abc9c);
+            color: white;
+        }
+
+        .analysis-tab-btn.tab-btn-3.active { 
+            color: #c0392b; 
+            border-left-color: #c0392b; 
+            font-weight: 700; 
+            background: linear-gradient(90deg, #fff5f5 0%, #fff 100%);
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(192, 57, 43, 0.15);
+        }
+        .analysis-tab-btn.tab-btn-3.active .tab-icon {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white;
+        }
+
+        /* Content Area */
+        .analysis-display-area {
+            flex: 1;
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .analysis-content { display: none; animation: slideIn 0.4s ease; }
+        .analysis-content.active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .analysis-header h3 {
+            margin-top: 0;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Image Styling */
+        .analysis-img-small {
+            display: block;
+            max-width: 100%;
+            max-height: 300px; 
+            width: auto;
+            margin: 0 auto 12px auto; 
+            border-radius: 10px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .analysis-img-small:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .figure-caption-text {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        /* --- Insight Boxes (Dynamic Colors) --- */
+        .insight-box {
+            margin-top: 25px;
+            padding: 22px 25px;
+            background-color: #fff;
+            border: 1px solid #f2f2f2;
+            border-left-width: 5px;
+            border-left-style: solid;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .insight-box-purple { border-left-color: #8e44ad; background: linear-gradient(135deg, #fdfaff 0%, #fff 100%); }
+        .insight-box-teal { border-left-color: #16a085; background: linear-gradient(135deg, #f0fcf9 0%, #fff 100%); }
+        .insight-box-red { border-left-color: #c0392b; background: linear-gradient(135deg, #fff5f5 0%, #fff 100%); }
+
+        .insight-header {
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .insight-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .insight-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .insight-number {
+            color: #fff;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-right: 14px;
+            margin-top: 2px; 
+            flex-shrink: 0;
+            font-family: 'Source Code Pro', monospace;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .insight-text {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .analysis-container { flex-direction: column; }
+            .analysis-sidebar { 
+                width: 100%;
+                flex-direction: row; 
+                overflow-x: auto; 
+                border-bottom: 1px solid #eee;
+                padding-bottom: 0;
+            }
+            .analysis-tab-btn {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                border-radius: 12px 12px 0 0;
+                white-space: nowrap;
+                padding: 12px 16px;
+                flex-direction: column;
+                text-align: center;
+                gap: 6px;
+            }
+            .analysis-tab-btn:hover { transform: none; }
+            
+            .analysis-tab-btn.tab-btn-1.active { border-bottom-color: #8e44ad; transform: none; }
+            .analysis-tab-btn.tab-btn-2.active { border-bottom-color: #16a085; transform: none; }
+            .analysis-tab-btn.tab-btn-3.active { border-bottom-color: #c0392b; transform: none; }
+        }
+    </style>
+
+    <script>
+        function openAnalysis(evt, tabName) {
+            var i, content, tablinks;
+            content = document.getElementsByClassName("analysis-content");
+            for (i = 0; i < content.length; i++) {
+                content[i].style.display = "none";
+                content[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("analysis-tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</section>
