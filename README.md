@@ -25,7 +25,7 @@
     <img src='https://img.shields.io/badge/🔥_Project-Page-00d9ff?style=for-the-badge&logo=github&logoColor=white&labelColor=1a1a2e'>
   </a>
 
-  <a href='https://arxiv.org/abs/2026.xxxxx'>
+  <a href='https://arxiv.org/abs/2601.13247'>
     <img src='https://img.shields.io/badge/📄_arXiv-Paper-ff6b6b?style=for-the-badge&logo=arxiv&logoColor=white&labelColor=1a1a2e'>
   </a>
 
