@@ -10,15 +10,15 @@ set -e
 
 export DISPLAY=":1"
 export CUDA_VISIBLE_DEVICES="0"
-export OPENAI_API_KEY="sk-ER4wzbooL5S5rMJ4k1TwGzuYdrk5Z5csr9nfkPgMErh6u2yo"
-export OPENAI_BASE_URL="https://vip.dmxapi.com/v1"
+export OPENAI_API_KEY="your-openai-api-key"
+export OPENAI_BASE_URL="your-openai-base-url"
 
 # ============================================================
 # CONFIGURATION PARAMETERS (Edit here)
 # ============================================================
 
-MODEL_NAME="gpt-3.5-turbo"
-ENV="eb-nav"              # Options: eb-alf, eb-hab, eb-nav
+MODEL_NAME="gpt-3.5-turbo"   # Choose your model
+ENV="eb-hab"              # Options: eb-alf, eb-hab, eb-nav
 EXP_NAME="test"       # Your experiment name
 ENABLE_WORLDMIND="True"   # True or False
 
