@@ -223,7 +223,6 @@ set -e
 # ENVIRONMENT VARIABLES (Export Section)
 # ============================================================
 
-export DISPLAY=:1
 export CUDA_VISIBLE_DEVICES=0
 export OPENAI_API_KEY="your-openai-api-key"
 export OPENAI_BASE_URL="your-openai-base-url"
