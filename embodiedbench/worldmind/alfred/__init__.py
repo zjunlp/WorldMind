@@ -1,13 +1,7 @@
-"""
-WorldMind Module for Alfred Environment
-
-This package provides the WorldMind components for the Alfred environment,
-including state prediction, discrimination, reflection, and knowledge management.
-"""
 
 from embodiedbench.worldmind.alfred.discriminator import WorldMindDiscriminator
 from embodiedbench.worldmind.alfred.reflector import WorldMindReflector
-from embodiedbench.worldmind.alfred.state_summarizer import WorldMindStateSummarizer
+from embodiedbench.worldmind.alfred.state_summarizer import WorldMindStateSummarizer, LocationKnowledgeExtractor
 from embodiedbench.worldmind.alfred.prompts import (
     WORLDMIND_ALFRED_SYSTEM_PROMPT,
     WorldMind_TEMPLATE,
@@ -21,8 +15,9 @@ from embodiedbench.worldmind.alfred.prompts import (
 
 __all__ = [
     "WorldMindDiscriminator",
-    "WorldMindReflector", 
+    "WorldMindReflector",
     "WorldMindStateSummarizer",
+    "LocationKnowledgeExtractor",
     "WORLDMIND_ALFRED_SYSTEM_PROMPT",
     "WorldMind_TEMPLATE",
     "WorldMind_TEMPLATE_LANG",

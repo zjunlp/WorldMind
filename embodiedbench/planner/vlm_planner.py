@@ -36,7 +36,7 @@ class VLMPlanner():
         self.language_only = language_only
         self.kwargs = kwargs
         self.action_key = kwargs.pop('action_key', 'action_id')
-        self.use_worldmind_template = True
+        self.use_worldmind_template = kwargs.pop('use_worldmind_template', True)
     
     def set_actions(self, actions):
         self.actions = actions
@@ -151,6 +151,35 @@ class VLMPlanner():
             action = np.random.randint(len(self.actions))
         return action
 
+    def resolve_action_item(self, action_item):
+        if not isinstance(action_item, dict):
+            return None
+
+        raw_action_id = action_item.get(self.action_key)
+        action_name = action_item.get('action_name') or action_item.get('action')
+        matched_id = None
+
+        if isinstance(action_name, str) and action_name.strip():
+            normalized_name = action_name.strip().lower()
+            for idx, candidate in enumerate(self.actions):
+                if str(candidate).strip().lower() == normalized_name:
+                    matched_id = idx
+                    break
+            if matched_id is None:
+                unindexed_name = re.sub(r'_(\d+)\b', '', normalized_name)
+                for idx, candidate in enumerate(self.actions):
+                    if str(candidate).strip().lower() == unindexed_name:
+                        matched_id = idx
+                        logger.info(f"Normalizing indexed action_name='{action_name}' to '{candidate}'")
+                        break
+
+        if matched_id is not None:
+            if raw_action_id != matched_id:
+                logger.info(f"Using action_name match for '{action_name}': {raw_action_id} -> {matched_id}")
+            return matched_id
+
+        return raw_action_id
+
     def json_to_action(self, output_text, json_key='executable_plan'):
         import re
         try:
@@ -230,7 +259,7 @@ class VLMPlanner():
                 logger.warning('Empty plan in JSON output')
                 return -2
             
-            action = [x.get(self.action_key) for x in executable_plan if isinstance(x, dict)]
+            action = [self.resolve_action_item(x) for x in executable_plan if isinstance(x, dict)]
             action = [a for a in action if a is not None]
             
             if not len(action):

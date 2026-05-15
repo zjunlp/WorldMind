@@ -1,9 +1,3 @@
-"""
-Habitat Environment Evaluator
-
-This module provides evaluators for the Habitat embodied AI environment.
-Includes both standard evaluator and WorldMind-enhanced evaluator with reflection.
-"""
 
 import os
 import numpy as np
@@ -22,7 +16,7 @@ link_path = os.path.join(os.path.dirname(__file__), '../envs/eb_habitat/data')
 try:
     os.symlink(link_path, 'data')
 except FileExistsError:
-    pass 
+    pass
 
 
 example_path = os.path.join(os.path.dirname(__file__), 'config/habitat_examples.json')
@@ -46,8 +40,7 @@ import re
 
 
 class EB_HabitatEvaluator():
-    """Standard Habitat Environment Evaluator."""
-    
+
     def __init__(self, config):
         self.model_name = config['model_name']
         self.eval_set = ValidEvalSets[0]
@@ -57,17 +50,15 @@ class EB_HabitatEvaluator():
         self.system_prompt = system_prompt
 
     def check_config_valid(self):
-        """Validate configuration."""
         if self.config['multistep'] + self.config['chat_history'] > 1:
             raise ValueError("Only one of multistep, chat_history can be enabled at a time.")
-        
+
         if self.config['language_only']:
             if self.config['multistep']:
                 logger.warning("Language only mode should not have multistep enabled. Setting to False...")
                 self.config['multistep'] = 0
-        
+
     def save_episode_metric(self, episode_info):
-        """Save episode metrics to file."""
         filename = 'episode_{}_final_res.json'.format(self.env._current_episode_num)
         res_path = os.path.join(self.env.log_path, 'results')
         if not os.path.exists(res_path):
@@ -76,12 +67,11 @@ class EB_HabitatEvaluator():
             json.dump(episode_info, f, ensure_ascii=False, indent=2)
 
     def get_completed_episodes(self, log_path: str) -> set:
-        """Get the set of completed episode numbers from the results directory."""
         completed = set()
         results_path = os.path.join(log_path, 'results')
         if not os.path.exists(results_path):
             return completed
-        
+
         import glob
         pattern = os.path.join(results_path, 'episode_*_final_res.json')
         for filepath in glob.glob(pattern):
@@ -90,78 +80,75 @@ class EB_HabitatEvaluator():
             if match:
                 episode_num = int(match.group(1))
                 completed.add(episode_num)
-        
+
         return completed
-    
+
     def should_skip_episode(self, episode_num: int, completed_episodes: set) -> bool:
-        """Check if an episode should be skipped (already completed)."""
         return self.config.get('resume', False) and episode_num in completed_episodes
 
     def is_eval_set_completed(self, log_path: str, total_episodes: int) -> bool:
-        """Check if all episodes in an eval set are completed."""
         if not self.config.get('resume', False):
             return False
-        
+
         completed_episodes = self.get_completed_episodes(log_path)
         expected_episodes = set(range(total_episodes))
-        
+
         is_completed = expected_episodes.issubset(completed_episodes)
-        
+
         if is_completed:
             logger.info(f"All {total_episodes} episodes already completed in {log_path}")
-        
+
         return is_completed
 
     def evaluate_main(self):
-        """Main evaluation loop."""
         valid_eval_sets = self.config.get('eval_sets', ValidEvalSets)
         valid_eval_sets = list(valid_eval_sets)
         if type(valid_eval_sets) == list and len(valid_eval_sets) == 0:
             valid_eval_sets = ValidEvalSets
-            
+
         for eval_set in valid_eval_sets:
             if self.env is not None:
                 self.env.close()
             self.eval_set = eval_set
             logger.info(f'Current eval set: {eval_set}')
             exp_name = f"{self.model_name.split('/')[-1]}_{self.config['exp_name']}/{eval_set}" if len(self.config['exp_name']) else f"{self.model_name.split('/')[-1]}/{eval_set}"
-            
+
             temp_env = EBHabEnv(
-                eval_set=self.eval_set, 
-                down_sample_ratio=self.config['down_sample_ratio'], 
+                eval_set=self.eval_set,
+                down_sample_ratio=self.config['down_sample_ratio'],
                 exp_name=exp_name,
-                start_epi_index=self.config.get('start_epi_index', 0), 
+                start_epi_index=self.config.get('start_epi_index', 0),
                 resolution=self.config.get('resolution', 500)
             )
-            
+
             if self.is_eval_set_completed(temp_env.log_path, temp_env.number_of_episodes):
                 logger.info(f"Skipping eval_set '{eval_set}' - all episodes already completed")
                 temp_env.close()
                 continue
-            
+
             temp_env.close()
-            
+
             self.env = EBHabEnv(
-                eval_set=self.eval_set, 
-                down_sample_ratio=self.config['down_sample_ratio'], 
+                eval_set=self.eval_set,
+                down_sample_ratio=self.config['down_sample_ratio'],
                 exp_name=exp_name,
-                start_epi_index=self.config.get('start_epi_index', 0), 
+                start_epi_index=self.config.get('start_epi_index', 0),
                 resolution=self.config.get('resolution', 500)
             )
-            
+
             model_type = self.config.get('model_type', 'remote')
             self.planner = VLMPlanner(
-                self.model_name, 
-                model_type, 
-                self.env.language_skill_set, 
-                self.system_prompt, 
+                self.model_name,
+                model_type,
+                self.env.language_skill_set,
+                self.system_prompt,
                 examples,
-                n_shot=self.config['n_shots'], 
+                n_shot=self.config['n_shots'],
                 obs_key='head_rgb',
-                chat_history=self.config['chat_history'], 
+                chat_history=self.config['chat_history'],
                 language_only=self.config['language_only'],
-                use_feedback=self.config.get('env_feedback', True), 
-                multistep=self.config.get('multistep', 0), 
+                use_feedback=self.config.get('env_feedback', True),
+                multistep=self.config.get('multistep', 0),
                 tp=self.config.get('tp', 1)
             )
             logger.info(self.planner)
@@ -170,23 +157,22 @@ class EB_HabitatEvaluator():
             with open(os.path.join(self.env.log_path, 'config.txt'), 'w') as f:
                 f.write(str(self.config))
 
-    
+
     def evaluate(self):
-        """Evaluate all episodes."""
         completed_episodes = set()
         if self.config.get('resume', False):
             completed_episodes = self.get_completed_episodes(self.env.log_path)
             if completed_episodes:
                 logger.info(f"Resume mode enabled. Found {len(completed_episodes)} completed episodes: {sorted(completed_episodes)}")
-        
+
         progress_bar = tqdm(total=self.env.number_of_episodes, desc="Episodes")
-        
+
         if completed_episodes:
             progress_bar.update(len(completed_episodes))
-        
+
         while self.env._current_episode_num < self.env.number_of_episodes:
             current_episode = self.env._current_episode_num
-            
+
             if self.should_skip_episode(current_episode, completed_episodes):
                 logger.info(f"Skipping completed episode {current_episode}")
                 try:
@@ -194,7 +180,7 @@ class EB_HabitatEvaluator():
                 except:
                     self.env._current_episode_num += 1
                 continue
-            
+
             logger.info(f"Evaluating episode {self.env._current_episode_num} ...")
             episode_info = {'reward': [], 'num_invalid_actions': 0, 'empty_plan': 0}
             obs = self.env.reset()
@@ -204,9 +190,9 @@ class EB_HabitatEvaluator():
 
             self.planner.reset()
             done = False
-            
+
             while not done:
-                try: 
+                try:
                     action, reasoning = self.planner.act(img_path, user_instruction)
                     print(f"Planner Output Action: {action}")
 
@@ -225,7 +211,7 @@ class EB_HabitatEvaluator():
                             'env_step': self.env._current_step,
                         }
                         break
-                    
+
                     if action == -1:
                         self.env._cur_invalid_actions += 1
                         episode_info['reward'].append(-1)
@@ -245,7 +231,7 @@ class EB_HabitatEvaluator():
                         if self.env._cur_invalid_actions >= self.env._max_invalid_actions:
                             break
                         continue
-                    
+
                     if type(action) == list:
                         for idx, action_single in enumerate(action[:min(self.env._max_episode_steps - self.env._current_step, len(action))]):
                             obs, reward, done, info = self.env.step(action_single, reasoning=reasoning)
@@ -270,8 +256,8 @@ class EB_HabitatEvaluator():
                         self.planner.update_info(info)
                         episode_info['reward'].append(reward)
                         episode_info['num_invalid_actions'] += (info['last_action_success'] == 0)
-                        
-                except Exception as e: 
+
+                except Exception as e:
                     logger.error(f"Error during evaluation: {e}")
                     import traceback
                     traceback.print_exc()
@@ -288,15 +274,14 @@ class EB_HabitatEvaluator():
             episode_info["num_invalid_actions"] = episode_info['num_invalid_actions']
             episode_info["num_invalid_action_ratio"] = episode_info['num_invalid_actions'] / info["env_step"] if info['env_step'] > 0 else 0
             episode_info["episode_elapsed_seconds"] = info.get("episode_elapsed_seconds", time.time() - self.env._episode_start_time)
-            
+
             self.env.save_episode_log()
             self.save_episode_metric(episode_info)
             progress_bar.update()
 
 
 class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
-    """WorldMind-enhanced Habitat Evaluator with reflection and experience trajectory."""
-    
+
     def __init__(self, config):
         super().__init__(config)
         self.enable_worldmind = config.get('enable_worldmind', True)
@@ -304,23 +289,23 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
         self.worldmind_reflector_model = config.get('worldmind_reflector_model', None)
         self.use_experience_trajectory = config.get('use_experience_trajectory', False)
         self.detailed_output = config.get('detailed_output', False)
-        
-        self.enable_goal_experience = config.get('enable_goal_experience', True)
-        self.goal_experience_top_k = config.get('goal_experience_top_k', 3)
-        
-        self.enable_process_experience = config.get('enable_process_experience', True)
-        self.process_experience_top_k = config.get('process_experience_top_k', 3)
-        
+
+        self.enable_goal_experience = config.get('enable_goal_experience', config.get('enable_success_experience', True))
+        self.goal_experience_top_k = config.get('goal_experience_top_k', config.get('success_experience_top_k', 3))
+
+        self.enable_process_experience = config.get('enable_process_experience', config.get('enable_world_knowledge', True))
+        self.process_experience_top_k = config.get('process_experience_top_k', config.get('world_knowledge_top_k', 3))
+
         self.enable_experience_refine = config.get('enable_experience_refine', False)
-        
+
         self.include_reflection_in_history = config.get('include_reflection_in_history', True)
-        
+        self.use_fast_feedback_discrimination = config.get('use_fast_feedback_discrimination', True)
+
         from embodiedbench.worldmind.habitat.prompts import WORLDMIND_HABITAT_SYSTEM_PROMPT
         self.system_prompt = WORLDMIND_HABITAT_SYSTEM_PROMPT
         self.worldmind_examples = worldmind_examples
-    
+
     def check_config_valid(self):
-        """Validate configuration for WorldMind mode."""
         super().check_config_valid()
         if self.enable_worldmind:
             logger.info("WorldMind (World Modeling) is enabled")
@@ -331,85 +316,84 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
             logger.info(f"Detailed Output: {self.detailed_output}")
             logger.info(f"Enable Experience Refine: {self.enable_experience_refine}")
             logger.info(f"Include Reflection in History: {self.include_reflection_in_history}")
-    
+            logger.info(f"Use Fast Feedback Discrimination: {self.use_fast_feedback_discrimination}")
+
     def save_episode_trajectory(self, episode_num: int, trajectory_data: list, instruction: str):
-        """Save episode trajectory to a separate trajectory folder."""
         trajectory_path = os.path.join(self.env.log_path, 'trajectory')
         if not os.path.exists(trajectory_path):
             os.makedirs(trajectory_path)
-        
+
         trajectory_file_content = {
             "episode_num": episode_num,
             "instruction": instruction,
             "trajectory": trajectory_data
         }
-        
+
         filename = f'episode_{episode_num}_trajectory.json'
         filepath = os.path.join(trajectory_path, filename)
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(trajectory_file_content, f, ensure_ascii=False, indent=2)
-        
+
         logger.info(f"Trajectory saved to {filepath}")
-    
+
     def evaluate_main(self):
-        """Main evaluation loop for WorldMind mode."""
         from embodiedbench.worldmind.habitat import WorldMindPlannerWrapper
-        
+
         valid_eval_sets = self.config.get('eval_sets', ValidEvalSets)
         valid_eval_sets = list(valid_eval_sets)
         if type(valid_eval_sets) == list and len(valid_eval_sets) == 0:
             valid_eval_sets = ValidEvalSets
-            
+
         for eval_set in valid_eval_sets:
             if self.env is not None:
                 self.env.close()
             self.eval_set = eval_set
             logger.info(f'Current eval set: {eval_set}')
-            
+
             base_exp_name = f"{self.model_name.split('/')[-1]}_{self.config['exp_name']}" if len(self.config['exp_name']) else f"{self.model_name.split('/')[-1]}"
             exp_name = f"worldmind_{base_exp_name}/{eval_set}"
-            
+
             temp_env = EBHabEnv(
-                eval_set=self.eval_set, 
-                down_sample_ratio=self.config['down_sample_ratio'], 
+                eval_set=self.eval_set,
+                down_sample_ratio=self.config['down_sample_ratio'],
                 exp_name=exp_name,
-                start_epi_index=self.config.get('start_epi_index', 0), 
+                start_epi_index=self.config.get('start_epi_index', 0),
                 resolution=self.config.get('resolution', 500)
             )
-            
+
             if self.is_eval_set_completed(temp_env.log_path, temp_env.number_of_episodes):
                 logger.info(f"Skipping eval_set '{eval_set}' - all episodes already completed")
                 temp_env.close()
                 continue
-            
+
             temp_env.close()
-            
+
             self.env = EBHabEnv(
-                eval_set=self.eval_set, 
-                down_sample_ratio=self.config['down_sample_ratio'], 
+                eval_set=self.eval_set,
+                down_sample_ratio=self.config['down_sample_ratio'],
                 exp_name=exp_name,
-                start_epi_index=self.config.get('start_epi_index', 0), 
+                start_epi_index=self.config.get('start_epi_index', 0),
                 resolution=self.config.get('resolution', 500)
             )
 
             model_type = self.config.get('model_type', 'remote')
-            
+
             base_planner = VLMPlanner(
-                self.model_name, 
-                model_type, 
-                self.env.language_skill_set, 
+                self.model_name,
+                model_type,
+                self.env.language_skill_set,
                 self.system_prompt,
                 self.worldmind_examples,
-                n_shot=self.config['n_shots'], 
+                n_shot=self.config['n_shots'],
                 obs_key='head_rgb',
-                chat_history=self.config['chat_history'], 
+                chat_history=self.config['chat_history'],
                 language_only=self.config['language_only'],
-                use_feedback=self.config.get('env_feedback', True), 
-                multistep=self.config.get('multistep', 0), 
+                use_feedback=self.config.get('env_feedback', True),
+                multistep=self.config.get('multistep', 0),
                 tp=self.config.get('tp', 1),
                 kwargs={'use_worldmind_template': True}
             )
-            
+
             self.planner = WorldMindPlannerWrapper(
                 base_planner=base_planner,
                 discriminator_model=self.worldmind_discriminator_model,
@@ -418,16 +402,26 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                 use_experience_trajectory=self.use_experience_trajectory,
                 detailed_output=self.detailed_output,
                 worldmind_first_action_only=True,
-                enable_goal_experience=self.enable_goal_experience,
-                goal_experience_top_k=self.goal_experience_top_k,
-                enable_process_experience=self.enable_process_experience,
-                process_experience_top_k=self.process_experience_top_k,
-                enable_experience_refine=self.enable_experience_refine
+                enable_success_experience=self.enable_goal_experience,
+                success_experience_top_k=self.goal_experience_top_k,
+                enable_world_knowledge=self.enable_process_experience,
+                world_knowledge_top_k=self.process_experience_top_k,
+                enable_experience_refine=self.enable_experience_refine,
+                enable_multi_simulation=self.config.get('enable_multi_simulation', False),
+                multi_simulation_n_candidates=self.config.get('multi_simulation_n_candidates', 3),
+                multi_simulation_use_llm_selection=self.config.get('multi_simulation_use_llm_selection', False),
+                cross_eval_set_retrieval=self.config.get('cross_eval_set_retrieval', False),
+                all_eval_sets=valid_eval_sets,
+                enable_location_knowledge=self.config.get('enable_location_knowledge', False),
+                enable_location_knowledge_accumulation=self.config.get('enable_location_knowledge_accumulation', False),
+                enable_experience_transfer=self.config.get('enable_experience_transfer', False),
+                experience_transfer_path=self.config.get('experience_transfer_path', None),
+                use_fast_feedback_discrimination=self.use_fast_feedback_discrimination
             )
-            
+
             self.planner.set_log_path(self.env.log_path)
             self.planner.set_eval_set(self.eval_set)
-            
+
             logger.info("WorldMind Planner Wrapper initialized successfully")
 
             self.evaluate()
@@ -436,23 +430,22 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                 f.write(str(self.config))
 
 
-    
+
     def evaluate(self):
-        """Evaluate all episodes with WorldMind discrimination and reflection."""
         completed_episodes = set()
         if self.config.get('resume', False):
             completed_episodes = self.get_completed_episodes(self.env.log_path)
             if completed_episodes:
                 logger.info(f"Resume mode enabled. Found {len(completed_episodes)} completed episodes: {sorted(completed_episodes)}")
-        
+
         progress_bar = tqdm(total=self.env.number_of_episodes, desc="Episodes")
-        
+
         if completed_episodes:
             progress_bar.update(len(completed_episodes))
-        
+
         while self.env._current_episode_num < self.env.number_of_episodes:
             current_episode = self.env._current_episode_num
-            
+
             if self.should_skip_episode(current_episode, completed_episodes):
                 logger.info(f"Skipping completed episode {current_episode}")
                 try:
@@ -460,11 +453,11 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                 except:
                     self.env._current_episode_num += 1
                 continue
-            
+
             logger.info(f"Evaluating episode {self.env._current_episode_num} ...")
             episode_info = {
-                'reward': [], 
-                'num_invalid_actions': 0, 
+                'reward': [],
+                'num_invalid_actions': 0,
                 'empty_plan': 0,
                 'worldmind_discrimination_results': [],
                 'worldmind_reflection_results': []
@@ -476,11 +469,11 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
 
             self.planner.reset()
             done = False
-            
+
             while not done:
-                try: 
+                try:
                     before_img_path = img_path
-                    
+
                     action, reasoning = self.planner.act(img_path, user_instruction)
                     print(f"Planner Output Action: {action}")
 
@@ -499,7 +492,7 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                             'env_step': self.env._current_step,
                         }
                         break
-                    
+
                     if action == -1:
                         self.env._cur_invalid_actions += 1
                         episode_info['reward'].append(-1)
@@ -519,7 +512,7 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                         if self.env._cur_invalid_actions >= self.env._max_invalid_actions:
                             break
                         continue
-                    
+
                     if type(action) == list:
                         for idx, action_single in enumerate(action[:min(self.env._max_episode_steps - self.env._current_step, len(action))]):
                             obs, reward, done, info = self.env.step(action_single, reasoning=reasoning)
@@ -527,15 +520,19 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                             print(f"Executed action: {action_str}, Task success: {info['task_success']}")
                             logger.debug(f"reward: {reward}")
                             logger.debug(f"terminate: {done}\n")
-                            
+
                             after_img_path = self.env.save_image(obs)
-                            
-                            should_perform_worldmind = (idx == 0) if self.planner.worldmind_first_action_only else True
-                            
-                            if should_perform_worldmind and self.planner.should_skip_worldmind():
+
+                            action_failed = info.get('last_action_success', 1) == 0
+                            should_perform_worldmind = (idx == 0 or action_failed) if self.planner.worldmind_first_action_only else True
+
+                            if should_perform_worldmind and self.planner.should_skip_worldmind(
+                                action_index=idx,
+                                last_action_success=info.get('last_action_success', 1)
+                            ):
                                 should_perform_worldmind = False
                                 logger.info(f"Skipping WorldMind cycle for action {idx} (Exploration phase detected)")
-                            
+
                             if should_perform_worldmind:
                                 discrimination_result, reflection_result = self._perform_worldmind_cycle(
                                     action_index=idx,
@@ -544,6 +541,7 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                                     action_str=action_str,
                                     episode_info=episode_info,
                                     env_feedback=info.get('env_feedback', ''),
+                                    last_action_success=info.get('last_action_success', 1),
                                     action_id=action_single if isinstance(action_single, int) else None,
                                     human_instruction=user_instruction
                                 )
@@ -551,24 +549,23 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                                 discrimination_result = None
                                 reflection_result = None
                                 logger.debug(f"Skipping WorldMind cycle for action {idx} (first_action_only=True)")
-                            
-                            # Update trajectory info for goal experience extraction
+
+
                             if hasattr(self.planner, 'update_trajectory_info'):
                                 action_id_for_trajectory = action_single if isinstance(action_single, int) else -1
                                 self.planner.update_trajectory_info({
                                     'action_id': action_id_for_trajectory,
                                     'env_feedback': info.get('env_feedback', ''),
-                                    'last_action_success': info.get('last_action_success', 1),
-                                    'task_progress': info.get('task_progress', 0.0)
+                                    'last_action_success': info.get('last_action_success', 1)
                                 })
-                            
+
                             self.planner.update_info(info, discrimination_result, reflection_result)
-                            
+
                             before_img_path = after_img_path
                             img_path = after_img_path
                             episode_info['reward'].append(reward)
                             episode_info['num_invalid_actions'] += (info['last_action_success'] == 0)
-                            
+
                             if done or info['last_action_success'] == 0:
                                 print("Invalid action or task complete. If invalid then Replanning.")
                                 break
@@ -578,10 +575,13 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                         print(f"Executed action: {action_str}, Task success: {info['task_success']}")
                         logger.debug(f"reward: {reward}")
                         logger.debug(f"terminate: {done}\n")
-                        
+
                         after_img_path = self.env.save_image(obs)
-                        
-                        if self.planner.should_skip_worldmind():
+
+                        if self.planner.should_skip_worldmind(
+                            action_index=0,
+                            last_action_success=info.get('last_action_success', 1)
+                        ):
                             discrimination_result = None
                             reflection_result = None
                             logger.info("Skipping WorldMind cycle (Exploration phase detected)")
@@ -593,27 +593,27 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                                 action_str=action_str,
                                 episode_info=episode_info,
                                 env_feedback=info.get('env_feedback', ''),
+                                last_action_success=info.get('last_action_success', 1),
                                 action_id=action if isinstance(action, int) else None,
                                 human_instruction=user_instruction
                             )
-                        
-                        # Update trajectory info for goal experience extraction
+
+
                         if hasattr(self.planner, 'update_trajectory_info'):
                             action_id_for_trajectory = action if isinstance(action, int) else -1
                             self.planner.update_trajectory_info({
                                 'action_id': action_id_for_trajectory,
                                 'env_feedback': info.get('env_feedback', ''),
-                                'last_action_success': info.get('last_action_success', 1),
-                                'task_progress': info.get('task_progress', 0.0)
+                                'last_action_success': info.get('last_action_success', 1)
                             })
-                        
+
                         self.planner.update_info(info, discrimination_result, reflection_result)
-                        
+
                         img_path = after_img_path
                         episode_info['reward'].append(reward)
                         episode_info['num_invalid_actions'] += (info['last_action_success'] == 0)
-                        
-                except Exception as e: 
+
+                except Exception as e:
                     logger.error(f"Error during evaluation: {e}")
                     import traceback
                     traceback.print_exc()
@@ -630,30 +630,30 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
             episode_info["num_invalid_actions"] = episode_info['num_invalid_actions']
             episode_info["num_invalid_action_ratio"] = episode_info['num_invalid_actions'] / info["env_step"] if info['env_step'] > 0 else 0
             episode_info["episode_elapsed_seconds"] = info.get("episode_elapsed_seconds", time.time() - self.env._episode_start_time)
-            
+
             episode_info['worldmind_stats'] = self.planner.get_worldmind_stats()
-            
+
             self.env.save_episode_log()
             self.save_episode_metric(episode_info)
-            
+
             trajectory_data = self.planner.get_trajectory_for_save()
             self.save_episode_trajectory(
                 episode_num=self.env._current_episode_num,
                 trajectory_data=trajectory_data,
                 instruction=user_instruction
             )
-            
-            if info['task_success'] == 1 and hasattr(self.planner, 'extract_goal_experience'):
-                self.planner.extract_goal_experience(
+
+            if info['task_success'] == 1 and hasattr(self.planner, 'extract_success_experience'):
+                self.planner.extract_success_experience(
                     instruction=user_instruction,
                     task_success=True
                 )
-            
-            if hasattr(self.planner, 'save_process_experience'):
-                self.planner.save_process_experience(self.env._current_episode_num)
-            
+
+            if hasattr(self.planner, 'save_world_knowledge'):
+                self.planner.save_world_knowledge(self.env._current_episode_num)
+
             progress_bar.update()
-    
+
     def _perform_worldmind_cycle(
         self,
         action_index: int,
@@ -662,43 +662,61 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
         action_str: str,
         episode_info: dict,
         env_feedback: str = "",
+        last_action_success: float = 1,
         action_id: int = None,
         human_instruction: str = None
     ) -> tuple:
-        """Perform complete WorldMind cycle: state summary -> discrimination -> reflection."""
         if not self.enable_worldmind:
             return None, None
-        
+
         discrimination_result = None
         reflection_result = None
-        
+
         try:
-            state_summaries = self.planner.summarize_states(
-                before_image_path=before_img_path,
-                after_image_path=after_img_path,
-                action_description=action_str
-            )
-            
-            state_before = state_summaries.get('state_before_action', '')
-            state_after = state_summaries.get('state_after_action', '')
-            
-            logger.debug(f"State before: {state_before[:100]}...")
-            logger.debug(f"State after: {state_after[:100]}...")
-            
-            discrimination_result = self.planner.discriminate_prediction(
-                actual_state_summary=state_after,
-                action_index=action_index,
-                action_id=action_id,
-                action_description=action_str
-            )
-            
+            if (
+                self.use_fast_feedback_discrimination
+                and hasattr(self.planner, 'describe_feedback_state')
+                and hasattr(self.planner, 'discriminate_feedback')
+            ):
+                state_before = ""
+                state_after = self.planner.describe_feedback_state(
+                    env_feedback=env_feedback,
+                    last_action_success=last_action_success
+                )
+                discrimination_result = self.planner.discriminate_feedback(
+                    env_feedback=env_feedback,
+                    action_index=action_index,
+                    action_id=action_id,
+                    action_description=action_str,
+                    last_action_success=last_action_success
+                )
+            else:
+                state_summaries = self.planner.summarize_states(
+                    before_image_path=before_img_path,
+                    after_image_path=after_img_path,
+                    action_description=action_str
+                )
+
+                state_before = state_summaries.get('state_before_action', '')
+                state_after = state_summaries.get('state_after_action', '')
+
+                logger.debug(f"State before: {state_before[:100]}...")
+                logger.debug(f"State after: {state_after[:100]}...")
+
+                discrimination_result = self.planner.discriminate_prediction(
+                    actual_state_summary=state_after,
+                    action_index=action_index,
+                    action_id=action_id,
+                    action_description=action_str
+                )
+
             if discrimination_result:
                 logger.info(f"WorldMind Discrimination: match={discrimination_result['match']}")
                 episode_info['worldmind_discrimination_results'].append({
                     'action': action_str,
                     'result': discrimination_result
                 })
-                
+
                 reflection_result = self.planner.trigger_reflection(
                     discrimination_result=discrimination_result,
                     state_before_action=state_before,
@@ -709,7 +727,7 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                     action_description=action_str,
                     human_instruction=human_instruction
                 )
-                
+
                 if reflection_result:
                     logger.info(f"WorldMind Reflexion: {reflection_result.get('reflexion', '')[:100]}...")
                     experience_entries = reflection_result.get('experience_entry', [])
@@ -717,29 +735,28 @@ class EB_HabitatEvaluator_WorldMind(EB_HabitatEvaluator):
                         logger.info(f"WorldMind Experience Entries ({len(experience_entries)}):")
                         for i, entry in enumerate(experience_entries, 1):
                             logger.info(f"  {i}. {entry[:100]}...")
-                    
+
                     experience_entries_str = "\n".join(experience_entries) if experience_entries else ""
-                    
+
                     episode_info['worldmind_reflection_results'].append({
                         'action': action_str,
                         'reflexion': reflection_result.get('reflexion', ''),
                         'experience_entry': experience_entries_str,
                         'experience_entries_count': len(experience_entries)
                     })
-        
+
         except Exception as e:
             logger.error(f"WorldMind cycle error: {e}")
             import traceback
             traceback.print_exc()
-        
+
         return discrimination_result, reflection_result
 
 
 if __name__ == '__main__':
     import argparse
-    
+
     def parse_arguments():
-        """Parse command line arguments."""
         parser = argparse.ArgumentParser(description='Change configuration parameters.')
         parser.add_argument('--model_name', type=str, help='Name of the model.')
         parser.add_argument('--n_shots', type=int, help='Number of examples')
@@ -765,15 +782,15 @@ if __name__ == '__main__':
     config = {
         'model_name': 'gpt-4o-mini',
         'n_shots': 10,
-        'down_sample_ratio': 1.0, 
+        'down_sample_ratio': 1.0,
         'model_type': 'remote',
         'language_only': 0,
         'exp_name': 'vlm_10shots_imgsize500',
-        'chat_history': 0,  
+        'chat_history': 0,
         'start_epi_index': 0,
         'eval_sets': ['base', 'common_sense', 'complex_instruction', 'spatial_relationship', 'visual_appearance', 'long_horizon'],
-        'multistep': 0, 
-        'resolution': 500, 
+        'multistep': 0,
+        'resolution': 500,
         'env_feedback': 1,
         'tp': 1,
         'enable_worldmind': 0,
@@ -783,7 +800,7 @@ if __name__ == '__main__':
         'detailed_output': 0,
         'resume': 0,
     }
-    
+
     args = parse_arguments()
     update_config_with_args(config, args)
 
@@ -791,7 +808,7 @@ if __name__ == '__main__':
         evaluator = EB_HabitatEvaluator_WorldMind(config)
     else:
         evaluator = EB_HabitatEvaluator(config)
-    
+
     evaluator.check_config_valid()
     evaluator.evaluate_main()
 

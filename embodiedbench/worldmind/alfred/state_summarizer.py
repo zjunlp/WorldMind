@@ -1,10 +1,3 @@
-"""
-WorldMind State Summarizer Module for Alfred Environment
-
-This module provides an LLM-based state summarization mechanism that converts
-visual observations (images) into textual descriptions of the environment state.
-Used for building experience trajectories and enhancing reflection.
-"""
 
 import os
 import json
@@ -16,7 +9,6 @@ from embodiedbench.main import logger
 
 
 def local_image_to_data_url(image_path: str) -> str:
-    """Convert a local image to a data URL for API consumption."""
     mime_type, _ = guess_type(image_path)
     if mime_type is None:
         mime_type = 'application/octet-stream'
@@ -25,7 +17,7 @@ def local_image_to_data_url(image_path: str) -> str:
     return f"data:{mime_type};base64,{base64_encoded_data}"
 
 
-# State summarization system prompt for Alfred environment
+
 STATE_SUMMARIZER_SYSTEM_PROMPT = """You are a **Fact-Based Visual Validator** for a robot in the **Alfred simulated household environment**.
 Your goal is NOT to summarize the whole scene, but to **verify the visual outcome** of a specific Action by comparing the state of relevant objects before and after the attempt.
 
@@ -87,7 +79,7 @@ Output ONLY a JSON object:
 """
 
 
-# User prompt template
+
 STATE_SUMMARIZER_USER_PROMPT = """## Task
 Analyze the visual changes related to the following action.
 
@@ -106,7 +98,7 @@ Analyze the visual changes related to the following action.
 Output your analysis in JSON format with keys: "state_before_action", "state_after_action"."""
 
 
-# Single state summarization prompt (current state only)
+
 SINGLE_STATE_SUMMARIZER_USER_PROMPT = """## Current Observation Task
 You are observing an **Alfred simulation environment**. Analyze the provided image.
 
@@ -124,82 +116,63 @@ Output your analysis in JSON format with key: "current_state"."""
 
 
 class WorldMindStateSummarizer:
-    """
-    LLM-based state summarization module for converting visual observations to text.
-    Used for building experience trajectories and enhancing reflection.
-    """
-    
+
     def __init__(self, model_name: str = None, use_separate_summarization: bool = False):
-        """
-        Initialize the state summarizer.
-        
-        Args:
-            model_name: The name of the VLM model to use. If None, reads from environment.
-            use_separate_summarization: Whether to summarize images separately (one LLM call per image)
-        """
+
         self.model_name = model_name or os.environ.get('WorldMind_SUMMARIZER_MODEL')
         self.api_key = os.environ.get('OPENAI_API_KEY')
         self.api_base = os.environ.get('OPENAI_API_BASE', None)
         self.use_separate_summarization = use_separate_summarization
-        
+
         if not self.api_key:
             raise ValueError("OPENAI_API_KEY environment variable is required for WorldMind State Summarizer")
-        
-        # Initialize OpenAI client
+
+
         try:
             from openai import OpenAI
             if self.api_base:
-                self.client = OpenAI(api_key=self.api_key, base_url=self.api_base)
+                self.client = OpenAI(api_key=self.api_key, base_url=self.api_base, timeout=60.0, max_retries=1)
             else:
-                self.client = OpenAI(api_key=self.api_key)
+                self.client = OpenAI(api_key=self.api_key, timeout=60.0, max_retries=1)
         except ImportError:
             raise ImportError("openai package is required for WorldMind State Summarizer")
-        
+
         self.system_prompt = STATE_SUMMARIZER_SYSTEM_PROMPT
-        
-        # Statistics tracking
+
+
         self.total_summaries = 0
-        
+
         summarization_mode = "separate" if use_separate_summarization else "combined"
         logger.info(f"WorldMind State Summarizer initialized with model: {self.model_name}, mode: {summarization_mode}")
-    
+
     def summarize_states(
         self,
         action_description: str,
         before_image_path: str,
         after_image_path: str
     ) -> Dict[str, str]:
-        """
-        Summarize the states before and after an action.
-        
-        Args:
-            action_description: Description of the action executed
-            before_image_path: Path to the observation image before the action
-            after_image_path: Path to the observation image after the action
-            
-        Returns:
-            dict: {"state_before_action": str, "state_after_action": str}
-        """
         if self.use_separate_summarization:
             return self._summarize_states_separately(action_description, before_image_path, after_image_path)
         else:
             return self._summarize_states_combined(action_description, before_image_path, after_image_path)
-    
+
     def _summarize_states_combined(
         self,
         action_description: str,
         before_image_path: str,
         after_image_path: str
     ) -> Dict[str, str]:
-        """Summarize states using a single LLM call with both images."""
         try:
+
             before_image_url = local_image_to_data_url(before_image_path)
             after_image_url = local_image_to_data_url(after_image_path)
-            
+
+
             user_prompt = STATE_SUMMARIZER_USER_PROMPT.format(
                 action_description=action_description
             )
-            
+
+
             messages = [
                 {"role": "system", "content": self.system_prompt},
                 {
@@ -217,40 +190,44 @@ class WorldMindStateSummarizer:
                     ]
                 }
             ]
-            
+
+
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
                 temperature=0,
                 max_tokens=512
             )
-            
+
             result_text = response.choices[0].message.content
             result = self._parse_result(result_text)
-            
+
+
             self.total_summaries += 1
-            
+
             logger.debug(f"State summarization (combined) completed for action: {action_description}")
-            
+
             return result
-            
+
         except Exception as e:
             logger.error(f"WorldMind State Summarizer (combined) error: {e}")
+
             return {
                 "state_before_action": f"[Summarization failed: {str(e)[:50]}]",
                 "state_after_action": f"[Summarization failed: {str(e)[:50]}]"
             }
-    
+
     def _summarize_states_separately(
         self,
         action_description: str,
         before_image_path: str,
         after_image_path: str
     ) -> Dict[str, str]:
-        """Summarize states using separate LLM calls for each image."""
         try:
+
             state_before = self.summarize_single_state(before_image_path)
-            
+
+
             state_after_prompt = f"""## Task
 Analyze the current observation image AFTER executing the following action.
 
@@ -265,7 +242,7 @@ Analyze the current observation image AFTER executing the following action.
 Output your analysis in JSON format with key: "current_state"."""
 
             after_image_url = local_image_to_data_url(after_image_path)
-            
+
             messages = [
                 {"role": "system", "content": self.system_prompt},
                 {
@@ -279,44 +256,36 @@ Output your analysis in JSON format with key: "current_state"."""
                     ]
                 }
             ]
-            
+
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
                 temperature=0,
                 max_tokens=256
             )
-            
+
             result_text = response.choices[0].message.content
             state_after = self._parse_single_state(result_text)
-            
+
+
             self.total_summaries += 1
-            
+
             return {
                 "state_before_action": state_before,
                 "state_after_action": state_after
             }
-            
+
         except Exception as e:
             logger.error(f"WorldMind State Summarizer (separate) error: {e}")
             return {
                 "state_before_action": f"[Summarization failed: {str(e)[:50]}]",
                 "state_after_action": f"[Summarization failed: {str(e)[:50]}]"
             }
-    
+
     def summarize_single_state(self, image_path: str) -> str:
-        """
-        Summarize a single observation image.
-        
-        Args:
-            image_path: Path to the observation image
-            
-        Returns:
-            str: Text description of the current state
-        """
         try:
             image_url = local_image_to_data_url(image_path)
-            
+
             messages = [
                 {"role": "system", "content": self.system_prompt},
                 {
@@ -330,23 +299,22 @@ Output your analysis in JSON format with key: "current_state"."""
                     ]
                 }
             ]
-            
+
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
                 temperature=0,
                 max_tokens=256
             )
-            
+
             result_text = response.choices[0].message.content
             return self._parse_single_state(result_text)
-            
+
         except Exception as e:
             logger.error(f"WorldMind State Summarizer (single) error: {e}")
             return f"[Summarization failed: {str(e)[:50]}]"
-    
+
     def _parse_result(self, result_text: str) -> Dict[str, str]:
-        """Parse the LLM output for combined state summarization."""
         import re
         try:
             json_match = re.search(r'\{[^{}]*\}', result_text, re.DOTALL)
@@ -358,15 +326,14 @@ Output your analysis in JSON format with key: "current_state"."""
                 }
         except json.JSONDecodeError:
             pass
-        
-        # Fallback: return raw text
+
+
         return {
             "state_before_action": result_text[:200],
             "state_after_action": result_text[200:400] if len(result_text) > 200 else ""
         }
-    
+
     def _parse_single_state(self, result_text: str) -> str:
-        """Parse the LLM output for single state summarization."""
         import re
         try:
             json_match = re.search(r'\{[^{}]*\}', result_text, re.DOTALL)
@@ -375,30 +342,92 @@ Output your analysis in JSON format with key: "current_state"."""
                 return str(result.get("current_state", result_text[:200]))
         except json.JSONDecodeError:
             pass
-        
+
         return result_text[:300]
-    
+
     def get_statistics(self) -> Dict:
-        """Get summarization statistics."""
         return {
             "total_summaries": self.total_summaries
         }
-    
+
     def reset_statistics(self):
-        """Reset statistics counters."""
         self.total_summaries = 0
 
 
-# Factory function
+class LocationKnowledgeExtractor:
+
+    def __init__(self, model_name: str = None):
+        self.model_name = model_name or os.environ.get('WorldMind_SUMMARIZER_MODEL')
+        self.api_key = os.environ.get('OPENAI_API_KEY')
+        self.api_base = os.environ.get('OPENAI_API_BASE', None)
+
+
+        if self.api_key:
+            try:
+                from openai import OpenAI
+                if self.api_base:
+                    self.client = OpenAI(api_key=self.api_key, base_url=self.api_base, timeout=60.0, max_retries=1)
+                else:
+                    self.client = OpenAI(api_key=self.api_key, timeout=60.0, max_retries=1)
+            except ImportError:
+                self.client = None
+        else:
+            self.client = None
+
+
+        self.learned_locations: Dict[str, str] = {}
+
+        logger.info(f"WorldMind Location Knowledge Extractor initialized")
+
+    def extract_from_trajectory(self, trajectory: list) -> Dict[str, str]:
+        locations = {}
+
+        last_receptacle = None
+        for entry in trajectory:
+            action = entry.get('action_description', '').lower()
+            feedback = entry.get('env_feedback', '').lower()
+
+
+            if 'find' in action or 'navigate' in action:
+
+                for word in action.split():
+                    if word[0].isupper() and word not in ['Find', 'Navigate', 'I', 'The']:
+                        last_receptacle = word
+                        break
+
+
+            if 'pick up' in action and 'success' in feedback:
+
+                words = action.replace('pick up', '').strip().split()
+                if words and last_receptacle:
+                    obj_name = words[0].strip('.,!?')
+                    if obj_name[0].isupper():
+                        locations[obj_name] = last_receptacle
+                        self.learned_locations[obj_name] = last_receptacle
+
+        return locations
+
+    def get_accumulated_knowledge(self) -> str:
+        if not self.learned_locations:
+            return "No accumulated location knowledge yet."
+
+        lines = []
+        for obj, loc in self.learned_locations.items():
+            lines.append(f"- {obj} is located at {loc}")
+
+        return "\n".join(lines)
+
+    def add_location(self, object_name: str, location: str):
+        self.learned_locations[object_name] = location
+
+    def reset(self):
+        self.learned_locations = {}
+
+
+
 def create_state_summarizer(model_name: str = None, use_separate: bool = False) -> WorldMindStateSummarizer:
-    """
-    Factory function to create a WorldMind State Summarizer.
-    
-    Args:
-        model_name: Model name for summarization
-        use_separate: Whether to use separate summarization for each image
-        
-    Returns:
-        WorldMindStateSummarizer instance
-    """
     return WorldMindStateSummarizer(model_name=model_name, use_separate_summarization=use_separate)
+
+
+def create_location_extractor(model_name: str = None) -> LocationKnowledgeExtractor:
+    return LocationKnowledgeExtractor(model_name=model_name)

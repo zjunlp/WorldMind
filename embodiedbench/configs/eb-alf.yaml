@@ -15,6 +15,10 @@ tp: 1
 
 # WorldMind specific settings
 enable_worldmind: False
+use_state_summarizer: true
+enable_discrimination: true
+use_fast_feedback_discrimination: true
+enable_visual_observation_summary: true
 
 use_vision_discriminator: false
 use_experience_trajectory: true
@@ -26,13 +30,25 @@ eval_sets: ['base', 'common_sense', 'complex_instruction', 'spatial', 'visual_ap
 # Goal Experience Settings
 enable_goal_experience: true
 goal_experience_top_k: 2
+enable_success_experience: true
+success_experience_top_k: 2
 
 # Process Experience Settings
 enable_process_experience: true
 process_experience_top_k: 2
+enable_world_knowledge: false
+world_knowledge_top_k: 1
 
 # Experience Refine Settings
-enable_experience_refine: true
+enable_experience_refine: false
+
+cross_eval_set_retrieval: false
+enable_location_knowledge: false
+enable_location_knowledge_accumulation: false
+enable_multi_simulation: false
+multi_simulation_n_candidates: 4
+multi_simulation_use_llm_selection: false
+include_reflection_in_history: true
 
 use_worldmind_template: true
 
